@@ -2,3 +2,5 @@ COM classes:
 
 This is a project to collect AutoHotkey v1.1 / v2 classes that implement COM interfaces.
 Every AHK scripter can contribute, but please use the standardized format described in the wiki.
+
+For a list of available interface classes see the wiki.
