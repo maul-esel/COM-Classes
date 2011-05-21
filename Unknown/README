@@ -1,0 +1,5 @@
+Unknown README:
+
+This class basically implements the IUnknown interface and class meta-functions.
+It is intended to be a base class, not for direct use.
+
