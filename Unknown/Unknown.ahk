@@ -1,4 +1,4 @@
-class IUnknown
+class Unknown
 	{
 	__New(ptr = 0){
 		if (!ptr)
