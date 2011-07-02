@@ -1,10 +1,11 @@
 ﻿/**************************************************************************************************************
-class: IProgressDialog
+class: ProgressDialog
 exposes methods to create, control and display a progress dialog via COM interface IProgressDialog.
 
 Requirements:
 	- This requires AHK v2 alpha (may also work with v1.1)
 	- It also requires Windows 2000 *Professional* / Windows XP or Windows Server 2003 or higher.
+	- the Unknown class is needed, too
 
 
 ***************************************************************************************************************	
@@ -34,7 +35,7 @@ class ProgressDialog extends Unknown
 		[opt] handle hParent - the handle to a window to make the dialog box modal to. You must set the appropriate flags.
 		
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 		
 	Example:
 >	MyProgress.StartProgressDialog()
@@ -49,13 +50,10 @@ class ProgressDialog extends Unknown
 			
 			PROGDLG_MARQUEEPROGRESS (0x00000020) - *Windows Vista and later.* Sets the progress bar to marquee mode. This causes the progress bar to scroll horizontally, similar to a marquee display. Use this when you wish to indicate that progress is being made, but the time required for the operation is unknown.
 			PROGDLG_NOCANCEL (0x00000040) - *Windows Vista and later.* No cancel button (operation cannot be canceled). Use this only when absolutely necessary.
-			
-	Synonyms:
-		- Function: <Start>
 	***************************************************************************************************************	
 	*/
 	StartProgressDialog(flags=0, hParent=0){
-		return DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", flags, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", flags, "UInt", 0))
 		}
 		
 	/**************************************************************************************************************
@@ -63,14 +61,14 @@ class ProgressDialog extends Unknown
 	stops displaying the dialog box.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 	
 	Example:
 >	MyProgress.StopProgressDialog()
 	***************************************************************************************************************	
 	*/	
 	StopProgressDialog(){
-		return DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr)
+		return this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -81,14 +79,14 @@ class ProgressDialog extends Unknown
 		str title - the title to set.
 		
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 		
 	Example:
 >	MyProgress.SetTitle("my new title")
 	***************************************************************************************************************	
 	*/
 	SetTitle(title){
-		return DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title)
+		return this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
 		}
 	
 	/**************************************************************************************************************
@@ -96,13 +94,14 @@ class ProgressDialog extends Unknown
 	checks whether the user canceled the dialog box.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool hasCanceled - true if the user canceled, false otherwise
 	
 	Example:
 >	canceled := MyProgress.HasUserCanceled()
 	***************************************************************************************************************	
 	*/
 	HasUserCanceled(){
+		this.__Error(0)
 		return DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr)
 		}
 	
@@ -114,14 +113,14 @@ class ProgressDialog extends Unknown
 		int percent - the new progress value, in percent
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 	
 	Example:
 >	MyProgress.SetProgress(50)
 	***************************************************************************************************************	
 	*/
 	SetProgress(percent){
-		return DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100)
+		return this.__Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
 		}
 	
 	/**************************************************************************************************************
@@ -133,14 +132,14 @@ class ProgressDialog extends Unknown
 		str text - the text to set
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 		
 	Example:
 >	MyProgress.SetLine(1, "This is line 1")
 	***************************************************************************************************************	
 	*/
 	SetLine(line, text){
-		return DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -151,14 +150,14 @@ class ProgressDialog extends Unknown
 		str text - the text to display
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 	
 	Example:
 >	MyProgress.SetCancelMsg("You canceled")
 	***************************************************************************************************************	
 	*/
 	SetCancelMsg(text){
-		return DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", msg, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", msg, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -166,14 +165,14 @@ class ProgressDialog extends Unknown
 	resets the timer the dialog box calculates to display the estimated remaining time.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 	
 	Example:
 >	MyProgress.ResetTimer()
 	***************************************************************************************************************	
 	*/
 	ResetTimer(){
-		return DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000001, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000001, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -182,14 +181,14 @@ class ProgressDialog extends Unknown
 	This remains until <ResumeTimer> is called.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 	
 	Example:
 >	MyProgress.PauseTimer()
 	***************************************************************************************************************	
 	*/
 	PauseTimer() {
-		return DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000002, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000002, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -197,14 +196,14 @@ class ProgressDialog extends Unknown
 	resumes the timer if it was previously paused.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise
+		bool success - true on success, false otherwise
 		
 	Example:
 >	MyProgress.ResumeTimer()
 	***************************************************************************************************************	
 	*/
 	ResumeTimer() {
-		return DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000003, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr," UInt", 0x00000003, "UInt", 0))
 		}
 	
 	}
