@@ -1,5 +1,5 @@
 /**************************************************************************************************************
-class Unknown
+class: Unknown
 implements the IUnknown interface and provides meta-functions and helper methods for inherited classes.
 ***************************************************************************************************************
 */
@@ -17,6 +17,8 @@ class Unknown
 	var Error := { "code" : 0, "description" : "" }
 	
 	/**************************************************************************************************************
+	group: metafunctions
+	
 	Function: __New
 	constructor for all inherited classes
 	
@@ -30,8 +32,8 @@ class Unknown
 		To make this working, you must define the correct IID and CLSID in your class.
 		
 		This makes available 2 fields:
-			ptr - the pointer to the object
-			vt - the pointer to the object's vTable
+			ptr ptr - the pointer to the object
+			ptr vt - the pointer to the object's vTable
 	***************************************************************************************************************
 	*/
 	__New(ptr = 0){
@@ -55,6 +57,8 @@ class Unknown
 		}
 
 	/**************************************************************************************************************
+	group: private functions
+	
 	Function: __GUID
 	internal helper function for inherited classes.
 	
@@ -103,6 +107,8 @@ class Unknown
 		}
 
 	/**************************************************************************************************************
+	group: IUnknown
+	
 	Function: QueryInterface
 	Queries the COM object for an interface.
 	
