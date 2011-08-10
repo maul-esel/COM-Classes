@@ -14,7 +14,7 @@ class Unknown
 		description - the error description string in the system's language
 	***************************************************************************************************************
 	*/
-	var Error := { "code" : 0, "description" : "" }
+	Error := { "code" : 0, "description" : "" }
 	
 	/**************************************************************************************************************
 	group: metafunctions

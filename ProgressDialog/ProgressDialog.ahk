@@ -17,14 +17,14 @@ class ProgressDialog extends Unknown
 	This is CLSID_ProgressDialog. It is needed to create the object.
 	***************************************************************************************************************	
 	*/
-	var CLSID := "{F8383852-FCD3-11d1-A6B9-006097DF5BD4}"
+	static CLSID := "{F8383852-FCD3-11d1-A6B9-006097DF5BD4}"
 	
 	/**************************************************************************************************************
 	Variable: IID
 	This is IID_IProgressDialog. It is also needed to create the object.
 	***************************************************************************************************************	
 	*/
-	var IID := "{EBBC7C04-315E-11d2-B62F-006097DF5BD4}"
+	static IID := "{EBBC7C04-315E-11d2-B62F-006097DF5BD4}"
 
 	/**************************************************************************************************************
 	Function: StartProgressDialog

@@ -15,14 +15,14 @@ class TaskbarList3 extends TaskbarList2
 	This is CLSID_TaskbarList. It is required to create the object.
 	***************************************************************************************************************	
 	*/
-	var CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
+	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
 		
 	/**************************************************************************************************************
 	Variable: IID
 	This is IID_ITaskbarList3. It is required to create the object.
 	***************************************************************************************************************	
 	*/
-	var IID := "{ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf}"
+	static IID := "{ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf}"
 	
 	/**************************************************************************************************************
 	Function: SetProgressValue
