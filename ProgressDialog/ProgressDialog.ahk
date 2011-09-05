@@ -157,7 +157,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetCancelMsg(text){
-		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", msg, "UInt", 0))
+		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
