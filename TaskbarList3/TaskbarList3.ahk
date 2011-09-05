@@ -135,7 +135,7 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetTabOrder(hGui)
 	***************************************************************************************************************	
 	*/
-	SetTabOrder(hTab, hBefore = 0){
+	SetTabOrder(hTab, hBefore := 0){
 		return DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore)
 		}
 	

@@ -52,7 +52,7 @@ class ProgressDialog extends Unknown
 			PROGDLG_NOCANCEL (0x00000040) - *Windows Vista and later.* No cancel button (operation cannot be canceled). Use this only when absolutely necessary.
 	***************************************************************************************************************	
 	*/
-	StartProgressDialog(flags=0, hParent=0){
+	StartProgressDialog(flags := 0, hParent := 0){
 		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", flags, "UInt", 0))
 		}
 		

@@ -55,7 +55,7 @@ class ImageList extends Unknown
 >>		handle := myIL.Handle
 	***************************************************************************************************************
 	*/
-	FromHIMAGELIST(il = 0){
+	FromHIMAGELIST(il := 0){
 		global ImageList
 		
 		if (il == 0)
@@ -77,12 +77,15 @@ class ImageList extends Unknown
 		
 	Returns:
 		int index - the new (zero-based) index of the image
+		
+	Remarks:
+		IImageList::Add copies the bitmap to an internal data structure.
+		You must use the DeleteObject function to delete bitmap and maskbitmap when you don't need them anymore:
+>>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	***************************************************************************************************************
 	*/
-	Add(bitmap, maskbitmap = 0){
+	Add(bitmap, maskbitmap := 0){
 		this.__Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
-		DllCall("Gdi32\DeleteObject", "uint", bitmap)
-		DllCall("Gdi32\DeleteObject", "uint", maskbitmap)
 		return int
 		}
 	
@@ -98,7 +101,7 @@ class ImageList extends Unknown
 		int index - the new image list index of the icon
 	***************************************************************************************************************
 	*/
-	ReplaceIcon(hIcon, index = -1){
+	ReplaceIcon(hIcon, index := -1){
 		this.__Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
 		return int
 		}
@@ -106,7 +109,7 @@ class ImageList extends Unknown
 	/**************************************************************************************************************
 	Function: SetOverlayImage
 	sets the overly image for an image.
-	To make it visible, you must also call IImageList::Draw and set the fStyle parameter appropriately.
+	To make it visible, you must also call <Draw> and set the fStyle parameter appropriately.
 	
 	Parameters:
 		int image - the zero-based index of the image to work on
@@ -131,13 +134,15 @@ class ImageList extends Unknown
 		
 	Returns:
 		bool success - true on success, false otherwise
+		
+	Remarks:
+		IImageList::Replace copies the bitmap to an internal data structure.
+		You must use the DeleteObject function to delete bitmap and maskbitmap when you don't need them anymore:
+>>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	***************************************************************************************************************
 	*/
-	Replace(index, bitmap, maskbitmap = 0){
-		hr := DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap)
-		DllCall("Gdi32\DeleteObject", "uint", bitmap)
-		DllCall("Gdi32\DeleteObject", "uint", maskbitmap)
-		return this.__Error(hr)
+	Replace(index, bitmap, maskbitmap := 0){
+		return this.__Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
 		}
 	
 	/**************************************************************************************************************
@@ -150,11 +155,15 @@ class ImageList extends Unknown
 		
 	Returns:
 		int index - the new index of the image
+		
+	Remarks:
+		IImageList::AddMasked copies the bitmap to an internal data structure.
+		You must use the DeleteObject function to delete bitmap and color when you don't need them anymore:
+>>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	***************************************************************************************************************
 	*/
 	AddMasked(bitmap, color){
 		this.__Error(DllCall(NumGet(this.vt+7*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", color, "int*", int))
-		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 		return int
 		}
 	
@@ -177,7 +186,7 @@ class ImageList extends Unknown
 	Draw(params*){
 		VarSetCapacity(ILDRAWPARAMS, 68, 0)
 		NumPut(17*4,			ILDRAWPARAMS,	00)
-		NumPut(this.Handle, 	ILDRAWPARAMS,	04)
+		NumPut(this.ptr, 		ILDRAWPARAMS,	04)
 		NumPut(params.i,		ILDRAWPARAMS,	08)
 		NumPut(params.hdcDst,	ILDRAWPARAMS,	12)
 		NumPut(params.x,		ILDRAWPARAMS,	16)
@@ -245,7 +254,7 @@ class ImageList extends Unknown
 	
 	Remarks:
 		the fields in the returned object match the struct member names: http://msdn.microsoft.com/en-us/library/bb761393.aspx
-		The unused fileds are ignored.
+		The unused fields are ignored.
 		To retrieve information about the RECT use something like:
 >		top := myIL.GetImageInfo(0).RECT.top
 	***************************************************************************************************************
@@ -267,7 +276,6 @@ class ImageList extends Unknown
 	
 	Parameters:
 		int iDest - the index the image should be copied to
-		ImageList Src - an ImageList instance to use as source
 		int iSrc - the index of the source image
 		bool swap - true to swap the images, false to move only the destination to the source
 		
@@ -275,8 +283,8 @@ class ImageList extends Unknown
 		**NOT WORKING!**
 	***************************************************************************************************************
 	*/
-	Copy(iDest, Src, iSrc, swap){
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", iSrc.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
+	Copy(iDest, iSrc, swap){
+		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
 		}
 	
 	/**************************************************************************************************************
@@ -287,9 +295,9 @@ class ImageList extends Unknown
 		**NOT WORKING!**
 	***************************************************************************************************************
 	*/
-	Merge(index1, index2, xoffset, yoffset, punk2 = 0) {
+	Merge(index1, index2, xoffset, yoffset, punk2 := false) {
 		global ImageList
-		if (punk2 == 0)
+		if (!punk2)
 			punk2 := this
 		if this.__Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
 					, "int", xoffset, "int", yoffset, "ptr", this.__GUID(i, this.IID), "ptr*", out))
@@ -491,6 +499,23 @@ class ImageList extends Unknown
 	DragLeave(hwnd){
 		return this.__Error(DllCall(NumGet(this.vt+25*A_PtrSize), "ptr", this.ptr, "uint", hwnd))
 		}
+		
+	/**************************************************************************************************************
+	Function: DragMove
+	Moves the image that is being dragged during a drag-and-drop operation.
+	This function is typically called in response to a WM_MOUSEMOVE message. 
+	
+	Parameters:
+		int x - the image's new x-coordinate relative to the upper-left corner of the window
+		int y - the image's new y-coordinate relative to the upper-left corner of the window
+		
+	Returns:
+		bool success - true on success, false otherwise
+	***************************************************************************************************************
+	*/
+	DragMove(x, y){
+		return this.__Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "int", x, "int", y))
+		}
 	
 	/**************************************************************************************************************
 	Function: SetDragCursorImage
@@ -506,10 +531,10 @@ class ImageList extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************
 	*/
-	SetDragCursorImage(index, xHotspot, yHotspot, il = 0){
+	SetDragCursorImage(index, xHotspot, yHotspot, il := 0){
 		if (il == 0)
 			il := this
-		return this.__Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
+		return this.__Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
 																	, "int", index, "int", xHotspot, "int", yHotspot))
 		}
 	
@@ -525,7 +550,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	DragShowNoLock(show){
-		return this.__Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "uint", show))
+		return this.__Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "uint", show))
 		}
 	
 	/**************************************************************************************************************
@@ -545,7 +570,7 @@ class ImageList extends Unknown
 	GetDragImage(ByRef dragPos, ByRef imagePos, ByRef IL){
 		global ImageList	
 		VarSetCapacity(POINT1, 8, 0), VarSetCapacity(POINT2, 8, 0)
-		bool := this.__Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
+		bool := this.__Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
 		dragPos := { "x" : NumGet(POINT1, 0), "y" : NumGet(POINT1, 4) }
 		imagePos := { "x" : NumGet(POINT2, 0), "y" : NumGet(POINT2, 4) }
 		IL := new ImageList(out)
@@ -569,7 +594,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetItemFlags(index){
-		this.__Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
+		this.__Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
 		return flags
 		}
 	
@@ -585,7 +610,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetOverlayImage(index){
-		this.__Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
+		this.__Error(DllCall(NumGet(this.vt+31*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
 		return out
 		}
 		
@@ -692,6 +717,9 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	Unload(){
-		return DllCall("FreeLibrary", "uint", this.hModule)
+		global ImageList
+		hM := ImageList.hModule
+		ImageList.hModule := 0
+		return DllCall("FreeLibrary", "uint", hM)
 		}
 	}

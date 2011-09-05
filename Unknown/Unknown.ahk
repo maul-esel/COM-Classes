@@ -36,7 +36,7 @@ class Unknown
 			ptr vt - the pointer to the object's vTable
 	***************************************************************************************************************
 	*/
-	__New(ptr = 0){
+	__New(ptr := 0){
 		if (!ptr)
 			this.ptr := ComObjCreate(this.CLSID, this.IID)
 		else
