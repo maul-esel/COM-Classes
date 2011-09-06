@@ -87,7 +87,7 @@ class TaskbarList3 extends TaskbarList2
 	Informs the taskbar that a new tab or document thumbnail has been provided for display in an application's taskbar group flyout.
 
 	Parameters:
-		handle hTab - the handle to the windo to be registered as a tab
+		handle hTab - the handle to the window to be registered as a tab
 		handle hWin - the handle to thew window to hold the tab.
 	
 	Returns:
@@ -159,6 +159,119 @@ class TaskbarList3 extends TaskbarList2
 		}
 	
 	/**************************************************************************************************************
+	Function: ThumbBarAddButtons
+	Adds a thumbnail toolbar with a specified set of buttons to the thumbnail image of a window in a taskbar button flyout.
+	
+	Parameters:
+		handle hWin - the handle to the window to work on
+		THUMBBUTTON[] array - an array of button descriptions (see the bottom of this page)
+		
+	Returns:
+		bool success - true on success, false otherwise.
+		
+	Remarks:
+		You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
+	***************************************************************************************************************	
+	*/
+	ThumbBarAddButtons(hWin, array){
+		this.ParseArray(array, struct)
+		return this.__Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		}
+	
+	/**************************************************************************************************************
+	Function: ThumbBarUpdateButtons
+	Shows, enables, disables, or hides buttons in a thumbnail toolbar as required by the window's current state.
+	
+	Parameters:
+		handle hWin - the handle to the window to work on
+		THUMBBUTTON[] array - an array of button descriptions (see the bottom of this page)
+		
+	Returns:
+		bool success - true on success, false otherwise.
+	***************************************************************************************************************	
+	*/
+	ThumbBarUpdateButtons(hWin, array){
+		this.ParseArray(array, struct)
+		return this.__Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		}
+
+	; private method: parses an array of AHK objects to an array of THUMBBUTTON structures
+	ParseArray(array, byref struct){
+		static THUMBBUTTONFLAGS := { "enabled" : 0, "disabled" : 1, "dismissonclick" : 2, "nobackground" : 4, "hidden" : 8, "noninteractive" : 10 }
+
+		count := array.MaxIndex()
+		if (count > 7)
+			count := 7
+		
+		VarSetCapacity(struct, 540 * count, 0)
+		for i, button in array ; loop through all button definitions
+			{
+			if (button.HasKey("iId")) ; if id is defined:
+				id := button["iId"] ; use it
+			else
+				id := A_Index ; use current index otherwise
+			NumPut(id, struct,	04 + 540 * (A_Index - 1), "UInt") ; put the id into the struct
+			
+			mask := 0
+			if (button.HasKey("iBitmap")) ; if bitmap is defined:
+				{
+				mask |= 0x00000001 ; add the information to the mask
+				NumPut(button["iBitmap"], struct, 08 + 540 * (A_Index - 1), "UInt") ;put the bitmap index in the struct
+				}
+				
+			if (button.HasKey("hIcon"))
+				{
+				mask |= 0x00000002
+				NumPut(button["hIcon"], struct, 12 + 540 * (A_Index - 1), "UInt")
+				}
+				
+			if (button.HasKey("szTip"))
+				{
+				mask |= 0x00000004
+				StrPut(button["szTip"], &struct + 16 + 540 * (A_Index - 1), 260)
+				}
+				
+			if (button.HasKey("dwFlags")) ; if flags are defined
+				{
+				mask |= 0x00000008 ; add it to the mask
+				_flags := flags := button["dwFlags"]
+				if flags is alnum ; if strings were used
+					{
+					flags := 0 ; reset flags
+					LoopParse, _flags, %A_Space%| ; parse:
+						{
+						; if the loop field is a valid flag and it was not added before:
+						if (THUMBBUTTONFLAGS.HasKey(A_LoopField) && (flags & THUMBBUTTONFLAGS[A_LoopField]) != THUMBBUTTONFLAGS[A_LoopField])
+							flags |= THUMBBUTTONFLAGS[A_LoopField] ; add it
+						}
+					}
+				NumPut(flags, struct, 536 + 540 * (A_Index - 1), "UInt") ; put the flags in the struct
+				}
+				
+			NumPut(mask, struct, 00 + 540 * (A_Index - 1), "UInt") ; put the mask in the struct
+			 
+			if (A_Index == 7) ; only 7 buttons allowed
+				break
+			}
+		}
+	
+	/**************************************************************************************************************
+	Function: ThumbBarSetImageList
+	Specifies an image list that contains button images for the toolbar
+	
+	Parameters:
+		handle hWin - the handle to the window to work on
+		HImageList il - the handle to the imagelist
+		
+	Returns:
+		bool success - true on success, false otherwise.
+	***************************************************************************************************************	
+	*/
+	ThumbBarSetImageList(hWin, il){
+		return this.__Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
+		}
+	
+	/**************************************************************************************************************
 	Function: SetOverlayIcon
 	set the overlay icon for a taskbar button
 
@@ -227,4 +340,46 @@ class TaskbarList3 extends TaskbarList2
 		
 		return this.__Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
 		}
+		
+	/**************************************************************************************************************
+	group: More about thumbbar buttons
+	
+	THUMBBUTTON structures:	
+	Whenever a THUMBBUTTON[] array is needed, you can pass an array of objects to the method.
+	These objects describe the buttons:
+	- The objects' fields are described here: <http://msdn.microsoft.com/en-us/library/dd391559%28v=VS.85%29.aspx>.
+	- The dwMask field is ignored.
+	- You can omit any field.
+	- If you omit the iId field, the index of the button in the toolbar is used.
+	- for the dwFlags field, you can use a combination of strings (separated by space or |) or a binary combination of their flag representation:
+		enabled (0x00000000) - The button is active and available to the user. Can be omitted.
+		disabled (0x00000001) - The button is disabled. It is present, but has a visual state that indicates that it will not respond to user action.
+		dismissonclick (0x00000002) - When the button is clicked, the taskbar button's flyout closes immediately.
+		nobackground (0x00000004) - Do not draw a button border, use only the image.
+		hidden (0x00000008) - The button is not shown to the user.
+		noninteractive (0x00000010) - The button is enabled but not interactive; no pressed button state is drawn. This value is intended for instances where the button is used in a notification.
+		
+	*The array must not have more than 7 THUMBBUTTON elements!*
+	
+	Reacting to clicks:	
+	To react, you must monitor the WM_Command message.
+>	OnMessage(0x111, "WM_COMMAND")
+>
+>	; ... add the thumbbuttons
+>
+>	WM_COMMAND(wp){
+>		static THBN_CLICKED := 0x1800
+>		if (HIWORD(wp) = THBN_CLICKED)
+>			Msgbox 64,,% "The button with the id " . LOWORD(wp) . " was clicked.", 3
+>		}
+>
+>	HIWORD(lparam){ ; these functions were copied from windows header files
+>		return lparam >> 16
+>		}
+>
+>	LOWORD(lparam){
+>		return lparam & 0xFFFF
+>		}
+	***************************************************************************************************************	
+	*/
 	}
