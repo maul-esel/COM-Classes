@@ -54,7 +54,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	StartProgressDialog(flags := 0, hParent := 0){
-		static PROGDLG := { "normal" : 0x00000000, "modal" : 0x00000001, "autotime" : 0x00000002, "notime" : 0x00000004
+		static OPROGDLGF := { "normal" : 0x00000000, "modal" : 0x00000001, "autotime" : 0x00000002, "notime" : 0x00000004
 							, "nominimize" : 0x00000008, "noprogressbar" : 0x00000010, "nocancel" : 0x00000040, "enablepause" : 0x00000080
 							, "allowundo" : 0x000000100, "dontdisplaysourcepath" : 0x00000200, "dontdisplaydestpath" : 0x00000400
 							, "nomultidayestimates" : 0x00000800, "dontdisplaylocations" : 0x00001000 }
@@ -64,8 +64,8 @@ class OperationsProgressDialog extends Unknown
 			_flags := 0
 			LoopParse flags, %A_Space%|
 				{
-				if (PROGDLG.HasKey(A_LoopField))
-					_flags |= PROGDLG[A_LoopField]
+				if (OPROGDLGF.HasKey(A_LoopField))
+					_flags |= OPROGDLGF[A_LoopField]
 				}
 			}
 		else
