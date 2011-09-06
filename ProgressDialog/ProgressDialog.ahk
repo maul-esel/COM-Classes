@@ -3,7 +3,7 @@ class: ProgressDialog
 exposes methods to create, control and display a progress dialog via COM interface IProgressDialog.
 
 Requirements:
-	- This requires AHK v2 alpha (may also work with v1.1)
+	- This requires AHK v2 alpha
 	- It also requires Windows 2000 *Professional* / Windows XP or Windows Server 2003 or higher.
 	- the Unknown class is needed, too
 

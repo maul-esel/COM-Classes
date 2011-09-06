@@ -3,7 +3,7 @@ class: ImageList
 exposes methods to manage image lists via COM interface IImageList.
 
 Requirements:
-	- This requires AHK v2 alpha (may also work with v1.1)
+	- This requires AHK v2 alpha
 	- the Unknown class is also required
 	- Windows XP / Windows Server 2003 or higher
 	
