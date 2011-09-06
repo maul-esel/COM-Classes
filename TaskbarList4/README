@@ -4,3 +4,4 @@ This class implements the ITaskbarList4 interface.
 
 Author:			maul.esel
 Documentation:	http://maul-esel.github.com/COM-Classes/TaskbarList4/docs/TaskbarList4
+License:		LGPL

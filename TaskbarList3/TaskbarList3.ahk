@@ -29,7 +29,7 @@ class TaskbarList3 extends TaskbarList2
 	sets the current value of a taskbar progressbar
 
 	Parameters:
-		handle hGui - the window handle of your gui
+		handle hWin - the window handle of your gui
 		int value - the value to set, in percent
 
 	Returns:
@@ -49,7 +49,7 @@ class TaskbarList3 extends TaskbarList2
 	sets the current state and thus the color of a taskbar progressbar
 
 	Parameters:
-		handle hGui - the window handle of your gui
+		handle hWin - the window handle of your gui
 		variant state - the state to set
 
 	Possible states:
@@ -63,7 +63,7 @@ class TaskbarList3 extends TaskbarList2
 		bool success - true on success, false otherwise.
 
 	Example:
->	ITBL3.SetProgressState(hGui, "P")
+>	ITBL3.SetProgressState(hWin, "P")
 
 	Remarks:
 		- There's still a difference between setting progress to 0 or turning it off.
@@ -94,7 +94,7 @@ class TaskbarList3 extends TaskbarList2
 		bool success - true on success, false otherwise.
 		
 	Example:
->	ITBL3.RegisterTab(WinExist(), hGui)
+>	ITBL3.RegisterTab(WinExist(), hWin)
 	***************************************************************************************************************	
 	*/	
 	RegisterTab(hTab, hWin){

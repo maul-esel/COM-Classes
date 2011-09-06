@@ -4,3 +4,4 @@ This class implements the ITaskbarList2 interface.
 
 Author:			maul.esel
 Documentation:	http://maul-esel.github.com/COM-Classes/TaskbarList2/docs/TaskbarList2
+License:		LGPL
