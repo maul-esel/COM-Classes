@@ -588,7 +588,7 @@ class ImageList extends Unknown
 		uint flags - the image's flags
 		
 	Remarks:
-		possibwle flag values:
+		possible flag values:
 		ILIF_ALPHA (0x00000001) - Indicates that the item in the imagelist has an alpha channel.
 		ILIF_LOWQUALITY (0x00000002) - **Windows Vista and later.** Indicates that the item in the imagelist was generated via a StretchBlt function, consequently image quality may have degraded.
 	***************************************************************************************************************
