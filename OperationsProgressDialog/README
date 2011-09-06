@@ -1,0 +1,9 @@
+OperationsProgressDialog README:
+
+This class implements the IOperationsProgressDialog interface.
+
+Author:			maul.esel
+Documentation:	http://maul-esel.github.com/COM-Classes/OperationsProgressDialog/docs/OperationsProgressDialog
+License:		LGPL
+
+This class is not really usable without some working ShellItem wrapper!
