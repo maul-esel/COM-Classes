@@ -28,7 +28,7 @@ class TaskbarList extends Unknown
 	initializes the interface.
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >		ITBL.HrInit()
@@ -38,7 +38,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	HrInit(){
-		return DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr)
+		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -49,7 +49,7 @@ class TaskbarList extends Unknown
 		handle hWin - the handle to the window to add.
 		
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	Gui +LastFound
@@ -57,7 +57,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	AddTab(hWin){
-		return DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin)
+		return this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************
@@ -68,14 +68,14 @@ class TaskbarList extends Unknown
 		handle hWin - the handle to the window to remove.
 		
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL.DeleteTab(WinExist("Notepad"))
 	***************************************************************************************************************	
 	*/
 	DeleteTab(hWin){
-		return DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin)
+		return this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************	
@@ -86,7 +86,7 @@ class TaskbarList extends Unknown
 		handle hWin - the handle to the window whose item should be activated.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL.ActivateTab(WinExist("Mozilla Firefox"))
@@ -96,7 +96,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	ActivateTab(hWin){
-		return DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin)
+		return this.__Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************	
@@ -107,7 +107,7 @@ class TaskbarList extends Unknown
 		handle hWin - the handle to the window that should be marked as active.
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 
 	Example:
 >	ITBL.SetActiveAlt(WinExist())
@@ -117,6 +117,6 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetActiveAlt(hWin){
-		return DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", hWin)
+		return this.__Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	}

@@ -32,14 +32,14 @@ class TaskbarList2 extends TaskbarList
 		bool ApplyRemove - determines whether to apply or remove fullscreen property
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	Gui 2: +LastFound
 >	ITBL2.MarkFullScreen(WinExist())
 	***************************************************************************************************************	
 	*/
-	MarkFullScreen(hWin){
-		return DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Uint", hWin, "UInt", ApplyRemove)
+	MarkFullScreen(hWin, ApplyRemove){
+		return this.__Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Uint", hWin, "UInt", ApplyRemove))
 		}
 	}

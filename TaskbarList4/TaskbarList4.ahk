@@ -45,13 +45,13 @@ class TaskbarList4 extends TaskbarList3
 	However, first lookup this page (<http://msdn.microsoft.com/de-de/library/dd562320.aspx>) to ensure this won't cause an error.
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >		ITBL4.SetTabProperties(WinExist(), 1|4)
 ***************************************************************************************************************	
 */
 	SetTabProperties(hTab, properties){
-		return DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties)
+		return this.__Error(DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties))
 		}
 	}

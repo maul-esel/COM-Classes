@@ -33,7 +33,7 @@ class TaskbarList3 extends TaskbarList2
 		int value - the value to set, in percent
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 				
 	Example:
 >	Gui +LastFound
@@ -41,7 +41,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetProgressValue(hWin, value){
-		return DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100)
+		return this.__Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
 		}
 	
 	/**************************************************************************************************************
@@ -60,7 +60,7 @@ class TaskbarList3 extends TaskbarList2
 		8 or P - paused, by default yellow
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 
 	Example:
 >	ITBL3.SetProgressState(hGui, "P")
@@ -80,7 +80,7 @@ class TaskbarList3 extends TaskbarList2
 					: (State = "E" ? 4
 					: (State = "P" ? 8 : 0))))
 			}
-		return DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state)
+		return this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
 		}
 	/**************************************************************************************************************
 	Function: RegisterTab
@@ -91,14 +91,14 @@ class TaskbarList3 extends TaskbarList2
 		handle hWin - the handle to thew window to hold the tab.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.RegisterTab(WinExist(), hGui)
 	***************************************************************************************************************	
 	*/	
 	RegisterTab(hTab, hWin){
-		return DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin)
+		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************
@@ -109,14 +109,14 @@ class TaskbarList3 extends TaskbarList2
 		handle hTab - the handle to the window whose thumbnail gonna be removed.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.UnRegisterTab(WinExist("ahk_class AutoHotkey"))
 	***************************************************************************************************************	
 	*/
 	UnRegisterTab(hTab){
-		return DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab)
+		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
 		}
 	
 	/**************************************************************************************************************
@@ -129,14 +129,14 @@ class TaskbarList3 extends TaskbarList2
 		handle hBefore - the handle of the tab window whose thumbnail that hwndTab is inserted to the left of.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.SetTabOrder(hGui)
 	***************************************************************************************************************	
 	*/
 	SetTabOrder(hTab, hBefore := 0){
-		return DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore)
+		return this.__Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
 		}
 	
 	/**************************************************************************************************************
@@ -148,14 +148,14 @@ class TaskbarList3 extends TaskbarList2
 		handle hWin - the handle to the window holding that tab.
 	
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.SetTabActive(hGui1, hGui2)
 	***************************************************************************************************************	
 	*/
 	SetTabActive(hTab, hWin){
-		return DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0)
+		return this.__Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -165,19 +165,20 @@ class TaskbarList3 extends TaskbarList2
 	params:
 		handle hGui - the window handle of your gui
 		hIcon Icon - handle to an icon
+		str altText - an alt text version of the information conveyed by the overlay, for accessibility purposes.
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
->	ITBL3.SetOverlayIcon(WinExist(), DllCall("LoadIcon", "UInt", 0, "UInt", 32516))
+>	ITBL3.SetOverlayIcon(WinExist(), DllCall("LoadIcon", "UInt", 0, "UInt", 32516), "an overlay icon")
 	
 	Remarks:
 		- To get a hIcon, you might use LoadImage (<http://msdn.microsoft.com/de-de/library/ms648045>)
 	***************************************************************************************************************	
 	*/
-	SetOverlayIcon(hWin, Icon) {
-		return DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon)
+	SetOverlayIcon(hWin, Icon, altText) {
+		return this.__Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
 		}
 	
 	/**************************************************************************************************************
@@ -189,14 +190,14 @@ class TaskbarList3 extends TaskbarList2
 		str Tooltip - the text to set as your tooltip
 			
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.SetThumbnailTooltip(WinExist(), "my custom tooltip")
 	***************************************************************************************************************	
 	*/
 	SetThumbnailTooltip(hWin, Tooltip){
-		return DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip)
+		return this.__Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
 		}
 	
 	/**************************************************************************************************************
@@ -211,7 +212,7 @@ class TaskbarList3 extends TaskbarList2
 		int h - the heigth of the area to show in the taskbar thumbnail
 
 	Returns:
-		HRESULT success - S_OK (0x000) on success, error code otherwise.
+		bool success - true on success, false otherwise.
 		
 	Example:
 >	ITBL3.SetThumbnailClip(hGui, 0, 0, 100, 100)
@@ -224,6 +225,6 @@ class TaskbarList3 extends TaskbarList2
 		NumPut(w+x, Rect, 8)
 		NumPut(h+y, Rect, 12)
 		
-		return DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect)
+		return this.__Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
 		}
 	}
