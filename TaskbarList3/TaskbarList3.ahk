@@ -235,7 +235,7 @@ class TaskbarList3 extends TaskbarList2
 				{
 				mask |= 0x00000008 ; add it to the mask
 				_flags := flags := button["dwFlags"]
-				if flags is alnum ; if strings were used
+				if flags is not integer ; if strings were used
 					{
 					flags := 0 ; reset flags
 					LoopParse, _flags, %A_Space%| ; parse:
