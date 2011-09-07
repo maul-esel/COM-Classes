@@ -98,20 +98,20 @@ class OperationsProgressDialog extends Unknown
 		
 	Remarks:
 		For operation, you can either specify a string or its flag representation. Valid flags are:
-		None (0) - 
-		Moving (1) - 
-		Copying (2) - 
-		Recycling (3) - 
-		ApplyingAttribs (4) - 
-		Downloading (5) - 
-		Searching_Internet (6) - 
-		Calculating (7) - 
-		Uploading (8) - 
-		Searching_File (9) - 
-		Deleting (10) - 
-		Renaming (11) - 
-		Formatting (12) - 
-		Copy_Moving (13) - 
+		None (0) - No action is being performed.
+		Moving (1) - Files are being moved.
+		Copying (2) - Files are being copied.
+		Recycling (3) - Files are being deleted.
+		ApplyingAttribs (4) - A set of attributes are being applied to files.
+		Downloading (5) - A file is being downloaded from a remote source.
+		Searching_Internet (6) - An Internet search is being performed.
+		Calculating (7) - A calculation is being performed.
+		Uploading (8) - A file is being uploaded to a remote source.
+		Searching_File (9) - A local search is being performed.
+		Deleting (10) - *Windows Vista and later.* A deletion is being performed.
+		Renaming (11) - *Windows Vista and later.* A renaming action is being performed.
+		Formatting (12) - *Windows Vista and later.* A formatting action is being performed.
+		Copy_Moving (13) - *Windows 7 and later.* A copy or move action is being performed.
 	***************************************************************************************************************	
 	*/
 	SetOperation(operation){
