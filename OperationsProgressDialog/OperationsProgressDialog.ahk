@@ -3,7 +3,7 @@ class: OperationsProgressDialog
 extends Unknown
 
 Requirements:
-	- This requires AHK v2 alpha / v1.1
+	- This requires AHK v2 alpha
 	- It also requires Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 ***************************************************************************************************************	
 */
@@ -36,8 +36,8 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 		
 	Remarks:
-		For flags, you can either pass a combination of strings (separated by space or |) or a binary combination.
-		Valid flags are:
+		For flags, you can either pass a combination of strings (separated by space or |) or a binary combination. Valid flags are:
+		
 		Normal (0x00000000) - Default, normal progress dialog behavior.
 		Modal (0x00000001) - The dialog is modal to its hParent. The default setting is modeless.
 		AutoTime (0x00000002) - Update "Line3" text with the time remaining. Present by default.
@@ -98,6 +98,7 @@ class OperationsProgressDialog extends Unknown
 		
 	Remarks:
 		For operation, you can either specify a string or its flag representation. Valid flags are:
+		
 		None (0) - No action is being performed.
 		Moving (1) - Files are being moved.
 		Copying (2) - Files are being copied.
@@ -140,6 +141,7 @@ class OperationsProgressDialog extends Unknown
 		
 	Remarks:
 		For mode, you can either specify a string or its flag representation. Valid flags are:
+		
 		Default (0x00000000) - Use the default progress dialog operations mode.
 		Run (0x00000001) - The operation is running.
 		Preflight (0x00000002) - The operation is gathering data before it begins, such as calculating the predicted operation time.
