@@ -38,7 +38,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	HrInit(){
-		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -57,7 +57,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	AddTab(hWin){
-		return this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************
@@ -75,7 +75,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	DeleteTab(hWin){
-		return this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************	
@@ -96,7 +96,7 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	ActivateTab(hWin){
-		return this.__Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************	
@@ -117,6 +117,6 @@ class TaskbarList extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetActiveAlt(hWin){
-		return this.__Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 		}
 	}

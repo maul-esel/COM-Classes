@@ -65,7 +65,7 @@ class ProgressDialog extends Unknown
 		else
 			_flags := flags
 	
-		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", _flags, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", _flags, "UInt", 0))
 		}
 		
 	/**************************************************************************************************************
@@ -80,7 +80,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/	
 	StopProgressDialog(){
-		return this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -98,7 +98,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetTitle(title){
-		return this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
+		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
 		}
 	
 	/**************************************************************************************************************
@@ -113,7 +113,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	HasUserCanceled(){
-		this.__Error(0)
+		this._Error(0)
 		return DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr)
 		}
 	
@@ -132,7 +132,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetProgress(percent){
-		return this.__Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
 		}
 	
 	/**************************************************************************************************************
@@ -151,7 +151,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetLine(line, text){
-		return this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -169,7 +169,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetCancelMsg(text){
-		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -200,7 +200,7 @@ class ProgressDialog extends Unknown
 				action := PDTimer["reset"]
 			}
 	
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -216,7 +216,7 @@ class ProgressDialog extends Unknown
 	*/
 	ResetTimer(){
 		static PDTimer_RESET := 0x00000001
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESET, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESET, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -233,7 +233,7 @@ class ProgressDialog extends Unknown
 	*/
 	PauseTimer(){
 		static PDTimer_PAUSE := 0x00000002
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_PAUSE, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_PAUSE, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -249,7 +249,7 @@ class ProgressDialog extends Unknown
 	*/
 	ResumeTimer() {
 		static PDTimer_RESUME := 0x00000003
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESUME, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESUME, "UInt", 0))
 		}
 	
 	}

@@ -41,7 +41,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetProgressValue(hWin, value){
-		return this.__Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
 		}
 	
 	/**************************************************************************************************************
@@ -80,7 +80,7 @@ class TaskbarList3 extends TaskbarList2
 					: (State = "E" ? 4
 					: (State = "P" ? 8 : 0))))
 			}
-		return this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
 		}
 	/**************************************************************************************************************
 	Function: RegisterTab
@@ -98,7 +98,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/	
 	RegisterTab(hTab, hWin){
-		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
 		}
 	
 	/**************************************************************************************************************
@@ -116,7 +116,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	UnRegisterTab(hTab){
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
 		}
 	
 	/**************************************************************************************************************
@@ -136,7 +136,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetTabOrder(hTab, hBefore := 0){
-		return this.__Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
+		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
 		}
 	
 	/**************************************************************************************************************
@@ -155,7 +155,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetTabActive(hTab, hWin){
-		return this.__Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -175,7 +175,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarAddButtons(hWin, array){
 		this.ParseArray(array, struct)
-		return this.__Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
 		}
 	
 	/**************************************************************************************************************
@@ -192,7 +192,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarUpdateButtons(hWin, array){
 		this.ParseArray(array, struct)
-		return this.__Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
 		}
 
 	; private method: parses an array of AHK objects to an array of THUMBBUTTON structures
@@ -268,7 +268,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	ThumbBarSetImageList(hWin, il){
-		return this.__Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
+		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
 		}
 	
 	/**************************************************************************************************************
@@ -291,7 +291,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetOverlayIcon(hWin, Icon, altText) {
-		return this.__Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
 		}
 	
 	/**************************************************************************************************************
@@ -310,7 +310,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetThumbnailTooltip(hWin, Tooltip){
-		return this.__Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
+		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
 		}
 	
 	/**************************************************************************************************************
@@ -338,7 +338,7 @@ class TaskbarList3 extends TaskbarList2
 		NumPut(w+x, Rect, 8)
 		NumPut(h+y, Rect, 12)
 		
-		return this.__Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
+		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
 		}
 		
 	/**************************************************************************************************************

@@ -38,7 +38,7 @@ class MMDeviceEnumerator extends Unknown
 	EnumAudioEndpoints(dataFlow, mask)
 	{
 		global MMDeviceCollection
-		this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr", devices))
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr", devices))
 		return new MMDeviceCollection(devices)
 	}
 	
@@ -58,7 +58,7 @@ class MMDeviceEnumerator extends Unknown
 	GetDefaultAudioEndpoint(dataFlow, role)
 	{
 		global MMDevice
-		this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr", device))
+		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr", device))
 		return new MMDevice(device)
 	}
 	
@@ -76,7 +76,7 @@ class MMDeviceEnumerator extends Unknown
 	GetDevice(id)
 	{
 		global MMDevice
-		this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr", device))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr", device))
 		return new MMDevice(device)
 	}
 	
@@ -92,7 +92,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	RegisterEndpointNotificationCallback(client)
 	{
-		return this.__Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
+		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
 	}
 	
 	/**************************************************************************************************************
@@ -107,6 +107,6 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	UnregisterEndpointNotificationCallback(client)
 	{
-		return this.__Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
 	}
 }

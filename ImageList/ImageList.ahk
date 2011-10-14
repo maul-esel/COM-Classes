@@ -61,7 +61,7 @@ class ImageList extends Unknown
 		if (il == 0)
 			il := IL_Create()
 
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "uint", this.__GUID(i, this.IID), "ptr*", ptr)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "uint", this._GUID(i, this.IID), "ptr*", ptr)
 		return new ImageList(ptr)
 		}
 	
@@ -85,7 +85,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	Add(bitmap, maskbitmap := 0){
-		this.__Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
+		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
 		return int
 		}
 	
@@ -102,7 +102,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	ReplaceIcon(hIcon, index := -1){
-		this.__Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
+		this._Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
 		return int
 		}
 	
@@ -120,7 +120,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	SetOverlayImage(image, overlay)	{
-		return this.__Error(DllCall(NumGet(this.vt+5*A_PtrSize), "ptr", this.ptr, "int", image, "int", overlay))
+		return this._Error(DllCall(NumGet(this.vt+5*A_PtrSize), "ptr", this.ptr, "int", image, "int", overlay))
 		}
 	
 	/**************************************************************************************************************
@@ -142,7 +142,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	Replace(index, bitmap, maskbitmap := 0){
-		return this.__Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
+		return this._Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
 		}
 	
 	/**************************************************************************************************************
@@ -163,7 +163,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	AddMasked(bitmap, color){
-		this.__Error(DllCall(NumGet(this.vt+7*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", color, "int*", int))
+		this._Error(DllCall(NumGet(this.vt+7*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", color, "int*", int))
 		return int
 		}
 	
@@ -202,7 +202,7 @@ class ImageList extends Unknown
 		NumPut(params.fState,	ILDRAWPARAMS,	56)
 		NumPut(params.Frame,	ILDRAWPARAMS,	60)
 		NumPut(params.crEffect,	ILDRAWPARAMS,	64)
-		return this.__Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", &ILDRAWPARAMS))
+		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", &ILDRAWPARAMS))
 		}
 	
 	/**************************************************************************************************************
@@ -217,7 +217,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	Remove(index){
-		return this.__Error(DllCall(NumGet(this.vt+9*A_PtrSize), "ptr", this.ptr, "int", index))
+		return this._Error(DllCall(NumGet(this.vt+9*A_PtrSize), "ptr", this.ptr, "int", index))
 		}
 	
 	/**************************************************************************************************************
@@ -238,7 +238,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetIcon(index, flags){
-		this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "int", index, "uint", flags, "uint*", hIcon))
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "int", index, "uint", flags, "uint*", hIcon))
 		return hIcon
 		}
 	
@@ -261,7 +261,7 @@ class ImageList extends Unknown
 	*/
 	GetImageInfo(index){
 		VarSetCapacity(IMAGEINFO, 32, 0)
-		this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &IMAGEINFO))
+		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &IMAGEINFO))
 		return { "hbmImage" : NumGet(IMAGEINFO, 0)
 				, "hbmMask" : NumGet(IMAGEINFO, 4)
 				, "RECT" : { "left" : NumGet(IMAGEINFO, 16)
@@ -284,7 +284,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	Copy(iDest, iSrc, swap){
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
 		}
 	
 	/**************************************************************************************************************
@@ -299,8 +299,8 @@ class ImageList extends Unknown
 		global ImageList
 		if (!punk2)
 			punk2 := this
-		if this.__Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
-					, "int", xoffset, "int", yoffset, "ptr", this.__GUID(i, this.IID), "ptr*", out))
+		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
+					, "int", xoffset, "int", yoffset, "ptr", this._GUID(i, this.IID), "ptr*", out))
 			return new ImageList(out)
 		}
 	
@@ -317,7 +317,7 @@ class ImageList extends Unknown
 	*/
 	Clone(){
 		global ImageList
-		this.__Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "ptr", this.__GUID(i, this.IID), "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "ptr", this._GUID(i, this.IID), "ptr*", out))
 		return new ImageList(out)
 		}
 	
@@ -334,7 +334,7 @@ class ImageList extends Unknown
 	*/
 	GetImageRect(index){
 		VarSetCapacity(RECT, 16, 0)
-		this.__Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &RECT))
+		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &RECT))
 		return { "left" : NumGet(RECT, 0)
 				, "top" : NumGet(RECT, 4)
 				, "right" : NumGet(RECT, 8)
@@ -354,7 +354,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetIconSize(ByRef width, ByRef height){
-		return this.__Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "int*", width, "int*", height))
+		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "int*", width, "int*", height))
 		}
 	
 	/**************************************************************************************************************
@@ -370,7 +370,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	SetIconSize(width, height){
-		return this.__Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
+		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
 		}
 	
 	/**************************************************************************************************************
@@ -382,7 +382,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetImageCount(){
-		this.__Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "int*", count))
+		this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "int*", count))
 		return count
 		}
 	
@@ -403,7 +403,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	SetImageCount(count){
-		return this.__Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uint", count))
+		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uint", count))
 		}
 	
 	/**************************************************************************************************************
@@ -422,7 +422,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	SetBkColor(color){
-		this.__Error(DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "uint", color, "uint*", oldColor))
+		this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "uint", color, "uint*", oldColor))
 		return oldColor
 		}
 	
@@ -435,7 +435,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetBkColor(){
-		this.__Error(DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "uint*", color))
+		this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "uint*", color))
 		return color
 		}
 	
@@ -453,7 +453,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	BeginDrag(index, xHotspot, yHotspot){
-		return this.__Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", iTrack, "int", xHotspot, "int", yHotspot))
+		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", iTrack, "int", xHotspot, "int", yHotspot))
 		}
 	
 	/**************************************************************************************************************
@@ -465,7 +465,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	EndDrag(){
-		return this.__Error(DllCall(NumGet(this.vt+23*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+23*A_PtrSize), "ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -482,7 +482,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	DragEnter(hwnd, x, y){
-		return this.__Error(DllCall(NumGet(this.vt+24*A_PtrSize), "ptr", this.ptr, "uint", hwnd, "int", x, "int", y))
+		return this._Error(DllCall(NumGet(this.vt+24*A_PtrSize), "ptr", this.ptr, "uint", hwnd, "int", x, "int", y))
 		}
 	
 	/**************************************************************************************************************
@@ -497,7 +497,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	DragLeave(hwnd){
-		return this.__Error(DllCall(NumGet(this.vt+25*A_PtrSize), "ptr", this.ptr, "uint", hwnd))
+		return this._Error(DllCall(NumGet(this.vt+25*A_PtrSize), "ptr", this.ptr, "uint", hwnd))
 		}
 		
 	/**************************************************************************************************************
@@ -514,7 +514,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	DragMove(x, y){
-		return this.__Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "int", x, "int", y))
+		return this._Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "int", x, "int", y))
 		}
 	
 	/**************************************************************************************************************
@@ -534,7 +534,7 @@ class ImageList extends Unknown
 	SetDragCursorImage(index, xHotspot, yHotspot, il := 0){
 		if (il == 0)
 			il := this
-		return this.__Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
+		return this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
 																	, "int", index, "int", xHotspot, "int", yHotspot))
 		}
 	
@@ -550,7 +550,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	DragShowNoLock(show){
-		return this.__Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "uint", show))
+		return this._Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "uint", show))
 		}
 	
 	/**************************************************************************************************************
@@ -570,7 +570,7 @@ class ImageList extends Unknown
 	GetDragImage(ByRef dragPos, ByRef imagePos, ByRef IL){
 		global ImageList	
 		VarSetCapacity(POINT1, 8, 0), VarSetCapacity(POINT2, 8, 0)
-		bool := this.__Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
+		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
 		dragPos := { "x" : NumGet(POINT1, 0), "y" : NumGet(POINT1, 4) }
 		imagePos := { "x" : NumGet(POINT2, 0), "y" : NumGet(POINT2, 4) }
 		IL := new ImageList(out)
@@ -594,7 +594,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetItemFlags(index){
-		this.__Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
+		this._Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
 		return flags
 		}
 	
@@ -610,7 +610,7 @@ class ImageList extends Unknown
 	***************************************************************************************************************
 	*/
 	GetOverlayImage(index){
-		this.__Error(DllCall(NumGet(this.vt+31*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
+		this._Error(DllCall(NumGet(this.vt+31*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
 		return out
 		}
 		

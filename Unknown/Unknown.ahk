@@ -59,7 +59,7 @@ class Unknown
 	/**************************************************************************************************************
 	group: private functions
 	
-	Function: __GUID
+	Function: _GUID
 	internal helper function for inherited classes.
 	
 	Parameters:
@@ -73,13 +73,13 @@ class Unknown
 		In cases where you need to pass a IID to a method, you can use this to create it inline.
 	***************************************************************************************************************
 	*/
-	__GUID(ByRef GUID, sGUID){
+	_GUID(ByRef GUID, sGUID){
 		VarSetCapacity(GUID, 16, 0)
 		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &GUID) >= 0 ? &GUID : ""
 		}
 
 	/**************************************************************************************************************
-	Function: __Error
+	Function: _Error
 	internal helper function for inherited classes.
 	
 	Parameters:
@@ -93,7 +93,7 @@ class Unknown
 		In most cases, you should also return this function's return value.
 	***************************************************************************************************************
 	*/
-	__Error(error)
+	_Error(error)
 		{
 		this.Error.code := error
 		

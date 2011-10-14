@@ -71,7 +71,7 @@ class OperationsProgressDialog extends Unknown
 		else
 			_flags := flags
 	
-		return this.__Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Uint", _flags))
+		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Uint", _flags))
 		}
 	
 	/**************************************************************************************************************
@@ -83,7 +83,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/	
 	StopProgressDialog(){
-		return this.__Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -126,7 +126,7 @@ class OperationsProgressDialog extends Unknown
 			else
 				operation := SPACTION["none"]
 		
-		return this.__Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", operation))
+		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", operation))
 		}
 	
 	/**************************************************************************************************************
@@ -160,7 +160,7 @@ class OperationsProgressDialog extends Unknown
 			else
 				mode := PMODE["default"]
 	
-		return this.__Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Uint", mode))
+		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Uint", mode))
 		}
 	
 	/**************************************************************************************************************
@@ -179,7 +179,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	UpdateProgress(pointsReached, pointsTotal, sizeReached, sizeTotal, itemsReached, itemsTotal){
-		return this.__Error(DllCall(NumGet(this.vt+07*A_PtrSize),	"Ptr",		this.ptr
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize),	"Ptr",		this.ptr
 													,	"Uint64",	pointsReached
 													,	"Uint64",	pointsTotal
 													,	"UInt64",	sizeReached
@@ -205,7 +205,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	UpdateLocations(source, target, item := 0) {
-		return this.__Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr
 								, "Ptr", IsObject(source) ? source.ptr : source
 								, "Ptr", IsObject(target) ? target.ptr : target
 								, "Ptr", IsObject(item) ? item.ptr : item))
@@ -220,7 +220,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	ResetTimer(){
-		return this.__Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -232,7 +232,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	PauseTimer(){
-		return this.__Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr))
 		}
 	
 	/**************************************************************************************************************
@@ -244,7 +244,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	ResumeTimer(){
-		return this.__Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr))
 		}
 
 	/**************************************************************************************************************
@@ -260,7 +260,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	GetMilliseconds(ByRef elapsed, ByRef remaining){
-		return this.__Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt64*", elapsed, "UInt64*", remaining))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt64*", elapsed, "UInt64*", remaining))
 		}
 	
 	/**************************************************************************************************************
@@ -280,7 +280,7 @@ class OperationsProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	GetOperationStatus(){
-		this.__Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt*", status))
+		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt*", status))
 		return status
 		}
 	}
