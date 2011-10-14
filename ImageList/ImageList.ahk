@@ -280,7 +280,7 @@ class ImageList extends Unknown
 		bool swap - true to swap the images, false to move only the destination to the source
 		
 	Remarks:
-		**NOT WORKING!**
+		*NOT WORKING!*
 	***************************************************************************************************************
 	*/
 	Copy(iDest, iSrc, swap){
@@ -292,7 +292,7 @@ class ImageList extends Unknown
 	Creates a new image by combining two existing images. This method also creates a new image list in which to store the image. 
 	
 	Remarks:
-		**NOT WORKING!**
+		*NOT WORKING!*
 	***************************************************************************************************************
 	*/
 	Merge(index1, index2, xoffset, yoffset, punk2 := false) {

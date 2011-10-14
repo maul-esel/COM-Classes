@@ -18,7 +18,7 @@ class TaskbarList extends Unknown
 	
 	/**************************************************************************************************************
 	Variable: IID
-	This is IID_ITaskbarList1. It is required to create the object.
+	This is IID_ITaskbarList. It is required to create the object.
 	***************************************************************************************************************	
 	*/
 	static IID := "{56FDF342-FD6D-11d0-958A-006097C9A090}"
