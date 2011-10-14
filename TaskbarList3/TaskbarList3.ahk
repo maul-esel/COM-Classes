@@ -3,7 +3,7 @@ class: TaskbarList3
 extends TaskbarList2
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- It also requires Windows 7, Windows Server 2008 R2 or higher
 ***************************************************************************************************************	
 */
@@ -135,7 +135,7 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetTabOrder(hGui)
 	***************************************************************************************************************	
 	*/
-	SetTabOrder(hTab, hBefore := 0){
+	SetTabOrder(hTab, hBefore = 0){
 		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
 		}
 	
@@ -238,7 +238,7 @@ class TaskbarList3 extends TaskbarList2
 				if flags is not integer ; if strings were used
 					{
 					flags := 0 ; reset flags
-					LoopParse, _flags, %A_Space%| ; parse:
+					Loop, Parse, _flags, %A_Space%| ; parse:
 						{
 						; if the loop field is a valid flag and it was not added before:
 						if (THUMBBUTTONFLAGS.HasKey(A_LoopField) && (flags & THUMBBUTTONFLAGS[A_LoopField]) != THUMBBUTTONFLAGS[A_LoopField])
@@ -291,7 +291,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetOverlayIcon(hWin, Icon, altText) {
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, (A_IsUnicode ? "str" : "ptr"), (A_IsUnicode ? altText : this._ToUnicode(altText))))
 		}
 	
 	/**************************************************************************************************************
@@ -310,7 +310,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetThumbnailTooltip(hWin, Tooltip){
-		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
+		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, (A_IsUnicode ? "str" : "ptr"), (A_IsUnicode ? Tooltip : this._ToUnicode(Tooltip))))
 		}
 	
 	/**************************************************************************************************************

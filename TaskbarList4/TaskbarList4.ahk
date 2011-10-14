@@ -3,7 +3,7 @@ class: TaskbarList4
 extends TaskbarList3
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- It also requires Windows 7, Windows Server 2008 R2 or higher
 ***************************************************************************************************************	
 */

@@ -1,4 +1,4 @@
-#SingleInstance
+#SingleInstance force
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\TaskbarList.ahk
 

@@ -3,7 +3,7 @@ class: ProgressDialog
 exposes methods to create, control and display a progress dialog via COM interface IProgressDialog.
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- It also requires Windows 2000 *Professional* / Windows XP or Windows Server 2003 or higher.
 	- the Unknown class is needed, too
 ***************************************************************************************************************	
@@ -50,13 +50,13 @@ class ProgressDialog extends Unknown
 			NoCancel (0x00000040) - *Windows Vista and later.* No cancel button (operation cannot be canceled).
 	***************************************************************************************************************	
 	*/
-	StartProgressDialog(flags := 0, hParent := 0){
+	StartProgressDialog(flags = 0, hParent = 0){
 		static PROGDLG := { "normal" : 0x00000000, "modal" : 0x00000001, "autotime" : 0x00000002, "notime" : 0x00000004
 							, "nominimize" : 0x00000008, "noprogressbar" : 0x00000010, "marqueeprogress" : 0x00000020, "nocancel" : 0x00000040 }
 		if flags is not integer
 			{
 			_flags := 0
-			LoopParse flags, %A_Space%|
+			Loop, Parse flags, %A_Space%|
 				{
 				if (PROGDLG.HasKey(A_LoopField))
 					_flags |= PROGDLG[A_LoopField]
@@ -98,7 +98,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetTitle(title){
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
+		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", this._ToUnicode(title)))
 		}
 	
 	/**************************************************************************************************************
@@ -151,7 +151,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetLine(line, text){
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, (A_IsUnicode ? "str" : "ptr"), A_IsUnicode ? text : this._ToUnicode(text), "UInt", 0, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -169,7 +169,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetCancelMsg(text){
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "ptr", this._ToUnicode(text), "UInt", 0))
 		}
 	
 	/**************************************************************************************************************

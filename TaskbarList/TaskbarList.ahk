@@ -3,7 +3,7 @@ class: TaskbarList
 extends Unknown
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- It also requires Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 ***************************************************************************************************************	
 */

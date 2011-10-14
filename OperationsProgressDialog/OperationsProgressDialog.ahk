@@ -3,7 +3,7 @@ class: OperationsProgressDialog
 extends Unknown
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- It also requires Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 ***************************************************************************************************************	
 */
@@ -53,7 +53,7 @@ class OperationsProgressDialog extends Unknown
 		DontDisplayLocations (0x00001000) - *Win7 and later:* Do not display the location line in the progress dialog.
 	***************************************************************************************************************	
 	*/
-	StartProgressDialog(flags := 0, hParent := 0){
+	StartProgressDialog(flags = 0, hParent = 0){
 		static OPROGDLGF := { "normal" : 0x00000000, "modal" : 0x00000001, "autotime" : 0x00000002, "notime" : 0x00000004
 							, "nominimize" : 0x00000008, "noprogressbar" : 0x00000010, "nocancel" : 0x00000040, "enablepause" : 0x00000080
 							, "allowundo" : 0x000000100, "dontdisplaysourcepath" : 0x00000200, "dontdisplaydestpath" : 0x00000400
@@ -62,7 +62,7 @@ class OperationsProgressDialog extends Unknown
 		if flags is not integer
 			{
 			_flags := 0
-			LoopParse flags, %A_Space%|
+			Loop, Parse flags, %A_Space%|
 				{
 				if (OPROGDLGF.HasKey(A_LoopField))
 					_flags |= OPROGDLGF[A_LoopField]
@@ -204,7 +204,7 @@ class OperationsProgressDialog extends Unknown
 		You can either pass raw pointers or ShellItem instances to this method.
 	***************************************************************************************************************	
 	*/
-	UpdateLocations(source, target, item := 0) {
+	UpdateLocations(source, target, item = 0) {
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr
 								, "Ptr", IsObject(source) ? source.ptr : source
 								, "Ptr", IsObject(target) ? target.ptr : target

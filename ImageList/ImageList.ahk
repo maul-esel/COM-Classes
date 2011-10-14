@@ -3,7 +3,7 @@ class: ImageList
 exposes methods to manage image lists via COM interface IImageList.
 
 Requirements:
-	- This requires AHK v2 alpha
+	- This requires AHK_L v1.1
 	- the Unknown class is also required
 	- Windows XP / Windows Server 2003 or higher
 	
@@ -55,7 +55,7 @@ class ImageList extends Unknown
 >>		handle := myIL.Handle
 	***************************************************************************************************************
 	*/
-	FromHIMAGELIST(il := 0){
+	FromHIMAGELIST(il = 0){
 		global ImageList
 		
 		if (il == 0)
@@ -84,7 +84,7 @@ class ImageList extends Unknown
 >>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	***************************************************************************************************************
 	*/
-	Add(bitmap, maskbitmap := 0){
+	Add(bitmap, maskbitmap = 0){
 		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
 		return int
 		}
@@ -101,7 +101,7 @@ class ImageList extends Unknown
 		int index - the new image list index of the icon
 	***************************************************************************************************************
 	*/
-	ReplaceIcon(hIcon, index := -1){
+	ReplaceIcon(hIcon, index = -1){
 		this._Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
 		return int
 		}
@@ -141,7 +141,7 @@ class ImageList extends Unknown
 >>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	***************************************************************************************************************
 	*/
-	Replace(index, bitmap, maskbitmap := 0){
+	Replace(index, bitmap, maskbitmap = 0){
 		return this._Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
 		}
 	
@@ -295,7 +295,7 @@ class ImageList extends Unknown
 		*NOT WORKING!*
 	***************************************************************************************************************
 	*/
-	Merge(index1, index2, xoffset, yoffset, punk2 := false) {
+	Merge(index1, index2, xoffset, yoffset, punk2 = false) {
 		global ImageList
 		if (!punk2)
 			punk2 := this
@@ -531,7 +531,7 @@ class ImageList extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************
 	*/
-	SetDragCursorImage(index, xHotspot, yHotspot, il := 0){
+	SetDragCursorImage(index, xHotspot, yHotspot, il = 0){
 		if (il == 0)
 			il := this
 		return this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
@@ -704,7 +704,7 @@ class ImageList extends Unknown
 			if (!cur)
 				cur := cursors["IDC_" . _cur]
 			}
-		return this.ReplaceIcon(DllCall("LoadCursorW", "uint", 0, "uint", cur))
+		return this.ReplaceIcon(DllCall("LoadCursor", "uint", 0, "uint", cur))
 		}
 
 	

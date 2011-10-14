@@ -3,7 +3,7 @@ class: MMDeviceEnumerator
 extends Unknown
 
 Requirements:
-	- This requires AHK v2 alpha / AHK_L v1.1
+	- This requires AHK_L v1.1
 	- It also requires Windows Vista, Windows 2008 Server or higher
 ***************************************************************************************************************	
 */
@@ -76,7 +76,7 @@ class MMDeviceEnumerator extends Unknown
 	GetDevice(id)
 	{
 		global MMDevice
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr", device))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr", this._ToUnicode(id), "ptr", device))
 		return new MMDevice(device)
 	}
 	

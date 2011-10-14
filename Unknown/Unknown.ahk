@@ -1,4 +1,4 @@
-/**************************************************************************************************************
+﻿/**************************************************************************************************************
 class: Unknown
 implements the IUnknown interface and provides meta-functions and helper methods for inherited classes.
 ***************************************************************************************************************
@@ -36,7 +36,7 @@ class Unknown
 			ptr vt - the pointer to the object's vTable
 	***************************************************************************************************************
 	*/
-	__New(ptr := 0){
+	__New(ptr = 0){
 		if (!ptr)
 			this.ptr := ComObjCreate(this.CLSID, this.IID)
 		else
@@ -98,13 +98,35 @@ class Unknown
 		this.Error.code := error
 		
 		buffer_size := VarSetCapacity(buffer, 1024, 0)
-		DllCall("FormatMessageW", "uint", 0x1200, "ptr", 0, "uint", error, "uint", 0x10000, ptr, &buffer, "uint", buffer_size, ptr, 0)
+		DllCall("FormatMessage" (A_IsUnicode ? "W" : "A"), "uint", 0x1200, "ptr", 0, "uint", error, "uint", 0x10000, ptr, &buffer, "uint", buffer_size, ptr, 0)
 		error_msg := StrGet(&buffer)
 
 		this.Error.description := error " - " error_msg
 		
 		return error >= 0
 		}
+	
+	/**************************************************************************************************************
+	Function: _ToUnicode
+	internal helper function for inherited classes
+	
+	Parameters:
+		string - the string to convert to unicode
+		
+	Developer remarks:
+		you must pass the return value of this method as "ptr", not as "str". Use this method like so:
+>		DllCall( ..., A_IsUnicode ? "str" : "ptr", A_IsUnicode ? myString : this._ToUnicode(string))
+	***************************************************************************************************************
+	*/
+	_ToUnicode(string)
+	{
+		if (A_IsUnicode)
+			return string		
+		nSize:=DllCall("kernel32\MultiByteToWideChar", "Uint", 65001, "Uint", 0, "Ptr", &string, "int", -1, "Uint", 0, "int", 0)
+		VarSetCapacity(wstring, nSize * 2 + 1)
+		DllCall("kernel32\MultiByteToWideChar", "Uint", 65001, "Uint", 0, "Ptr", &string, "int", -1, "Ptr", &wstring, "int", nSize + 1)
+		return &wstring
+	}
 
 	/**************************************************************************************************************
 	group: IUnknown
