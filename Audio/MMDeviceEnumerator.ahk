@@ -14,7 +14,7 @@ class MMDeviceEnumerator extends Unknown
 	This is CLSID_MMDeviceEnumerator. It is required to create the object.
 	***************************************************************************************************************	
 	*/
-	static CSID := "{BCDE0395-E52F-467C-8E3D-C4579291692E}"
+	static CLSID := "{BCDE0395-E52F-467C-8E3D-C4579291692E}"
 	
 	/**************************************************************************************************************
 	Variable: IID
