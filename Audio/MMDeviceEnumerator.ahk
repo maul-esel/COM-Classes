@@ -14,7 +14,7 @@ class MMDeviceEnumerator extends Unknown
 	This is CLSID_MMDeviceEnumerator. It is required to create the object.
 	***************************************************************************************************************	
 	*/
-	static CSID := "{BCDE0395-E52F-467C-8E3D-C4579291692E}"
+	static CLSID := "{BCDE0395-E52F-467C-8E3D-C4579291692E}"
 	
 	/**************************************************************************************************************
 	Variable: IID
@@ -37,8 +37,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	EnumAudioEndpoints(dataFlow, mask)
 	{
-		global MMDeviceCollection
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr", devices))
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr*", devices))
 		return new MMDeviceCollection(devices)
 	}
 	
@@ -57,8 +56,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	GetDefaultAudioEndpoint(dataFlow, role)
 	{
-		global MMDevice
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr", device))
+		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr*", device))
 		return new MMDevice(device)
 	}
 	
@@ -75,8 +73,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	GetDevice(id)
 	{
-		global MMDevice
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr", this._ToUnicode(id), "ptr", device))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr*", device))
 		return new MMDevice(device)
 	}
 	
