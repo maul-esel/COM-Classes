@@ -17,6 +17,14 @@ class Unknown
 	Error := { "code" : 0, "description" : "" }
 	
 	/**************************************************************************************************************
+	Variable: ThrowOnCreation
+	determines whether the creation of a new instance, without a given pointer, should throw an exception.
+	False by default.
+	***************************************************************************************************************
+	*/
+	static ThrowOnCreation := false
+	
+	/**************************************************************************************************************
 	group: metafunctions
 	
 	Function: __New
@@ -38,7 +46,16 @@ class Unknown
 	*/
 	__New(ptr := 0){
 		if (!ptr)
-			this.ptr := ComObjCreate(this.CLSID, this.IID)
+		{
+			if (this.base.ThrowOnCreation)
+			{
+				throw Exception("This class does not support direct creation: " . this.base.__class, -1)
+			}
+			else
+			{
+				this.ptr := ComObjCreate(this.base.CLSID, this.base.IID)
+			}
+		}
 		else
 			this.ptr := ptr
 		this.vt := NumGet(this.ptr + 0)
