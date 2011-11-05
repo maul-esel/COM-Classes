@@ -278,7 +278,7 @@ class TaskbarList3 extends TaskbarList2
 	params:
 		handle hGui - the window handle of your gui
 		hIcon Icon - handle to an icon
-		str altText - an alt text version of the information conveyed by the overlay, for accessibility purposes.
+		[opt] str altText - an alt text version of the information conveyed by the overlay, for accessibility purposes.
 
 	Returns:
 		bool success - true on success, false otherwise.
