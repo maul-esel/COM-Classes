@@ -98,7 +98,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetTitle(title){
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", this._ToUnicode(title)))
+		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "wstr", title))
 		}
 	
 	/**************************************************************************************************************
@@ -151,7 +151,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetLine(line, text){
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, (A_IsUnicode ? "str" : "ptr"), A_IsUnicode ? text : this._ToUnicode(text), "UInt", 0, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "wstr", text, "UInt", 0, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -169,7 +169,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	SetCancelMsg(text){
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "ptr", this._ToUnicode(text), "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "wstr", text, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************

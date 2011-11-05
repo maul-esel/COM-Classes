@@ -228,7 +228,7 @@ class TaskbarList3 extends TaskbarList2
 			if (button.HasKey("szTip"))
 				{
 				mask |= 0x00000004
-				StrPut(button["szTip"], &struct + 16 + 540 * (A_Index - 1), 260)
+				StrPut(button["szTip"], &struct + 16 + 540 * (A_Index - 1), 260, "UTF-16")
 				}
 				
 			if (button.HasKey("dwFlags")) ; if flags are defined
@@ -310,7 +310,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetThumbnailTooltip(hWin, Tooltip){
-		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, (A_IsUnicode ? "str" : "ptr"), (A_IsUnicode ? Tooltip : this._ToUnicode(Tooltip))))
+		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "wstr", Tooltip))
 		}
 	
 	/**************************************************************************************************************
