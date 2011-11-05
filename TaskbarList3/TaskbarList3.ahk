@@ -291,7 +291,7 @@ class TaskbarList3 extends TaskbarList2
 	***************************************************************************************************************	
 	*/
 	SetOverlayIcon(hWin, Icon, altText = "") {
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, (A_IsUnicode ? "str" : "ptr"), (A_IsUnicode ? altText : this._ToUnicode(altText))))
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "wstr", altText))
 		}
 	
 	/**************************************************************************************************************
