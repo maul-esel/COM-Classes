@@ -290,7 +290,7 @@ class TaskbarList3 extends TaskbarList2
 		- To get a hIcon, you might use LoadImage (<http://msdn.microsoft.com/de-de/library/ms648045>)
 	***************************************************************************************************************	
 	*/
-	SetOverlayIcon(hWin, Icon, altText) {
+	SetOverlayIcon(hWin, Icon, altText := "") {
 		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
 		}
 	
