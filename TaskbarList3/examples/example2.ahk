@@ -36,7 +36,7 @@ return
 WM_COMMAND(wp){
 	static THBN_CLICKED := 0x1800
 	if (HIWORD(wp) = THBN_CLICKED) ;if we received a button click:
-		Msgbox 64,,% "The ThumbBar button with the id `"" LOWORD(wp) "`" was clicked!", 3 ; show it to the user
+		Msgbox 64,,% "The ThumbBar button with the id """ LOWORD(wp) """ was clicked!", 3 ; show it to the user
 	}
 
 HIWORD(val){
