@@ -23,11 +23,11 @@ sleep 2000
 Tooltip The same works for other windows.
 WinGet, id, list,,, Program Manager ; get a list of all windows
 
-Loop id
+Loop %id%
     tbl.DeleteTab(id%A_Index%) ; remove all windows' taskbar entries
 
 sleep 3000
-Loop, id
+Loop %id%
     tbl.AddTab(id%A_Index%) ; add all windows' taskbar entries
 
 Tooltip Done
