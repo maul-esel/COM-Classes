@@ -90,9 +90,10 @@ class IMAGEINFO
 }
 
 /*
-group: dependencies
+group: dependencies & related
 */
 /*
-This class requires the RECT class (auto-included)
+RECT:
+	This class requires the RECT structure class **(auto-included)**.
 */
 #include %A_ScriptDir%\RECT.ahk
