@@ -34,80 +34,80 @@ class Picture extends Unknown
 	
 	get_Handle()
 	{
-		this._Error(DllCall(this.vt+03*A_PtrSize, "ptr", this.ptr, "uint*", handle))
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", handle))
 		return handle
 	}
 	
 	get_hPal()
 	{
-		this._Error(DllCall(this.vt+04*A_PtrSize, "ptr", this.ptr, "uint*", hPal))
+		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", hPal))
 		return hPal
 	}
 	
 	get_Type()
 	{
-		this._Error(DllCall(this.vt+05*A_PtrSize, "ptr", this.ptr, "short*", type))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "short*", type))
 		return type
 	}
 	
 	get_Width()
 	{
-		this._Error(DllCall(this.vt+06*A_PtrSize, "ptr", this.ptr, "int*", width))
+		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int*", width))
 		return width
 	}
 	
 	get_Height()
 	{
-		this._Error(DllCall(this.vt+07*A_PtrSize, "ptr", this.ptr, "int*", height))
+		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "int*", height))
 		return height
 	}
 	
 	Render(dc, x, y, w, h, xSrc, ySrc, wSrc, hSrc, rect := 0)
 	{
-		return this._Error(DllCall(this.vt+08*A_PtrSize, "ptr", this.ptr, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", rect))
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", rect))
 	}
 	
 	set_hPal(value)
 	{
-		return this._Error(DllCall(this.vt+09*A_PtrSize, "ptr", this.ptr, "uint", value))
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "uint", value))
 	}
 	
 	get_CurDC()
 	{
-		this._Error(DllCall(this.vt+10*A_PtrSize, "ptr", this.ptr, "ptr*", hDC))
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr*", hDC))
 		return hDC
 	}
 	
 	SelectPicture(newHDC, byRef outHDC := "", byRef outHBMP := "")
 	{
-		return this._Error(DllCall(this.vt+11*A_PtrSize, "ptr", this.ptr, "ptr", newHDC, "ptr*", outHDC, "ptr*", outHBMP))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "ptr", newHDC, "ptr*", outHDC, "ptr*", outHBMP))
 	}
 	
 	get_KeepOriginalFormat()
 	{
-		this._Error(DllCall(this.vt+12*A_PtrSize, "ptr", this.ptr, "uint*", keep))
+		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "uint*", keep))
 		return keep
 	}
 	
 	put_KeepOriginalFormat(value)
 	{
-		return this._Error(DllCall(this.vt+13*A_PtrSize, "ptr", this.ptr, "uint", value))
+		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "uint", value))
 	}
 	
 	PictureChanged()
 	{
-		return this._Error(DllCall(this.vt+14*A_PtrSize, "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr))
 	}
 	
 	SaveAsFile(stream, fSaveMemCopy)
 	{
-		this._Error(DllCall(this.vt+15*A_PtrSize, "ptr", this.ptr, "ptr", (IsObject(stream) ? stream.ptr : stream), "uint", fSaveMemCopy, "int*", cbSize))
+		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "ptr", (IsObject(stream) ? stream.ptr : stream), "uint", fSaveMemCopy, "int*", cbSize))
 		return cbSize
 	}
 	
 	get_Attributes()
 	{
-		this._Error(DllCall(this.vt+16*A_PtrSize, "ptr", this.ptr, "uint*", attr))
+		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "uint*", attr))
 		return attr
 	}
 }
