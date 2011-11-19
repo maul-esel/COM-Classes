@@ -172,37 +172,26 @@ class ImageList extends Unknown
 	Draws an image list item in the specified device context.
 	
 	Parameters:
-		object params* - a (variadic) list of parameters specifying the options.
+		ILDRAWPARAMS params - either a **pointer** to a valid struct or an instance of the ILDRAWPARAMS class, specifying the options.
 		
 	Returns:
 		bool success - true on success, false otherwise
 		
 	Remarks:
-		The used fields of the params object are described here: http://msdn.microsoft.com/en-us/library/bb761395.aspx
-		- cbSize and himl are ignored
-		- i and hdcDst are required
+		- The cbSize and himl members of the parameter are overwritten
+		- The i and hdcDst members of the parameter are required
 	***************************************************************************************************************
 	*/
-	Draw(params*){
-		VarSetCapacity(ILDRAWPARAMS, 68, 0)
-		NumPut(17*4,			ILDRAWPARAMS,	00)
-		NumPut(this.ptr, 		ILDRAWPARAMS,	04)
-		NumPut(params.i,		ILDRAWPARAMS,	08)
-		NumPut(params.hdcDst,	ILDRAWPARAMS,	12)
-		NumPut(params.x,		ILDRAWPARAMS,	16)
-		NumPut(params.y,		ILDRAWPARAMS,	20)
-		NumPut(params.cx,		ILDRAWPARAMS,	24)
-		NumPut(params.cy,		ILDRAWPARAMS,	28)
-		NumPut(params.xBitmap,	ILDRAWPARAMS,	32)
-		NumPut(params.yBitmap,	ILDRAWPARAMS,	36)
-		NumPut(params.rgbBk,	ILDRAWPARAMS,	40)
-		NumPut(params.rgbFg,	ILDRAWPARAMS,	44)
-		NumPut(params.fStyle,	ILDRAWPARAMS,	48)
-		NumPut(params.dwRop,	ILDRAWPARAMS,	52)
-		NumPut(params.fState,	ILDRAWPARAMS,	56)
-		NumPut(params.Frame,	ILDRAWPARAMS,	60)
-		NumPut(params.crEffect,	ILDRAWPARAMS,	64)
-		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", &ILDRAWPARAMS))
+	Draw(params){
+		if (IsObject(params))
+			struct := params.ToStructPtr()
+		else
+			struct := params
+			
+		NumPut(2 * A_PtrSize + 15 * 4,	struct,	00, "UInt") ; overwrite cbSize & himl
+		NumPut(this.ptr,	struct,		04, "UPtr")
+		
+		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", struct))
 		}
 	
 	/**************************************************************************************************************
