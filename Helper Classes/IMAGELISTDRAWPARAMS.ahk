@@ -160,4 +160,36 @@ class IMAGELISTDRAWPARAMS
 		
 		return &struct
 	}
+
+	/*
+	Method: FromStructPtr
+	(static) method that converts a script-usable struct into a new instance of the class
+
+	Returns:
+		instance - the new IMAGELISTDRAWPARAMS instance
+	*/
+	FromStructPtr(ptr)
+	{
+		instance := new IMAGELISTDRAWPARAMS()
+
+		instance.cbSize		:= NumGet(ptr,	00 + 0*A_PtrSize,	"UInt")
+		instance.ptr		:= NumGet(ptr,	04 + 0*A_PtrSize,	"UPtr")
+		instance.i			:= NumGet(ptr,	04 + 1*A_PtrSize,	"Int")
+		instance.hdcDst		:= NumGet(ptr,	08 + 1*A_PtrSize,	"UPtr")
+		instance.x			:= NumGet(ptr,	08 + 2*A_PtrSize,	"Int")
+		instance.y			:= NumGet(ptr,	12 + 2*A_PtrSize,	"Int")
+		instance.cx			:= NumGet(ptr,	16 + 2*A_PtrSize,	"Int")
+		instance.cy			:= NumGet(ptr,	20 + 2*A_PtrSize,	"Int")
+		instance.xBitmap	:= NumGet(ptr,	24 + 2*A_PtrSize,	"Int")
+		instance.yBitmap	:= NumGet(ptr,	28 + 2*A_PtrSize,	"Int")
+		instance.rgbBk		:= NumGet(ptr,	32 + 2*A_PtrSize,	"UInt")
+		instance.rgbFg		:= NumGet(ptr,	36 + 2*A_PtrSize,	"UInt")
+		instance.fStyle		:= NumGet(ptr,	40 + 2*A_PtrSize,	"UInt")
+		instance.dwRop		:= NumGet(ptr,	44 + 2*A_PtrSize,	"UInt")
+		instance.fState		:= NumGet(ptr,	48 + 2*A_PtrSize,	"UInt")
+		instance.Frame		:= NumGet(ptr,	52 + 2*A_PtrSize,	"UInt")
+		instance.crEffect	:= NumGet(ptr,	56 + 2*A_PtrSize,	"UInt")
+
+		return instance
+	}
 }
