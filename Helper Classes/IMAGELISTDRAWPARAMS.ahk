@@ -76,23 +76,26 @@ class IMAGELISTDRAWPARAMS
 	
 	/*
 	Field: rgbBk
-	The image background color. This parameter can be an application-defined RGB value or one of the following values:
-		CLR_DEFAULT (0xFF000000) - The default background color. The image is drawn using the image list background color. 
-		CLR_NONE (0xFFFFFFFF) - No background color. The image is drawn transparently. 
+	The image background color. This parameter can be an application-defined RGB value or a special value defined in a member of the COLORREF class.
 	
 	Remarks:
 		- For application-defined values, use the format "0x00bbggrr" (the first byte must be zero).
+		- the meanings of the special values:
+			COLORREF.DEFAULT - The default background color. The image is drawn using the image list background color.
+			COLORREF.NONE - No background color. The image is drawn transparently.
 	*/
 	rgbBk := 0xFF000000
 	
 	/*
 	Field: rgbFg
-	The image foreground color. This member is used only if fStyle includes the ILD_BLEND25 or ILD_BLEND50 flag. This parameter can be an application-defined RGB value or one of the following values:
-		CLR_DEFAULT (0xFF000000) - The default foreground color. The image is drawn using the system highlight color as the foreground color.
-		CLR_NONE (0xFFFFFFFF) - No blend color. The image is blended with the color of the destination device context. 
+	The image foreground color. This parameter can be an application-defined RGB value or oa special value defined in a member of the COLORREF class.
 
 	Remarks:
 		- For application-defined values, use the format "0x00bbggrr" (the first byte must be zero).
+		- This member is used only if fStyle includes the IMAGELISTDRAWFLAGS.BLEND25 or IMAGELISTDRAWFLAGS.BLEND50 flag.
+		- the meanings of the special values:
+			COLORREF.DEFAULT - The default foreground color. The image is drawn using the system highlight color as the foreground color.
+			COLORREF.NONE - No blend color. The image is blended with the color of the destination device context.
 	*/
 	rgbFg := 0xFF000000
 	
@@ -119,7 +122,7 @@ class IMAGELISTDRAWPARAMS
 	Field: Frame
 	Used with the alpha blending effect.
 
-	When used with IMAGELISTSTATEFLAGS.ALPHA, this member holds the value for the alpha channel. This value can be from 0 to 255, with 0 being completely transparent, and 255 being completely opaque. 
+	When used with IMAGELISTSTATEFLAGS.ALPHA in <fState>, this member holds the value for the alpha channel. This value can be from 0 to 255, with 0 being completely transparent, and 255 being completely opaque. 
 	*/
 	Frame := 0
 	
@@ -193,3 +196,22 @@ class IMAGELISTDRAWPARAMS
 		return instance
 	}
 }
+
+/*
+group: dependencies & related
+*/
+
+/*
+COLORREF:
+	You may use the values defined in the COLORREF enumeration class with this class **(not auto-included)**.
+*/
+
+/*
+IMAGELISTDRAWFLAGS:
+	You may use the values defined in the IMAGELISTDRAWFLAGS enumeration class with this class **(not auto-included)**.
+*/
+
+/*
+IMAGELISTSTATEFLAGS:
+	You may use the values defined in the IMAGELISTSTATEFLAGS enumeration class with this class **(not auto-included)**.
+*/
