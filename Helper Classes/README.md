@@ -6,7 +6,7 @@ This folder holds classes that are used to represent structs or enumerations use
 * the member names must exactly match those in the struct definition
 * the members must be accessible via get/set
 * each class must implement a method called `ToStructPtr()` (no parameters), that converts the current values into a structure in memory and returns a pointer to it.
-* each class must implement a (static) `FromStruct()` method, which accepts a pointer to a memory struct and returns a new instance of the class.
+* each class must implement a (static) `FromStructPtr(ptr)` method, which accepts a pointer to a memory struct and returns a new instance of the class.
 
 ### Usage
 Usually, it should be possible to pass either the struct instance or a pointer (for example obtained by calling `ToStructPtr()`) to a method.
