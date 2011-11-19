@@ -16,6 +16,7 @@ Of course, it must also be documented what structs instances can be passed, with
 ### Requirements
 * the member names must exactly match those in the enumeration definition
 * override `__Set()` to ensure they're not changed by accident.
+* use static fields!
 
 ### Usage
 The enumeration members can be used in methods or for struct fields. Ensure the corresponding enumeration is documented.
