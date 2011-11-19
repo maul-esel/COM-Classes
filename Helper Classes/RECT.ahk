@@ -53,11 +53,28 @@ class RECT
 	*/
 	ToStructPtr()
 	{
-		VarSetCapacity(rect, 16, 0)
-		NumPut(this.left,	00,	"UInt")
-		NumPut(this.top,	04,	"UInt")
-		NumPut(this.right,	08,	"UInt")
-		NumPut(this.bottom,	12,	"UInt")
-		return &rect
+		VarSetCapacity(struct, 16, 0)
+
+		NumPut(this.left,	struct,	00,	"Int")
+		NumPut(this.top,	struct,	04,	"Int")
+		NumPut(this.right,	struct,	08,	"Int")
+		NumPut(this.bottom,	struct,	12,	"Int")
+
+		return struct
+	}
+	
+	/*
+	Method: FromStructPtr
+	(static) method that converts a script-usable struct into a new instance of the class
+	
+	Returns:
+		instance - the new RECT instance
+	*/
+	FromStructPtr(ptr)
+	{
+		return new RECT(NumGet(ptr, 00, "Int")
+					,	NumGet(ptr, 04, "Int")
+					,	NumGet(ptr, 08, "Int")
+					,	NumGet(ptr, 12, "Int"))
 	}
 }
