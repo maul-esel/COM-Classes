@@ -15,7 +15,6 @@ Of course, it must also be documented what structs instances can be passed, with
 # Enumeration classes
 ### Requirements
 * the member names must exactly match those in the enumeration definition
-* override `__Set()` to ensure they're not changed by accident.
 * use static fields!
 
 ### Usage
