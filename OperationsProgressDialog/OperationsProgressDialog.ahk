@@ -9,7 +9,7 @@ Requirements:
 */
 
 class OperationsProgressDialog extends Unknown
-	{
+{
 	/**************************************************************************************************************
 	Variable: CLSID
 	This is CLSID_ProgressDialog. It is required to create the object.
@@ -36,9 +36,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	StartProgressDialog(flags := 0, hParent := 0){
+	StartProgressDialog(flags := 0, hParent := 0)
+	{
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Uint", flags))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: StopProgressDialog
@@ -48,9 +49,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/	
-	StopProgressDialog(){
+	StopProgressDialog()
+	{
 		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetOperation
@@ -63,9 +65,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	SetOperation(operation){
+	SetOperation(operation)
+	{
 		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", operation))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetMode
@@ -78,9 +81,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	SetMode(mode){
+	SetMode(mode)
+	{
 		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Uint", mode))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: UpdateProgress
@@ -97,7 +101,8 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	UpdateProgress(pointsReached, pointsTotal, sizeReached, sizeTotal, itemsReached, itemsTotal){
+	UpdateProgress(pointsReached, pointsTotal, sizeReached, sizeTotal, itemsReached, itemsTotal)
+	{
 		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize),	"Ptr",		this.ptr
 													,	"Uint64",	pointsReached
 													,	"Uint64",	pointsTotal
@@ -105,7 +110,7 @@ class OperationsProgressDialog extends Unknown
 													,	"UInt64",	sizeTotal
 													,	"Uint64",	itemsReached
 													,	"Uint64",	itemsTotal))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: UpdateLocations
@@ -123,12 +128,13 @@ class OperationsProgressDialog extends Unknown
 		You can either pass raw pointers or ShellItem instances to this method.
 	***************************************************************************************************************	
 	*/
-	UpdateLocations(source, target, item := 0) {
+	UpdateLocations(source, target, item := 0)
+	{
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr
 								, "Ptr", IsObject(source) ? source.ptr : source
 								, "Ptr", IsObject(target) ? target.ptr : target
 								, "Ptr", IsObject(item) ? item.ptr : item))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ResetTimer
@@ -138,9 +144,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	ResetTimer(){
+	ResetTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: PauseTimer
@@ -150,9 +157,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	PauseTimer(){
+	PauseTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ResumeTimer
@@ -162,9 +170,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	ResumeTimer(){
+	ResumeTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr))
-		}
+	}
 
 	/**************************************************************************************************************
 	Function: GetMilliseconds
@@ -178,9 +187,10 @@ class OperationsProgressDialog extends Unknown
 		bool success - true on success, false otherwise
 	***************************************************************************************************************	
 	*/
-	GetMilliseconds(ByRef elapsed, ByRef remaining){
+	GetMilliseconds(ByRef elapsed, ByRef remaining)
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt64*", elapsed, "UInt64*", remaining))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: GetOperationStatus
@@ -193,11 +203,12 @@ class OperationsProgressDialog extends Unknown
 		- To get information about success and failure of this method, check the instance's Error object.
 	***************************************************************************************************************	
 	*/
-	GetOperationStatus(){
+	GetOperationStatus()
+	{
 		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt*", status))
 		return status
-		}
 	}
+}
 	
 /*
 group: dependencies & related
