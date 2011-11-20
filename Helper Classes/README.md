@@ -1,4 +1,4 @@
-# Helper structs
+# Helper classes
 This folder holds classes that are used to represent structs or enumerations used by one or several COM Classes.
 
 ## Struct classes
@@ -11,11 +11,11 @@ This folder holds classes that are used to represent structs or enumerations use
 ### Usage
 Usually, it should be possible to pass either the struct instance or a pointer (for example obtained by calling `ToStructPtr()`) to a method.
 A COM class can also document the structs it can handle for each function (if not all can be handled).
-Of course, it must also be documented what structs instances can be passed, with a link to the class' documentation.
+Of course, it must also be documented what struct instances can be passed, with a link to the class' documentation.
 
 # Enumeration classes
 ### Requirements
-* the member names must exactly match those in the enumeration definition
+* the member names must exactly match those in the enumeration definition, except a eading prefix (if present) is ommitted.
 * use static fields!
 
 ### Usage
