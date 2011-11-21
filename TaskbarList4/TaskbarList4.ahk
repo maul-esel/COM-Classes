@@ -31,26 +31,18 @@ class TaskbarList4 extends TaskbarList3
 
 	Parameters:
 		handle hTab - the handle of the tab to work on.
-		int properties - the properties to set.
-	
-	Possible properties:
-		0 - none
-		1 - use the thumbnail provided by the main application frame window.
-		2 - use the thumbnail of the tab except when it is active.
-		3 - use the peek image provided by the main application frame window.
-		4 - use the peek image of the tab except when it is active.
-	
-	You may combine these values like this:
->		properties := 1|4
-	However, first lookup this page (<http://msdn.microsoft.com/de-de/library/dd562320.aspx>) to ensure this won't cause an error.
+		uint properties - the properties to set. You may use the fields of the STPFLAG class for convenience.
 
 	Returns:
 		bool success - true on success, false otherwise.
 		
 	Example:
->		ITBL4.SetTabProperties(WinExist(), 1|4)
-***************************************************************************************************************	
-*/
+>		ITBL4.SetTabProperties(WinExist(), STPFLAG.USEAPPTHUMBNAILALWAYS|STPFLAG.USEAPPPEEKALWAYS)
+
+	Remarks:
+		Read the flag documentation carefully to avoid flag combinations that cause errors.
+	***************************************************************************************************************	
+	*/
 	SetTabProperties(hTab, properties)
 	{
 		return this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties))
