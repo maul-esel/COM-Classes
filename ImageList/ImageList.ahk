@@ -703,7 +703,7 @@ IDI:
 ILDRAWPARAMS:
 	You may use the the ILDRAWPARAMS structure class with this class **(auto-included)**.
 */
-#include %A_ScriptDir%\ILDRAWPARAMS.ahk
+#include %A_ScriptDir%\..\Helper Classes\ILDRAWPARAMS.ahk
 
 /*
 ILIF:
@@ -714,7 +714,7 @@ ILIF:
 IMAGEINFO:
 	This class requires the IMAGEINFO structure class **(auto-included)**.
 */
-#include %A_ScriptDir%\IMAGEINFO.ahk
+#include %A_ScriptDir%\..\Helper Classes\IMAGEINFO.ahk
 
 /*
 IMAGELISTDRAWFLAGS:
@@ -730,10 +730,10 @@ OBM:
 POINT:
 	This class requires the POINT structure class **(auto-included)**.
 */
-#include %A_ScriptDir%\POINT.ahk
+#include %A_ScriptDir%\..\Helper Classes\POINT.ahk
 
 /*
 RECT:
 	This class requires the RECT structure class **(auto-included)**.
 */
-#include %A_ScriptDir%\RECT.ahk
+#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
