@@ -29,42 +29,17 @@ class ProgressDialog extends Unknown
 	starts displaying the progress dialog.
 	
 	Parameters:
-		[opt] variant flags - see the Remarks.
-		[opt] handle hParent - the handle to a window to make the dialog box modal to. You must set the appropriate flags.
+		[opt] uint flags - a combination of flags modifying the dialog. You can use the fields of the PROGDLG class for convenience.
+		[opt] handle hParent - the handle to a window to make the dialog box modal to. You must set the appropriate flags to make this work.
 		
 	Returns:
 		bool success - true on success, false otherwise
 		
 	Example:
 >	MyProgress.StartProgressDialog()
-		
-	Remarks:
-		For flags, you can either pass a binary combination or a combination of strings (separated by space or |). The valid flags are:
-			Normal (0x00000000) - Normal progress dialog box behavior. [default]
-			Modal (0x00000001) - The progress dialog box will be modal to the window specified by hwndParent. By default, a progress dialog box is modeless.
-			AutoTime (0x00000002) - Automatically estimate the remaining time and display the estimate on line 3. If this flag is set, <SetLine> can be used only to display text on lines 1 and 2.
-			NoTime (0x00000004) - Do not show the "time remaining" text.
-			NoMinimize (0x00000008) - Do not display a minimize button on the dialog box's caption bar.
-			NoProgressBar (0x00000010) - Do not display the progress bar.
-			MarqueeProgress (0x00000020) - *Windows Vista and later.* Sets the progress bar to marquee mode.
-			NoCancel (0x00000040) - *Windows Vista and later.* No cancel button (operation cannot be canceled).
 	***************************************************************************************************************	
 	*/
 	StartProgressDialog(flags := 0, hParent := 0){
-		static PROGDLG := { "normal" : 0x00000000, "modal" : 0x00000001, "autotime" : 0x00000002, "notime" : 0x00000004
-							, "nominimize" : 0x00000008, "noprogressbar" : 0x00000010, "marqueeprogress" : 0x00000020, "nocancel" : 0x00000040 }
-		if flags is not integer
-			{
-			_flags := 0
-			LoopParse flags, %A_Space%|
-				{
-				if (PROGDLG.HasKey(A_LoopField))
-					_flags |= PROGDLG[A_LoopField]
-				}
-			}
-		else
-			_flags := flags
-	
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", _flags, "UInt", 0))
 		}
 		
@@ -177,29 +152,16 @@ class ProgressDialog extends Unknown
 	performs an action on the ProgressDialog's timer
 	
 	Parameters:
-		variant action - the action to perform
+		uint action - the action to perform. You may use the fields of the PDTIMER class for convenience.
 		
 	Returns:
 		bool success - true on success, false otherwise
 		
 	Remarks:
-		For action, you can either pass a string or its flag representation. Valid flags are:
-		Reset (0x00000001) - the timer is resetted (default).
-		Pause (0x00000002) - the timer is paused.
-		Resume (0x00000003) - the timer is resumed.
+		Instead of specifying the operation, you may also use one of the methods <ResetTimer>, <PauseTimer> or <ResetTimer>.
 	***************************************************************************************************************	
 	*/
 	Timer(action){
-		static PDTimer := { "reset" : 0x00000001, "pause" : 0x00000002, "resume" : 0x00000003 }
-		
-		if action is not integer
-			{
-			if (PDTimer.HasKey(action))
-				action := PDTimer[action]
-			else
-				action := PDTimer["reset"]
-			}
-	
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0))
 		}
 	
@@ -215,8 +177,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	ResetTimer(){
-		static PDTimer_RESET := 0x00000001
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESET, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.RESET, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -232,8 +193,7 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	PauseTimer(){
-		static PDTimer_PAUSE := 0x00000002
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_PAUSE, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.PAUSE, "UInt", 0))
 		}
 	
 	/**************************************************************************************************************
@@ -248,8 +208,18 @@ class ProgressDialog extends Unknown
 	***************************************************************************************************************	
 	*/
 	ResumeTimer() {
-		static PDTimer_RESUME := 0x00000003
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTimer_RESUME, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.RESUME, "UInt", 0))
 		}
-	
 	}
+/*
+group: dependencies & related
+*/
+/*
+PDTIMER:
+	This class requires the PDTIMER enumeration class **(auto-included)**.
+*/
+#include %A_ScriptDir%\..\Helper Classes\PDTIMER.ahk
+/*
+PROGDLG:
+	You may use the fields of the PROGDLG enumeration class with this class **(not auto-included)**.
+*/
