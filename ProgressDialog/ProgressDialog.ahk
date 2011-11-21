@@ -9,7 +9,7 @@ Requirements:
 ***************************************************************************************************************	
 */
 class ProgressDialog extends Unknown
-	{
+{
 	/**************************************************************************************************************
 	Variable: CLSID
 	This is CLSID_ProgressDialog. It is needed to create the object.
@@ -39,9 +39,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.StartProgressDialog()
 	***************************************************************************************************************	
 	*/
-	StartProgressDialog(flags := 0, hParent := 0){
+	StartProgressDialog(flags := 0, hParent := 0)
+	{
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", _flags, "UInt", 0))
-		}
+	}
 		
 	/**************************************************************************************************************
 	Function: StopProgressDialog
@@ -54,9 +55,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.StopProgressDialog()
 	***************************************************************************************************************	
 	*/	
-	StopProgressDialog(){
+	StopProgressDialog()
+	{
 		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetTitle
@@ -72,9 +74,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.SetTitle("my new title")
 	***************************************************************************************************************	
 	*/
-	SetTitle(title){
+	SetTitle(title)
+	{
 		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: HasUserCanceled
@@ -87,10 +90,11 @@ class ProgressDialog extends Unknown
 >	canceled := MyProgress.HasUserCanceled()
 	***************************************************************************************************************	
 	*/
-	HasUserCanceled(){
+	HasUserCanceled()
+	{
 		this._Error(0)
 		return DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr)
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetProgress
@@ -106,9 +110,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.SetProgress(50)
 	***************************************************************************************************************	
 	*/
-	SetProgress(percent){
+	SetProgress(percent)
+	{
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetLine
@@ -125,9 +130,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.SetLine(1, "This is line 1")
 	***************************************************************************************************************	
 	*/
-	SetLine(line, text){
+	SetLine(line, text)
+	{
 		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetCancelMsg
@@ -143,9 +149,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.SetCancelMsg("You canceled")
 	***************************************************************************************************************	
 	*/
-	SetCancelMsg(text){
+	SetCancelMsg(text)
+	{
 		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: Timer
@@ -161,9 +168,10 @@ class ProgressDialog extends Unknown
 		Instead of specifying the operation, you may also use one of the methods <ResetTimer>, <PauseTimer> or <ResetTimer>.
 	***************************************************************************************************************	
 	*/
-	Timer(action){
+	Timer(action)
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ResetTimer
@@ -176,9 +184,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.ResetTimer()
 	***************************************************************************************************************	
 	*/
-	ResetTimer(){
+	ResetTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.RESET, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: PauseTimer
@@ -192,9 +201,10 @@ class ProgressDialog extends Unknown
 >	MyProgress.PauseTimer()
 	***************************************************************************************************************	
 	*/
-	PauseTimer(){
+	PauseTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.PAUSE, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ResumeTimer
@@ -207,10 +217,11 @@ class ProgressDialog extends Unknown
 >	MyProgress.ResumeTimer()
 	***************************************************************************************************************	
 	*/
-	ResumeTimer() {
+	ResumeTimer()
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", PDTIMER.RESUME, "UInt", 0))
-		}
 	}
+}
 /*
 group: dependencies & related
 */
