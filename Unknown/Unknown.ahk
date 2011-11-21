@@ -44,7 +44,8 @@ class Unknown
 			ptr vt - the pointer to the object's vTable
 	***************************************************************************************************************
 	*/
-	__New(ptr := 0){
+	__New(ptr := 0)
+	{
 		if (!ptr)
 		{
 			if (this.base.ThrowOnCreation)
@@ -59,7 +60,7 @@ class Unknown
 		else
 			this.ptr := ptr
 		this.vt := NumGet(this.ptr + 0)
-		}
+	}
 
 	/**************************************************************************************************************
 	Function: __Delete
@@ -69,9 +70,10 @@ class Unknown
 		In most cases, you don't call this from your code.
 	***************************************************************************************************************
 	*/
-	__Delete(){
+	__Delete()
+	{
 		return ObjRelease(this.ptr)
-		}
+	}
 
 	/**************************************************************************************************************
 	group: private functions
@@ -90,10 +92,11 @@ class Unknown
 		In cases where you need to pass a IID to a method, you can use this to create it inline.
 	***************************************************************************************************************
 	*/
-	_GUID(ByRef GUID, sGUID){
+	_GUID(ByRef GUID, sGUID)
+	{
 		VarSetCapacity(GUID, 16, 0)
 		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &GUID) >= 0 ? &GUID : ""
-		}
+	}
 
 	/**************************************************************************************************************
 	Function: _Error
@@ -111,7 +114,7 @@ class Unknown
 	***************************************************************************************************************
 	*/
 	_Error(error)
-		{
+	{
 		this.Error.code := error
 		
 		buffer_size := VarSetCapacity(buffer, 1024, 0)
@@ -121,7 +124,7 @@ class Unknown
 		this.Error.description := error " - " error_msg
 		
 		return error >= 0
-		}
+	}
 
 	/**************************************************************************************************************
 	group: IUnknown
@@ -136,25 +139,28 @@ class Unknown
 		uint pointer - a pointer to the interface or zero.
 	***************************************************************************************************************
 	*/
-	QueryInterface(rIID){
+	QueryInterface(rIID)
+	{
 		return ComObjQuery(this.ptr, rIID)
-		}
+	}
 
 	/**************************************************************************************************************
 	Function: AddRef
 	Increment's the object's reference count.
 	***************************************************************************************************************
 	*/
-	AddRef(){
+	AddRef()
+	{
 		return ObjAddRef(this.ptr)
-		}
+	}
 
 	/**************************************************************************************************************
 	Function: Release
 	Decrements the object's reference count.
 	***************************************************************************************************************
 	*/
-	Release(){
+	Release()
+	{
 		return ObjRelease(this.ptr)
-		}
+	}
 	}

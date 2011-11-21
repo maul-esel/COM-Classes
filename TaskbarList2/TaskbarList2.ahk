@@ -8,7 +8,7 @@ Requirements:
 ***************************************************************************************************************	
 */
 class TaskbarList2 extends TaskbarList
-	{
+{
 	/**************************************************************************************************************
 	Variable: CLSID
 	This is CLSID_TaskbarList. It is required to create the object.
@@ -39,7 +39,8 @@ class TaskbarList2 extends TaskbarList
 >	ITBL2.MarkFullScreen(WinExist())
 	***************************************************************************************************************	
 	*/
-	MarkFullScreen(hWin, ApplyRemove){
+	MarkFullScreen(hWin, ApplyRemove)
+	{
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Uint", hWin, "UInt", ApplyRemove))
-		}
 	}
+}

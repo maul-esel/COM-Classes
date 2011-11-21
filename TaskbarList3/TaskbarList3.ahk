@@ -40,9 +40,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetProgressValue(WinExist(), 50)
 	***************************************************************************************************************	
 	*/
-	SetProgressValue(hWin, value){
+	SetProgressValue(hWin, value)
+	{
 		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetProgressState
@@ -70,7 +71,8 @@ class TaskbarList3 extends TaskbarList2
 		- original function by Lexikos
 	***************************************************************************************************************	
 	*/
-	SetProgressState(hWin, state){
+	SetProgressState(hWin, state)
+	{
 		if State is not integer
 			{
 			if state not in I,N,E,P,S
@@ -81,7 +83,7 @@ class TaskbarList3 extends TaskbarList2
 					: (State = "P" ? 8 : 0))))
 			}
 		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
-		}
+	}
 	/**************************************************************************************************************
 	Function: RegisterTab
 	Informs the taskbar that a new tab or document thumbnail has been provided for display in an application's taskbar group flyout.
@@ -97,9 +99,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.RegisterTab(WinExist(), hWin)
 	***************************************************************************************************************	
 	*/	
-	RegisterTab(hTab, hWin){
+	RegisterTab(hTab, hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: UnRegisterTab
@@ -115,9 +118,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.UnRegisterTab(WinExist("ahk_class AutoHotkey"))
 	***************************************************************************************************************	
 	*/
-	UnRegisterTab(hTab){
+	UnRegisterTab(hTab)
+	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetTabOrder
@@ -135,9 +139,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetTabOrder(hGui)
 	***************************************************************************************************************	
 	*/
-	SetTabOrder(hTab, hBefore := 0){
+	SetTabOrder(hTab, hBefore := 0)
+	{
 		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetTabActive
@@ -154,9 +159,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetTabActive(hGui1, hGui2)
 	***************************************************************************************************************	
 	*/
-	SetTabActive(hTab, hWin){
+	SetTabActive(hTab, hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ThumbBarAddButtons
@@ -173,10 +179,11 @@ class TaskbarList3 extends TaskbarList2
 		You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
 	***************************************************************************************************************	
 	*/
-	ThumbBarAddButtons(hWin, array){
+	ThumbBarAddButtons(hWin, array)
+	{
 		this.ParseArray(array, struct)
 		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ThumbBarUpdateButtons
@@ -190,13 +197,15 @@ class TaskbarList3 extends TaskbarList2
 		bool success - true on success, false otherwise.
 	***************************************************************************************************************	
 	*/
-	ThumbBarUpdateButtons(hWin, array){
+	ThumbBarUpdateButtons(hWin, array)
+	{
 		this.ParseArray(array, struct)
 		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
-		}
+	}
 
 	; private method: parses an array of AHK objects to an array of THUMBBUTTON structures
-	ParseArray(array, byref struct){
+	ParseArray(array, byref struct)
+	{
 		static THUMBBUTTONFLAGS := { "enabled" : 0, "disabled" : 1, "dismissonclick" : 2, "nobackground" : 4, "hidden" : 8, "noninteractive" : 10 }
 
 		count := array.MaxIndex()
@@ -253,7 +262,7 @@ class TaskbarList3 extends TaskbarList2
 			if (A_Index == 7) ; only 7 buttons allowed
 				break
 			}
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: ThumbBarSetImageList
@@ -267,9 +276,10 @@ class TaskbarList3 extends TaskbarList2
 		bool success - true on success, false otherwise.
 	***************************************************************************************************************	
 	*/
-	ThumbBarSetImageList(hWin, il){
+	ThumbBarSetImageList(hWin, il)
+	{
 		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetOverlayIcon
@@ -290,9 +300,10 @@ class TaskbarList3 extends TaskbarList2
 		- To get a hIcon, you might use LoadImage (<http://msdn.microsoft.com/de-de/library/ms648045>)
 	***************************************************************************************************************	
 	*/
-	SetOverlayIcon(hWin, Icon, altText := "") {
+	SetOverlayIcon(hWin, Icon, altText := "")
+	{
 		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetThumbnailTooltip
@@ -309,9 +320,10 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetThumbnailTooltip(WinExist(), "my custom tooltip")
 	***************************************************************************************************************	
 	*/
-	SetThumbnailTooltip(hWin, Tooltip){
+	SetThumbnailTooltip(hWin, Tooltip)
+	{
 		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: SetThumbnailClip
@@ -331,7 +343,8 @@ class TaskbarList3 extends TaskbarList2
 >	ITBL3.SetThumbnailClip(hGui, 0, 0, 100, 100)
 	***************************************************************************************************************	
 	*/
-	SetThumbnailClip(hWin, x, y, w, h) {
+	SetThumbnailClip(hWin, x, y, w, h)
+	{
 		VarSetCapacity(Rect, 16, 0)
 		NumPut(x, Rect, 0)
 		NumPut(y, Rect, 4)
@@ -339,7 +352,7 @@ class TaskbarList3 extends TaskbarList2
 		NumPut(h+y, Rect, 12)
 		
 		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
-		}
+	}
 		
 	/**************************************************************************************************************
 	group: More about thumbbar buttons

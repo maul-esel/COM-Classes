@@ -8,7 +8,7 @@ Requirements:
 ***************************************************************************************************************	
 */
 class TaskbarList extends Unknown
-	{
+{
 	/**************************************************************************************************************
 	Variable: CLSID
 	This is CLSID_TaskbarList. It is required to create the object.
@@ -37,9 +37,10 @@ class TaskbarList extends Unknown
 		- This is required to work with ITaskbarList(1-4).
 	***************************************************************************************************************	
 	*/
-	HrInit(){
+	HrInit()
+	{
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: AddTab
@@ -56,9 +57,10 @@ class TaskbarList extends Unknown
 >	ITBL.AddTab(WinExist())
 	***************************************************************************************************************	
 	*/
-	AddTab(hWin){
+	AddTab(hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
-		}
+	}
 	
 	/**************************************************************************************************************
 	Function: DeleteTab
@@ -74,9 +76,10 @@ class TaskbarList extends Unknown
 >	ITBL.DeleteTab(WinExist("Notepad"))
 	***************************************************************************************************************	
 	*/
-	DeleteTab(hWin){
+	DeleteTab(hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
-		}
+	}
 	
 	/**************************************************************************************************************	
 	Function: ActivateTab
@@ -95,9 +98,10 @@ class TaskbarList extends Unknown
 		- The window is not actually activated; the window's item on the taskbar is merely displayed as active.
 	***************************************************************************************************************	
 	*/
-	ActivateTab(hWin){
+	ActivateTab(hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
-		}
+	}
 	
 	/**************************************************************************************************************	
 	Function: SetActiveAlt
@@ -116,7 +120,8 @@ class TaskbarList extends Unknown
 		- SetActiveAlt marks the item associated with hwnd as the currently active item for the window's process without changing the pressed state of any item. Any user action that would activate a different tab in that process will activate the tab associated with hwnd instead. The active state of the window's item is not guaranteed to be preserved when the process associated with hwnd is not active. To ensure that a given tab is always active, call SetActiveAlt whenever any of your windows are activated. Calling SetActiveAlt with a NULL hwnd clears this state.
 	***************************************************************************************************************	
 	*/
-	SetActiveAlt(hWin){
+	SetActiveAlt(hWin)
+	{
 		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
-		}
 	}
+}

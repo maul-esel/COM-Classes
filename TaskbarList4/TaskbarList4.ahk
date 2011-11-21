@@ -9,7 +9,7 @@ Requirements:
 */
 
 class TaskbarList4 extends TaskbarList3
-	{
+{
 	/**************************************************************************************************************
 	Variable: CLSID
 	This is CLSID_TaskbarList. It is required to create the object.
@@ -51,7 +51,8 @@ class TaskbarList4 extends TaskbarList3
 >		ITBL4.SetTabProperties(WinExist(), 1|4)
 ***************************************************************************************************************	
 */
-	SetTabProperties(hTab, properties){
+	SetTabProperties(hTab, properties)
+	{
 		return this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties))
-		}
 	}
+}
