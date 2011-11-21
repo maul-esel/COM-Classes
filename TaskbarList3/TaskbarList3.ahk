@@ -51,20 +51,13 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		handle hWin - the window handle of your gui
-		variant state - the state to set
-
-	Possible states:
-		0 or S - stop displaying progress
-		1 or I - indeterminate (similar to progress style PBS_MARQUEE), green
-		2 or N - normal, by default green
-		4 or E - error, by default red
-		8 or P - paused, by default yellow
+		uint state - the state to set. You may use the fields of the TBPFLAG class for convenience.
 
 	Returns:
 		bool success - true on success, false otherwise.
 
 	Example:
->	ITBL3.SetProgressState(hWin, "P")
+>	ITBL3.SetProgressState(hWin, TBPFLAG.PAUSED)
 
 	Remarks:
 		- There's still a difference between setting progress to 0 or turning it off.
@@ -73,15 +66,6 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetProgressState(hWin, state)
 	{
-		if State is not integer
-			{
-			if state not in I,N,E,P,S
-				return -1
-			State :=  (State = "I" ? 1
-					: (State = "N" ? 2
-					: (State = "E" ? 4
-					: (State = "P" ? 8 : 0))))
-			}
 		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
 	}
 	/**************************************************************************************************************
@@ -170,19 +154,19 @@ class TaskbarList3 extends TaskbarList2
 	
 	Parameters:
 		handle hWin - the handle to the window to work on
-		THUMBBUTTON[] array - an array of button descriptions (see the bottom of this page)
+		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
 		
 	Returns:
 		bool success - true on success, false otherwise.
 		
 	Remarks:
-		You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
+		- You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
+		- The array may not have more than 7 members.
 	***************************************************************************************************************	
 	*/
 	ThumbBarAddButtons(hWin, array)
 	{
-		this.ParseArray(array, struct)
-		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
 	
 	/**************************************************************************************************************
@@ -191,7 +175,7 @@ class TaskbarList3 extends TaskbarList2
 	
 	Parameters:
 		handle hWin - the handle to the window to work on
-		THUMBBUTTON[] array - an array of button descriptions (see the bottom of this page)
+		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
 		
 	Returns:
 		bool success - true on success, false otherwise.
@@ -199,69 +183,34 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarUpdateButtons(hWin, array)
 	{
-		this.ParseArray(array, struct)
-		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "uptr", &struct))
+		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
 
-	; private method: parses an array of AHK objects to an array of THUMBBUTTON structures
-	ParseArray(array, byref struct)
+	; private method: parses an array of AHK THUMBBUTTON instances to an array of THUMBBUTTON structures
+	ParseArray(array)
 	{
-		static THUMBBUTTONFLAGS := { "enabled" : 0, "disabled" : 1, "dismissonclick" : 2, "nobackground" : 4, "hidden" : 8, "noninteractive" : 10 }
+		static item_size := A_PtrSize + 536
+		local count, struct
 
 		count := array.MaxIndex()
 		if (count > 7)
 			count := 7
 		
-		VarSetCapacity(struct, 540 * count, 0)
+		VarSetCapacity(struct, item_size * count, 0)
 		for i, button in array ; loop through all button definitions
-			{
-			if (button.HasKey("iId")) ; if id is defined:
-				id := button["iId"] ; use it
-			else
-				id := A_Index ; use current index otherwise
-			NumPut(id, struct,	04 + 540 * (A_Index - 1), "UInt") ; put the id into the struct
-			
-			mask := 0
-			if (button.HasKey("iBitmap")) ; if bitmap is defined:
-				{
-				mask |= 0x00000001 ; add the information to the mask
-				NumPut(button["iBitmap"], struct, 08 + 540 * (A_Index - 1), "UInt") ;put the bitmap index in the struct
-				}
-				
-			if (button.HasKey("hIcon"))
-				{
-				mask |= 0x00000002
-				NumPut(button["hIcon"], struct, 12 + 540 * (A_Index - 1), "UInt")
-				}
-				
-			if (button.HasKey("szTip"))
-				{
-				mask |= 0x00000004
-				StrPut(button["szTip"], &struct + 16 + 540 * (A_Index - 1), 260)
-				}
-				
-			if (button.HasKey("dwFlags")) ; if flags are defined
-				{
-				mask |= 0x00000008 ; add it to the mask
-				_flags := flags := button["dwFlags"]
-				if flags is not integer ; if strings were used
-					{
-					flags := 0 ; reset flags
-					LoopParse, _flags, %A_Space%| ; parse:
-						{
-						; if the loop field is a valid flag and it was not added before:
-						if (THUMBBUTTONFLAGS.HasKey(A_LoopField) && (flags & THUMBBUTTONFLAGS[A_LoopField]) != THUMBBUTTONFLAGS[A_LoopField])
-							flags |= THUMBBUTTONFLAGS[A_LoopField] ; add it
-						}
-					}
-				NumPut(flags, struct, 536 + 540 * (A_Index - 1), "UInt") ; put the flags in the struct
-				}
-				
-			NumPut(mask, struct, 00 + 540 * (A_Index - 1), "UInt") ; put the mask in the struct
+		{
+			NumPut(button.dwMask,	struct,		000 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
+			NumPut(button.iId,		struct,		004 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
+			NumPut(button.iBitmap,	struct,		008 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
+			NumPut(button.hIcon,	struct,		012 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UPtr")
+			StrPut(button.szTip,	&struct	+	012 + 1 * A_PtrSize + item_size * (A_Index - 1),	260)
+			NumPut(button.dwFlags,	struct,		532 + 1 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
 			 
 			if (A_Index == 7) ; only 7 buttons allowed
 				break
-			}
+		}
+
+		return &struct
 	}
 	
 	/**************************************************************************************************************
@@ -331,48 +280,22 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		handle hGui - the window handle of your gui
-		int x - the x-coordinate of the area to show in the taskbar thumbnail
-		int y - the y-coordinate of the area to show in the taskbar thumbnail
-		int w - the width of the area to show in the taskbar thumbnail
-		int h - the heigth of the area to show in the taskbar thumbnail
+		RECT clip - a RECT instance describing the area to show in the taskbar thumbnail
 
 	Returns:
 		bool success - true on success, false otherwise.
 		
 	Example:
->	ITBL3.SetThumbnailClip(hGui, 0, 0, 100, 100)
+>	ITBL3.SetThumbnailClip(hGui, new RECT(0, 0, 100, 100))
 	***************************************************************************************************************	
 	*/
-	SetThumbnailClip(hWin, x, y, w, h)
+	SetThumbnailClip(hWin, clip)
 	{
-		VarSetCapacity(Rect, 16, 0)
-		NumPut(x, Rect, 0)
-		NumPut(y, Rect, 4)
-		NumPut(w+x, Rect, 8)
-		NumPut(h+y, Rect, 12)
-		
-		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UInt", &Rect))
+		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", clip.ToStructPtr()))
 	}
 		
 	/**************************************************************************************************************
 	group: More about thumbbar buttons
-	
-	THUMBBUTTON structures:	
-	Whenever a THUMBBUTTON[] array is needed, you can pass an array of objects to the method.
-	These objects describe the buttons:
-	- The objects' fields are described here: <http://msdn.microsoft.com/en-us/library/dd391559%28v=VS.85%29.aspx>.
-	- The dwMask field is ignored.
-	- You can omit any field.
-	- If you omit the iId field, the index of the button in the toolbar is used.
-	- for the dwFlags field, you can use a combination of strings (separated by space or |) or a binary combination of their flag representation:
-		enabled (0x00000000) - The button is active and available to the user. Can be omitted.
-		disabled (0x00000001) - The button is disabled. It is present, but has a visual state that indicates that it will not respond to user action.
-		dismissonclick (0x00000002) - When the button is clicked, the taskbar button's flyout closes immediately.
-		nobackground (0x00000004) - Do not draw a button border, use only the image.
-		hidden (0x00000008) - The button is not shown to the user.
-		noninteractive (0x00000010) - The button is enabled but not interactive; no pressed button state is drawn. This value is intended for instances where the button is used in a notification.
-		
-	*The array must not have more than 7 THUMBBUTTON elements!*
 	
 	Reacting to clicks:	
 	To react, you must monitor the WM_Command message.
