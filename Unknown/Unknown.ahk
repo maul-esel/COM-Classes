@@ -11,6 +11,12 @@ Requirements:
 class Unknown
 {
 	/*
+	Field: IID
+	This is IID_IUnknown. It may be used by inherited classes.
+	*/
+	static IID := "{00000000-0000-0000-C000-000000000046}"
+	
+	/*
 	Field: Error
 	an object holding the last error code and its description
 	
