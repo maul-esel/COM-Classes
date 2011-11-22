@@ -1,15 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
-#include %A_ScriptDir%\..\Helper Classes\IDC.ahk
-#include %A_ScriptDir%\..\Helper Classes\IDI.ahk
-#include %A_ScriptDir%\..\Helper Classes\ILDRAWPARAMS.ahk
-#include %A_ScriptDir%\..\Helper Classes\ILIF.ahk
-#include %A_ScriptDir%\..\Helper Classes\IMAGEINFO.ahk
-#include %A_ScriptDir%\..\Helper Classes\IMAGELISTDRAWFLAGS.ahk
-#include %A_ScriptDir%\..\Helper Classes\OBM.ahk
-#include %A_ScriptDir%\..\Helper Classes\POINT.ahk
-#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
-
 /*
 class: ImageList
 implements IImageList and exposes methods that manipulate and interact with image lists.

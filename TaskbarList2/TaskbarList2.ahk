@@ -1,6 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-#include %A_ScriptDir%\..\TaskbarList\TaskbarList.ahk
-
 /*
 class: TaskbarList2
 implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.

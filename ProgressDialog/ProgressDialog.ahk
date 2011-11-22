@@ -1,9 +1,4 @@
-﻿#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
-#include %A_ScriptDir%\..\Helper Classes\PROGDLG.ahk
-#include %A_ScriptDir%\..\Helper Classes\PDTIMER.ahk
-
-/*
+﻿/*
 class: ProgressDialog
 implements IProgressDialog and exposes methods to create, control and display a progress dialog.
 

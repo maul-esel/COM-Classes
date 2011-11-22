@@ -1,10 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
-#include %A_ScriptDir%\..\Helper Classes\PROGDLG.ahk
-#include %A_ScriptDir%\..\Helper Classes\PDOPSTATUS.ahk
-#include %A_ScriptDir%\..\Helper Classes\PMODE.ahk
-#include %A_ScriptDir%\..\Helper Classes\SPACTION.ahk
-
 /*
 class: OperationsProgressDialog
 implements IOperationsProgressDialog and exposes methods to get, set, and query a progress dialog.

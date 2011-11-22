@@ -1,11 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-#include %A_ScriptDir%\..\TaskbarList\TaskbarList.ahk
-#include %A_ScriptDir%\..\TaskbarList2\TaskbarList2.ahk
-
-#include %A_ScriptDir%\..\Helper Classes\TBPFLAG.ahk
-#include %A_ScriptDir%\..\Helper Classes\THUMBBUTTON.ahk
-#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
-
 /*
 class: TaskbarList3
 implements the ITaskbarList3 interface and exposes methods that support the unified launching and switching taskbar button functionality added in Windows 7. This functionality includes thumbnail representations and switch targets based on individual tabs in a tabbed application, thumbnail toolbars, notification and status overlays, and progress indicators.

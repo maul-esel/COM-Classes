@@ -1,5 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
 /*
 class: TaskbarList
 implements the ITaskbarList insterface and exposes methods that control the taskbar. It allows you to dynamically add, remove, and activate items on the taskbar.
