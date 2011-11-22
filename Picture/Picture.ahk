@@ -1,3 +1,5 @@
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+
 class Picture extends Unknown
 {
 	static IID := "{7BF80980-BF32-101A-8BBB-00AA00300CAB}"

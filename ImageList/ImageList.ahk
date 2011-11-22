@@ -1,73 +1,80 @@
-/**************************************************************************************************************
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+
+#include %A_ScriptDir%\..\Helper Classes\IDC.ahk
+#include %A_ScriptDir%\..\Helper Classes\IDI.ahk
+#include %A_ScriptDir%\..\Helper Classes\ILDRAWPARAMS.ahk
+#include %A_ScriptDir%\..\Helper Classes\ILIF.ahk
+#include %A_ScriptDir%\..\Helper Classes\IMAGEINFO.ahk
+#include %A_ScriptDir%\..\Helper Classes\IMAGELISTDRAWFLAGS.ahk
+#include %A_ScriptDir%\..\Helper Classes\OBM.ahk
+#include %A_ScriptDir%\..\Helper Classes\POINT.ahk
+#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
+
+/*
 class: ImageList
-exposes methods to manage image lists via COM interface IImageList.
+implements IImageList and exposes methods that manipulate and interact with image lists.
 
 Requirements:
-	- This requires AHK v2 alpha
-	- the Unknown class is also required
-	- Windows XP / Windows Server 2003 or higher
+	AutoHotkey - AHK v2 alpha
+	OS - Windows XP / Windows Server 2003 or higher
+	Base classes - Unknown
+	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
 	
 Remarks:
-	- functions which receive bitmaps as parameters usually call DeleteObject() on them.
-	- to get a HBITMAP or a HICON, use a DllCall to LoadImageW, LoadBitmapW, LoadIconW, LoadCursorW, ...
-	- the HIMAGELIST (e.g. for LV_SetImageList() or IL_xxx functions) handle can be obtained using ImageList.ptr
-***************************************************************************************************************
+	- to get a HBITMAP or a HICON, use a DllCall to LoadImage, LoadBitmap, LoadIcon, LoadCursor, ...
+	- the HIMAGELIST (e.g. for LV_SetImageList() or IL_xxx functions) handle can be obtained using instance.ptr
 */
 class ImageList extends Unknown
 {
-	/**************************************************************************************************************
-	Variable: CLSID
-	This is CLSID_ImageList.
-	***************************************************************************************************************
+	/*
+	Field: CLSID
+	This is CLSID_ImageList. It is required to create an instance.
 	*/
 	static CLSID := "{7C476BA2-02B1-48f4-8048-B24619DDC058}"
 	
-	/**************************************************************************************************************
-	Variable: IID
-	This is IID_IImageList
-	***************************************************************************************************************
+	/*
+	Field: IID
+	This is IID_IImageList. It is required to create an instance.
 	*/
 	static IID := "{46EB5926-582E-4017-9FDF-E8998DAA0950}"
 	
-	/**************************************************************************************************************
-	Variable: hModule
-	The module handle returned by LoadLibrary()
-	***************************************************************************************************************
+	/*
+	Field: hModule
+	The module handle to the Comctl32 library, as returned by LoadLibrary()
 	*/
 	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll")
 	
-	/**************************************************************************************************************
+	/*
 	group: Constructors
 	
-	Function: FromHIMAGELIST
+	Method: FromHIMAGELIST
 	creates a new instance for a given HIMAGELIST handle.
 	
 	Parameters:
-		[opt] HIMAGELIST il - the handle to the image list as returned by IL_Create(). If omitted, a new image list is created
+		[opt] HIMAGELIST il - the handle to the image list as returned by IL_Create(). If omitted, a new image list is created.
 		
 	Remarks:
 		Although you can create an instance using the usual way:
->>		myIL := new ImageList
-		it is recommended to create an instance from this function:
->>		myIL := ImageList.FromHIMAGELIST(IL_CREATE())
+>		myIL := new ImageList()
+		it is recommended to create an instance from this method:
+>		myIL := ImageList.FromHIMAGELIST(IL_CREATE())
 		
 		The given handle can be obtained using
->>		handle := myIL.Handle
-	***************************************************************************************************************
+>		handle := myIL.ptr
 	*/
 	FromHIMAGELIST(il := 0)
 	{
 		if (il == 0)
 			il := IL_Create()
 
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "uint", this._GUID(i, this.IID), "ptr*", ptr)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "uint", this._GUID(this.IID), "ptr*", ptr)
 		return new ImageList(ptr)
 	}
 	
-	/**************************************************************************************************************
+	/*
 	group: IImageList
 	
-	Function: Add
+	Method: Add
 	adds a bitmap image to an ImageList instance.
 	
 	Parameters:
@@ -75,13 +82,12 @@ class ImageList extends Unknown
 		[opt] HBITMAP maskbitmap - the bitmap to use as a mask
 		
 	Returns:
-		int index - the new (zero-based) index of the image
+		INT index - the new (zero-based) index of the image
 		
 	Remarks:
 		IImageList::Add copies the bitmap to an internal data structure.
 		You must use the DeleteObject function to delete bitmap and maskbitmap when you don't need them anymore:
->>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
-	***************************************************************************************************************
+>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	*/
 	Add(bitmap, maskbitmap := 0)
 	{
@@ -89,17 +95,16 @@ class ImageList extends Unknown
 		return int
 	}
 	
-	/**************************************************************************************************************
-	Function: ReplaceIcon
+	/*
+	Method: ReplaceIcon
 	replaces an icon in the image list or adds a new one.
 	
 	Parameters:
 		HICON hIcon - the icon to add
-		[opt] int index - the index of the icon to be replaced. Leave this empty or use -1 to append the icon to the list.
+		[opt] INT index - the index of the icon to be replaced. Leave this empty or use -1 to append the icon to the list.
 		
 	Returns:
-		int index - the new image list index of the icon
-	***************************************************************************************************************
+		INT index - the new image list index of the icon
 	*/
 	ReplaceIcon(hIcon, index := -1)
 	{
@@ -107,63 +112,60 @@ class ImageList extends Unknown
 		return int
 	}
 	
-	/**************************************************************************************************************
-	Function: SetOverlayImage
+	/*
+	Method: SetOverlayImage
 	sets the overly image for an image.
 	To make it visible, you must also call <Draw> and set the fStyle parameter appropriately.
 	
 	Parameters:
-		int image - the zero-based index of the image to work on
-		int overlay - the one-based index of the image to set as overlay image
+		INT image - the zero-based index of the image to work on
+		INT overlay - the one-based index of the image to set as overlay image
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	SetOverlayImage(image, overlay)
 	{
 		return this._Error(DllCall(NumGet(this.vt+5*A_PtrSize), "ptr", this.ptr, "int", image, "int", overlay))
 	}
 	
-	/**************************************************************************************************************
-	Function: Replace
+	/*
+	Method: Replace
 	replaces an image in the image list with a new one
 	
 	Parameters:
-		int index - the image to be replaced
+		INT index - the image to be replaced
 		HBITMAP bitmap - the new image
 		[opt] HBITMAP maskbitmap - the optional mask bitmap for the new image
 		
 	Returns:
-		bool success - true on success, false otherwise
+		BOOL success - true on success, false otherwise
 		
 	Remarks:
 		IImageList::Replace copies the bitmap to an internal data structure.
 		You must use the DeleteObject function to delete bitmap and maskbitmap when you don't need them anymore:
->>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
-	***************************************************************************************************************
+>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	*/
 	Replace(index, bitmap, maskbitmap := 0)
 	{
 		return this._Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
 	}
 	
-	/**************************************************************************************************************
-	Function: AddMasked
+	/*
+	Method: AddMasked
 	Adds an image or images to an image list, generating a mask from the specified bitmap.
 	
 	Parameters:
 		HBITMAP bitmap - the bitmap to add
-		COLORREF color - the mask color (e.g. 0xFF0000)
+		UINT color - the mask color (e.g. 0xFF0000)
 		
 	Returns:
-		int index - the new index of the image
+		INT index - the new index of the image
 		
 	Remarks:
 		IImageList::AddMasked copies the bitmap to an internal data structure.
 		You must use the DeleteObject function to delete bitmap and color when you don't need them anymore:
->>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
-	***************************************************************************************************************
+>		DllCall("Gdi32\DeleteObject", "uint", bitmap)
 	*/
 	AddMasked(bitmap, color)
 	{
@@ -171,20 +173,19 @@ class ImageList extends Unknown
 		return int
 	}
 	
-	/**************************************************************************************************************
-	Function: Draw
+	/*
+	Method: Draw
 	Draws an image list item in the specified device context.
 	
 	Parameters:
-		ILDRAWPARAMS params - either a **pointer** to a valid struct or an instance of the ILDRAWPARAMS class, specifying the options.
+		ILDRAWPARAMS params - either a *pointer* to a valid struct or an instance of the ILDRAWPARAMS class, specifying the options.
 		
 	Returns:
-		bool success - true on success, false otherwise
+		BOOL success - true on success, false otherwise
 		
 	Remarks:
 		- The cbSize and himl members of the parameter are overwritten
 		- The i and hdcDst members of the parameter are required
-	***************************************************************************************************************
 	*/
 	Draw(params)
 	{
@@ -199,33 +200,31 @@ class ImageList extends Unknown
 		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", struct))
 	}
 	
-	/**************************************************************************************************************
-	Function: Remove
+	/*
+	Method: Remove
 	Removes an image from an image list. 
 	
 	Parameters:
 		int index - the index of the icon to be removed
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	Remove(index)
 	{
 		return this._Error(DllCall(NumGet(this.vt+9*A_PtrSize), "ptr", this.ptr, "int", index))
 	}
 	
-	/**************************************************************************************************************
-	Function: GetIcon
+	/*
+	Method: GetIcon
 	Creates an icon from an image and a mask in an image list.
 	
 	Parameters:
-		int index - the index of the image to use
-		uint flags - a combination of flags to be used. You can use the values in the IMAGELISTDRAWFLAGS class and combine them using the "|" operator
+		INT index - the index of the image to use
+		UINT flags - a combination of flags to be used. You can use the values in the IMAGELISTDRAWFLAGS class and combine them using the "|" operator
 		
 	Returns:
-		HICON icon - the generated icon
-	***************************************************************************************************************
+		HICON icon - the generated icon	
 	*/
 	GetIcon(index, flags)
 	{
@@ -233,21 +232,15 @@ class ImageList extends Unknown
 		return hIcon
 	}
 	
-	/**************************************************************************************************************
-	Function: GetImageInfo
+	/*
+	Method: GetImageInfo
 	gets information about an image
 	
 	Parameters:
-		int index - the index of the image to work on
+		INT index - the index of the image to work on
 		
 	Returns:
 		IMAGEINFO info - an IMAGEINFO instance containing the information.
-	
-	Remarks:
-		The IMAGEINFO class is documented <here at IMAGEINFO.html>.
-		To retrieve information about the RECT use something like:
->		top := myIL.GetImageInfo(0).rcImage.top
-	***************************************************************************************************************
 	*/
 	GetImageInfo(index)
 	{
@@ -256,31 +249,30 @@ class ImageList extends Unknown
 		return IMAGEINFO.FromStructPtr(&info)
 	}
 	
-	/**************************************************************************************************************
-	Function: Copy
+	/*
+	Method: Copy
 	Copies images from a given ImageList instance.
 	
 	Parameters:
-		int iDest - the index the image should be copied to
-		int iSrc - the index of the source image
-		bool swap - true to swap the images, false to move only the destination to the source
+		INT iDest - the index the image should be copied to
+		INT iSrc - the index of the source image
+		BOOL swap - true to swap the images, false to move only the destination to the source
 		
 	Remarks:
 		*NOT WORKING!*
-	***************************************************************************************************************
+	
 	*/
 	Copy(iDest, iSrc, swap)
 	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
 	}
 	
-	/**************************************************************************************************************
-	Function: Merge
+	/*
+	Method: Merge
 	Creates a new image by combining two existing images. This method also creates a new image list in which to store the image. 
 	
 	Remarks:
-		*NOT WORKING!*
-	***************************************************************************************************************
+		*NOT WORKING!*	
 	*/
 	Merge(index1, index2, xoffset, yoffset, punk2 := false)
 	{
@@ -291,8 +283,8 @@ class ImageList extends Unknown
 			return new ImageList(out)
 	}
 	
-	/**************************************************************************************************************
-	Function: Clone
+	/*
+	Method: Clone
 	clones an existing instance.
 	
 	Returns:
@@ -300,7 +292,6 @@ class ImageList extends Unknown
 		
 	Remarks:
 		Changes to the original image list won't be visible to the clone (and the other way round).
-	***************************************************************************************************************
 	*/
 	Clone()
 	{
@@ -308,16 +299,15 @@ class ImageList extends Unknown
 		return new ImageList(out)
 	}
 	
-	/**************************************************************************************************************
-	Function: GetImageRect
+	/*
+	Method: GetImageRect
 	Gets an image's bounding rectangle.
 	
 	Parameters:
-		int index - the index of the image
+		INT index - the index of the image
 	
 	Returns:
 		RECT image - an RECT instance representing the image.
-	***************************************************************************************************************
 	*/
 	GetImageRect(index)
 	{
@@ -326,47 +316,44 @@ class ImageList extends Unknown
 		return RECT.FromStructPtr(&info)
 	}
 	
-	/**************************************************************************************************************
-	Function: GetIconSize
+	/*
+	Method: GetIconSize
 	Gets the dimensions of images in an image list. All images in an image list have the same dimensions.
 	
 	Parameters:
-		byref int width - receives the width
-		byref int height - receives the height
+		byref INT width - receives the width
+		byref INT height - receives the height
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	GetIconSize(ByRef width, ByRef height)
 	{
 		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "int*", width, "int*", height))
 	}
 	
-	/**************************************************************************************************************
-	Function: SetIconSize
+	/*
+	Method: SetIconSize
 	Sets the dimensions of images in an image list and removes all images from the list.
 	
 	Parameters:
-		int width - the new width
-		int height - the new height
+		INT width - the new width
+		INT height - the new height
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	SetIconSize(width, height)
 	{
 		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
 	}
 	
-	/**************************************************************************************************************
-	Function: GetImageCount
+	/*
+	Method: GetImageCount
 	Gets the number of images in an image list.
 	
 	Returns:
-		int count - the count of images
-	***************************************************************************************************************
+		INT count - the count of images
 	*/
 	GetImageCount()
 	{
@@ -374,41 +361,39 @@ class ImageList extends Unknown
 		return count
 	}
 	
-	/**************************************************************************************************************
-	Function: SetImageCount
+	/*
+	Method: SetImageCount
 	Resizes an existing image list.
 	
 	Parameters:
-		int count - the new image count
+		INT count - the new image count
 		
 	Returns:
-		bool success - true on success, false otherwise
+		BOOL success - true on success, false otherwise
 		
 	Remarks:
-		- if you "cut" the image list, the last icons are removed
+		- if you "cut" the image list, the last icons are removed.
 		- if you enlarge it, the new images will be filled black.
-		- if you cut and re-enlarge it, the cutted images will be present again
-	***************************************************************************************************************
+		- if you cut and re-enlarge it, the cutted images will be present again.
 	*/
 	SetImageCount(count)
 	{
 		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uint", count))
 	}
 	
-	/**************************************************************************************************************
-	Function: SetBkColor
+	/*
+	Method: SetBkColor
 	Sets the background color for an image list.
 	
 	Parameters:
-		COLORREF color - the new color (e.g. 0x00FFFF)
+		UINT color - the new color (e.g. 0x00FFFF)
 		
 	Returns:
-		COLORREF old - the previous background color
+		UINT old - the previous background color
 	
 	Remarks:
 		This method only functions if you add an icon to the image list or use the IImageList::AddMasked method to add a black and white bitmap.
 		Without a mask, the entire image draws, and the background color is not visible. 
-	***************************************************************************************************************
 	*/
 	SetBkColor(color)
 	{
@@ -416,13 +401,12 @@ class ImageList extends Unknown
 		return oldColor
 	}
 	
-	/**************************************************************************************************************
-	Function: GetBkColor
+	/*
+	Method: GetBkColor
 	Gets the current background color for an image list.
 	
 	Returns:
-		COLORREF color - the background color
-	***************************************************************************************************************
+		UINT color - the background color
 	*/
 	GetBkColor()
 	{
@@ -430,102 +414,96 @@ class ImageList extends Unknown
 		return color
 	}
 	
-	/**************************************************************************************************************
-	Function: BeginDrag
+	/*
+	Method: BeginDrag
 	Begins dragging an image. 
 	
 	Parameters:
-		int index - the image to drag
-		int xHotspot - the x-component of the drag position relative to the upper-left corner of the image
-		int yHotspot - the y-component of the drag position relative to the upper-left corner of the image.
+		INT index - the image to drag
+		INT xHotspot - the x-component of the drag position relative to the upper-left corner of the image
+		INT yHotspot - the y-component of the drag position relative to the upper-left corner of the image.
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	BeginDrag(index, xHotspot, yHotspot)
 	{
 		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", iTrack, "int", xHotspot, "int", yHotspot))
 	}
 	
-	/**************************************************************************************************************
-	Function: EndDrag
+	/*
+	Method: EndDrag
 	Ends a drag operation.
 	
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	EndDrag()
 	{
 		return this._Error(DllCall(NumGet(this.vt+23*A_PtrSize), "ptr", this.ptr))
 	}
 	
-	/**************************************************************************************************************
-	Function: DragEnter
+	/*
+	Method: DragEnter
 	Locks updates to the specified window during a drag operation and displays the drag image at the specified position within the window. 
 	
 	Parameters:
 		HWND hwnd - the window handle
-		int x - The x-coordinate at which to display the drag image. The coordinate is relative to the upper-left corner of the window, not the client area.
-		int y - The y-coordinate at which to display the drag image. The coordinate is relative to the upper-left corner of the window, not the client area.
+		INT x - The x-coordinate at which to display the drag image. The coordinate is relative to the upper-left corner of the window, not the client area.
+		INT y - The y-coordinate at which to display the drag image. The coordinate is relative to the upper-left corner of the window, not the client area.
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	DragEnter(hwnd, x, y)
 	{
 		return this._Error(DllCall(NumGet(this.vt+24*A_PtrSize), "ptr", this.ptr, "uint", hwnd, "int", x, "int", y))
 	}
 	
-	/**************************************************************************************************************
-	Function: DragLeave
+	/*
+	Method: DragLeave
 	Unlocks the specified window and hides the drag image, which enables the window to update. 
 	
 	Parameters:
 		HWND hwnd - the window handle
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	DragLeave(hwnd)
 	{
 		return this._Error(DllCall(NumGet(this.vt+25*A_PtrSize), "ptr", this.ptr, "uint", hwnd))
 	}
 		
-	/**************************************************************************************************************
-	Function: DragMove
+	/*
+	Method: DragMove
 	Moves the image that is being dragged during a drag-and-drop operation.
-	This function is typically called in response to a WM_MOUSEMOVE message. 
+	This method is typically called in response to a WM_MOUSEMOVE message. 
 	
 	Parameters:
-		int x - the image's new x-coordinate relative to the upper-left corner of the window
-		int y - the image's new y-coordinate relative to the upper-left corner of the window
+		INT x - the image's new x-coordinate relative to the upper-left corner of the window
+		INT y - the image's new y-coordinate relative to the upper-left corner of the window
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	DragMove(x, y)
 	{
 		return this._Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "int", x, "int", y))
 	}
 	
-	/**************************************************************************************************************
-	Function: SetDragCursorImage
+	/*
+	Method: SetDragCursorImage
 	Creates a new drag image by combining the specified image, which is typically a mouse cursor image, with the current drag image.
 	
 	Parameters:
-		int index - the index of the image
-		int xHotspot - contains the x-component of the hot spot within the new image. 
-		int yHotspot - contains the x-component of the hot spot within the new image. 
+		INT index - the index of the image
+		INT xHotspot - contains the x-component of the hot spot within the new image. 
+		INT yHotspot - contains the x-component of the hot spot within the new image. 
 		[opt] ImageList il - the ImageList that contains the specified image. If omitted, the current instance is used.
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	SetDragCursorImage(index, xHotspot, yHotspot, il := 0)
 	{
@@ -535,26 +513,25 @@ class ImageList extends Unknown
 																	, "int", index, "int", xHotspot, "int", yHotspot))
 	}
 	
-	/**************************************************************************************************************
-	Function: DragShowNoLock
+	/*
+	Method: DragShowNoLock
 	Shows or hides the image being dragged.
 	
 	Parameters:
-		bool show - true to show, false to hide the image
+		BOOL show - true to show, false to hide the image
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	DragShowNoLock(show)
 	{
 		return this._Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "uint", show))
 	}
 	
-	/**************************************************************************************************************
-	Function: GetDragImage
+	/*
+	Method: GetDragImage
 	Gets the temporary image list that is used for the drag image.
-	The function also retrieves the current drag position and the offset of the drag image relative to the drag position.
+	The method also retrieves the current drag position and the offset of the drag image relative to the drag position.
 	
 	Parameters:
 		byref POINT dragPos - receives a POINT instance representing the current dragging position
@@ -562,8 +539,7 @@ class ImageList extends Unknown
 		byref ImageList IL - receives an instance for the image list used for the drag image.
 		
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	GetDragImage(byRef dragPos, byRef imagePos, byRef IL)
 	{
@@ -577,21 +553,20 @@ class ImageList extends Unknown
 		return bool
 	}
 	
-	/**************************************************************************************************************
-	Function: GetItemFlags
+	/*
+	Method: GetItemFlags
 	Gets the flags of an image.
 	
 	Parameters:
-		int index - the image index
+		INT index - the image index
 	
 	Returns:
-		uint flags - the image's flags. You may use the ILIF class for convenience.
-		
+		UINT flags - the image's flags. You may use the ILIF class for convenience.
+
 	Remarks:
 		possible flag values:
 			ILIF.ALPHA - Indicates that the item in the imagelist has an alpha channel.
-			ILIF.LOWQUALITY - **Windows Vista and later.** Indicates that the item in the imagelist was generated via a StretchBlt function, consequently image quality may have degraded.
-	***************************************************************************************************************
+			ILIF.LOWQUALITY - **Windows Vista and later.** Indicates that the item in the imagelist was generated via a StretchBlt method, consequently image quality may have degraded.
 	*/
 	GetItemFlags(index)
 	{
@@ -599,16 +574,15 @@ class ImageList extends Unknown
 		return flags
 	}
 	
-	/**************************************************************************************************************
-	Function: GetOverlayImage
+	/*
+	Method: GetOverlayImage
 	Retrieves a specified image from the list of images used as overlay masks.
 	
 	Parameters:
-		int index - the image index
+		INT index - the image index
 		
 	Returns:
-		int overlay - the one-based index of the overlay mask
-	***************************************************************************************************************
+		INT overlay - the one-based index of the overlay mask
 	*/
 	GetOverlayImage(index)
 	{
@@ -616,18 +590,17 @@ class ImageList extends Unknown
 		return out
 	}
 		
-	/**************************************************************************************************************	
+	/*	
 	group: additional methods
 	
-	Function: AddSystemBitmap
+	Method: AddSystemBitmap
 	adds a system bitmap to the image list.
 	
 	Parameters: 
-		uint bmp - the ID of a predefined system bitmap. You can use the fields of the OBM class for convenience.
+		UINT bmp - the ID of a predefined system bitmap. You can use the fields of the OBM class for convenience.
 	
 	Returns:
-		int index - the new (zero-based) index of the image
-	***************************************************************************************************************
+		INT index - the new (zero-based) index of the image´
 	*/
 	AddSystemBitmap(bmp)
 	{
@@ -635,16 +608,15 @@ class ImageList extends Unknown
 	}
 	
 	
-	/**************************************************************************************************************
-	Function: AddSystemIcon
+	/*
+	Method: AddSystemIcon
 	adds a system icon to the image list.
 	
 	Parameters:
-		uint ico - the ID of a predefined system icon. You can use the fields of the IDI class for convenience.
+		UINT ico - the ID of a predefined system icon. You can use the fields of the IDI class for convenience.
 					
 	Returns:
-		int index - the new (zero-based) index of the image
-	***************************************************************************************************************
+		INT index - the new (zero-based) index of the image
 	*/
 	AddSystemIcon(ico)
 	{
@@ -652,30 +624,27 @@ class ImageList extends Unknown
 	}
 	
 	
-	/**************************************************************************************************************
-	Function: AddSystemCursor
+	/*
+	Method: AddSystemCursor
 	adds a system cursor to the image list.
 	
 	Parameters:
-		uint cur - the ID of a predefined system cursor. You can use the fields of the IDC class for convenience.
+		UINT cur - the ID of a predefined system cursor. You can use the fields of the IDC class for convenience.
 					
 	Returns:
-		int index - the new (zero-based) index of the image
-	***************************************************************************************************************
+		INT index - the new (zero-based) index of the image
 	*/
 	AddSystemCursor(cur)
 	{
 		return this.ReplaceIcon(DllCall("LoadCursorW", "uint", 0, "uint", cur))
 	}
 
-	
-	/**************************************************************************************************************
-	Function: Unload
+	/*
+	Method: Unload
 	unloads Comctl32.dll
 	
 	Returns:
-		bool success - true on success, false otherwise
-	***************************************************************************************************************
+		BOOL success - true on success, false otherwise
 	*/
 	Unload()
 	{
@@ -684,56 +653,3 @@ class ImageList extends Unknown
 		return DllCall("FreeLibrary", "uint", hM)
 	}
 }
-
-/*
-group: dependencies & related
-*/
-
-/*
-IDC:
-	You may use the values defined in the IDC enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-IDI:
-	You may use the values defined in the IDI enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-ILDRAWPARAMS:
-	You may use the the ILDRAWPARAMS structure class with this class **(auto-included)**.
-*/
-#include %A_ScriptDir%\..\Helper Classes\ILDRAWPARAMS.ahk
-
-/*
-ILIF:
-	You may use the values defined in the ILIF enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-IMAGEINFO:
-	This class requires the IMAGEINFO structure class **(auto-included)**.
-*/
-#include %A_ScriptDir%\..\Helper Classes\IMAGEINFO.ahk
-
-/*
-IMAGELISTDRAWFLAGS:
-	You may use the values defined in the IMAGELISTDRAWFLAGS enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-OBM:
-	You may use the values defined in the OBM enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-POINT:
-	This class requires the POINT structure class **(auto-included)**.
-*/
-#include %A_ScriptDir%\..\Helper Classes\POINT.ahk
-
-/*
-RECT:
-	This class requires the RECT structure class **(auto-included)**.
-*/
-#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
