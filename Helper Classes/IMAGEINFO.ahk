@@ -88,12 +88,3 @@ class IMAGEINFO
 						,	RECT.FromStructPtr(ptr + 08 + 2*A_PtrSize))
 	}
 }
-
-/*
-group: dependencies & related
-*/
-/*
-RECT:
-	This class requires the RECT structure class **(auto-included)**.
-*/
-#include %A_ScriptDir%\RECT.ahk

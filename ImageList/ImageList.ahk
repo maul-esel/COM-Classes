@@ -1,15 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
-#include %A_ScriptDir%\..\Helper Classes\IDC.ahk
-#include %A_ScriptDir%\..\Helper Classes\IDI.ahk
-#include %A_ScriptDir%\..\Helper Classes\ILDRAWPARAMS.ahk
-#include %A_ScriptDir%\..\Helper Classes\ILIF.ahk
-#include %A_ScriptDir%\..\Helper Classes\IMAGEINFO.ahk
-#include %A_ScriptDir%\..\Helper Classes\IMAGELISTDRAWFLAGS.ahk
-#include %A_ScriptDir%\..\Helper Classes\OBM.ahk
-#include %A_ScriptDir%\..\Helper Classes\POINT.ahk
-#include %A_ScriptDir%\..\Helper Classes\RECT.ahk
-
 /*
 class: ImageList
 implements IImageList and exposes methods that manipulate and interact with image lists.
@@ -45,6 +33,12 @@ class ImageList extends Unknown
 	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll")
 	
 	/*
+	Field: ThrowOnCreation
+	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
+	*/
+	static ThrowOnCreation := true
+
+	/*
 	group: Constructors
 	
 	Method: FromHIMAGELIST
@@ -54,20 +48,19 @@ class ImageList extends Unknown
 		[opt] HIMAGELIST il - the handle to the image list as returned by IL_Create(). If omitted, a new image list is created.
 		
 	Remarks:
-		Although you can create an instance using the usual way:
+		You cannot create an instance using the usual way:
 >		myIL := new ImageList()
-		it is recommended to create an instance from this method:
+		This throws an exception. You must create an instance from this method:
 >		myIL := ImageList.FromHIMAGELIST(IL_CREATE())
-		
 		The given handle can be obtained using
 >		handle := myIL.ptr
 	*/
 	FromHIMAGELIST(il = 0)
 	{
-		if (il == 0)
+		if (!il)
 			il := IL_Create()
 
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "UPtr", this._GUID(this.IID), "ptr*", ptr)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", this._GUID(i, ImageList.IID), "ptr*", ptr)
 		return new ImageList(ptr)
 	}
 	
@@ -295,7 +288,7 @@ class ImageList extends Unknown
 	*/
 	Clone()
 	{
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", this._GUID(this.IID), "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", this._GUID(i, ImageList.IID), "ptr*", out))
 		return new ImageList(out)
 	}
 	

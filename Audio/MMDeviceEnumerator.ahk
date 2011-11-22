@@ -1,5 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-
 /*
 class: MMDeviceEnumerator
 implements IMMDeviceEnumerator and provides methods for enumerating multimedia device resources.

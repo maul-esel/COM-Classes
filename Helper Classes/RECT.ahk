@@ -60,7 +60,7 @@ class RECT
 		NumPut(this.right,	struct,	08,	"Int")
 		NumPut(this.bottom,	struct,	12,	"Int")
 
-		return struct
+		return &struct
 	}
 	
 	/*

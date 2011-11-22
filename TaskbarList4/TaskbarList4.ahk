@@ -1,8 +1,3 @@
-#include %A_ScriptDir%\..\Unknown\Unknown.ahk
-#include %A_ScriptDir%\..\TaskbarList\TaskbarList.ahk
-#include %A_ScriptDir%\..\TaskbarList2\TaskbarList2.ahk
-#include %A_ScriptDir%\..\TaskbarList3\TaskbarList3.ahk
-
 /*
 class: TaskbarList4
 implements the ITaskbarList4 interface and provides a method that allows the caller to control two property values for the tab thumbnail and peek feature.

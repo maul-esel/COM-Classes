@@ -196,22 +196,3 @@ class IMAGELISTDRAWPARAMS
 		return instance
 	}
 }
-
-/*
-group: dependencies & related
-*/
-
-/*
-COLORREF:
-	You may use the values defined in the COLORREF enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-IMAGELISTDRAWFLAGS:
-	You may use the values defined in the IMAGELISTDRAWFLAGS enumeration class with this class **(not auto-included)**.
-*/
-
-/*
-IMAGELISTSTATEFLAGS:
-	You may use the values defined in the IMAGELISTSTATEFLAGS enumeration class with this class **(not auto-included)**.
-*/
