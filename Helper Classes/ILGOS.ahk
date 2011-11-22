@@ -9,13 +9,13 @@ class ILGOS
 {
 	/*
 	Field: ALWAYS
-	Always get the original size (can be slow). 
+	Always get the original size (can be slow).
 	*/
 	static ALWAYS := 0x00000000
 	
 	/*
 	Field: FROMSTANDBY
-	Only get if present or on standby. 
+	Only get if present or on standby.
 	*/
 	static FROMSTANDBY := 0x00000001
 }
