@@ -33,6 +33,12 @@ class ImageList extends Unknown
 	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll")
 	
 	/*
+	Field: ThrowOnCreation
+	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
+	*/
+	static ThrowOnCreation := true
+
+	/*
 	group: Constructors
 	
 	Method: FromHIMAGELIST
@@ -42,11 +48,10 @@ class ImageList extends Unknown
 		[opt] HIMAGELIST il - the handle to the image list as returned by IL_Create(). If omitted, a new image list is created.
 		
 	Remarks:
-		Although you can create an instance using the usual way:
+		You cannot create an instance using the usual way:
 >		myIL := new ImageList()
-		it is recommended to create an instance from this method:
+		This throws an exception. You must create an instance from this method:
 >		myIL := ImageList.FromHIMAGELIST(IL_CREATE())
-		
 		The given handle can be obtained using
 >		handle := myIL.ptr
 	*/
