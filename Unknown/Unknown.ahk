@@ -105,11 +105,10 @@ class Unknown
 	Developer remarks:
 		In cases where you need to pass a IID or CLSID to a method, you can use this to create it inline.
 	*/
-	_GUID(sGUID)
+	_GUID(byRef GUID, sGUID)
 	{
-		local GUID
 		VarSetCapacity(GUID, 16, 0)
-		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &GUID) == 0x00 ? &GUID : ""
+		return DllCall("ole32\CLSIDFromString", "str", sGUID, "ptr", &GUID) == 0x00 ? &GUID : 0
 	}
 
 	/*
