@@ -52,10 +52,10 @@ class ImageList extends Unknown
 	*/
 	FromHIMAGELIST(il := 0)
 	{
-		if (il == 0)
+		if (!il)
 			il := IL_Create()
 
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "uint", il, "UPtr", this._GUID(this.IID), "ptr*", ptr)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", this._GUID(i, ImageList.IID), "ptr*", ptr)
 		return new ImageList(ptr)
 	}
 	
@@ -283,7 +283,7 @@ class ImageList extends Unknown
 	*/
 	Clone()
 	{
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", this._GUID(this.IID), "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", this._GUID(i, ImageList.IID), "ptr*", out))
 		return new ImageList(out)
 	}
 	
