@@ -1,3 +1,5 @@
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+
 class Picture extends Unknown
 {
 	static IID := "{7BF80980-BF32-101A-8BBB-00AA00300CAB}"
@@ -62,6 +64,7 @@ class Picture extends Unknown
 		return height
 	}
 	
+
 	Render(dc, x, y, w, h, xSrc, ySrc, wSrc, hSrc, rect = 0)
 	{
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", rect))
@@ -77,7 +80,7 @@ class Picture extends Unknown
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr*", hDC))
 		return hDC
 	}
-	
+
 	SelectPicture(newHDC, byRef outHDC := "", byRef outHBMP = "")
 	{
 		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "ptr", newHDC, "ptr*", outHDC, "ptr*", outHBMP))

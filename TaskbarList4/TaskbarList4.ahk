@@ -1,57 +1,55 @@
-/**************************************************************************************************************
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+#include %A_ScriptDir%\..\TaskbarList\TaskbarList.ahk
+#include %A_ScriptDir%\..\TaskbarList2\TaskbarList2.ahk
+#include %A_ScriptDir%\..\TaskbarList3\TaskbarList3.ahk
+
+/*
 class: TaskbarList4
-extends TaskbarList3
+implements the ITaskbarList4 interface and provides a method that allows the caller to control two property values for the tab thumbnail and peek feature.
 
 Requirements:
-	- This requires AHK_L v1.1
-	- It also requires Windows 7, Windows Server 2008 R2 or higher
-***************************************************************************************************************	
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 7, Windows Server 2008 R2 or higher
+	Base classes - Unknown, TaskbarList, TaskbarList2, TaskbarList3
+	Helper classes - STPFLAG
 */
-
 class TaskbarList4 extends TaskbarList3
-	{
-	/**************************************************************************************************************
-	Variable: CLSID
-	This is CLSID_TaskbarList. It is required to create the object.
-	***************************************************************************************************************	
+{
+	/*
+	Field: CLSID
+	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
 		
-	/**************************************************************************************************************
-	Variable: IID
-	This is IID_ITaskbarList4. It is required to create the object.
-	***************************************************************************************************************	
+	/*
+	Field: IID
+	This is IID_ITaskbarList4. It is required to create an instance.
 	*/
 	static IID := "{c43dc798-95d1-4bea-9030-bb99e2983a1a}"
 		
-	/**************************************************************************************************************
-	Function: SetTabProperties
-	Allows a tab to specify whether the main application frame window or the tab window
-	should be used as a thumbnail or in the peek feature.
+	/*
+	Method: SetTabProperties
+	Allows a tab to specify whether the main application frame window or the tab window should be used as a thumbnail or in the peek feature.
 
 	Parameters:
-		handle hTab - the handle of the tab to work on.
-		int properties - the properties to set.
-	
-	Possible properties:
-		0 - none
-		1 - use the thumbnail provided by the main application frame window.
-		2 - use the thumbnail of the tab except when it is active.
-		3 - use the peek image provided by the main application frame window.
-		4 - use the peek image of the tab except when it is active.
-	
-	You may combine these values like this:
->		properties := 1|4
-	However, first lookup this page (<http://msdn.microsoft.com/de-de/library/dd562320.aspx>) to ensure this won't cause an error.
+		HWND hTab - the handle of the tab to work on.
+		UINT properties - the properties to set. You may use the fields of the STPFLAG class for convenience.
 
 	Returns:
-		bool success - true on success, false otherwise.
+		BOOL success - true on success, false otherwise.
 		
 	Example:
->		ITBL4.SetTabProperties(WinExist(), 1|4)
-***************************************************************************************************************	
-*/
-	SetTabProperties(hTab, properties){
+		(start code)
+		ITBL4 := new TaskbarList4()
+		ITBL4.HrInit()
+		ITBL4.SetTabProperties(WinExist(), STPFLAG.USEAPPTHUMBNAILALWAYS|STPFLAG.USEAPPPEEKALWAYS)
+		(end code)
+
+	Remarks:
+		Read the flag documentation carefully to avoid flag combinations that cause errors.
+	*/
+	SetTabProperties(hTab, properties)
+	{
 		return this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties))
-		}
 	}
+}

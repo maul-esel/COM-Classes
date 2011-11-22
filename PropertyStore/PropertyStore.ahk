@@ -1,3 +1,5 @@
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+
 class PropertyStore extends Unknown
 {
 	static IID := "{886d8eeb-8cf2-4446-8d02-cdba1dbdcf99}"

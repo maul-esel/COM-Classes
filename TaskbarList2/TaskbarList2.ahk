@@ -1,45 +1,52 @@
-/**************************************************************************************************************
+#include %A_ScriptDir%\..\Unknown\Unknown.ahk
+#include %A_ScriptDir%\..\TaskbarList\TaskbarList.ahk
+
+/*
 class: TaskbarList2
-extends TaskbarList
+implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.
 
 Requirements:
-	- This requires AHK_L v1.1
-	- It also requires Windows XP, Windows 2000 Server or higher
-***************************************************************************************************************	
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP, Windows 2000 Server or higher
+	Base classes - Unknown, TaskbarList
+	Helper classes - (none)
 */
 class TaskbarList2 extends TaskbarList
-	{
-	/**************************************************************************************************************
-	Variable: CLSID
-	This is CLSID_TaskbarList. It is required to create the object.
-	***************************************************************************************************************	
+{
+	/*
+	Field: CLSID
+	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
 		
-	/**************************************************************************************************************
-	Variable: IID
-	This is IID_ITaskbarList2. It is required to create the object.
-	***************************************************************************************************************	
+	/*
+	Field: IID
+	This is IID_ITaskbarList2. It is required to create an instance.
 	*/
 	static IID := "{602D4995-B13A-429b-A66E-1935E44F4317}"
 	
-	/**************************************************************************************************************
-	Function: MarkFullScreen
+	/*
+	Method: MarkFullScreen
 	Marks a window as full-screen.
 
 	Parameters:
-		handle hGui - the window handle of your gui
-		bool ApplyRemove - determines whether to apply or remove fullscreen property
+		HWND hGui - the window handle of your gui
+		BOOL ApplyRemove - determines whether to apply or remove fullscreen property
 
 	Returns:
-		bool success - true on success, false otherwise.
+		BOOL success - true on success, false otherwise.
 		
 	Example:
->	Gui 2: +LastFound
->	ITBL2.MarkFullScreen(WinExist())
+		(start code)
+		ITBL2 := new TaskbarList2()
+		ITBL2.HrInit()
+		Gui 2: +LastFound
+		ITBL2.MarkFullScreen(WinExist())
+		(end code)
 	***************************************************************************************************************	
 	*/
-	MarkFullScreen(hWin, ApplyRemove){
+	MarkFullScreen(hWin, ApplyRemove)
+	{
 		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Uint", hWin, "UInt", ApplyRemove))
-		}
 	}
+}
