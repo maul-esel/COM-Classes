@@ -12,19 +12,18 @@ progress.SetCancelMsg("You canceled the dialog. Please wait.")
 if (!progress.StartProgressDialog()) ; show the dialog
 	ExitApp
 
-Loop 100 {
+Loop 100
+{
 	progress.SetProgress(A_Index) ; update progress
 	sleep 500
-	if (progress.HasUserCanceled()) { ; if user canceled:
+	if (progress.HasUserCanceled()) ; if user canceled:
+	{
 		sleep 2000 ; let him read cancel msg
 		break
-		}
 	}
+}
 
 progress.SetLine(2, "The script finished now and will exit in a few seconds...")
 progress.SetLine(3, "Bye Bye!")
 sleep 3000
-progress.StopProgressDialog() ; hide it
-progress.Release()
-
-ExitApp
+progress.StopProgressDialog() ; close the dialog

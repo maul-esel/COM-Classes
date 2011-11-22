@@ -7,7 +7,6 @@ Remarks:
 */
 class TBPFLAG
 {
-	
 	/*
 	Field: NOPROGRESS
 	Stops displaying progress and returns the button to its normal state. Use this flag to dismiss the progress bar when the operation is complete or canceled.
@@ -36,6 +35,5 @@ class TBPFLAG
 	Field: PAUSED
 	The progress indicator turns yellow to show that progress is currently stopped in one of the windows but can be resumed by the user. No error condition exists and nothing is preventing the progress from continuing. This is a determinate state. If the progress indicator is in the indeterminate state, it switches to a yellow determinate display of a generic percentage not indicative of actual progress.
 	*/
-	static PAUSED := 0x00000008
-	
+	static PAUSED := 0x00000008	
 }
