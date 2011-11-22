@@ -11,10 +11,10 @@ Requirements:
 class Unknown
 {
 	/*
-	Field: IID
+	Field: IID_IUnknown
 	This is IID_IUnknown. It may be used by inherited classes.
 	*/
-	static IID := "{00000000-0000-0000-C000-000000000046}"
+	static IID_IUnknown := "{00000000-0000-0000-C000-000000000046}"
 	
 	/*
 	Field: Error
