@@ -1,4 +1,4 @@
-<html><head><title>TaskbarList2</title><style>/*
+<html><head><title>ERole</title><style>/*
    IMPORTANT: If you're editing this file in the output directory of one of
    your projects, your changes will be overwritten the next time you run
    Natural Docs.  Instead, copy this file to your project directory, make your
@@ -839,27 +839,24 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 
 
-<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TaskbarList2"></a>TaskbarList2</h1><div class=CBody><p>implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.</p><h4 class=CHeading>Requirements</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>AutoHotkey</td><td class=CDLDescription>AHK_L v1.1+</td></tr><tr><td class=CDLEntry>OS</td><td class=CDLDescription>Windows XP, Windows 2000 Server or higher</td></tr><tr><td class=CDLEntry>Base classes</td><td class=CDLDescription>Unknown, TaskbarList</td></tr><tr><td class=CDLEntry>Helper classes</td><td class=CDLDescription>(none)</td></tr></table><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#TaskbarList2" >TaskbarList2</a></td><td class=SDescription>implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#TaskbarList2.Variables" >Variables</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#TaskbarList2.CLSID" >CLSID</a></td><td class=SDescription>This is CLSID_TaskbarList. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#TaskbarList2.IID" >IID</a></td><td class=SDescription>This is IID_ITaskbarList2. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#TaskbarList2.Functions" >Functions</a></td><td class=SDescription></td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#TaskbarList2.MarkFullScreen" id=link1 onMouseOver="ShowTip(event, 'tt1', 'link1')" onMouseOut="HideTip('tt1')">MarkFullScreen</a></td><td class=SDescription>Marks a window as full-screen.</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
+<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="ERole"></a>ERole</h1><div class=CBody><p>an enumeration class containing constants that indicate the role that the system has assigned to an audio endpoint device.</p><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#ERole" >ERole</a></td><td class=SDescription>an enumeration class containing constants that indicate the role that the system has assigned to an audio endpoint device.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#ERole.Variables" >Variables</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#ERole.eConsole" >eConsole</a></td><td class=SDescription>Games, system notification sounds, and voice commands.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#ERole.eMultimedia" >eMultimedia</a></td><td class=SDescription>Music, movies, narration, and live music recording.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#ERole.eCommunications" >eCommunications</a></td><td class=SDescription>Voice communications (talking to another person).</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#ERole.ERole_enum_count" >ERole_enum_count</a></td><td class=SDescription>The number of members in the ERole enumeration (not counting the ERole_enum_count member).</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
 
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.Variables"></a>Variables</h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="ERole.Variables"></a>Variables</h3></div></div>
 
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.CLSID"></a>CLSID</h3><div class=CBody><p>This is CLSID_TaskbarList.&nbsp; It is required to create an instance.</p></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ERole.eConsole"></a>eConsole</h3><div class=CBody><p>Games, system notification sounds, and voice commands.</p></div></div></div>
 
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.IID"></a>IID</h3><div class=CBody><p>This is IID_ITaskbarList2.&nbsp; It is required to create an instance.</p></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ERole.eMultimedia"></a>eMultimedia</h3><div class=CBody><p>Music, movies, narration, and live music recording.</p></div></div></div>
 
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.Functions"></a>Functions</h3></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ERole.eCommunications"></a>eCommunications</h3><div class=CBody><p>Voice communications (talking to another person).</p></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.MarkFullScreen"></a>MarkFullScreen</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>MarkFullScreen(</td><td class=PParameter nowrap>hWin,</td></tr><tr><td></td><td class=PParameter nowrap>ApplyRemove</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Marks a window as full-screen.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HWND hGui</td><td class=CDLDescription>the window handle of your gui</td></tr><tr><td class=CDLEntry>BOOL ApplyRemove</td><td class=CDLDescription>determines whether to apply or remove fullscreen property</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table><h4 class=CHeading>Example</h4><blockquote><pre>ITBL2 := new TaskbarList2()
-ITBL2.HrInit()
-Gui 2: +LastFound
-ITBL2.MarkFullScreen(WinExist())</pre></blockquote></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ERole.ERole_enum_count"></a>ERole_enum_count</h3><div class=CBody><p>The number of members in the ERole enumeration (not counting the ERole_enum_count member).</p></div></div></div>
 
 </div><!--Content-->
 
 
 
 <!--START_ND_TOOLTIPS-->
-<div class=CToolTip id="tt1"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>MarkFullScreen(</td><td class=PParameter nowrap>hWin,</td></tr><tr><td></td><td class=PParameter nowrap>ApplyRemove</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Marks a window as full-screen.</div></div><!--END_ND_TOOLTIPS-->
+<!--END_ND_TOOLTIPS-->
 
 <script language=JavaScript><!--
 if (browserType) {if (browserVer) {document.write("</div>"); }document.write("</div>");}// --></script></body></html>

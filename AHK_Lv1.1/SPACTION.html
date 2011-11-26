@@ -1,4 +1,4 @@
-<html><head><title>TaskbarList2</title><style>/*
+<html><head><title>SPACTION</title><style>/*
    IMPORTANT: If you're editing this file in the output directory of one of
    your projects, your changes will be overwritten the next time you run
    Natural Docs.  Instead, copy this file to your project directory, make your
@@ -839,27 +839,44 @@ if (browserType) {document.write("<div class=" + browserType + ">");if (browserV
 
 
 
-<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TaskbarList2"></a>TaskbarList2</h1><div class=CBody><p>implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.</p><h4 class=CHeading>Requirements</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>AutoHotkey</td><td class=CDLDescription>AHK_L v1.1+</td></tr><tr><td class=CDLEntry>OS</td><td class=CDLDescription>Windows XP, Windows 2000 Server or higher</td></tr><tr><td class=CDLEntry>Base classes</td><td class=CDLDescription>Unknown, TaskbarList</td></tr><tr><td class=CDLEntry>Helper classes</td><td class=CDLDescription>(none)</td></tr></table><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#TaskbarList2" >TaskbarList2</a></td><td class=SDescription>implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#TaskbarList2.Variables" >Variables</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#TaskbarList2.CLSID" >CLSID</a></td><td class=SDescription>This is CLSID_TaskbarList. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#TaskbarList2.IID" >IID</a></td><td class=SDescription>This is IID_ITaskbarList2. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#TaskbarList2.Functions" >Functions</a></td><td class=SDescription></td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#TaskbarList2.MarkFullScreen" id=link1 onMouseOver="ShowTip(event, 'tt1', 'link1')" onMouseOut="HideTip('tt1')">MarkFullScreen</a></td><td class=SDescription>Marks a window as full-screen.</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
+<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="SPACTION"></a>SPACTION</h1><div class=CBody><p>an enumeration class describing an action being performed that requires progress to be shown to the user using an IActionProgress / IOperationsProgressDialog interface.</p><h4 class=CHeading>Remarks</h4><ul><li>The field names exactly match the contants&rsquo; names, except that the leading &ldquo;SPACTION_&rdquo; is omitted.</li></ul><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#SPACTION" >SPACTION</a></td><td class=SDescription>an enumeration class describing an action being performed that requires progress to be shown to the user using an IActionProgress / IOperationsProgressDialog interface.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#SPACTION.Variables" >Variables</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.NONE" >NONE</a></td><td class=SDescription>No action is being performed.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.MOVING" >MOVING</a></td><td class=SDescription>Files are being moved.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.COPYING" >COPYING</a></td><td class=SDescription>Files are being copied.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.RECYCLING" >RECYCLING</a></td><td class=SDescription>Files are being deleted.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.APPLYINGATTRIBS" >APPLYINGATTRIBS</a></td><td class=SDescription>A set of attributes are being applied to files.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.DOWNLOADING" >DOWNLOADING</a></td><td class=SDescription>A file is being downloaded from a remote source.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.SEARCHING_INTERNET" >SEARCHING_INTERNET</a></td><td class=SDescription>An Internet search is being performed.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.CALCULATING" >CALCULATING</a></td><td class=SDescription>A calculation is being performed.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.UPLOADING" >UPLOADING</a></td><td class=SDescription>A file is being uploaded to a remote source.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.SEARCHING_FILES" >SEARCHING_FILES</a></td><td class=SDescription>A local search is being performed.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.DELETING" >DELETING</a></td><td class=SDescription>**Windows Vista and later.** A deletion is being performed.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.RENAMING" >RENAMING</a></td><td class=SDescription>**Windows Vista and later.** A renaming action is being performed.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#SPACTION.FORMATTING" >FORMATTING</a></td><td class=SDescription>**Windows Vista and later.** A formatting action is being performed.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#SPACTION.COPY_MOVING" >COPY_MOVING</a></td><td class=SDescription>**Windows 7 and later.** A copy or move action is being performed.</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
 
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.Variables"></a>Variables</h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="SPACTION.Variables"></a>Variables</h3></div></div>
 
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.CLSID"></a>CLSID</h3><div class=CBody><p>This is CLSID_TaskbarList.&nbsp; It is required to create an instance.</p></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.NONE"></a>NONE</h3><div class=CBody><p>No action is being performed.</p></div></div></div>
 
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.IID"></a>IID</h3><div class=CBody><p>This is IID_ITaskbarList2.&nbsp; It is required to create an instance.</p></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.MOVING"></a>MOVING</h3><div class=CBody><p>Files are being moved.</p></div></div></div>
 
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.Functions"></a>Functions</h3></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.COPYING"></a>COPYING</h3><div class=CBody><p>Files are being copied.</p></div></div></div>
 
-<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="TaskbarList2.MarkFullScreen"></a>MarkFullScreen</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>MarkFullScreen(</td><td class=PParameter nowrap>hWin,</td></tr><tr><td></td><td class=PParameter nowrap>ApplyRemove</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Marks a window as full-screen.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HWND hGui</td><td class=CDLDescription>the window handle of your gui</td></tr><tr><td class=CDLEntry>BOOL ApplyRemove</td><td class=CDLDescription>determines whether to apply or remove fullscreen property</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table><h4 class=CHeading>Example</h4><blockquote><pre>ITBL2 := new TaskbarList2()
-ITBL2.HrInit()
-Gui 2: +LastFound
-ITBL2.MarkFullScreen(WinExist())</pre></blockquote></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.RECYCLING"></a>RECYCLING</h3><div class=CBody><p>Files are being deleted.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.APPLYINGATTRIBS"></a>APPLYINGATTRIBS</h3><div class=CBody><p>A set of attributes are being applied to files.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.DOWNLOADING"></a>DOWNLOADING</h3><div class=CBody><p>A file is being downloaded from a remote source.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.SEARCHING_INTERNET"></a>SEARCHING_INTERNET</h3><div class=CBody><p>An Internet search is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.CALCULATING"></a>CALCULATING</h3><div class=CBody><p>A calculation is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.UPLOADING"></a>UPLOADING</h3><div class=CBody><p>A file is being uploaded to a remote source.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.SEARCHING_FILES"></a>SEARCHING_FILES</h3><div class=CBody><p>A local search is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.DELETING"></a>DELETING</h3><div class=CBody><p>**Windows Vista and later.** A deletion is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.RENAMING"></a>RENAMING</h3><div class=CBody><p>**Windows Vista and later.** A renaming action is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.FORMATTING"></a>FORMATTING</h3><div class=CBody><p>**Windows Vista and later.** A formatting action is being performed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="SPACTION.COPY_MOVING"></a>COPY_MOVING</h3><div class=CBody><p>**Windows 7 and later.** A copy or move action is being performed.</p></div></div></div>
 
 </div><!--Content-->
 
 
 
 <!--START_ND_TOOLTIPS-->
-<div class=CToolTip id="tt1"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>MarkFullScreen(</td><td class=PParameter nowrap>hWin,</td></tr><tr><td></td><td class=PParameter nowrap>ApplyRemove</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Marks a window as full-screen.</div></div><!--END_ND_TOOLTIPS-->
+<!--END_ND_TOOLTIPS-->
 
 <script language=JavaScript><!--
 if (browserType) {if (browserVer) {document.write("</div>"); }document.write("</div>");}// --></script></body></html>
