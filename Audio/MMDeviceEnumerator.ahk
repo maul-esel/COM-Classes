@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista, Windows 2008 Server or higher
 	Base classes - Unknown
-	Helper classes - (none)
+	Helper classes - EDataFlow, ERole, DEVICE_STATE, MMDeviceCollection, MMDevice, MMNotificationClient
 */
 class MMDeviceEnumerator extends Unknown
 {
@@ -28,7 +28,7 @@ class MMDeviceEnumerator extends Unknown
 
 	Parameters:
 		UINT dataFlow - The data-flow direction for the endpoint devices in the collection. You can use the fields of the EDataFlow enumeration class for convenience. You should set this parameter either EDataFlow.eRender or EDataFlow.eCapture.
-		UINT mask - The state or states of the endpoints that are to be included in the collection. You can use a combination (or just one) of the fields in the DEVIVE_STATE enumeration class for convenience.
+		UINT mask - The state or states of the endpoints that are to be included in the collection. You can use a combination (or just one) of the fields in the DEVICE_STATE enumeration class for convenience.
 
 	Returns:
 		MMDeviceCollection collection - a new instance of the MMDeviceCollection class
