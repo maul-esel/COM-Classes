@@ -21,7 +21,7 @@ tbl.SetOverlayIcon(hWin, DllCall("LoadIcon", "UInt", 0, "UInt", 32516))
 
 sleep 3000
 MsgBox check the current taskbar thumbnail. Then click OK
-tbl.SetThumbnailClip(hWin, a := new RECT(0, 0, 60, 60))
+tbl.SetThumbnailClip(hWin, new RECT(0, 0, 60, 60))
 MsgBox recheck the taskbar thumbnail now
 
 Loop 100

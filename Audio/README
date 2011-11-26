@@ -1,7 +1,0 @@
-MMDeviceEnumerator README:
-
-This class implements the IMMDeviceEnumerator interface.
-
-Author:			maul.esel
-Documentation:	http://maul-esel.github.com/COM-Classes/Audio/docs/MMDeviceEnumerator.html
-License:		LGPL
