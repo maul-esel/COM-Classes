@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown, SequentialStream
-	Helper classes - STGC, STATSTG, LOCKTYPE, STATFLAG
+	Helper classes - STGC, STATSTG, LOCKTYPE, STATFLAG, STREAM_SEEK
 */
 class Stream extends SequentialStream
 {
@@ -47,7 +47,7 @@ class Stream extends SequentialStream
 
 	Parameters:
 		INT64 move - the displacement to be added to the location indicated by the dwOrigin parameter.
-		UINT dwOrigin - The origin for the displacement specified in move.
+		UINT dwOrigin - The origin for the displacement specified in move. You can use the fields of the STREAM_SEEK class for convenience.
 
 	Returns:
 		UINT64 newPos - the location where this method writes the value of the new seek pointer from the beginning of the stream.
