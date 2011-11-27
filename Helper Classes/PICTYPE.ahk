@@ -11,7 +11,7 @@ class PICTYPE
 	Field: UNINITIALIZED
 	The picture object is currently uninitialized. This value is only valid as a return value from IPicture::get_Type and is not valid with the PICTDESC structure.
 	*/
-	static UNINITIALIZED := (-1
+	static UNINITIALIZED := -1
 
 	/*
 	Field: NONE
