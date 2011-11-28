@@ -112,7 +112,8 @@ SaveIconToFile(hIcon, file, bAutoDelete := false)
 				dwWritten := hFile.RawWrite(&buf, dwRead)
 				
 				/*
-					if( dwWritten != dwRead ) // if something failed with writing: stop
+				if something failed with writing: stop
+					if( dwWritten != dwRead )
 						break;
 					dwDone += dwRead;
 				*/
