@@ -10,29 +10,29 @@ class RECT
 	The x-coordinate of the upper-left corner of the rectangle.
 	*/
 	left := 0
-	
+
 	/*
 	Field: top
 	The y-coordinate of the upper-left corner of the rectangle.
 	*/
 	top := 0
-	
+
 	/*
 	Field: right
 	The x-coordinate of the lower-right corner of the rectangle.
 	*/
 	right := 0
-	
+
 	/*
 	Field: bottom
 	The y-coordinate of the lower-right corner of the rectangle.
 	*/
 	bottom := 0
-	
+
 	/*
 	Method: Constructor
 	creates a new instance of the RECT class
-	
+
 	Parameters:
 		[opt] left - the initial value for the <left> field
 		[opt] top - the initial value for the <top> field
@@ -43,11 +43,11 @@ class RECT
 	{
 		this.left := left, this.top := top, this.right := right, this.bottom := bottom
 	}
-	
+
 	/*
 	Method: ToStructPtr
 	converts the instance to a script-usable struct
-	
+
 	Returns:
 		ptr - a pointer to the struct in memory
 	*/
@@ -62,11 +62,11 @@ class RECT
 
 		return &struct
 	}
-	
+
 	/*
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class
-	
+
 	Returns:
 		instance - the new RECT instance
 	*/
