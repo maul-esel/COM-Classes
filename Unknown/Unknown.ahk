@@ -138,7 +138,7 @@ class Unknown
 
 		this.Error.description := error " - " error_msg
 		
-		return error == 0x00
+		return error >= 0x00
 	}
 
 	/*
