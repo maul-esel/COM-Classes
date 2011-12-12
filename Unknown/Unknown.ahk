@@ -3,7 +3,7 @@ class: Unknown
 implements the IUnknown interface and provides meta-functions and helper methods for inherited classes.
 
 Requirements:
-	AutoHotkey - AHK v2 alpha
+	AutoHotkey - AHK_L v1.1+
 	OS - (any)
 	Base classes - (none)
 	Helper classes - (none)
@@ -138,7 +138,7 @@ class Unknown
 
 		this.Error.description := error " - " error_msg
 		
-		return error == 0x00
+		return error >= 0x00
 	}
 
 	/*
