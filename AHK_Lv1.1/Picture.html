@@ -1,0 +1,910 @@
+<html><head><title>Picture</title><style>/*
+   IMPORTANT: If you're editing this file in the output directory of one of
+   your projects, your changes will be overwritten the next time you run
+   Natural Docs.  Instead, copy this file to your project directory, make your
+   changes, and you can use it with -s.  Even better would be to make a CSS
+   file in your project directory with only your changes, which you can then
+   use with -s [original style] [your changes].
+
+   On the other hand, if you're editing this file in the Natural Docs styles
+   directory, the changes will automatically be applied to all your projects
+   that use this style the next time Natural Docs is run on them.
+
+   This file is part of Natural Docs, which is Copyright (C) 2003-2008 Greg Valure
+   Natural Docs is licensed under the GPL
+*/
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "MS sans serif";
+    color: #000000;
+    margin: 0; padding: 0;
+    }
+
+.ContentPage,
+.IndexPage,
+.FramedMenuPage {
+    background-color: #E8E8E8;
+    }
+.FramedContentPage,
+.FramedIndexPage,
+.FramedSearchResultsPage,
+.PopupSearchResultsPage {
+    background-color: #FFFFFF;
+    }
+
+
+a:link,
+a:visited { color: #900000; text-decoration: none }
+a:hover { color: #900000; text-decoration: underline }
+a:active { color: #FF0000; text-decoration: underline }
+
+td {
+    vertical-align: top }
+
+img { border: 0;  }
+
+
+/*
+    Comment out this line to use web-style paragraphs (blank line between
+    paragraphs, no indent) instead of print-style paragraphs (no blank line,
+    indented.)
+*/
+/*p {
+    text-indent: 0ex; margin: 0 }
+*/
+
+/*  Opera doesn't break with just wbr, but will if you add this.  */
+.Opera wbr:after {
+	content: "\00200B";
+	}
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    }
+
+
+.Firefox1 blockquote {
+    padding-bottom: .5em;
+    }
+
+/*  Turn off scrolling when printing.  */
+@media print {
+    blockquote {
+        overflow: visible;
+        }
+    .IE blockquote {
+        width: auto;
+        }
+    }
+
+
+
+#Menu {
+    font-size: 9pt;
+    padding: 10px 0 0 0;
+    }
+.ContentPage #Menu,
+.IndexPage #Menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 31ex;
+    overflow: hidden;
+    }
+.ContentPage .Firefox #Menu,
+.IndexPage .Firefox #Menu {
+    width: 27ex;
+    }
+
+
+    .MTitle {
+        font-size: 16pt; font-weight: bold; font-variant: small-caps;
+        text-align: center;
+        padding: 5px 10px 15px 10px;
+        border-bottom: 1px dotted #000000;
+        margin-bottom: 15px }
+
+    .MSubTitle {
+        font-size: 9pt; font-weight: normal; font-variant: normal;
+        margin-top: 1ex; margin-bottom: 5px }
+
+
+    .MEntry a:link,
+    .MEntry a:hover,
+    .MEntry a:visited { color: #606060; margin-right: 0 }
+    .MEntry a:active { color: #A00000; margin-right: 0 }
+
+
+    .MGroup {
+        font-variant: small-caps; font-weight: bold;
+        margin: 1em 0 1em 10px;
+        }
+
+    .MGroupContent {
+        font-variant: normal; font-weight: normal }
+
+    .MGroup a:link,
+    .MGroup a:hover,
+    .MGroup a:visited { color: #545454; margin-right: 10px }
+    .MGroup a:active { color: #A00000; margin-right: 10px }
+
+
+    .MFile,
+    .MText,
+    .MLink,
+    .MIndex {
+        padding: 1px 17px 2px 10px;
+        margin: .25em 0 .25em 0;
+        }
+
+    .MText {
+        font-size: 8pt; font-style: italic }
+
+    .MLink {
+        font-style: italic }
+
+    #MSelected {
+        color: #000000; background-color: #FFFFFF;
+        /*  Replace padding with border.  */
+        padding: 0 10px 0 10px;
+        border-width: 1px 2px 2px 0; border-style: solid; border-color: #000000;
+        margin-right: 5px;
+        }
+
+    /*  Close off the left side when its in a group.  */
+    .MGroup #MSelected {
+        padding-left: 9px; border-left-width: 1px }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox #MSelected {
+        -moz-border-radius-topright: 10px;
+        -moz-border-radius-bottomright: 10px }
+    .Firefox .MGroup #MSelected {
+        -moz-border-radius-topleft: 10px;
+        -moz-border-radius-bottomleft: 10px }
+
+
+    #MSearchPanel {
+        padding: 0px 6px;
+        margin: .25em 0;
+        }
+
+
+    #MSearchField {
+        font: italic 9pt Verdana, sans-serif;
+        color: #606060;
+        background-color: #E8E8E8;
+        border: none;
+        padding: 2px 4px;
+        width: 100%;
+        }
+    /* Only Opera gets it right. */
+    .Firefox #MSearchField,
+    .IE #MSearchField,
+    .Safari #MSearchField {
+        width: 94%;
+        }
+    .Opera9 #MSearchField,
+    .Konqueror #MSearchField {
+        width: 97%;
+        }
+    .FramedMenuPage .Firefox #MSearchField,
+    .FramedMenuPage .Safari #MSearchField,
+    .FramedMenuPage .Konqueror #MSearchField {
+        width: 98%;
+        }
+
+    /* Firefox doesn't do this right in frames without #MSearchPanel added on.
+        It's presence doesn't hurt anything other browsers. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        padding: 1px 3px;
+        }
+    .MSearchPanelActive #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        font-style: normal;
+        padding: 1px 3px;
+        }
+
+    #MSearchType {
+        visibility: hidden;
+        font: 8pt Verdana, sans-serif;
+        width: 98%;
+        padding: 0;
+        border: 1px solid #C0C0C0;
+        }
+    .MSearchPanelActive #MSearchType,
+    /*  As mentioned above, Firefox doesn't do this right in frames without #MSearchPanel added on. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchType,
+    #MSearchType:focus {
+        visibility: visible;
+        color: #606060;
+        }
+    #MSearchType option#MSearchEverything {
+        font-weight: bold;
+        }
+
+    .Opera8 .MSearchPanelInactive:hover,
+    .Opera8 .MSearchPanelActive {
+        margin-left: -1px;
+        }
+
+
+    iframe#MSearchResults {
+        width: 60ex;
+        height: 15em;
+        }
+    #MSearchResultsWindow {
+        display: none;
+        position: absolute;
+        left: 0; top: 0;
+        border: 1px solid #000000;
+        background-color: #E8E8E8;
+        }
+    #MSearchResultsWindowClose {
+        font-weight: bold;
+        font-size: 8pt;
+        display: block;
+        padding: 2px 5px;
+        }
+    #MSearchResultsWindowClose:link,
+    #MSearchResultsWindowClose:visited {
+        color: #000000;
+        text-decoration: none;
+        }
+    #MSearchResultsWindowClose:active,
+    #MSearchResultsWindowClose:hover {
+        color: #800000;
+        text-decoration: none;
+        background-color: #F4F4F4;
+        }
+
+
+
+
+#Content {
+    padding-bottom: 15px;
+    }
+
+.ContentPage #Content {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    background-color: #FFFFFF;
+    font-size: 9pt;  /* To make 31ex match the menu's 31ex. */
+    
+    }
+.ContentPage .Firefox #Content {
+    margin-left: 27ex;
+    }
+
+
+
+    .CTopic {
+        font-size: 10pt;
+        margin-bottom: 3em;
+        }
+
+
+    .CTitle {
+        font-size: 12pt; font-weight: bold;
+        border-width: 0 0 1px 0; border-style: solid; border-color: #A0A0A0;
+        margin: 0 15px .5em 15px }
+
+    .CGroup .CTitle {
+        font-size: 16pt; font-variant: small-caps;
+        padding-left: 15px; padding-right: 15px;
+        border-width: 0 0 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CClass .CTitle,
+    .CInterface .CTitle,
+    .CDatabase .CTitle,
+    .CDatabaseTable .CTitle,
+    .CSection .CTitle {
+        font-size: 18pt;
+        color: #FFFFFF; background-color: #A0A0A0;
+        padding: 10px 15px 10px 15px;
+        border-width: 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    #MainTopic .CTitle {
+        font-size: 20pt;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CBody {
+        margin-left: 15px; margin-right: 15px }
+
+
+    .CToolTip {
+        position: absolute; visibility: hidden;
+        left: 0; top: 0;
+        background-color: #FFFFE0;
+        padding: 5px;
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #000000;
+        font-size: 8pt;
+        }
+
+    .Opera .CToolTip {
+        max-width: 98%;
+        }
+
+    /*  Scrollbars would be useless.  */
+    .CToolTip blockquote {
+        overflow: hidden;
+        }
+    .IE6 .CToolTip blockquote {
+        overflow: visible;
+        }
+
+    .CHeading {
+        font-weight: bold; font-size: 10pt;
+        margin: 1.5em 0 .5em 0;
+        }
+
+    .CBody pre {
+        font: 10pt "Courier New", Courier, monospace;
+        margin: 1em 0;
+        }
+
+    .CBody ul {
+        /*  I don't know why CBody's margin doesn't apply, but it's consistent across browsers so whatever.
+             Reapply it here as padding.  */
+        padding-left: 15px; padding-right: 15px;
+        margin: .5em 5ex .5em 5ex;
+        }
+
+    .CDescriptionList {
+        margin: .5em 5ex 0 5ex }
+
+    .CDLEntry {
+            font: 10pt "Courier New", Courier, monospace; color: #808080;
+            padding-bottom: .25em;
+            white-space: nowrap }
+
+    CDLDescription {
+            font-size: 10pt;  /*  For browsers that don't inherit correctly, like Opera 5.  */
+            padding-bottom: .5em; padding-left: 5ex }
+
+
+    .CTopic img {
+        text-align: center;
+        display: block;
+        margin: 1em auto;
+        }
+    .CImageCaption {
+        font-variant: small-caps;
+        font-size: 8pt;
+        color: #808080;
+        text-align: center;
+        position: relative;
+        top: 1em;
+        }
+
+    .CImageLink {
+        color: #808080;
+        font-style: italic;
+        }
+    a.CImageLink:link,
+    a.CImageLink:visited,
+    a.CImageLink:hover { color: #808080 }
+
+
+
+
+
+.Prototype {
+    font: 10pt "Courier New", Courier, monospace;
+    padding: 5px 3ex;
+    border-width: 1px; border-style: solid;
+    margin: 0 5ex 1.5em 5ex;
+    }
+
+    .Prototype td {
+        font-size: 10pt;
+        }
+
+    .PDefaultValue,
+    .PDefaultValuePrefix,
+    .PTypePrefix {
+        color: #8F8F8F;
+        }
+    .PTypePrefix {
+        text-align: right;
+        }
+    .PAfterParameters {
+        vertical-align: bottom;
+        }
+
+    .IE .Prototype table {
+        padding: 0;
+        }
+
+    .CFunction .Prototype {
+        background-color: #F4F4F4; border-color: #D0D0D0 }
+    .CProperty .Prototype {
+        background-color: #F4F4FF; border-color: #C0C0E8 }
+    .CVariable .Prototype {
+        background-color: #FFFFF0; border-color: #E0E0A0 }
+
+    .CClass .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        background-color: #F4F4F4;
+        }
+    .CInterface .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0D0;
+        background-color: #F4F4FF;
+        }
+
+    .CDatabaseIndex .Prototype,
+    .CConstant .Prototype {
+        background-color: #D0D0D0; border-color: #000000 }
+    .CType .Prototype,
+    .CEnumeration .Prototype {
+        background-color: #FAF0F0; border-color: #E0B0B0;
+        }
+    .CDatabaseTrigger .Prototype,
+    .CEvent .Prototype,
+    .CDelegate .Prototype {
+        background-color: #F0FCF0; border-color: #B8E4B8 }
+
+    .CToolTip .Prototype {
+        margin: 0 0 .5em 0;
+        white-space: nowrap;
+        }
+
+
+
+
+
+.Summary {
+    margin: 1.5em 5ex 0 5ex }
+
+    .STitle {
+        font-size: 12pt; font-weight: bold;
+        margin-bottom: .5em }
+
+
+    .SBorder {
+        background-color: #FFFFF0;
+        padding: 15px;
+        border: 1px solid #C0C060 }
+
+    /* In a frame IE 6 will make them too long unless you set the width to 100%.  Without frames it will be correct without a width
+        or slightly too long (but not enough to scroll) with a width.  This arbitrary weirdness simply astounds me.  IE 7 has the same
+        problem with frames, haven't tested it without.  */
+    .FramedContentPage .IE .SBorder {
+        width: 100% }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox .SBorder {
+        -moz-border-radius: 20px }
+
+
+    .STable {
+        font-size: 9pt; width: 100% }
+
+    .SEntry {
+        width: 30% }
+    .SDescription {
+        width: 70% }
+
+
+    .SMarked {
+        background-color: #F8F8D8 }
+
+    .SDescription { padding-left: 2ex }
+    .SIndent1 .SEntry { padding-left: 1.5ex }   .SIndent1 .SDescription { padding-left: 3.5ex }
+    .SIndent2 .SEntry { padding-left: 3.0ex }   .SIndent2 .SDescription { padding-left: 5.0ex }
+    .SIndent3 .SEntry { padding-left: 4.5ex }   .SIndent3 .SDescription { padding-left: 6.5ex }
+    .SIndent4 .SEntry { padding-left: 6.0ex }   .SIndent4 .SDescription { padding-left: 8.0ex }
+    .SIndent5 .SEntry { padding-left: 7.5ex }   .SIndent5 .SDescription { padding-left: 9.5ex }
+
+    .SDescription a { color: #800000}
+    .SDescription a:active { color: #A00000 }
+
+    .SGroup td {
+        padding-top: .5em; padding-bottom: .25em }
+
+    .SGroup .SEntry {
+        font-weight: bold; font-variant: small-caps }
+
+    .SGroup .SEntry a { color: #800000 }
+    .SGroup .SEntry a:active { color: #F00000 }
+
+
+    .SMain td,
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        font-size: 10pt;
+        padding-bottom: .25em }
+
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        padding-top: 1em }
+
+    .SMain .SEntry,
+    .SClass .SEntry,
+    .SDatabase .SEntry,
+    .SDatabaseTable .SEntry,
+    .SSection .SEntry {
+        font-weight: bold;
+        }
+
+    .SMain .SEntry a,
+    .SClass .SEntry a,
+    .SDatabase .SEntry a,
+    .SDatabaseTable .SEntry a,
+    .SSection .SEntry a { color: #000000 }
+
+    .SMain .SEntry a:active,
+    .SClass .SEntry a:active,
+    .SDatabase .SEntry a:active,
+    .SDatabaseTable .SEntry a:active,
+    .SSection .SEntry a:active { color: #A00000 }
+
+
+
+
+
+.ClassHierarchy {
+    margin: 0 15px 1em 15px }
+
+    .CHEntry {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        margin-bottom: 3px;
+        padding: 2px 2ex;
+        font-size: 10pt;
+        background-color: #F4F4F4; color: #606060;
+        }
+
+    .Firefox .CHEntry {
+        -moz-border-radius: 4px;
+        }
+
+    .CHCurrent .CHEntry {
+        font-weight: bold;
+        border-color: #000000;
+        color: #000000;
+        }
+
+    .CHChildNote .CHEntry {
+        font-style: italic;
+        font-size: 8pt;
+        }
+
+    .CHIndent {
+        margin-left: 3ex;
+        }
+
+    .CHEntry a:link,
+    .CHEntry a:visited,
+    .CHEntry a:hover {
+        color: #606060;
+        }
+    .CHEntry a:active {
+        color: #800000;
+        }
+
+
+
+
+
+#Index {
+    background-color: #FFFFFF;
+    }
+
+/*  As opposed to .PopupSearchResultsPage #Index  */
+.IndexPage #Index,
+.FramedIndexPage #Index,
+.FramedSearchResultsPage #Index {
+    padding: 15px;
+    }
+
+.IndexPage #Index {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    font-size: 9pt;  /* To make 27ex match the menu's 27ex. */
+    margin-left: 27ex;
+    }
+
+
+    .IPageTitle {
+        font-size: 20pt; font-weight: bold;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000; border-style: solid;
+        margin: -15px -15px 0 -15px }
+
+    .FramedSearchResultsPage .IPageTitle {
+        margin-bottom: 15px;
+        }
+
+    .INavigationBar {
+        font-size: 10pt;
+        text-align: center;
+        background-color: #FFFFF0;
+        padding: 5px;
+        border-bottom: solid 1px black;
+        margin: 0 -15px 15px -15px;
+        }
+
+    .INavigationBar a {
+        font-weight: bold }
+
+    .IHeading {
+        font-size: 16pt; font-weight: bold;
+        padding: 2.5em 0 .5em 0;
+        text-align: center;
+        width: 3.5ex;
+        }
+    #IFirstHeading {
+        padding-top: 0;
+        }
+
+    .IEntry {
+        font-size: 10pt;
+        padding-left: 1ex;
+        }
+    .PopupSearchResultsPage .IEntry {
+        font-size: 8pt;
+        padding: 1px 5px;
+        }
+    .PopupSearchResultsPage .Opera9 .IEntry,
+    .FramedSearchResultsPage .Opera9 .IEntry {
+        text-align: left;
+        }
+    .FramedSearchResultsPage .IEntry {
+        padding: 0;
+        }
+
+    .ISubIndex {
+        padding-left: 3ex; padding-bottom: .5em }
+    .PopupSearchResultsPage .ISubIndex {
+        display: none;
+        }
+
+
+    /*  While it may cause some entries to look like links when they aren't, I found it's much easier to read the
+         index if everything's the same color.  */
+    .ISymbol {
+        font-weight: bold; color: #900000  }
+
+    .IndexPage .ISymbolPrefix,
+    .FramedIndexPage .ISymbolPrefix {
+        font-size: 10pt;
+        text-align: right;
+        color: #C47C7C;
+        background-color: #F8F8F8;
+        border-right: 3px solid #E0E0E0;
+        border-left: 1px solid #E0E0E0;
+        padding: 0 1px 0 2px;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix,
+    .FramedSearchResultsPage .ISymbolPrefix {
+        color: #900000;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix {
+        font-size: 8pt;
+        }
+
+    .IndexPage #IFirstSymbolPrefix,
+    .FramedIndexPage #IFirstSymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        }
+    .IndexPage #ILastSymbolPrefix,
+    .FramedIndexPage #ILastSymbolPrefix {
+        border-bottom: 1px solid #E0E0E0;
+        }
+    .IndexPage #IOnlySymbolPrefix,
+    .FramedIndexPage #IOnlySymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        }
+
+    a.IParent,
+    a.IFile {
+        display: block;
+        }
+
+    .PopupSearchResultsPage .SRStatus {
+        padding: 2px 5px;
+        font-size: 8pt;
+        font-style: italic;
+        }
+    .FramedSearchResultsPage .SRStatus {
+        font-size: 10pt;
+        font-style: italic;
+        }
+
+    .SRResult {
+        display: none;
+        }
+
+
+
+#Footer {
+    font-size: 8pt;
+    color: #989898;
+    text-align: right;
+    }
+
+#Footer p {
+    text-indent: 0;
+    margin-bottom: .5em;
+    }
+
+.ContentPage #Footer,
+.IndexPage #Footer {
+    text-align: right;
+    margin: 2px;
+    }
+
+.FramedMenuPage #Footer {
+    text-align: center;
+    margin: 5em 10px 10px 10px;
+    padding-top: 1em;
+    border-top: 1px solid #C8C8C8;
+    }
+
+    #Footer a:link,
+    #Footer a:hover,
+    #Footer a:visited { color: #989898 }
+    #Footer a:active { color: #A00000 }
+
+
+#MainTopic .CTitle {					/* Title: */
+  font-size: 20pt;
+  font-weight: bold; /* Bold looks better against dark background. */
+  font-family: Arial, Helvetica, sans-serif, "MS sans serif"; 
+  background-color: #405871;
+  color: #FFFFFF;
+  margin: 0 0 0.5em 0;
+  padding: 10px 15px 10px 15px;
+}
+
+
+.SBorder,.SEntry, .SDescription {				/* Summary index */
+  background-color: #F2F2F2;
+  padding: 8px;
+  border: 1px solid #E0E0E0 }
+.SBorder{ padding: 1px; }
+
+
+.CTitle {							/* Function */
+  background-color: #FFFFAA;
+  margin: 1 1 1 1;
+  padding: 12px 0 12px 4px;
+  font-size: 12pt; font-weight: bold;
+  border-width: 3px 0px 0px 0; border-style: solid; border-color: #A0A0A0;
+}
+
+
+h4 {							/* topics.. (parameters, returns, example..) */
+  font-size: 111%;  font-weight: bold;
+  background-color:#E6E6E6;
+  margin: 1.0em 0 0.5em 0;
+  padding: 0.1em 0 0.1em 0.2em;
+}
+
+
+.CDescriptionList, .CDLEntry, .CDLDescription {			/* parameter table */
+  width: 100%;
+  margin: 1em 0ex 0 0ex;
+  border-width: 1px 1px 1px 1px; border-style: solid; border-color: #C0C0C0;
+}
+.CDLEntry, .CDLDescription { margin: 0 0 0em 0;  text-indent: 0px; padding-bottom: .5em; padding-top: .5em; font: 11pt "Calibri", Courier, monospace; }
+.CDLEntry { width: 15%; font: 10pt "Courier New", Courier, monospace; }
+.CDLDescription {  padding-left: 1ex }
+
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 20;
+        padding-left: 9px; border-left-width: 1px;
+    margin: 0;
+    overflow: auto;
+    background-color: #F3F3FF;			/* example bg color..*/
+        border-width: 0px 0px 0px 0px; border-style: solid; border-color: #838B8B;
+    }
+
+/* .ContentPage #Content { margin-left: 0ex; }   */
+
+
+a        {text-decoration: none;}
+a:link   {text-decoration: none; color: #0000AA;}
+a:visited{text-decoration: none; color: #AA00AA;}
+a:active {text-decoration: none; color: #0000AA;}
+a:hover  {text-decoration: underline; color: #6666CC;}</style><script language=JavaScript src="../javascript/main.js"></script></head><body class="FramedContentPage" onLoad="NDOnLoad()"><script language=JavaScript><!--
+if (browserType) {document.write("<div class=" + browserType + ">");if (browserVer) {document.write("<div class=" + browserVer + ">"); }}// --></script>
+
+<!--  Generated by Natural Docs, version 1.4 -->
+<!--  http://www.naturaldocs.org  -->
+
+<!-- saved from url=(0026)http://www.naturaldocs.org -->
+
+
+
+
+<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Picture"></a>Picture</h1><div class=CBody><p>implements the IPicture interface and manages a picture object and its properties.</p><h4 class=CHeading>Requirements</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>AutoHotkey</td><td class=CDLDescription>AHK v1.1+</td></tr><tr><td class=CDLEntry>OS</td><td class=CDLDescription>Windows 2000 Professional / Windows 2000 Server</td></tr><tr><td class=CDLEntry>Base classes</td><td class=CDLDescription>Unknown</td></tr><tr><td class=CDLEntry>Helper Classes</td><td class=CDLDescription>Stream, PICTYPE, RECT, PICTUREATTRIBUTES</td></tr></table><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#Picture" >Picture</a></td><td class=SDescription>implements the IPicture interface and manages a picture object and its properties.</td></tr><tr class="SVariable SIndent1 SMarked"><td class=SEntry><a href="#Picture.IID" >IID</a></td><td class=SDescription>This is IID_IPicture. </td></tr><tr class="SVariable SIndent1"><td class=SEntry><a href="#Picture.ThrowOnCreation" >ThrowOnCreation</a></td><td class=SDescription>indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#Picture.meta-functions" >meta-functions</a></td><td class=SDescription></td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.__Get" id=link1 onMouseOver="ShowTip(event, 'tt1', 'link1')" onMouseOut="HideTip('tt1')">__Get</a></td><td class=SDescription>meta-function to implement dynamic properties.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.__Set" id=link2 onMouseOver="ShowTip(event, 'tt2', 'link2')" onMouseOut="HideTip('tt2')">__Set</a></td><td class=SDescription>meta-function to implement dynamic properties.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#Picture.dynamic_properties" >dynamic properties</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#Picture.handle" >handle</a></td><td class=SDescription>the handle to the picture managed within this picture object to a specified location.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#Picture.hPal" >hPal</a></td><td class=SDescription>a GDI palette to the picture contained in the picture object.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#Picture.Type" >Type</a></td><td class=SDescription>the current type of the picture contained in the picture object.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#Picture.width" >width</a></td><td class=SDescription>the current width of the picture in the picture object.</td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#Picture.height" >height</a></td><td class=SDescription>the current height of the picture in the picture object.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#Picture.CurDC" >CurDC</a></td><td class=SDescription>the handle of the current device context. </td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#Picture.KeepOriginalFormat" >KeepOriginalFormat</a></td><td class=SDescription>the current value of the picture&rsquo;s KeepOriginalFormat property.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#Picture.Attributes" >Attributes</a></td><td class=SDescription>the current set of the picture&rsquo;s bit attributes.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#Picture.IPicture_methods" >IPicture methods</a></td><td class=SDescription></td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.get_Handle" id=link3 onMouseOver="ShowTip(event, 'tt3', 'link3')" onMouseOut="HideTip('tt3')">get_Handle</a></td><td class=SDescription>Retrieves the handle to the picture managed within this picture object to a specified location.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.get_hPal" id=link4 onMouseOver="ShowTip(event, 'tt4', 'link4')" onMouseOut="HideTip('tt4')">get_hPal</a></td><td class=SDescription>Retrieves a copy of the palette currently used by the picture object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.get_Type" id=link5 onMouseOver="ShowTip(event, 'tt5', 'link5')" onMouseOut="HideTip('tt5')">get_Type</a></td><td class=SDescription>Retrieves the current type of the picture contained in the picture object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.get_Width" id=link6 onMouseOver="ShowTip(event, 'tt6', 'link6')" onMouseOut="HideTip('tt6')">get_Width</a></td><td class=SDescription>Retrieves the current width of the picture in the picture object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.get_Height" id=link7 onMouseOver="ShowTip(event, 'tt7', 'link7')" onMouseOut="HideTip('tt7')">get_Height</a></td><td class=SDescription>Retrieves the current height of the picture in the picture object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.Render" id=link8 onMouseOver="ShowTip(event, 'tt8', 'link8')" onMouseOut="HideTip('tt8')">Render</a></td><td class=SDescription>Renders (draws) a specified portion of the picture of the source picture and the dimensions to copy. </td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.set_hPal" id=link9 onMouseOver="ShowTip(event, 'tt9', 'link9')" onMouseOut="HideTip('tt9')">set_hPal</a></td><td class=SDescription>Assigns a GDI palette to the picture contained in the picture object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.get_CurDC" id=link10 onMouseOver="ShowTip(event, 'tt10', 'link10')" onMouseOut="HideTip('tt10')">get_CurDC</a></td><td class=SDescription>Retrieves the handle of the current device context. </td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.SelectPicture" id=link11 onMouseOver="ShowTip(event, 'tt11', 'link11')" onMouseOut="HideTip('tt11')">SelectPicture</a></td><td class=SDescription>Selects a bitmap picture into a given device context, and returns the device context in which the picture was previously selected as well as the picture&rsquo;s GDI handle.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.get_KeepOriginalFormat" id=link12 onMouseOver="ShowTip(event, 'tt12', 'link12')" onMouseOut="HideTip('tt12')">get_KeepOriginalFormat</a></td><td class=SDescription>Retrieves the current value of the picture&rsquo;s KeepOriginalFormat property.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.put_KeepOriginalFormat" id=link13 onMouseOver="ShowTip(event, 'tt13', 'link13')" onMouseOut="HideTip('tt13')">put_KeepOriginalFormat</a></td><td class=SDescription>Sets the value of the picture&rsquo;s KeepOriginalFormat property.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.PictureChanged" id=link14 onMouseOver="ShowTip(event, 'tt14', 'link14')" onMouseOut="HideTip('tt14')">PictureChanged</a></td><td class=SDescription>Notifies the picture object that its picture resource has changed. </td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#Picture.SaveAsFile" id=link15 onMouseOver="ShowTip(event, 'tt15', 'link15')" onMouseOut="HideTip('tt15')">SaveAsFile</a></td><td class=SDescription>Saves the picture&rsquo;s data into a stream in the same format that it would save itself into a file. </td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#Picture.get_Attributes" id=link16 onMouseOver="ShowTip(event, 'tt16', 'link16')" onMouseOut="HideTip('tt16')">get_Attributes</a></td><td class=SDescription>Retrieves the current set of the picture&rsquo;s bit attributes.</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.IID"></a>IID</h3><div class=CBody><p>This is IID_IPicture.&nbsp; It is required to create an instance.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.ThrowOnCreation"></a>ThrowOnCreation</h3><div class=CBody><p>indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.</p><h4 class=CHeading>Remarks</h4><p>You may obtain a pointer using OleCreatePictureIndirect (<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms694511" class=LURL target=_top>http://msdn.microsoft.com<wbr>/en-us<wbr>/library<wbr>/windows<wbr>/desktop<wbr>/ms694511</a>).</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Picture.meta-functions"></a>meta-functions</h3></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.__Get"></a>__Get</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>__Get(</td><td class=PParameter nowrap>property</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>meta-function to implement dynamic properties.</p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.__Set"></a>__Set</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>__Set(</td><td class=PParameter nowrap>property,</td></tr><tr><td></td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>meta-function to implement dynamic properties.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Picture.dynamic_properties"></a>dynamic properties</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.handle"></a>handle</h3><div class=CBody><p>the handle to the picture managed within this picture object to a specified location.</p><p>Access: read-only</p><p>corresponding methods: <a href="#Picture.get_Handle" class=LFunction id=link17 onMouseOver="ShowTip(event, 'tt3', 'link17')" onMouseOut="HideTip('tt3')">get_Handle</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.hPal"></a>hPal</h3><div class=CBody><p>a GDI palette to the picture contained in the picture object.</p><p>Access: read-write</p><h4 class=CHeading>Remarks</h4><p>Reading this property retrieves <b>a copy of the palette currently used by the picture object.</b></p><p>corresponding methods: <a href="#Picture.get_hPal" class=LFunction id=link18 onMouseOver="ShowTip(event, 'tt4', 'link18')" onMouseOut="HideTip('tt4')">get_hPal</a>, <a href="#Picture.set_hPal" class=LFunction id=link19 onMouseOver="ShowTip(event, 'tt9', 'link19')" onMouseOut="HideTip('tt9')">set_hPal</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.Type"></a>Type</h3><div class=CBody><p>the current type of the picture contained in the picture object.</p><p>Access: read-only</p><h4 class=CHeading>Remarks</h4><p>This is one of the values defined in the PICTYPE enumeration class.</p><p>corresponding methods: <a href="#Picture.get_Type" class=LFunction id=link20 onMouseOver="ShowTip(event, 'tt5', 'link20')" onMouseOut="HideTip('tt5')">get_Type</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.width"></a>width</h3><div class=CBody><p>the current width of the picture in the picture object.</p><p>Access: read-only</p><p>corresponding methods: <a href="#Picture.get_Width" class=LFunction id=link21 onMouseOver="ShowTip(event, 'tt6', 'link21')" onMouseOut="HideTip('tt6')">get_Width</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.height"></a>height</h3><div class=CBody><p>the current height of the picture in the picture object.</p><p>Access: read-only</p><p>corresponding methods: <a href="#Picture.get_Height" class=LFunction id=link22 onMouseOver="ShowTip(event, 'tt7', 'link22')" onMouseOut="HideTip('tt7')">get_Height</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.CurDC"></a>CurDC</h3><div class=CBody><p>the handle of the current device context.&nbsp; This property is valid only for bitmap pictures.</p><p>Access: read-only</p><p>corresponding methods: <a href="#Picture.get_CurDC" class=LFunction id=link23 onMouseOver="ShowTip(event, 'tt10', 'link23')" onMouseOut="HideTip('tt10')">get_CurDC</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.KeepOriginalFormat"></a>KeepOriginalFormat</h3><div class=CBody><p>the current value of the picture&rsquo;s KeepOriginalFormat property.</p><p>Access: read-write</p><p>corresponding methods: <a href="#Picture.get_KeepOriginalFormat" class=LFunction id=link24 onMouseOver="ShowTip(event, 'tt12', 'link24')" onMouseOut="HideTip('tt12')">get_KeepOriginalFormat</a>, <a href="#Picture.put_KeepOriginalFormat" class=LFunction id=link25 onMouseOver="ShowTip(event, 'tt13', 'link25')" onMouseOut="HideTip('tt13')">put_KeepOriginalFormat</a></p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="Picture.Attributes"></a>Attributes</h3><div class=CBody><p>the current set of the picture&rsquo;s bit attributes.</p><p>Access: read-only</p><p>corresponding methods: <a href="#Picture.get_Attributes" class=LFunction id=link26 onMouseOver="ShowTip(event, 'tt16', 'link26')" onMouseOut="HideTip('tt16')">get_Attributes</a></p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Picture.IPicture_methods"></a>IPicture methods</h3></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_Handle"></a>get_Handle</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Handle()</td></tr></table></blockquote><p>Retrieves the handle to the picture managed within this picture object to a specified location.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UPTR handle</td><td class=CDLDescription>the handle</td></tr></table><p>corresponding property: <a href="#Picture.handle" class=LVariable id=link27 onMouseOver="ShowTip(event, 'tt17', 'link27')" onMouseOut="HideTip('tt17')">handle</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_hPal"></a>get_hPal</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_hPal()</td></tr></table></blockquote><p>Retrieves a copy of the palette currently used by the picture object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UPTR palette</td><td class=CDLDescription>the handle to the copy</td></tr></table><p>corresponding property: <a href="#Picture.hPal" class=LVariable id=link28 onMouseOver="ShowTip(event, 'tt18', 'link28')" onMouseOut="HideTip('tt18')">hPal</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_Type"></a>get_Type</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Type()</td></tr></table></blockquote><p>Retrieves the current type of the picture contained in the picture object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>SHORT type</td><td class=CDLDescription>the picture type</td></tr></table><p>corresponding property: <a href="#Picture.Type" class=LVariable id=link29 onMouseOver="ShowTip(event, 'tt19', 'link29')" onMouseOut="HideTip('tt19')">Type</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_Width"></a>get_Width</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Width()</td></tr></table></blockquote><p>Retrieves the current width of the picture in the picture object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UINT width</td><td class=CDLDescription>the image&rsquo;s width</td></tr></table><p>corresponding property: <a href="#Picture.width" class=LVariable id=link30 onMouseOver="ShowTip(event, 'tt20', 'link30')" onMouseOut="HideTip('tt20')">width</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_Height"></a>get_Height</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Height()</td></tr></table></blockquote><p>Retrieves the current height of the picture in the picture object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UINT height</td><td class=CDLDescription>the image&rsquo;s height</td></tr></table><p>corresponding property: <a href="#Picture.height" class=LVariable id=link31 onMouseOver="ShowTip(event, 'tt21', 'link31')" onMouseOut="HideTip('tt21')">height</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.Render"></a>Render</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>Render(</td><td class=PParameter nowrap>dc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>x,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>y,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>w,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>h,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>xSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>ySrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>wSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>hSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>rect</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 0</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Renders (draws) a specified portion of the picture of the source picture and the dimensions to copy.&nbsp; This picture is rendered onto the specified device context.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HDC dc</td><td class=CDLDescription>A handle of the device context on which to render the image.</td></tr><tr><td class=CDLEntry>INT x</td><td class=CDLDescription>The horizontal coordinate in hdc at which to place the rendered image.</td></tr><tr><td class=CDLEntry>INT y</td><td class=CDLDescription>The vertical coordinate in hdc at which to place the rendered image.</td></tr><tr><td class=CDLEntry>INT w</td><td class=CDLDescription>The horizontal dimension (width) of the destination rectangle.</td></tr><tr><td class=CDLEntry>INT h</td><td class=CDLDescription>The vertical dimension (height) of the destination rectangle.</td></tr><tr><td class=CDLEntry>INT xSrc</td><td class=CDLDescription>The horizontal offset in the source picture from which to start copying.</td></tr><tr><td class=CDLEntry>INT ySrc</td><td class=CDLDescription>The vertical offset in the source picture from which to start copying.</td></tr><tr><td class=CDLEntry>INT wSrc</td><td class=CDLDescription>The horizontal extent to copy from the source picture.</td></tr><tr><td class=CDLEntry>INT hSrc</td><td class=CDLDescription>The vertical extent to copy from the source picture.</td></tr><tr><td class=CDLEntry>RECT rect</td><td class=CDLDescription>a rectangle containing the position of the destination within a metafile device context if hdc is a metafile DC.&nbsp; Cannot be NULL in such cases.&nbsp; This can either be a RECT instance or a pointer ot a valid struct in memory.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.set_hPal"></a>set_hPal</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>set_hPal(</td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Assigns a GDI palette to the picture contained in the picture object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UPTR palette</td><td class=CDLDescription>the new palette to use</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table><p>corresponding property: <a href="#Picture.hPal" class=LVariable id=link32 onMouseOver="ShowTip(event, 'tt18', 'link32')" onMouseOut="HideTip('tt18')">hPal</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_CurDC"></a>get_CurDC</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_CurDC()</td></tr></table></blockquote><p>Retrieves the handle of the current device context.&nbsp; This property is valid only for bitmap pictures.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HDC curDC</td><td class=CDLDescription>the handle to the current device context</td></tr></table><p>corresponding property: <a href="#Picture.CurDC" class=LVariable id=link33 onMouseOver="ShowTip(event, 'tt22', 'link33')" onMouseOut="HideTip('tt22')">CurDC</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.SelectPicture"></a>SelectPicture</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SelectPicture(</td><td class=PType nowrap>&nbsp;</td><td class=PParameter nowrap>newHDC,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>outHDC</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> &quot;&quot;,</td></tr><tr><td></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>outHBMP</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> &quot;&quot;</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Selects a bitmap picture into a given device context, and returns the device context in which the picture was previously selected as well as the picture&rsquo;s GDI handle.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HDC newHDC</td><td class=CDLDescription>A handle for the device context in which to select the picture.</td></tr><tr><td class=CDLEntry>[opt] byRef HDC outHDC</td><td class=CDLDescription>receives the previous HDC.</td></tr><tr><td class=CDLEntry>[opt] byRef HBITMAP outHBMP</td><td class=CDLDescription>receives the the GDI handle of the picture.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_KeepOriginalFormat"></a>get_KeepOriginalFormat</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_KeepOriginalFormat()</td></tr></table></blockquote><p>Retrieves the current value of the picture&rsquo;s KeepOriginalFormat property.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL keep</td><td class=CDLDescription>the current value</td></tr></table><p>corresponding property: <a href="#Picture.KeepOriginalFormat" class=LVariable id=link34 onMouseOver="ShowTip(event, 'tt23', 'link34')" onMouseOut="HideTip('tt23')">KeepOriginalFormat</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.put_KeepOriginalFormat"></a>put_KeepOriginalFormat</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>put_KeepOriginalFormat(</td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the value of the picture&rsquo;s KeepOriginalFormat property.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL keep</td><td class=CDLDescription>the new value for the property</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table><p>corresponding property: <a href="#Picture.KeepOriginalFormat" class=LVariable id=link35 onMouseOver="ShowTip(event, 'tt23', 'link35')" onMouseOut="HideTip('tt23')">KeepOriginalFormat</a></p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.PictureChanged"></a>PictureChanged</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>PictureChanged()</td></tr></table></blockquote><p>Notifies the picture object that its picture resource has changed.&nbsp; This method only calls IPropertyNotifySink::OnChanged with DISPID_PICT_HANDLE for any connected sinks.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.SaveAsFile"></a>SaveAsFile</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SaveAsFile(</td><td class=PParameter nowrap>stream,</td></tr><tr><td></td><td class=PParameter nowrap>fSaveMemCopy</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Saves the picture&rsquo;s data into a stream in the same format that it would save itself into a file.&nbsp; Bitmaps use the BMP file format, metafiles the WMF format, and icons the ICO format.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Stream stream</td><td class=CDLDescription>either a Stream instance or a pointer to an IStream instance into which the picture writes its data.</td></tr><tr><td class=CDLEntry>BOOL fSaveMemCopy</td><td class=CDLDescription>A flag indicating whether to save a copy of the picture in memory.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise.</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="Picture.get_Attributes"></a>get_Attributes</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Attributes()</td></tr></table></blockquote><p>Retrieves the current set of the picture&rsquo;s bit attributes.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>UINT attr</td><td class=CDLDescription>the value of the Attributes property.&nbsp; This is a combination of the values defined in the PICTUREATTRIBUTES enumeration class.</td></tr></table><p>corresponding property: <a href="#Picture.Attributes" class=LVariable id=link36 onMouseOver="ShowTip(event, 'tt24', 'link36')" onMouseOut="HideTip('tt24')">Attributes</a></p></div></div></div>
+
+</div><!--Content-->
+
+
+
+<!--START_ND_TOOLTIPS-->
+<div class=CToolTip id="tt1"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>__Get(</td><td class=PParameter nowrap>property</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>meta-function to implement dynamic properties.</div></div><div class=CToolTip id="tt2"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>__Set(</td><td class=PParameter nowrap>property,</td></tr><tr><td></td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>meta-function to implement dynamic properties.</div></div><div class=CToolTip id="tt3"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Handle()</td></tr></table></blockquote>Retrieves the handle to the picture managed within this picture object to a specified location.</div></div><div class=CToolTip id="tt4"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_hPal()</td></tr></table></blockquote>Retrieves a copy of the palette currently used by the picture object.</div></div><div class=CToolTip id="tt5"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Type()</td></tr></table></blockquote>Retrieves the current type of the picture contained in the picture object.</div></div><div class=CToolTip id="tt6"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Width()</td></tr></table></blockquote>Retrieves the current width of the picture in the picture object.</div></div><div class=CToolTip id="tt7"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Height()</td></tr></table></blockquote>Retrieves the current height of the picture in the picture object.</div></div><div class=CToolTip id="tt8"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>Render(</td><td class=PParameter nowrap>dc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>x,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>y,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>w,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>h,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>xSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>ySrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>wSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>hSrc,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PParameter nowrap>rect</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 0</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Renders (draws) a specified portion of the picture of the source picture and the dimensions to copy. </div></div><div class=CToolTip id="tt9"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>set_hPal(</td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Assigns a GDI palette to the picture contained in the picture object.</div></div><div class=CToolTip id="tt10"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_CurDC()</td></tr></table></blockquote>Retrieves the handle of the current device context. </div></div><div class=CToolTip id="tt11"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SelectPicture(</td><td class=PType nowrap>&nbsp;</td><td class=PParameter nowrap>newHDC,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>outHDC</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> &quot;&quot;,</td></tr><tr><td></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>outHBMP</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> &quot;&quot;</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Selects a bitmap picture into a given device context, and returns the device context in which the picture was previously selected as well as the picture&rsquo;s GDI handle.</div></div><div class=CToolTip id="tt12"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_KeepOriginalFormat()</td></tr></table></blockquote>Retrieves the current value of the picture&rsquo;s KeepOriginalFormat property.</div></div><div class=CToolTip id="tt13"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>put_KeepOriginalFormat(</td><td class=PParameter nowrap>value</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the value of the picture&rsquo;s KeepOriginalFormat property.</div></div><div class=CToolTip id="tt14"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>PictureChanged()</td></tr></table></blockquote>Notifies the picture object that its picture resource has changed. </div></div><div class=CToolTip id="tt15"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SaveAsFile(</td><td class=PParameter nowrap>stream,</td></tr><tr><td></td><td class=PParameter nowrap>fSaveMemCopy</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Saves the picture&rsquo;s data into a stream in the same format that it would save itself into a file. </div></div><div class=CToolTip id="tt16"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>get_Attributes()</td></tr></table></blockquote>Retrieves the current set of the picture&rsquo;s bit attributes.</div></div><div class=CToolTip id="tt17"><div class=CVariable>the handle to the picture managed within this picture object to a specified location.</div></div><div class=CToolTip id="tt18"><div class=CVariable>a GDI palette to the picture contained in the picture object.</div></div><div class=CToolTip id="tt19"><div class=CVariable>the current type of the picture contained in the picture object.</div></div><div class=CToolTip id="tt20"><div class=CVariable>the current width of the picture in the picture object.</div></div><div class=CToolTip id="tt21"><div class=CVariable>the current height of the picture in the picture object.</div></div><div class=CToolTip id="tt22"><div class=CVariable>the handle of the current device context. </div></div><div class=CToolTip id="tt23"><div class=CVariable>the current value of the picture&rsquo;s KeepOriginalFormat property.</div></div><div class=CToolTip id="tt24"><div class=CVariable>the current set of the picture&rsquo;s bit attributes.</div></div><!--END_ND_TOOLTIPS-->
+
+<script language=JavaScript><!--
+if (browserType) {if (browserVer) {document.write("</div>"); }document.write("</div>");}// --></script></body></html>

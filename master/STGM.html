@@ -1,0 +1,902 @@
+<html><head><title>STGM</title><style>/*
+   IMPORTANT: If you're editing this file in the output directory of one of
+   your projects, your changes will be overwritten the next time you run
+   Natural Docs.  Instead, copy this file to your project directory, make your
+   changes, and you can use it with -s.  Even better would be to make a CSS
+   file in your project directory with only your changes, which you can then
+   use with -s [original style] [your changes].
+
+   On the other hand, if you're editing this file in the Natural Docs styles
+   directory, the changes will automatically be applied to all your projects
+   that use this style the next time Natural Docs is run on them.
+
+   This file is part of Natural Docs, which is Copyright (C) 2003-2008 Greg Valure
+   Natural Docs is licensed under the GPL
+*/
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "MS sans serif";
+    color: #000000;
+    margin: 0; padding: 0;
+    }
+
+.ContentPage,
+.IndexPage,
+.FramedMenuPage {
+    background-color: #E8E8E8;
+    }
+.FramedContentPage,
+.FramedIndexPage,
+.FramedSearchResultsPage,
+.PopupSearchResultsPage {
+    background-color: #FFFFFF;
+    }
+
+
+a:link,
+a:visited { color: #900000; text-decoration: none }
+a:hover { color: #900000; text-decoration: underline }
+a:active { color: #FF0000; text-decoration: underline }
+
+td {
+    vertical-align: top }
+
+img { border: 0;  }
+
+
+/*
+    Comment out this line to use web-style paragraphs (blank line between
+    paragraphs, no indent) instead of print-style paragraphs (no blank line,
+    indented.)
+*/
+/*p {
+    text-indent: 0ex; margin: 0 }
+*/
+
+/*  Opera doesn't break with just wbr, but will if you add this.  */
+.Opera wbr:after {
+	content: "\00200B";
+	}
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    }
+
+
+.Firefox1 blockquote {
+    padding-bottom: .5em;
+    }
+
+/*  Turn off scrolling when printing.  */
+@media print {
+    blockquote {
+        overflow: visible;
+        }
+    .IE blockquote {
+        width: auto;
+        }
+    }
+
+
+
+#Menu {
+    font-size: 9pt;
+    padding: 10px 0 0 0;
+    }
+.ContentPage #Menu,
+.IndexPage #Menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 31ex;
+    overflow: hidden;
+    }
+.ContentPage .Firefox #Menu,
+.IndexPage .Firefox #Menu {
+    width: 27ex;
+    }
+
+
+    .MTitle {
+        font-size: 16pt; font-weight: bold; font-variant: small-caps;
+        text-align: center;
+        padding: 5px 10px 15px 10px;
+        border-bottom: 1px dotted #000000;
+        margin-bottom: 15px }
+
+    .MSubTitle {
+        font-size: 9pt; font-weight: normal; font-variant: normal;
+        margin-top: 1ex; margin-bottom: 5px }
+
+
+    .MEntry a:link,
+    .MEntry a:hover,
+    .MEntry a:visited { color: #606060; margin-right: 0 }
+    .MEntry a:active { color: #A00000; margin-right: 0 }
+
+
+    .MGroup {
+        font-variant: small-caps; font-weight: bold;
+        margin: 1em 0 1em 10px;
+        }
+
+    .MGroupContent {
+        font-variant: normal; font-weight: normal }
+
+    .MGroup a:link,
+    .MGroup a:hover,
+    .MGroup a:visited { color: #545454; margin-right: 10px }
+    .MGroup a:active { color: #A00000; margin-right: 10px }
+
+
+    .MFile,
+    .MText,
+    .MLink,
+    .MIndex {
+        padding: 1px 17px 2px 10px;
+        margin: .25em 0 .25em 0;
+        }
+
+    .MText {
+        font-size: 8pt; font-style: italic }
+
+    .MLink {
+        font-style: italic }
+
+    #MSelected {
+        color: #000000; background-color: #FFFFFF;
+        /*  Replace padding with border.  */
+        padding: 0 10px 0 10px;
+        border-width: 1px 2px 2px 0; border-style: solid; border-color: #000000;
+        margin-right: 5px;
+        }
+
+    /*  Close off the left side when its in a group.  */
+    .MGroup #MSelected {
+        padding-left: 9px; border-left-width: 1px }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox #MSelected {
+        -moz-border-radius-topright: 10px;
+        -moz-border-radius-bottomright: 10px }
+    .Firefox .MGroup #MSelected {
+        -moz-border-radius-topleft: 10px;
+        -moz-border-radius-bottomleft: 10px }
+
+
+    #MSearchPanel {
+        padding: 0px 6px;
+        margin: .25em 0;
+        }
+
+
+    #MSearchField {
+        font: italic 9pt Verdana, sans-serif;
+        color: #606060;
+        background-color: #E8E8E8;
+        border: none;
+        padding: 2px 4px;
+        width: 100%;
+        }
+    /* Only Opera gets it right. */
+    .Firefox #MSearchField,
+    .IE #MSearchField,
+    .Safari #MSearchField {
+        width: 94%;
+        }
+    .Opera9 #MSearchField,
+    .Konqueror #MSearchField {
+        width: 97%;
+        }
+    .FramedMenuPage .Firefox #MSearchField,
+    .FramedMenuPage .Safari #MSearchField,
+    .FramedMenuPage .Konqueror #MSearchField {
+        width: 98%;
+        }
+
+    /* Firefox doesn't do this right in frames without #MSearchPanel added on.
+        It's presence doesn't hurt anything other browsers. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        padding: 1px 3px;
+        }
+    .MSearchPanelActive #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        font-style: normal;
+        padding: 1px 3px;
+        }
+
+    #MSearchType {
+        visibility: hidden;
+        font: 8pt Verdana, sans-serif;
+        width: 98%;
+        padding: 0;
+        border: 1px solid #C0C0C0;
+        }
+    .MSearchPanelActive #MSearchType,
+    /*  As mentioned above, Firefox doesn't do this right in frames without #MSearchPanel added on. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchType,
+    #MSearchType:focus {
+        visibility: visible;
+        color: #606060;
+        }
+    #MSearchType option#MSearchEverything {
+        font-weight: bold;
+        }
+
+    .Opera8 .MSearchPanelInactive:hover,
+    .Opera8 .MSearchPanelActive {
+        margin-left: -1px;
+        }
+
+
+    iframe#MSearchResults {
+        width: 60ex;
+        height: 15em;
+        }
+    #MSearchResultsWindow {
+        display: none;
+        position: absolute;
+        left: 0; top: 0;
+        border: 1px solid #000000;
+        background-color: #E8E8E8;
+        }
+    #MSearchResultsWindowClose {
+        font-weight: bold;
+        font-size: 8pt;
+        display: block;
+        padding: 2px 5px;
+        }
+    #MSearchResultsWindowClose:link,
+    #MSearchResultsWindowClose:visited {
+        color: #000000;
+        text-decoration: none;
+        }
+    #MSearchResultsWindowClose:active,
+    #MSearchResultsWindowClose:hover {
+        color: #800000;
+        text-decoration: none;
+        background-color: #F4F4F4;
+        }
+
+
+
+
+#Content {
+    padding-bottom: 15px;
+    }
+
+.ContentPage #Content {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    background-color: #FFFFFF;
+    font-size: 9pt;  /* To make 31ex match the menu's 31ex. */
+    
+    }
+.ContentPage .Firefox #Content {
+    margin-left: 27ex;
+    }
+
+
+
+    .CTopic {
+        font-size: 10pt;
+        margin-bottom: 3em;
+        }
+
+
+    .CTitle {
+        font-size: 12pt; font-weight: bold;
+        border-width: 0 0 1px 0; border-style: solid; border-color: #A0A0A0;
+        margin: 0 15px .5em 15px }
+
+    .CGroup .CTitle {
+        font-size: 16pt; font-variant: small-caps;
+        padding-left: 15px; padding-right: 15px;
+        border-width: 0 0 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CClass .CTitle,
+    .CInterface .CTitle,
+    .CDatabase .CTitle,
+    .CDatabaseTable .CTitle,
+    .CSection .CTitle {
+        font-size: 18pt;
+        color: #FFFFFF; background-color: #A0A0A0;
+        padding: 10px 15px 10px 15px;
+        border-width: 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    #MainTopic .CTitle {
+        font-size: 20pt;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CBody {
+        margin-left: 15px; margin-right: 15px }
+
+
+    .CToolTip {
+        position: absolute; visibility: hidden;
+        left: 0; top: 0;
+        background-color: #FFFFE0;
+        padding: 5px;
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #000000;
+        font-size: 8pt;
+        }
+
+    .Opera .CToolTip {
+        max-width: 98%;
+        }
+
+    /*  Scrollbars would be useless.  */
+    .CToolTip blockquote {
+        overflow: hidden;
+        }
+    .IE6 .CToolTip blockquote {
+        overflow: visible;
+        }
+
+    .CHeading {
+        font-weight: bold; font-size: 10pt;
+        margin: 1.5em 0 .5em 0;
+        }
+
+    .CBody pre {
+        font: 10pt "Courier New", Courier, monospace;
+        margin: 1em 0;
+        }
+
+    .CBody ul {
+        /*  I don't know why CBody's margin doesn't apply, but it's consistent across browsers so whatever.
+             Reapply it here as padding.  */
+        padding-left: 15px; padding-right: 15px;
+        margin: .5em 5ex .5em 5ex;
+        }
+
+    .CDescriptionList {
+        margin: .5em 5ex 0 5ex }
+
+    .CDLEntry {
+            font: 10pt "Courier New", Courier, monospace; color: #808080;
+            padding-bottom: .25em;
+            white-space: nowrap }
+
+    CDLDescription {
+            font-size: 10pt;  /*  For browsers that don't inherit correctly, like Opera 5.  */
+            padding-bottom: .5em; padding-left: 5ex }
+
+
+    .CTopic img {
+        text-align: center;
+        display: block;
+        margin: 1em auto;
+        }
+    .CImageCaption {
+        font-variant: small-caps;
+        font-size: 8pt;
+        color: #808080;
+        text-align: center;
+        position: relative;
+        top: 1em;
+        }
+
+    .CImageLink {
+        color: #808080;
+        font-style: italic;
+        }
+    a.CImageLink:link,
+    a.CImageLink:visited,
+    a.CImageLink:hover { color: #808080 }
+
+
+
+
+
+.Prototype {
+    font: 10pt "Courier New", Courier, monospace;
+    padding: 5px 3ex;
+    border-width: 1px; border-style: solid;
+    margin: 0 5ex 1.5em 5ex;
+    }
+
+    .Prototype td {
+        font-size: 10pt;
+        }
+
+    .PDefaultValue,
+    .PDefaultValuePrefix,
+    .PTypePrefix {
+        color: #8F8F8F;
+        }
+    .PTypePrefix {
+        text-align: right;
+        }
+    .PAfterParameters {
+        vertical-align: bottom;
+        }
+
+    .IE .Prototype table {
+        padding: 0;
+        }
+
+    .CFunction .Prototype {
+        background-color: #F4F4F4; border-color: #D0D0D0 }
+    .CProperty .Prototype {
+        background-color: #F4F4FF; border-color: #C0C0E8 }
+    .CVariable .Prototype {
+        background-color: #FFFFF0; border-color: #E0E0A0 }
+
+    .CClass .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        background-color: #F4F4F4;
+        }
+    .CInterface .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0D0;
+        background-color: #F4F4FF;
+        }
+
+    .CDatabaseIndex .Prototype,
+    .CConstant .Prototype {
+        background-color: #D0D0D0; border-color: #000000 }
+    .CType .Prototype,
+    .CEnumeration .Prototype {
+        background-color: #FAF0F0; border-color: #E0B0B0;
+        }
+    .CDatabaseTrigger .Prototype,
+    .CEvent .Prototype,
+    .CDelegate .Prototype {
+        background-color: #F0FCF0; border-color: #B8E4B8 }
+
+    .CToolTip .Prototype {
+        margin: 0 0 .5em 0;
+        white-space: nowrap;
+        }
+
+
+
+
+
+.Summary {
+    margin: 1.5em 5ex 0 5ex }
+
+    .STitle {
+        font-size: 12pt; font-weight: bold;
+        margin-bottom: .5em }
+
+
+    .SBorder {
+        background-color: #FFFFF0;
+        padding: 15px;
+        border: 1px solid #C0C060 }
+
+    /* In a frame IE 6 will make them too long unless you set the width to 100%.  Without frames it will be correct without a width
+        or slightly too long (but not enough to scroll) with a width.  This arbitrary weirdness simply astounds me.  IE 7 has the same
+        problem with frames, haven't tested it without.  */
+    .FramedContentPage .IE .SBorder {
+        width: 100% }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox .SBorder {
+        -moz-border-radius: 20px }
+
+
+    .STable {
+        font-size: 9pt; width: 100% }
+
+    .SEntry {
+        width: 30% }
+    .SDescription {
+        width: 70% }
+
+
+    .SMarked {
+        background-color: #F8F8D8 }
+
+    .SDescription { padding-left: 2ex }
+    .SIndent1 .SEntry { padding-left: 1.5ex }   .SIndent1 .SDescription { padding-left: 3.5ex }
+    .SIndent2 .SEntry { padding-left: 3.0ex }   .SIndent2 .SDescription { padding-left: 5.0ex }
+    .SIndent3 .SEntry { padding-left: 4.5ex }   .SIndent3 .SDescription { padding-left: 6.5ex }
+    .SIndent4 .SEntry { padding-left: 6.0ex }   .SIndent4 .SDescription { padding-left: 8.0ex }
+    .SIndent5 .SEntry { padding-left: 7.5ex }   .SIndent5 .SDescription { padding-left: 9.5ex }
+
+    .SDescription a { color: #800000}
+    .SDescription a:active { color: #A00000 }
+
+    .SGroup td {
+        padding-top: .5em; padding-bottom: .25em }
+
+    .SGroup .SEntry {
+        font-weight: bold; font-variant: small-caps }
+
+    .SGroup .SEntry a { color: #800000 }
+    .SGroup .SEntry a:active { color: #F00000 }
+
+
+    .SMain td,
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        font-size: 10pt;
+        padding-bottom: .25em }
+
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        padding-top: 1em }
+
+    .SMain .SEntry,
+    .SClass .SEntry,
+    .SDatabase .SEntry,
+    .SDatabaseTable .SEntry,
+    .SSection .SEntry {
+        font-weight: bold;
+        }
+
+    .SMain .SEntry a,
+    .SClass .SEntry a,
+    .SDatabase .SEntry a,
+    .SDatabaseTable .SEntry a,
+    .SSection .SEntry a { color: #000000 }
+
+    .SMain .SEntry a:active,
+    .SClass .SEntry a:active,
+    .SDatabase .SEntry a:active,
+    .SDatabaseTable .SEntry a:active,
+    .SSection .SEntry a:active { color: #A00000 }
+
+
+
+
+
+.ClassHierarchy {
+    margin: 0 15px 1em 15px }
+
+    .CHEntry {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        margin-bottom: 3px;
+        padding: 2px 2ex;
+        font-size: 10pt;
+        background-color: #F4F4F4; color: #606060;
+        }
+
+    .Firefox .CHEntry {
+        -moz-border-radius: 4px;
+        }
+
+    .CHCurrent .CHEntry {
+        font-weight: bold;
+        border-color: #000000;
+        color: #000000;
+        }
+
+    .CHChildNote .CHEntry {
+        font-style: italic;
+        font-size: 8pt;
+        }
+
+    .CHIndent {
+        margin-left: 3ex;
+        }
+
+    .CHEntry a:link,
+    .CHEntry a:visited,
+    .CHEntry a:hover {
+        color: #606060;
+        }
+    .CHEntry a:active {
+        color: #800000;
+        }
+
+
+
+
+
+#Index {
+    background-color: #FFFFFF;
+    }
+
+/*  As opposed to .PopupSearchResultsPage #Index  */
+.IndexPage #Index,
+.FramedIndexPage #Index,
+.FramedSearchResultsPage #Index {
+    padding: 15px;
+    }
+
+.IndexPage #Index {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    font-size: 9pt;  /* To make 27ex match the menu's 27ex. */
+    margin-left: 27ex;
+    }
+
+
+    .IPageTitle {
+        font-size: 20pt; font-weight: bold;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000; border-style: solid;
+        margin: -15px -15px 0 -15px }
+
+    .FramedSearchResultsPage .IPageTitle {
+        margin-bottom: 15px;
+        }
+
+    .INavigationBar {
+        font-size: 10pt;
+        text-align: center;
+        background-color: #FFFFF0;
+        padding: 5px;
+        border-bottom: solid 1px black;
+        margin: 0 -15px 15px -15px;
+        }
+
+    .INavigationBar a {
+        font-weight: bold }
+
+    .IHeading {
+        font-size: 16pt; font-weight: bold;
+        padding: 2.5em 0 .5em 0;
+        text-align: center;
+        width: 3.5ex;
+        }
+    #IFirstHeading {
+        padding-top: 0;
+        }
+
+    .IEntry {
+        font-size: 10pt;
+        padding-left: 1ex;
+        }
+    .PopupSearchResultsPage .IEntry {
+        font-size: 8pt;
+        padding: 1px 5px;
+        }
+    .PopupSearchResultsPage .Opera9 .IEntry,
+    .FramedSearchResultsPage .Opera9 .IEntry {
+        text-align: left;
+        }
+    .FramedSearchResultsPage .IEntry {
+        padding: 0;
+        }
+
+    .ISubIndex {
+        padding-left: 3ex; padding-bottom: .5em }
+    .PopupSearchResultsPage .ISubIndex {
+        display: none;
+        }
+
+
+    /*  While it may cause some entries to look like links when they aren't, I found it's much easier to read the
+         index if everything's the same color.  */
+    .ISymbol {
+        font-weight: bold; color: #900000  }
+
+    .IndexPage .ISymbolPrefix,
+    .FramedIndexPage .ISymbolPrefix {
+        font-size: 10pt;
+        text-align: right;
+        color: #C47C7C;
+        background-color: #F8F8F8;
+        border-right: 3px solid #E0E0E0;
+        border-left: 1px solid #E0E0E0;
+        padding: 0 1px 0 2px;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix,
+    .FramedSearchResultsPage .ISymbolPrefix {
+        color: #900000;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix {
+        font-size: 8pt;
+        }
+
+    .IndexPage #IFirstSymbolPrefix,
+    .FramedIndexPage #IFirstSymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        }
+    .IndexPage #ILastSymbolPrefix,
+    .FramedIndexPage #ILastSymbolPrefix {
+        border-bottom: 1px solid #E0E0E0;
+        }
+    .IndexPage #IOnlySymbolPrefix,
+    .FramedIndexPage #IOnlySymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        }
+
+    a.IParent,
+    a.IFile {
+        display: block;
+        }
+
+    .PopupSearchResultsPage .SRStatus {
+        padding: 2px 5px;
+        font-size: 8pt;
+        font-style: italic;
+        }
+    .FramedSearchResultsPage .SRStatus {
+        font-size: 10pt;
+        font-style: italic;
+        }
+
+    .SRResult {
+        display: none;
+        }
+
+
+
+#Footer {
+    font-size: 8pt;
+    color: #989898;
+    text-align: right;
+    }
+
+#Footer p {
+    text-indent: 0;
+    margin-bottom: .5em;
+    }
+
+.ContentPage #Footer,
+.IndexPage #Footer {
+    text-align: right;
+    margin: 2px;
+    }
+
+.FramedMenuPage #Footer {
+    text-align: center;
+    margin: 5em 10px 10px 10px;
+    padding-top: 1em;
+    border-top: 1px solid #C8C8C8;
+    }
+
+    #Footer a:link,
+    #Footer a:hover,
+    #Footer a:visited { color: #989898 }
+    #Footer a:active { color: #A00000 }
+
+
+#MainTopic .CTitle {					/* Title: */
+  font-size: 20pt;
+  font-weight: bold; /* Bold looks better against dark background. */
+  font-family: Arial, Helvetica, sans-serif, "MS sans serif"; 
+  background-color: #405871;
+  color: #FFFFFF;
+  margin: 0 0 0.5em 0;
+  padding: 10px 15px 10px 15px;
+}
+
+
+.SBorder,.SEntry, .SDescription {				/* Summary index */
+  background-color: #F2F2F2;
+  padding: 8px;
+  border: 1px solid #E0E0E0 }
+.SBorder{ padding: 1px; }
+
+
+.CTitle {							/* Function */
+  background-color: #FFFFAA;
+  margin: 1 1 1 1;
+  padding: 12px 0 12px 4px;
+  font-size: 12pt; font-weight: bold;
+  border-width: 3px 0px 0px 0; border-style: solid; border-color: #A0A0A0;
+}
+
+
+h4 {							/* topics.. (parameters, returns, example..) */
+  font-size: 111%;  font-weight: bold;
+  background-color:#E6E6E6;
+  margin: 1.0em 0 0.5em 0;
+  padding: 0.1em 0 0.1em 0.2em;
+}
+
+
+.CDescriptionList, .CDLEntry, .CDLDescription {			/* parameter table */
+  width: 100%;
+  margin: 1em 0ex 0 0ex;
+  border-width: 1px 1px 1px 1px; border-style: solid; border-color: #C0C0C0;
+}
+.CDLEntry, .CDLDescription { margin: 0 0 0em 0;  text-indent: 0px; padding-bottom: .5em; padding-top: .5em; font: 11pt "Calibri", Courier, monospace; }
+.CDLEntry { width: 15%; font: 10pt "Courier New", Courier, monospace; }
+.CDLDescription {  padding-left: 1ex }
+
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 20;
+        padding-left: 9px; border-left-width: 1px;
+    margin: 0;
+    overflow: auto;
+    background-color: #F3F3FF;			/* example bg color..*/
+        border-width: 0px 0px 0px 0px; border-style: solid; border-color: #838B8B;
+    }
+
+/* .ContentPage #Content { margin-left: 0ex; }   */
+
+
+a        {text-decoration: none;}
+a:link   {text-decoration: none; color: #0000AA;}
+a:visited{text-decoration: none; color: #AA00AA;}
+a:active {text-decoration: none; color: #0000AA;}
+a:hover  {text-decoration: underline; color: #6666CC;}</style><script language=JavaScript src="../javascript/main.js"></script></head><body class="FramedContentPage" onLoad="NDOnLoad()"><script language=JavaScript><!--
+if (browserType) {document.write("<div class=" + browserType + ">");if (browserVer) {document.write("<div class=" + browserVer + ">"); }}// --></script>
+
+<!--  Generated by Natural Docs, version 1.4 -->
+<!--  http://www.naturaldocs.org  -->
+
+<!-- saved from url=(0026)http://www.naturaldocs.org -->
+
+
+
+
+<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="STGM"></a>STGM</h1><div class=CBody><p>an enumeration class specifying the conditions for creating and deleting the object and access modes for the object.</p><h4 class=CHeading>Remarks</h4><ul><li>The field names exactly match the contants&rsquo; names, except that the leading &ldquo;STGM_&rdquo; is omitted.</li><li>These elements are often combined using an | operator.&nbsp; They are interpreted in groups as listed in the following table.&nbsp; It is not valid to use more than one element from a single group.</li></ul><h4 class=CHeading>MSDN documentation</h4><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#STGM" >STGM</a></td><td class=SDescription>an enumeration class specifying the conditions for creating and deleting the object and access modes for the object.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Access" >Access</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.READ" >READ</a></td><td class=SDescription>Indicates that the object is read-only, meaning that modifications cannot be made. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.WRITE" >WRITE</a></td><td class=SDescription>Enables you to save changes to the object, but does not permit access to its data. </td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.READWRITE" >READWRITE</a></td><td class=SDescription>Enables access and modification of object data. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Sharing" >Sharing</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.SHARE_DENY_NONE" >SHARE_DENY_NONE</a></td><td class=SDescription>Specifies that subsequent openings of the object are not denied read or write access. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.SHARE_DENY_READ" >SHARE_DENY_READ</a></td><td class=SDescription>Prevents others from subsequently opening the object in <a href="#STGM.READ" class=LVariable id=link1 onMouseOver="ShowTip(event, 'tt1', 'link1')" onMouseOut="HideTip('tt1')">READ</a> mode. </td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.SHARE_DENY_WRITE" >SHARE_DENY_WRITE</a></td><td class=SDescription>Prevents others from subsequently opening the object for <a href="#STGM.WRITE" class=LVariable id=link2 onMouseOver="ShowTip(event, 'tt2', 'link2')" onMouseOut="HideTip('tt2')">WRITE</a> or <a href="#STGM.READWRITE" class=LVariable id=link3 onMouseOver="ShowTip(event, 'tt3', 'link3')" onMouseOut="HideTip('tt3')">READWRITE</a> access. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.SHARE_EXCLUSIVE" >SHARE_EXCLUSIVE</a></td><td class=SDescription>Prevents others from subsequently opening the object in any mode. </td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.PRIORITY" >PRIORITY</a></td><td class=SDescription>Opens the storage object with exclusive access to the most recently committed version. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Creation" >Creation</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.CREATE" >CREATE</a></td><td class=SDescription>Indicates that an existing storage object or stream should be removed before the new object replaces it. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.CONVERT" >CONVERT</a></td><td class=SDescription>Creates the new object while preserving existing data in a stream named &ldquo;Contents&rdquo;. </td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.FAILIFTHERE" >FAILIFTHERE</a></td><td class=SDescription>Causes the create operation to fail if an existing object with the specified name exists. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Transactioning" >Transactioning</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.DIRECT" >DIRECT</a></td><td class=SDescription>Indicates that, in direct mode, each change to a storage or stream element is written as it occurs. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.TRANSACTED" >TRANSACTED</a></td><td class=SDescription>Indicates that, in transacted mode, changes are buffered and written only if an explicit commit operation is called. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Transactioning_performance" >Transactioning performance</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.NOSCRATCH" >NOSCRATCH</a></td><td class=SDescription>Indicates that, in transacted mode, a temporary scratch file is usually used to save modifications until the Commit method is called. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.NOSNAPSHOT" >NOSNAPSHOT</a></td><td class=SDescription>This flag is used when opening a storage object with <a href="#STGM.TRANSACTED" class=LVariable id=link4 onMouseOver="ShowTip(event, 'tt4', 'link4')" onMouseOut="HideTip('tt4')">TRANSACTED</a> and without <a href="#STGM.SHARE_EXCLUSIVE" class=LVariable id=link5 onMouseOver="ShowTip(event, 'tt5', 'link5')" onMouseOut="HideTip('tt5')">SHARE_EXCLUSIVE</a> or <a href="#STGM.SHARE_DENY_WRITE" class=LVariable id=link6 onMouseOver="ShowTip(event, 'tt6', 'link6')" onMouseOut="HideTip('tt6')">SHARE_DENY_WRITE</a>. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Direct_SWMR_and_Simple" >Direct SWMR and Simple</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.SIMPLE" >SIMPLE</a></td><td class=SDescription>Provides a faster implementation of a compound file in a limited, but frequently used, case.</td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#STGM.DIRECT_SWMR" >DIRECT_SWMR</a></td><td class=SDescription>Supports direct mode for single-writer, multireader file operations.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#STGM.Delete_On_Release" >Delete On Release</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#STGM.DELETEONRELEASE" >DELETEONRELEASE</a></td><td class=SDescription>Indicates that the underlying file is to be automatically destroyed when the root storage object is released. </td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Access"></a>Access</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.READ"></a>READ</h3><div class=CBody><p>Indicates that the object is read-only, meaning that modifications cannot be made.&nbsp; For example, if a stream object is opened with <a href="#STGM.READ" class=LVariable id=link7 onMouseOver="ShowTip(event, 'tt1', 'link7')" onMouseOut="HideTip('tt1')">READ</a>, the ISequentialStream::Read method may be called, but the ISequentialStream::Write method may not.&nbsp; Similarly, if a storage object opened with <a href="#STGM.READ" class=LVariable id=link8 onMouseOver="ShowTip(event, 'tt1', 'link8')" onMouseOut="HideTip('tt1')">READ</a>, the IStorage::OpenStream and IStorage::OpenStorage methods may be called, but the IStorage::CreateStream and IStorage::CreateStorage methods may not.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.WRITE"></a>WRITE</h3><div class=CBody><p>Enables you to save changes to the object, but does not permit access to its data.&nbsp; The provided implementations of the IPropertyStorage and IPropertySetStorage interfaces do not support this write-only mode.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.READWRITE"></a>READWRITE</h3><div class=CBody><p>Enables access and modification of object data.&nbsp; For example, if a stream object is created or opened in this mode, it is possible to call both IStream::Read and IStream::Write.&nbsp; Be aware that this constant is not a simple binary OR operation of the <a href="#STGM.WRITE" class=LVariable id=link9 onMouseOver="ShowTip(event, 'tt2', 'link9')" onMouseOut="HideTip('tt2')">WRITE</a> and <a href="#STGM.READ" class=LVariable id=link10 onMouseOver="ShowTip(event, 'tt1', 'link10')" onMouseOut="HideTip('tt1')">READ</a> elements.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Sharing"></a>Sharing</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.SHARE_DENY_NONE"></a>SHARE_DENY_NONE</h3><div class=CBody><p>Specifies that subsequent openings of the object are not denied read or write access.&nbsp; If no flag from the sharing group is specified, this flag is assumed.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.SHARE_DENY_READ"></a>SHARE_DENY_READ</h3><div class=CBody><p>Prevents others from subsequently opening the object in <a href="#STGM.READ" class=LVariable id=link11 onMouseOver="ShowTip(event, 'tt1', 'link11')" onMouseOut="HideTip('tt1')">READ</a> mode.&nbsp; It is typically used on a root storage object.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.SHARE_DENY_WRITE"></a>SHARE_DENY_WRITE</h3><div class=CBody><p>Prevents others from subsequently opening the object for <a href="#STGM.WRITE" class=LVariable id=link12 onMouseOver="ShowTip(event, 'tt2', 'link12')" onMouseOut="HideTip('tt2')">WRITE</a> or <a href="#STGM.READWRITE" class=LVariable id=link13 onMouseOver="ShowTip(event, 'tt3', 'link13')" onMouseOut="HideTip('tt3')">READWRITE</a> access.&nbsp; In transacted mode, sharing of <a href="#STGM.SHARE_DENY_WRITE" class=LVariable id=link14 onMouseOver="ShowTip(event, 'tt6', 'link14')" onMouseOut="HideTip('tt6')">SHARE_DENY_WRITE</a> or <a href="#STGM.SHARE_EXCLUSIVE" class=LVariable id=link15 onMouseOver="ShowTip(event, 'tt5', 'link15')" onMouseOut="HideTip('tt5')">SHARE_EXCLUSIVE</a> can significantly improve performance because they do not require snapshots.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.SHARE_EXCLUSIVE"></a>SHARE_EXCLUSIVE</h3><div class=CBody><p>Prevents others from subsequently opening the object in any mode.&nbsp; Be aware that this value is not a simple bitwise OR operation of the <a href="#STGM.SHARE_DENY_READ" class=LVariable id=link16 onMouseOver="ShowTip(event, 'tt7', 'link16')" onMouseOut="HideTip('tt7')">SHARE_DENY_READ</a> and <a href="#STGM.SHARE_DENY_WRITE" class=LVariable id=link17 onMouseOver="ShowTip(event, 'tt6', 'link17')" onMouseOut="HideTip('tt6')">SHARE_DENY_WRITE</a> values.&nbsp; In transacted mode, sharing of <a href="#STGM.SHARE_DENY_WRITE" class=LVariable id=link18 onMouseOver="ShowTip(event, 'tt6', 'link18')" onMouseOut="HideTip('tt6')">SHARE_DENY_WRITE</a> or <a href="#STGM.SHARE_EXCLUSIVE" class=LVariable id=link19 onMouseOver="ShowTip(event, 'tt5', 'link19')" onMouseOut="HideTip('tt5')">SHARE_EXCLUSIVE</a> can significantly improve performance because they do not require snapshots.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.PRIORITY"></a>PRIORITY</h3><div class=CBody><p>Opens the storage object with exclusive access to the most recently committed version.&nbsp; Thus, other users cannot commit changes to the object while you have it open in priority mode.&nbsp; You gain performance benefits for copy operations, but you prevent others from committing changes.&nbsp; Limit the time that objects are open in priority mode.&nbsp; You must specify <a href="#STGM.DIRECT" class=LVariable id=link20 onMouseOver="ShowTip(event, 'tt8', 'link20')" onMouseOut="HideTip('tt8')">DIRECT</a> and <a href="#STGM.READ" class=LVariable id=link21 onMouseOver="ShowTip(event, 'tt1', 'link21')" onMouseOut="HideTip('tt1')">READ</a> with priority mode, and you cannot specify <a href="#STGM.DELETEONRELEASE" class=LVariable id=link22 onMouseOver="ShowTip(event, 'tt9', 'link22')" onMouseOut="HideTip('tt9')">DELETEONRELEASE</a>.&nbsp; <a href="#STGM.DELETEONRELEASE" class=LVariable id=link23 onMouseOver="ShowTip(event, 'tt9', 'link23')" onMouseOut="HideTip('tt9')">DELETEONRELEASE</a> is only valid when creating a root object, such as with StgCreateStorageEx.&nbsp; It is not valid when opening an existing root object, such as with StgOpenStorageEx.&nbsp; It is also not valid when creating or opening a subelement, such as with IStorage::OpenStorage.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Creation"></a>Creation</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.CREATE"></a>CREATE</h3><div class=CBody><p>Indicates that an existing storage object or stream should be removed before the new object replaces it.&nbsp; A new object is created when this flag is specified only if the existing object has been successfully removed.</p><h4 class=CHeading>This flag is used when attempting to create</h4><ul><li>A storage object on a disk, but a file of that name exists.</li><li>An object inside a storage object, but an object with the specified name exists.</li><li>A byte array object, but one with the specified name exists.</li></ul><p>This flag cannot be used with open operations, such as StgOpenStorageEx or IStorage::OpenStream.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.CONVERT"></a>CONVERT</h3><div class=CBody><p>Creates the new object while preserving existing data in a stream named &ldquo;Contents&rdquo;.&nbsp; In the case of a storage object or a byte array, the old data is formatted into a stream regardless of whether the existing file or byte array currently contains a layered storage object.&nbsp; This flag can only be used when creating a root storage object.&nbsp; It cannot be used within a storage object; for example, in IStorage::CreateStream.&nbsp; It is also not valid to use this flag and the <a href="#STGM.DELETEONRELEASE" class=LVariable id=link24 onMouseOver="ShowTip(event, 'tt9', 'link24')" onMouseOut="HideTip('tt9')">DELETEONRELEASE</a> flag simultaneously.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.FAILIFTHERE"></a>FAILIFTHERE</h3><div class=CBody><p>Causes the create operation to fail if an existing object with the specified name exists.&nbsp; In this case, STG_E_FILEALREADYEXISTS is returned.&nbsp; This is the default creation mode; that is, if no other create flag is specified, <a href="#STGM.FAILIFTHERE" class=LVariable id=link25 onMouseOver="ShowTip(event, 'tt10', 'link25')" onMouseOut="HideTip('tt10')">FAILIFTHERE</a> is implied.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Transactioning"></a>Transactioning</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.DIRECT"></a>DIRECT</h3><div class=CBody><p>Indicates that, in direct mode, each change to a storage or stream element is written as it occurs.&nbsp; This is the default if neither <a href="#STGM.DIRECT" class=LVariable id=link26 onMouseOver="ShowTip(event, 'tt8', 'link26')" onMouseOut="HideTip('tt8')">DIRECT</a> nor <a href="#STGM.TRANSACTED" class=LVariable id=link27 onMouseOver="ShowTip(event, 'tt4', 'link27')" onMouseOut="HideTip('tt4')">TRANSACTED</a> is specified.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.TRANSACTED"></a>TRANSACTED</h3><div class=CBody><p>Indicates that, in transacted mode, changes are buffered and written only if an explicit commit operation is called.&nbsp; To ignore the changes, call the Revert method in the IStream, IStorage, or IPropertyStorage interface.&nbsp; The COM compound file implementation of IStorage does not support transacted streams, which means that streams can be opened only in direct mode, and you cannot revert changes to them, however transacted storages are supported.&nbsp; The compound file, stand-alone, and NTFS file system implementations of IPropertySetStorage similarly do not support transacted, simple property sets because these property sets are stored in streams.&nbsp; However, transactioning of nonsimple property sets, which can be created by specifying the PROPSETFLAG_NONSIMPLE flag in the grfFlags parameter of IPropertySetStorage::Create, are supported.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Transactioning_performance"></a>Transactioning performance</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.NOSCRATCH"></a>NOSCRATCH</h3><div class=CBody><p>Indicates that, in transacted mode, a temporary scratch file is usually used to save modifications until the Commit method is called.&nbsp; Specifying <a href="#STGM.NOSCRATCH" class=LVariable id=link28 onMouseOver="ShowTip(event, 'tt11', 'link28')" onMouseOut="HideTip('tt11')">NOSCRATCH</a> permits the unused portion of the original file to be used as work space instead of creating a new file for that purpose.&nbsp; This does not affect the data in the original file, and in certain cases can result in improved performance.&nbsp; It is not valid to specify this flag without also specifying <a href="#STGM.TRANSACTED" class=LVariable id=link29 onMouseOver="ShowTip(event, 'tt4', 'link29')" onMouseOut="HideTip('tt4')">TRANSACTED</a>, and this flag may only be used in a root open.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.NOSNAPSHOT"></a>NOSNAPSHOT</h3><div class=CBody><p>This flag is used when opening a storage object with <a href="#STGM.TRANSACTED" class=LVariable id=link30 onMouseOver="ShowTip(event, 'tt4', 'link30')" onMouseOut="HideTip('tt4')">TRANSACTED</a> and without <a href="#STGM.SHARE_EXCLUSIVE" class=LVariable id=link31 onMouseOver="ShowTip(event, 'tt5', 'link31')" onMouseOut="HideTip('tt5')">SHARE_EXCLUSIVE</a> or <a href="#STGM.SHARE_DENY_WRITE" class=LVariable id=link32 onMouseOver="ShowTip(event, 'tt6', 'link32')" onMouseOut="HideTip('tt6')">SHARE_DENY_WRITE</a>.&nbsp; In this case, specifying <a href="#STGM.NOSNAPSHOT" class=LVariable id=link33 onMouseOver="ShowTip(event, 'tt12', 'link33')" onMouseOut="HideTip('tt12')">NOSNAPSHOT</a> prevents the system-provided implementation from creating a snapshot copy of the file.&nbsp; Instead, changes to the file are written to the end of the file.&nbsp; Unused space is not reclaimed unless consolidation is performed during the commit, and there is only one current writer on the file.&nbsp; When the file is opened in no snapshot mode, another open operation cannot be performed without specifying <a href="#STGM.NOSNAPSHOT" class=LVariable id=link34 onMouseOver="ShowTip(event, 'tt12', 'link34')" onMouseOut="HideTip('tt12')">NOSNAPSHOT</a>.&nbsp; This flag may only be used in a root open operation.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Direct_SWMR_and_Simple"></a>Direct SWMR and Simple</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.SIMPLE"></a>SIMPLE</h3><div class=CBody><p>Provides a faster implementation of a compound file in a limited, but frequently used, case.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.DIRECT_SWMR"></a>DIRECT_SWMR</h3><div class=CBody><p>Supports direct mode for single-writer, multireader file operations.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="STGM.Delete_On_Release"></a>Delete On Release</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="STGM.DELETEONRELEASE"></a>DELETEONRELEASE</h3><div class=CBody><p>Indicates that the underlying file is to be automatically destroyed when the root storage object is released.&nbsp; This feature is most useful for creating temporary files.&nbsp; This flag can only be used when creating a root object, such as with StgCreateStorageEx.&nbsp; It is not valid when opening a root object, such as with StgOpenStorageEx, or when creating or opening a subelement, such as with IStorage::CreateStream.&nbsp; It is also not valid to use this flag and the <a href="#STGM.CONVERT" class=LVariable id=link35 onMouseOver="ShowTip(event, 'tt13', 'link35')" onMouseOut="HideTip('tt13')">CONVERT</a> flag simultaneously.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+<!--START_ND_TOOLTIPS-->
+<div class=CToolTip id="tt1"><div class=CVariable>Indicates that the object is read-only, meaning that modifications cannot be made. </div></div><div class=CToolTip id="tt2"><div class=CVariable>Enables you to save changes to the object, but does not permit access to its data. </div></div><div class=CToolTip id="tt3"><div class=CVariable>Enables access and modification of object data. </div></div><div class=CToolTip id="tt4"><div class=CVariable>Indicates that, in transacted mode, changes are buffered and written only if an explicit commit operation is called. </div></div><div class=CToolTip id="tt5"><div class=CVariable>Prevents others from subsequently opening the object in any mode. </div></div><div class=CToolTip id="tt6"><div class=CVariable>Prevents others from subsequently opening the object for WRITE or READWRITE access. </div></div><div class=CToolTip id="tt7"><div class=CVariable>Prevents others from subsequently opening the object in READ mode. </div></div><div class=CToolTip id="tt8"><div class=CVariable>Indicates that, in direct mode, each change to a storage or stream element is written as it occurs. </div></div><div class=CToolTip id="tt9"><div class=CVariable>Indicates that the underlying file is to be automatically destroyed when the root storage object is released. </div></div><div class=CToolTip id="tt10"><div class=CVariable>Causes the create operation to fail if an existing object with the specified name exists. </div></div><div class=CToolTip id="tt11"><div class=CVariable>Indicates that, in transacted mode, a temporary scratch file is usually used to save modifications until the Commit method is called. </div></div><div class=CToolTip id="tt12"><div class=CVariable>This flag is used when opening a storage object with TRANSACTED and without SHARE_EXCLUSIVE or SHARE_DENY_WRITE. </div></div><div class=CToolTip id="tt13"><div class=CVariable>Creates the new object while preserving existing data in a stream named &ldquo;Contents&rdquo;. </div></div><!--END_ND_TOOLTIPS-->
+
+<script language=JavaScript><!--
+if (browserType) {if (browserVer) {document.write("</div>"); }document.write("</div>");}// --></script></body></html>

@@ -1,0 +1,896 @@
+<html><head><title>ShellLinkW</title><style>/*
+   IMPORTANT: If you're editing this file in the output directory of one of
+   your projects, your changes will be overwritten the next time you run
+   Natural Docs.  Instead, copy this file to your project directory, make your
+   changes, and you can use it with -s.  Even better would be to make a CSS
+   file in your project directory with only your changes, which you can then
+   use with -s [original style] [your changes].
+
+   On the other hand, if you're editing this file in the Natural Docs styles
+   directory, the changes will automatically be applied to all your projects
+   that use this style the next time Natural Docs is run on them.
+
+   This file is part of Natural Docs, which is Copyright (C) 2003-2008 Greg Valure
+   Natural Docs is licensed under the GPL
+*/
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "MS sans serif";
+    color: #000000;
+    margin: 0; padding: 0;
+    }
+
+.ContentPage,
+.IndexPage,
+.FramedMenuPage {
+    background-color: #E8E8E8;
+    }
+.FramedContentPage,
+.FramedIndexPage,
+.FramedSearchResultsPage,
+.PopupSearchResultsPage {
+    background-color: #FFFFFF;
+    }
+
+
+a:link,
+a:visited { color: #900000; text-decoration: none }
+a:hover { color: #900000; text-decoration: underline }
+a:active { color: #FF0000; text-decoration: underline }
+
+td {
+    vertical-align: top }
+
+img { border: 0;  }
+
+
+/*
+    Comment out this line to use web-style paragraphs (blank line between
+    paragraphs, no indent) instead of print-style paragraphs (no blank line,
+    indented.)
+*/
+/*p {
+    text-indent: 0ex; margin: 0 }
+*/
+
+/*  Opera doesn't break with just wbr, but will if you add this.  */
+.Opera wbr:after {
+	content: "\00200B";
+	}
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    }
+
+
+.Firefox1 blockquote {
+    padding-bottom: .5em;
+    }
+
+/*  Turn off scrolling when printing.  */
+@media print {
+    blockquote {
+        overflow: visible;
+        }
+    .IE blockquote {
+        width: auto;
+        }
+    }
+
+
+
+#Menu {
+    font-size: 9pt;
+    padding: 10px 0 0 0;
+    }
+.ContentPage #Menu,
+.IndexPage #Menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 31ex;
+    overflow: hidden;
+    }
+.ContentPage .Firefox #Menu,
+.IndexPage .Firefox #Menu {
+    width: 27ex;
+    }
+
+
+    .MTitle {
+        font-size: 16pt; font-weight: bold; font-variant: small-caps;
+        text-align: center;
+        padding: 5px 10px 15px 10px;
+        border-bottom: 1px dotted #000000;
+        margin-bottom: 15px }
+
+    .MSubTitle {
+        font-size: 9pt; font-weight: normal; font-variant: normal;
+        margin-top: 1ex; margin-bottom: 5px }
+
+
+    .MEntry a:link,
+    .MEntry a:hover,
+    .MEntry a:visited { color: #606060; margin-right: 0 }
+    .MEntry a:active { color: #A00000; margin-right: 0 }
+
+
+    .MGroup {
+        font-variant: small-caps; font-weight: bold;
+        margin: 1em 0 1em 10px;
+        }
+
+    .MGroupContent {
+        font-variant: normal; font-weight: normal }
+
+    .MGroup a:link,
+    .MGroup a:hover,
+    .MGroup a:visited { color: #545454; margin-right: 10px }
+    .MGroup a:active { color: #A00000; margin-right: 10px }
+
+
+    .MFile,
+    .MText,
+    .MLink,
+    .MIndex {
+        padding: 1px 17px 2px 10px;
+        margin: .25em 0 .25em 0;
+        }
+
+    .MText {
+        font-size: 8pt; font-style: italic }
+
+    .MLink {
+        font-style: italic }
+
+    #MSelected {
+        color: #000000; background-color: #FFFFFF;
+        /*  Replace padding with border.  */
+        padding: 0 10px 0 10px;
+        border-width: 1px 2px 2px 0; border-style: solid; border-color: #000000;
+        margin-right: 5px;
+        }
+
+    /*  Close off the left side when its in a group.  */
+    .MGroup #MSelected {
+        padding-left: 9px; border-left-width: 1px }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox #MSelected {
+        -moz-border-radius-topright: 10px;
+        -moz-border-radius-bottomright: 10px }
+    .Firefox .MGroup #MSelected {
+        -moz-border-radius-topleft: 10px;
+        -moz-border-radius-bottomleft: 10px }
+
+
+    #MSearchPanel {
+        padding: 0px 6px;
+        margin: .25em 0;
+        }
+
+
+    #MSearchField {
+        font: italic 9pt Verdana, sans-serif;
+        color: #606060;
+        background-color: #E8E8E8;
+        border: none;
+        padding: 2px 4px;
+        width: 100%;
+        }
+    /* Only Opera gets it right. */
+    .Firefox #MSearchField,
+    .IE #MSearchField,
+    .Safari #MSearchField {
+        width: 94%;
+        }
+    .Opera9 #MSearchField,
+    .Konqueror #MSearchField {
+        width: 97%;
+        }
+    .FramedMenuPage .Firefox #MSearchField,
+    .FramedMenuPage .Safari #MSearchField,
+    .FramedMenuPage .Konqueror #MSearchField {
+        width: 98%;
+        }
+
+    /* Firefox doesn't do this right in frames without #MSearchPanel added on.
+        It's presence doesn't hurt anything other browsers. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        padding: 1px 3px;
+        }
+    .MSearchPanelActive #MSearchField {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        font-style: normal;
+        padding: 1px 3px;
+        }
+
+    #MSearchType {
+        visibility: hidden;
+        font: 8pt Verdana, sans-serif;
+        width: 98%;
+        padding: 0;
+        border: 1px solid #C0C0C0;
+        }
+    .MSearchPanelActive #MSearchType,
+    /*  As mentioned above, Firefox doesn't do this right in frames without #MSearchPanel added on. */
+    #MSearchPanel.MSearchPanelInactive:hover #MSearchType,
+    #MSearchType:focus {
+        visibility: visible;
+        color: #606060;
+        }
+    #MSearchType option#MSearchEverything {
+        font-weight: bold;
+        }
+
+    .Opera8 .MSearchPanelInactive:hover,
+    .Opera8 .MSearchPanelActive {
+        margin-left: -1px;
+        }
+
+
+    iframe#MSearchResults {
+        width: 60ex;
+        height: 15em;
+        }
+    #MSearchResultsWindow {
+        display: none;
+        position: absolute;
+        left: 0; top: 0;
+        border: 1px solid #000000;
+        background-color: #E8E8E8;
+        }
+    #MSearchResultsWindowClose {
+        font-weight: bold;
+        font-size: 8pt;
+        display: block;
+        padding: 2px 5px;
+        }
+    #MSearchResultsWindowClose:link,
+    #MSearchResultsWindowClose:visited {
+        color: #000000;
+        text-decoration: none;
+        }
+    #MSearchResultsWindowClose:active,
+    #MSearchResultsWindowClose:hover {
+        color: #800000;
+        text-decoration: none;
+        background-color: #F4F4F4;
+        }
+
+
+
+
+#Content {
+    padding-bottom: 15px;
+    }
+
+.ContentPage #Content {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    background-color: #FFFFFF;
+    font-size: 9pt;  /* To make 31ex match the menu's 31ex. */
+    
+    }
+.ContentPage .Firefox #Content {
+    margin-left: 27ex;
+    }
+
+
+
+    .CTopic {
+        font-size: 10pt;
+        margin-bottom: 3em;
+        }
+
+
+    .CTitle {
+        font-size: 12pt; font-weight: bold;
+        border-width: 0 0 1px 0; border-style: solid; border-color: #A0A0A0;
+        margin: 0 15px .5em 15px }
+
+    .CGroup .CTitle {
+        font-size: 16pt; font-variant: small-caps;
+        padding-left: 15px; padding-right: 15px;
+        border-width: 0 0 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CClass .CTitle,
+    .CInterface .CTitle,
+    .CDatabase .CTitle,
+    .CDatabaseTable .CTitle,
+    .CSection .CTitle {
+        font-size: 18pt;
+        color: #FFFFFF; background-color: #A0A0A0;
+        padding: 10px 15px 10px 15px;
+        border-width: 2px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    #MainTopic .CTitle {
+        font-size: 20pt;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000;
+        margin-left: 0; margin-right: 0 }
+
+    .CBody {
+        margin-left: 15px; margin-right: 15px }
+
+
+    .CToolTip {
+        position: absolute; visibility: hidden;
+        left: 0; top: 0;
+        background-color: #FFFFE0;
+        padding: 5px;
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #000000;
+        font-size: 8pt;
+        }
+
+    .Opera .CToolTip {
+        max-width: 98%;
+        }
+
+    /*  Scrollbars would be useless.  */
+    .CToolTip blockquote {
+        overflow: hidden;
+        }
+    .IE6 .CToolTip blockquote {
+        overflow: visible;
+        }
+
+    .CHeading {
+        font-weight: bold; font-size: 10pt;
+        margin: 1.5em 0 .5em 0;
+        }
+
+    .CBody pre {
+        font: 10pt "Courier New", Courier, monospace;
+        margin: 1em 0;
+        }
+
+    .CBody ul {
+        /*  I don't know why CBody's margin doesn't apply, but it's consistent across browsers so whatever.
+             Reapply it here as padding.  */
+        padding-left: 15px; padding-right: 15px;
+        margin: .5em 5ex .5em 5ex;
+        }
+
+    .CDescriptionList {
+        margin: .5em 5ex 0 5ex }
+
+    .CDLEntry {
+            font: 10pt "Courier New", Courier, monospace; color: #808080;
+            padding-bottom: .25em;
+            white-space: nowrap }
+
+    CDLDescription {
+            font-size: 10pt;  /*  For browsers that don't inherit correctly, like Opera 5.  */
+            padding-bottom: .5em; padding-left: 5ex }
+
+
+    .CTopic img {
+        text-align: center;
+        display: block;
+        margin: 1em auto;
+        }
+    .CImageCaption {
+        font-variant: small-caps;
+        font-size: 8pt;
+        color: #808080;
+        text-align: center;
+        position: relative;
+        top: 1em;
+        }
+
+    .CImageLink {
+        color: #808080;
+        font-style: italic;
+        }
+    a.CImageLink:link,
+    a.CImageLink:visited,
+    a.CImageLink:hover { color: #808080 }
+
+
+
+
+
+.Prototype {
+    font: 10pt "Courier New", Courier, monospace;
+    padding: 5px 3ex;
+    border-width: 1px; border-style: solid;
+    margin: 0 5ex 1.5em 5ex;
+    }
+
+    .Prototype td {
+        font-size: 10pt;
+        }
+
+    .PDefaultValue,
+    .PDefaultValuePrefix,
+    .PTypePrefix {
+        color: #8F8F8F;
+        }
+    .PTypePrefix {
+        text-align: right;
+        }
+    .PAfterParameters {
+        vertical-align: bottom;
+        }
+
+    .IE .Prototype table {
+        padding: 0;
+        }
+
+    .CFunction .Prototype {
+        background-color: #F4F4F4; border-color: #D0D0D0 }
+    .CProperty .Prototype {
+        background-color: #F4F4FF; border-color: #C0C0E8 }
+    .CVariable .Prototype {
+        background-color: #FFFFF0; border-color: #E0E0A0 }
+
+    .CClass .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        background-color: #F4F4F4;
+        }
+    .CInterface .Prototype {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0D0;
+        background-color: #F4F4FF;
+        }
+
+    .CDatabaseIndex .Prototype,
+    .CConstant .Prototype {
+        background-color: #D0D0D0; border-color: #000000 }
+    .CType .Prototype,
+    .CEnumeration .Prototype {
+        background-color: #FAF0F0; border-color: #E0B0B0;
+        }
+    .CDatabaseTrigger .Prototype,
+    .CEvent .Prototype,
+    .CDelegate .Prototype {
+        background-color: #F0FCF0; border-color: #B8E4B8 }
+
+    .CToolTip .Prototype {
+        margin: 0 0 .5em 0;
+        white-space: nowrap;
+        }
+
+
+
+
+
+.Summary {
+    margin: 1.5em 5ex 0 5ex }
+
+    .STitle {
+        font-size: 12pt; font-weight: bold;
+        margin-bottom: .5em }
+
+
+    .SBorder {
+        background-color: #FFFFF0;
+        padding: 15px;
+        border: 1px solid #C0C060 }
+
+    /* In a frame IE 6 will make them too long unless you set the width to 100%.  Without frames it will be correct without a width
+        or slightly too long (but not enough to scroll) with a width.  This arbitrary weirdness simply astounds me.  IE 7 has the same
+        problem with frames, haven't tested it without.  */
+    .FramedContentPage .IE .SBorder {
+        width: 100% }
+
+    /*  A treat for Mozilla users.  Blatantly non-standard.  Will be replaced with CSS 3 attributes when finalized/supported.  */
+    .Firefox .SBorder {
+        -moz-border-radius: 20px }
+
+
+    .STable {
+        font-size: 9pt; width: 100% }
+
+    .SEntry {
+        width: 30% }
+    .SDescription {
+        width: 70% }
+
+
+    .SMarked {
+        background-color: #F8F8D8 }
+
+    .SDescription { padding-left: 2ex }
+    .SIndent1 .SEntry { padding-left: 1.5ex }   .SIndent1 .SDescription { padding-left: 3.5ex }
+    .SIndent2 .SEntry { padding-left: 3.0ex }   .SIndent2 .SDescription { padding-left: 5.0ex }
+    .SIndent3 .SEntry { padding-left: 4.5ex }   .SIndent3 .SDescription { padding-left: 6.5ex }
+    .SIndent4 .SEntry { padding-left: 6.0ex }   .SIndent4 .SDescription { padding-left: 8.0ex }
+    .SIndent5 .SEntry { padding-left: 7.5ex }   .SIndent5 .SDescription { padding-left: 9.5ex }
+
+    .SDescription a { color: #800000}
+    .SDescription a:active { color: #A00000 }
+
+    .SGroup td {
+        padding-top: .5em; padding-bottom: .25em }
+
+    .SGroup .SEntry {
+        font-weight: bold; font-variant: small-caps }
+
+    .SGroup .SEntry a { color: #800000 }
+    .SGroup .SEntry a:active { color: #F00000 }
+
+
+    .SMain td,
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        font-size: 10pt;
+        padding-bottom: .25em }
+
+    .SClass td,
+    .SDatabase td,
+    .SDatabaseTable td,
+    .SSection td {
+        padding-top: 1em }
+
+    .SMain .SEntry,
+    .SClass .SEntry,
+    .SDatabase .SEntry,
+    .SDatabaseTable .SEntry,
+    .SSection .SEntry {
+        font-weight: bold;
+        }
+
+    .SMain .SEntry a,
+    .SClass .SEntry a,
+    .SDatabase .SEntry a,
+    .SDatabaseTable .SEntry a,
+    .SSection .SEntry a { color: #000000 }
+
+    .SMain .SEntry a:active,
+    .SClass .SEntry a:active,
+    .SDatabase .SEntry a:active,
+    .SDatabaseTable .SEntry a:active,
+    .SSection .SEntry a:active { color: #A00000 }
+
+
+
+
+
+.ClassHierarchy {
+    margin: 0 15px 1em 15px }
+
+    .CHEntry {
+        border-width: 1px 2px 2px 1px; border-style: solid; border-color: #A0A0A0;
+        margin-bottom: 3px;
+        padding: 2px 2ex;
+        font-size: 10pt;
+        background-color: #F4F4F4; color: #606060;
+        }
+
+    .Firefox .CHEntry {
+        -moz-border-radius: 4px;
+        }
+
+    .CHCurrent .CHEntry {
+        font-weight: bold;
+        border-color: #000000;
+        color: #000000;
+        }
+
+    .CHChildNote .CHEntry {
+        font-style: italic;
+        font-size: 8pt;
+        }
+
+    .CHIndent {
+        margin-left: 3ex;
+        }
+
+    .CHEntry a:link,
+    .CHEntry a:visited,
+    .CHEntry a:hover {
+        color: #606060;
+        }
+    .CHEntry a:active {
+        color: #800000;
+        }
+
+
+
+
+
+#Index {
+    background-color: #FFFFFF;
+    }
+
+/*  As opposed to .PopupSearchResultsPage #Index  */
+.IndexPage #Index,
+.FramedIndexPage #Index,
+.FramedSearchResultsPage #Index {
+    padding: 15px;
+    }
+
+.IndexPage #Index {
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #000000;
+    font-size: 9pt;  /* To make 27ex match the menu's 27ex. */
+    margin-left: 27ex;
+    }
+
+
+    .IPageTitle {
+        font-size: 20pt; font-weight: bold;
+        color: #FFFFFF; background-color: #7070C0;
+        padding: 10px 15px 10px 15px;
+        border-width: 0 0 3px 0; border-color: #000000; border-style: solid;
+        margin: -15px -15px 0 -15px }
+
+    .FramedSearchResultsPage .IPageTitle {
+        margin-bottom: 15px;
+        }
+
+    .INavigationBar {
+        font-size: 10pt;
+        text-align: center;
+        background-color: #FFFFF0;
+        padding: 5px;
+        border-bottom: solid 1px black;
+        margin: 0 -15px 15px -15px;
+        }
+
+    .INavigationBar a {
+        font-weight: bold }
+
+    .IHeading {
+        font-size: 16pt; font-weight: bold;
+        padding: 2.5em 0 .5em 0;
+        text-align: center;
+        width: 3.5ex;
+        }
+    #IFirstHeading {
+        padding-top: 0;
+        }
+
+    .IEntry {
+        font-size: 10pt;
+        padding-left: 1ex;
+        }
+    .PopupSearchResultsPage .IEntry {
+        font-size: 8pt;
+        padding: 1px 5px;
+        }
+    .PopupSearchResultsPage .Opera9 .IEntry,
+    .FramedSearchResultsPage .Opera9 .IEntry {
+        text-align: left;
+        }
+    .FramedSearchResultsPage .IEntry {
+        padding: 0;
+        }
+
+    .ISubIndex {
+        padding-left: 3ex; padding-bottom: .5em }
+    .PopupSearchResultsPage .ISubIndex {
+        display: none;
+        }
+
+
+    /*  While it may cause some entries to look like links when they aren't, I found it's much easier to read the
+         index if everything's the same color.  */
+    .ISymbol {
+        font-weight: bold; color: #900000  }
+
+    .IndexPage .ISymbolPrefix,
+    .FramedIndexPage .ISymbolPrefix {
+        font-size: 10pt;
+        text-align: right;
+        color: #C47C7C;
+        background-color: #F8F8F8;
+        border-right: 3px solid #E0E0E0;
+        border-left: 1px solid #E0E0E0;
+        padding: 0 1px 0 2px;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix,
+    .FramedSearchResultsPage .ISymbolPrefix {
+        color: #900000;
+        }
+    .PopupSearchResultsPage .ISymbolPrefix {
+        font-size: 8pt;
+        }
+
+    .IndexPage #IFirstSymbolPrefix,
+    .FramedIndexPage #IFirstSymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        }
+    .IndexPage #ILastSymbolPrefix,
+    .FramedIndexPage #ILastSymbolPrefix {
+        border-bottom: 1px solid #E0E0E0;
+        }
+    .IndexPage #IOnlySymbolPrefix,
+    .FramedIndexPage #IOnlySymbolPrefix {
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        }
+
+    a.IParent,
+    a.IFile {
+        display: block;
+        }
+
+    .PopupSearchResultsPage .SRStatus {
+        padding: 2px 5px;
+        font-size: 8pt;
+        font-style: italic;
+        }
+    .FramedSearchResultsPage .SRStatus {
+        font-size: 10pt;
+        font-style: italic;
+        }
+
+    .SRResult {
+        display: none;
+        }
+
+
+
+#Footer {
+    font-size: 8pt;
+    color: #989898;
+    text-align: right;
+    }
+
+#Footer p {
+    text-indent: 0;
+    margin-bottom: .5em;
+    }
+
+.ContentPage #Footer,
+.IndexPage #Footer {
+    text-align: right;
+    margin: 2px;
+    }
+
+.FramedMenuPage #Footer {
+    text-align: center;
+    margin: 5em 10px 10px 10px;
+    padding-top: 1em;
+    border-top: 1px solid #C8C8C8;
+    }
+
+    #Footer a:link,
+    #Footer a:hover,
+    #Footer a:visited { color: #989898 }
+    #Footer a:active { color: #A00000 }
+
+
+#MainTopic .CTitle {					/* Title: */
+  font-size: 20pt;
+  font-weight: bold; /* Bold looks better against dark background. */
+  font-family: Arial, Helvetica, sans-serif, "MS sans serif"; 
+  background-color: #405871;
+  color: #FFFFFF;
+  margin: 0 0 0.5em 0;
+  padding: 10px 15px 10px 15px;
+}
+
+
+.SBorder,.SEntry, .SDescription {				/* Summary index */
+  background-color: #F2F2F2;
+  padding: 8px;
+  border: 1px solid #E0E0E0 }
+.SBorder{ padding: 1px; }
+
+
+.CTitle {							/* Function */
+  background-color: #FFFFAA;
+  margin: 1 1 1 1;
+  padding: 12px 0 12px 4px;
+  font-size: 12pt; font-weight: bold;
+  border-width: 3px 0px 0px 0; border-style: solid; border-color: #A0A0A0;
+}
+
+
+h4 {							/* topics.. (parameters, returns, example..) */
+  font-size: 111%;  font-weight: bold;
+  background-color:#E6E6E6;
+  margin: 1.0em 0 0.5em 0;
+  padding: 0.1em 0 0.1em 0.2em;
+}
+
+
+.CDescriptionList, .CDLEntry, .CDLDescription {			/* parameter table */
+  width: 100%;
+  margin: 1em 0ex 0 0ex;
+  border-width: 1px 1px 1px 1px; border-style: solid; border-color: #C0C0C0;
+}
+.CDLEntry, .CDLDescription { margin: 0 0 0em 0;  text-indent: 0px; padding-bottom: .5em; padding-top: .5em; font: 11pt "Calibri", Courier, monospace; }
+.CDLEntry { width: 15%; font: 10pt "Courier New", Courier, monospace; }
+.CDLDescription {  padding-left: 1ex }
+
+
+/*  Blockquotes are used as containers for things that may need to scroll.  */
+blockquote {
+    padding: 20;
+        padding-left: 9px; border-left-width: 1px;
+    margin: 0;
+    overflow: auto;
+    background-color: #F3F3FF;			/* example bg color..*/
+        border-width: 0px 0px 0px 0px; border-style: solid; border-color: #838B8B;
+    }
+
+/* .ContentPage #Content { margin-left: 0ex; }   */
+
+
+a        {text-decoration: none;}
+a:link   {text-decoration: none; color: #0000AA;}
+a:visited{text-decoration: none; color: #AA00AA;}
+a:active {text-decoration: none; color: #0000AA;}
+a:hover  {text-decoration: underline; color: #6666CC;}</style><script language=JavaScript src="../javascript/main.js"></script></head><body class="FramedContentPage" onLoad="NDOnLoad()"><script language=JavaScript><!--
+if (browserType) {document.write("<div class=" + browserType + ">");if (browserVer) {document.write("<div class=" + browserVer + ">"); }}// --></script>
+
+<!--  Generated by Natural Docs, version 1.4 -->
+<!--  http://www.naturaldocs.org  -->
+
+<!-- saved from url=(0026)http://www.naturaldocs.org -->
+
+
+
+
+<div id=Content><div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="ShellLinkW"></a>ShellLinkW</h1><div class=CBody><p>implements the IShellLinkW interface and exposes methods that create, modify, and resolve Shell links.</p><h4 class=CHeading>Requirements</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>AutoHotkey</td><td class=CDLDescription>AHK v2 alpha</td></tr><tr><td class=CDLEntry>OS</td><td class=CDLDescription>Windows XP / Windows 2000 Server or higher</td></tr><tr><td class=CDLEntry>Base classes</td><td class=CDLDescription>Unknown</td></tr><tr><td class=CDLEntry>Helper classes</td><td class=CDLDescription>SLGP, SLR, SW, (WIN32_FIND_DATA)</td></tr></table><h4 class=CHeading>Remarks</h4><p>To create a shortcut, query the instance for IPersistFile and call its Save() method.</p><!--START_ND_SUMMARY--><div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable><tr class="SMain"><td class=SEntry><a href="#ShellLinkW" >ShellLinkW</a></td><td class=SDescription>implements the IShellLinkW interface and exposes methods that create, modify, and resolve Shell links.</td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#ShellLinkW.Variables" >Variables</a></td><td class=SDescription></td></tr><tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.CLSID" >CLSID</a></td><td class=SDescription>This is CLSID_ShellLink. </td></tr><tr class="SVariable SIndent2"><td class=SEntry><a href="#ShellLinkW.IID" >IID</a></td><td class=SDescription>This is IID_IShellLinkW. </td></tr><tr class="SGroup SIndent1"><td class=SEntry><a href="#ShellLinkW.Functions" >Functions</a></td><td class=SDescription></td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.GetPath" id=link1 onMouseOver="ShowTip(event, 'tt1', 'link1')" onMouseOut="HideTip('tt1')">GetPath</a></td><td class=SDescription>Gets the path and file name of a Shell link object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetIDList" id=link2 onMouseOver="ShowTip(event, 'tt2', 'link2')" onMouseOut="HideTip('tt2')">GetIDList</a></td><td class=SDescription>Not implemented</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetIDList" id=link3 onMouseOver="ShowTip(event, 'tt3', 'link3')" onMouseOut="HideTip('tt3')">SetIDList</a></td><td class=SDescription>Not implemented</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetDescription" id=link4 onMouseOver="ShowTip(event, 'tt4', 'link4')" onMouseOut="HideTip('tt4')">GetDescription</a></td><td class=SDescription>Gets the description string for a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetDescription" id=link5 onMouseOver="ShowTip(event, 'tt5', 'link5')" onMouseOut="HideTip('tt5')">SetDescription</a></td><td class=SDescription>Sets the description for a Shell link object. </td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetWorkingDirectory" id=link6 onMouseOver="ShowTip(event, 'tt6', 'link6')" onMouseOut="HideTip('tt6')">GetWorkingDirectory</a></td><td class=SDescription>Gets the name of the working directory for a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetWorkingDirectory" id=link7 onMouseOver="ShowTip(event, 'tt7', 'link7')" onMouseOut="HideTip('tt7')">SetWorkingDirectory</a></td><td class=SDescription>Sets the name of the working directory for a Shell link object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetArguments" id=link8 onMouseOver="ShowTip(event, 'tt8', 'link8')" onMouseOut="HideTip('tt8')">GetArguments</a></td><td class=SDescription>Gets the command-line arguments associated with a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetArguments" id=link9 onMouseOver="ShowTip(event, 'tt9', 'link9')" onMouseOut="HideTip('tt9')">SetArguments</a></td><td class=SDescription>Sets the command-line arguments for a Shell link object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetHotkey" id=link10 onMouseOver="ShowTip(event, 'tt10', 'link10')" onMouseOut="HideTip('tt10')">GetHotkey</a></td><td class=SDescription>Gets the keyboard shortcut (hot key) for a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetHotkey" id=link11 onMouseOver="ShowTip(event, 'tt11', 'link11')" onMouseOut="HideTip('tt11')">SetHotkey</a></td><td class=SDescription>Sets a keyboard shortcut (hot key) for a Shell link object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetShowCmd" id=link12 onMouseOver="ShowTip(event, 'tt12', 'link12')" onMouseOut="HideTip('tt12')">GetShowCmd</a></td><td class=SDescription>Gets the show command for a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetShowCmd" id=link13 onMouseOver="ShowTip(event, 'tt13', 'link13')" onMouseOut="HideTip('tt13')">SetShowCmd</a></td><td class=SDescription>Sets the show command for a Shell link object. </td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.GetIconLocation" id=link14 onMouseOver="ShowTip(event, 'tt14', 'link14')" onMouseOut="HideTip('tt14')">GetIconLocation</a></td><td class=SDescription>Gets the location (path and index) of the icon for a Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.SetIconLocation" id=link15 onMouseOver="ShowTip(event, 'tt15', 'link15')" onMouseOut="HideTip('tt15')">SetIconLocation</a></td><td class=SDescription>Sets the location (path and index) of the icon for a Shell link object.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.SetRelativePath" id=link16 onMouseOver="ShowTip(event, 'tt16', 'link16')" onMouseOut="HideTip('tt16')">SetRelativePath</a></td><td class=SDescription>Sets the relative path to the Shell link object.</td></tr><tr class="SFunction SIndent2 SMarked"><td class=SEntry><a href="#ShellLinkW.Resolve" id=link17 onMouseOver="ShowTip(event, 'tt17', 'link17')" onMouseOut="HideTip('tt17')">Resolve</a></td><td class=SDescription>Attempts to find the target of a Shell link, even if it has been moved or renamed.</td></tr><tr class="SFunction SIndent2"><td class=SEntry><a href="#ShellLinkW.SetPath" id=link18 onMouseOver="ShowTip(event, 'tt18', 'link18')" onMouseOut="HideTip('tt18')">SetPath</a></td><td class=SDescription>Sets the path and file name of a Shell link object.</td></tr></table></div></div><!--END_ND_SUMMARY--></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.Variables"></a>Variables</h3></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.CLSID"></a>CLSID</h3><div class=CBody><p>This is CLSID_ShellLink.&nbsp; It is required to create an instance.</p></div></div></div>
+
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.IID"></a>IID</h3><div class=CBody><p>This is IID_IShellLinkW.&nbsp; It is required to create an instance.</p></div></div></div>
+
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.Functions"></a>Functions</h3></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetPath"></a>GetPath</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetPath(</td><td class=PTypePrefix nowrap></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>path,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PTypePrefix nowrap></td><td class=PType nowrap>&nbsp;</td><td class=PParameter nowrap>flags,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PTypePrefix nowrap>byRef&nbsp;</td><td class=PType nowrap>data&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 0</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Gets the path and file name of a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>byRef STR path</td><td class=CDLDescription>receives the path and file name of the Shell link object.</td></tr><tr><td class=CDLEntry>UINT flags</td><td class=CDLDescription>a combination of flags that specify the type of path information to retrieve.&nbsp; You can use the fields of the SLGP class for convenience.</td></tr><tr><td class=CDLEntry>[opt] byRef WIN32_FIND_DATA data</td><td class=CDLDescription>receives a WIN32_FIND_DATA instance that contains information about the Shell link object.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetIDList"></a>GetIDList</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetIDList(</td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>idlist</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><h4 class=CHeading>Remarks</h4><p>Not implemented</p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetIDList"></a>SetIDList</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetIDList(</td><td class=PParameter nowrap>idlist</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><h4 class=CHeading>Remarks</h4><p>Not implemented</p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetDescription"></a>GetDescription</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetDescription(</td><td class=PType nowrap>maxChars&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 300</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Gets the description string for a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>[opt] INT maxChars</td><td class=CDLDescription>the maximum number of characters to retrieve.&nbsp; By default 300.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR description</td><td class=CDLDescription>the description string.</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetDescription"></a>SetDescription</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetDescription(</td><td class=PParameter nowrap>description</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the description for a Shell link object.&nbsp; The description can be any application-defined string.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR description</td><td class=CDLDescription>the new description string</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetWorkingDirectory"></a>GetWorkingDirectory</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetWorkingDirectory()</td></tr></table></blockquote><p>Gets the name of the working directory for a Shell link object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR dir</td><td class=CDLDescription>the working directory</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetWorkingDirectory"></a>SetWorkingDirectory</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetWorkingDirectory(</td><td class=PParameter nowrap>dir</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the name of the working directory for a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR dir</td><td class=CDLDescription>the name of the new working directory</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetArguments"></a>GetArguments</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetArguments(</td><td class=PType nowrap>size&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 300</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Gets the command-line arguments associated with a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>[opt] INT size</td><td class=CDLDescription>the maximum number of characters to retrieve.&nbsp; By default 300.&nbsp; Returns:</td></tr><tr><td class=CDLEntry>STR args</td><td class=CDLDescription>the arguments</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetArguments"></a>SetArguments</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetArguments(</td><td class=PParameter nowrap>args</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the command-line arguments for a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR args</td><td class=CDLDescription>the new command-line arguments</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetHotkey"></a>GetHotkey</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetHotkey()</td></tr></table></blockquote><p>Gets the keyboard shortcut (hot key) for a Shell link object.</p><h4 class=CHeading>Remarks</h4><p>Not implemented</p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetHotkey"></a>SetHotkey</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetHotkey(</td><td class=PParameter nowrap>hotkey</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets a keyboard shortcut (hot key) for a Shell link object.</p><h4 class=CHeading>Remarks</h4><p>Not implemented</p></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetShowCmd"></a>GetShowCmd</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetShowCmd()</td></tr></table></blockquote><p>Gets the show command for a Shell link object.</p><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>INT cmd</td><td class=CDLDescription>an integer describing the show command.&nbsp; You can compare this to the fields of the SW class for convenience.&nbsp; Supported commands include: SW.SHOWNORMAL, SW.SHOWMAXIMIZED, SW.SHOWMINNOACTIVE</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetShowCmd"></a>SetShowCmd</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetShowCmd(</td><td class=PParameter nowrap>cmd</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the show command for a Shell link object.&nbsp; The show command sets the initial show state of the window.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>INT cmd</td><td class=CDLDescription>an integer describing the show command.&nbsp; This must be one of the values listed under <a href="#ShellLinkW.GetShowCmd" class=LFunction id=link19 onMouseOver="ShowTip(event, 'tt12', 'link19')" onMouseOut="HideTip('tt12')">GetShowCmd</a>.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.GetIconLocation"></a>GetIconLocation</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetIconLocation(</td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>path,</td></tr><tr><td></td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>index</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Gets the location (path and index) of the icon for a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>byRef STR path</td><td class=CDLDescription>receives the path of the file containing the icon</td></tr><tr><td class=CDLEntry>byRef INT index</td><td class=CDLDescription>receives the index of the icon</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetIconLocation"></a>SetIconLocation</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetIconLocation(</td><td class=PParameter nowrap>path,</td></tr><tr><td></td><td class=PParameter nowrap>index</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the location (path and index) of the icon for a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR path</td><td class=CDLDescription>the path of the file containing the icon</td></tr><tr><td class=CDLEntry>INT index</td><td class=CDLDescription>the index of the icon</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetRelativePath"></a>SetRelativePath</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetRelativePath(</td><td class=PParameter nowrap>path</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the relative path to the Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR path</td><td class=CDLDescription>the new relative path.&nbsp; It should be a file name, not a folder name.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.Resolve"></a>Resolve</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>Resolve()</td></tr></table></blockquote><p>Attempts to find the target of a Shell link, even if it has been moved or renamed.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>HWND hwnd</td><td class=CDLDescription>A handle to the window that the Shell will use as the parent for a dialog box.&nbsp; The Shell displays the dialog box if it needs to prompt the user for more information while resolving a Shell link.</td></tr><tr><td class=CDLEntry>UINT fFlags</td><td class=CDLDescription>action flags.&nbsp; You can use the fields of the SLR class for convenience.</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+<div class="CFunction"><div class=CTopic><h3 class=CTitle><a name="ShellLinkW.SetPath"></a>SetPath</h3><div class=CBody><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetPath(</td><td class=PParameter nowrap>path</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote><p>Sets the path and file name of a Shell link object.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>STR path</td><td class=CDLDescription>the new path</td></tr></table><h4 class=CHeading>Returns</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BOOL success</td><td class=CDLDescription>true on success, false otherwise</td></tr></table></div></div></div>
+
+</div><!--Content-->
+
+
+
+<!--START_ND_TOOLTIPS-->
+<div class=CToolTip id="tt1"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetPath(</td><td class=PTypePrefix nowrap></td><td class=PType nowrap>byRef&nbsp;</td><td class=PParameter nowrap>path,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PTypePrefix nowrap></td><td class=PType nowrap>&nbsp;</td><td class=PParameter nowrap>flags,</td><td class=PDefaultValuePrefix>&nbsp;&nbsp;</td><td class=PDefaultValue width=100%></td></tr><tr><td></td><td class=PTypePrefix nowrap>byRef&nbsp;</td><td class=PType nowrap>data&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 0</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Gets the path and file name of a Shell link object.</div></div><div class=CToolTip id="tt2"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetIDList(</td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>idlist</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Not implemented</div></div><div class=CToolTip id="tt3"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetIDList(</td><td class=PParameter nowrap>idlist</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Not implemented</div></div><div class=CToolTip id="tt4"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetDescription(</td><td class=PType nowrap>maxChars&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 300</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Gets the description string for a Shell link object.</div></div><div class=CToolTip id="tt5"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetDescription(</td><td class=PParameter nowrap>description</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the description for a Shell link object. </div></div><div class=CToolTip id="tt6"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetWorkingDirectory()</td></tr></table></blockquote>Gets the name of the working directory for a Shell link object.</div></div><div class=CToolTip id="tt7"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetWorkingDirectory(</td><td class=PParameter nowrap>dir</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the name of the working directory for a Shell link object.</div></div><div class=CToolTip id="tt8"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetArguments(</td><td class=PType nowrap>size&nbsp;</td><td class=PParameter nowrap>:</td><td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td><td class=PDefaultValue width=100%> 300</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Gets the command-line arguments associated with a Shell link object.</div></div><div class=CToolTip id="tt9"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetArguments(</td><td class=PParameter nowrap>args</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the command-line arguments for a Shell link object.</div></div><div class=CToolTip id="tt10"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetHotkey()</td></tr></table></blockquote>Gets the keyboard shortcut (hot key) for a Shell link object.</div></div><div class=CToolTip id="tt11"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetHotkey(</td><td class=PParameter nowrap>hotkey</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets a keyboard shortcut (hot key) for a Shell link object.</div></div><div class=CToolTip id="tt12"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>GetShowCmd()</td></tr></table></blockquote>Gets the show command for a Shell link object.</div></div><div class=CToolTip id="tt13"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetShowCmd(</td><td class=PParameter nowrap>cmd</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the show command for a Shell link object. </div></div><div class=CToolTip id="tt14"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>GetIconLocation(</td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>path,</td></tr><tr><td></td><td class=PType nowrap>ByRef&nbsp;</td><td class=PParameter nowrap>index</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Gets the location (path and index) of the icon for a Shell link object.</div></div><div class=CToolTip id="tt15"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetIconLocation(</td><td class=PParameter nowrap>path,</td></tr><tr><td></td><td class=PParameter nowrap>index</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the location (path and index) of the icon for a Shell link object.</div></div><div class=CToolTip id="tt16"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetRelativePath(</td><td class=PParameter nowrap>path</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the relative path to the Shell link object.</div></div><div class=CToolTip id="tt17"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>Resolve()</td></tr></table></blockquote>Attempts to find the target of a Shell link, even if it has been moved or renamed.</div></div><div class=CToolTip id="tt18"><div class=CFunction><blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><table border=0 cellspacing=0 cellpadding=0><tr><td class=PBeforeParameters nowrap>SetPath(</td><td class=PParameter nowrap>path</td><td class=PAfterParameters nowrap>)</td></tr></table></td></tr></table></blockquote>Sets the path and file name of a Shell link object.</div></div><!--END_ND_TOOLTIPS-->
+
+<script language=JavaScript><!--
+if (browserType) {if (browserVer) {document.write("</div>"); }document.write("</div>");}// --></script></body></html>
