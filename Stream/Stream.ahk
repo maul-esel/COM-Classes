@@ -14,10 +14,10 @@ Remarks:
 class Stream extends SequentialStream
 {
 	/*
-	Field: CLSID
-	This is CLSID_. It is required to create an instance.
+	Field: ThrowOnCreation
+	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
 	*/
-	static CLSID := "{}"
+	static ThrowOnCreation := true
 
 	/*
 	Field: IID
