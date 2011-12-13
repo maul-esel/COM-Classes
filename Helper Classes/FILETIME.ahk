@@ -50,11 +50,33 @@ class FILETIME
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class
 
+	Parameters:
+		UPTR ptr - a pointer to a FILETIME struct in memory
+
 	Returns:
 		FILETIME instance - the new FILETIME instance
 	*/
 	FromStructPtr(ptr)
 	{
 		return new FILETIME(NumGet(ptr, 00, "UInt"), NumGet(ptr, 04, "UInt"))
+	}
+
+	/*
+	Method: FromSYSTEMTIME
+	(static) method that converts a SYSTEMTIME instance to a FILETIME instance
+
+	Parameters:
+		SYSTEMTIME src - the SYSTEMTIME instance to convert
+
+	Returns:
+		FILETIME instance - the new FILETIME instance
+	*/
+	FromSYSTEMTIME(src)
+	{
+		if (IsObject(src))
+			src := src.ToStructPtr()
+		VarSetCapacity(dest, 8, 0)
+		DllCall("SystemTimeToFileTime", "ptr", src, "ptr", &dest)
+		return FILETIME.FromStructPtr(&dest)
 	}
 }
