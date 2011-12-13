@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows 2000 Server or higher
 	Base classes - Unknown
-	Helper classes - SLGP, SLR, SW
+	Helper classes - SLGP, SLR, SW, (WIN32_FIND_DATA)
 
 Remarks:
 	To create a shortcut, query the instance for IPersistFile and call its Save() method.
