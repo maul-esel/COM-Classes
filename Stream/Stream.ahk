@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown, SequentialStream
 	Helper classes - STGC, STATSTG, LOCKTYPE, STATFLAG, STREAM_SEEK
+
+Remarks:
+	Although IStream inherits ISequentialStream and you can use ISequentialStream's methods on an IStream instance, a QueryInterface() call for ISequentialStream is not supported by the system implementation.
 */
 class Stream extends SequentialStream
 {
