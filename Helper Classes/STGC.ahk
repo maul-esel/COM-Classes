@@ -4,6 +4,9 @@ an enumeration class specifying the conditions for performing the commit operati
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STGC_" is omitted.
+
+MSDN documentation:
+
 */
 class STGC
 {
@@ -22,7 +25,7 @@ class STGC
 	- The low-memory save sequence will be used to safely save the storage object to a smaller file.
 	- A previous commit returned STG_E_MEDIUMFULL, but overwriting the existing data would provide enough space to commit changes to the storage object.
 
-	Be aware that the commit operation verifies that adequate space exists before any overwriting occurs. Thus, even with this value specified, if the commit operation fails due to space requirements, the old data is safe. It is possible, however, for data loss to occur with the STGC_OVERWRITE value specified if the commit operation fails for any reason other than lack of disk space.
+	Be aware that the commit operation verifies that adequate space exists before any overwriting occurs. Thus, even with this value specified, if the commit operation fails due to space requirements, the old data is safe. It is possible, however, for data loss to occur with the <OVERWRITE> value specified if the commit operation fails for any reason other than lack of disk space.
 	*/
 	static OVERWRITE := 1
 
@@ -42,7 +45,7 @@ class STGC
 
 	/*
 	Field: CONSOLIDATE
-	*Windows 2000 and Windows XP:* Indicates that a storage should be consolidated after it is committed, resulting in a smaller file on disk. This flag is valid only on the outermost storage object that has been opened in transacted mode. It is not valid for streams. The STGC_CONSOLIDATE flag can be combined with any other STGC flags.
+	*Windows 2000 and Windows XP:* Indicates that a storage should be consolidated after it is committed, resulting in a smaller file on disk. This flag is valid only on the outermost storage object that has been opened in transacted mode. It is not valid for streams. The <CONSOLIDATE> flag can be combined with any other <STGC> flags.
 	*/
 	static CONSOLIDATE := 8
 }
