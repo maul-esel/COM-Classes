@@ -1,6 +1,5 @@
 ﻿#include ..\..\Unknown\Unknown.ahk
 #include ..\ShellLinkW.ahk
-#include ..\..\Helper Classes\SLGP.ahk
 #include ..\..\Persist\Persist.ahk
 #include ..\..\PersistFile\PersistFile.ahk
 
