@@ -72,8 +72,7 @@ SaveHICON2File(hIcon, file, bAutoDelete := false, isbmp := false)
 		res = SUCCEEDED( pPict->SaveAsFile( pStrm, TRUE, &cbSize ) );
 	*/
 	pStrm := Stream.FromHGlobal(0)
-	DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", pd.ToStructPtr(), "UPtr", Unknown._Guid(i, Picture.IID), "UInt", bAutoDelete, "ptr*", pPict)
-	pPict := new Picture(pPict)
+	pPict := Picture.FromPICTDESC(pd)
 	cbSize := pPict.SaveAsFile(pStrm, true)
 
 	/*
