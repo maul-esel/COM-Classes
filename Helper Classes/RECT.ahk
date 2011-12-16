@@ -49,7 +49,7 @@ class RECT
 	converts the instance to a script-usable struct
 
 	Returns:
-		ptr - a pointer to the struct in memory
+		UPTR ptr - a pointer to the struct in memory
 	*/
 	ToStructPtr()
 	{
@@ -67,8 +67,11 @@ class RECT
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class
 
+	Parameters:
+		UPTR ptr - a pointer to a RECT struct in memory
+
 	Returns:
-		instance - the new RECT instance
+		RECT instance - the new RECT instance
 	*/
 	FromStructPtr(ptr)
 	{

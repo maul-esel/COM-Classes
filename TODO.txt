@@ -1,0 +1,13 @@
+PropertyStore -> GetAt -> PROPERTYKEY struct class
+Helper -> STATSTG -> finish
+ShellLinkW -> Load -> WIN32_FIND_DATA struct class
+ShellLinkW -> GetIDList / SetIDList
+ShellLinkW -> GetHotkey / SetHotkey
+RichEditOLE -> IID
+RichEditOLE -> continue
+RichEditOLE -> example1
+ImageList2 -> SetCallback / GetCallback
+IPropertyStoreCache
+Audio classes
+IUIAutomation
+PropertyStore -> GetValue / SetValue -> PROPSTAT (difficult!)

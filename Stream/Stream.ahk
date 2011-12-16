@@ -7,14 +7,17 @@ Requirements:
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown, SequentialStream
 	Helper classes - STGC, STATSTG, LOCKTYPE, STATFLAG, STREAM_SEEK
+
+Remarks:
+	Although IStream inherits ISequentialStream and you can use ISequentialStream's methods on an IStream instance, a QueryInterface() call for ISequentialStream is not supported by the system implementation.
 */
 class Stream extends SequentialStream
 {
 	/*
-	Field: CLSID
-	This is CLSID_. It is required to create an instance.
+	Field: ThrowOnCreation
+	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
 	*/
-	static CLSID := "{}"
+	static ThrowOnCreation := true
 
 	/*
 	Field: IID
