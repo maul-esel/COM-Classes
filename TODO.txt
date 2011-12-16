@@ -10,4 +10,4 @@ ImageList2 -> SetCallback / GetCallback
 IPropertyStoreCache
 Audio classes
 IUIAutomation
-PropertyStore -> GetValue / SetValue -> PROPSTAT (difficult!)
+PropertyStore -> GetValue / SetValue -> PROPVARIANT (difficult!)
