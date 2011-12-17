@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown, SequentialStream
-	Helper classes - STGC, STATSTG, LOCKTYPE, STATFLAG, STREAM_SEEK
+	Helper classes - STGC, LOCKTYPE, STATFLAG, STREAM_SEEK, STATSTG
 
 Remarks:
 	Although IStream inherits ISequentialStream and you can use ISequentialStream's methods on an IStream instance, a QueryInterface() call for ISequentialStream is not supported by the system implementation.
@@ -163,12 +163,12 @@ class Stream extends SequentialStream
 		[opt] UINT flag - indicates certain members to omit from the structure. You can use the fields of the STATFLAG enumeration class for convenience.
 
 	Returns:
-		BOOL success - true on success, false otherwise.
+		STATSTG info - the STATSTG instance for the stream
 	*/
 	Stat(flag := 0)
 	{
-		VarSetCapacity(struct, 0, 0) ; TODO
-		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr*", struct, "uint", flag))
+		VarSetCapacity(struct, A_PtrSize + 68, 0)
+		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", &struct, "uint", flag))
 		return STATSTG.FromStructPtr(&struct)
 	}
 

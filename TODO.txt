@@ -1,5 +1,3 @@
-Helper -> STATSTG -> finish
-
 ShellLinkW -> Load -> WIN32_FIND_DATA struct class
 ShellLinkW -> GetIDList / SetIDList
 ShellLinkW -> GetHotkey / SetHotkey
