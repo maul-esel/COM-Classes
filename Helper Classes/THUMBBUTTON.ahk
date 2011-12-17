@@ -57,7 +57,7 @@ class THUMBBUTTON
 
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 16 + A_PtrSize + 520, 0)
+			VarSetCapacity(struct, A_PtrSize + 536, 0)
 			ptr := &struct
 		}
 
@@ -70,7 +70,7 @@ class THUMBBUTTON
 
 		return ptr
 	}
-	
+
 	/*
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class

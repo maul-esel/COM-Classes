@@ -15,13 +15,13 @@ class TaskbarList3 extends TaskbarList2
 	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
-		
+
 	/*
 	Field: IID
 	This is IID_ITaskbarList3. It is required to create an instance.
 	*/
 	static IID := "{ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf}"
-	
+
 	/*
 	Method: SetProgressValue
 	sets the current value of a taskbar progressbar
@@ -45,7 +45,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
 	}
-	
+
 	/*
 	Method: SetProgressState
 	sets the current state and thus the color of a taskbar progressbar
@@ -96,7 +96,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
 	}
-	
+
 	/*
 	Method: UnRegisterTab
 	Removes a thumbnail from an application's preview group when that tab or document is closed in the application.
@@ -118,7 +118,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
 	}
-	
+
 	/*
 	Method: SetTabOrder
 	Inserts a new thumbnail into an application's group flyout or moves an existing thumbnail to a new position in the application's group.
@@ -141,7 +141,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
 	}
-	
+
 	/*
 	Method: SetTabActive
 	Informs the taskbar that a tab or document window has been made the active window.
@@ -164,7 +164,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
 	}
-	
+
 	/*
 	Method: ThumbBarAddButtons
 	Adds a thumbnail toolbar with a specified set of buttons to the thumbnail image of a window in a taskbar button flyout.
@@ -182,7 +182,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarAddButtons(hWin, array)
 	{
-		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
+		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
 	
 	/*
@@ -198,7 +198,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarUpdateButtons(hWin, array)
 	{
-		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "UInt", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
+		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
 	
 	/*
@@ -277,7 +277,7 @@ class TaskbarList3 extends TaskbarList2
 
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -293,42 +293,35 @@ class TaskbarList3 extends TaskbarList2
 	
 	/*
 	group: private methods
-	*/
-	/*	
+
 	Method: ParseArray
 	parses an array of AHK THUMBBUTTON class instances to an array of THUMBBUTTON memory structures
-	
+
 	Parameters:
 		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
-		
+
 	Returns:
 		UPTR pointer - the pointer to the array in memory
 	*/
 	ParseArray(array)
 	{
-		static item_size := A_PtrSize + 536
-		local count, struct
+		static item_size := A_PtrSize + 536, struct
+		local count := array.MaxIndex()
 
-		count := array.MaxIndex()
 		if (count > 7)
 			count := 7
-		
+
 		VarSetCapacity(struct, item_size * count, 0)
-		for i, button in array ; loop through all button definitions
+		for each, button in array ; loop through all button definitions
 		{
-			NumPut(button.dwMask,	struct,		000 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
-			NumPut(button.iId,		struct,		004 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
-			NumPut(button.iBitmap,	struct,		008 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
-			NumPut(button.hIcon,	struct,		012 + 0 * A_PtrSize + item_size * (A_Index - 1),	"UPtr")
-			StrPut(button.szTip,	&struct	+	012 + 1 * A_PtrSize + item_size * (A_Index - 1),	260)
-			NumPut(button.dwFlags,	struct,		532 + 1 * A_PtrSize + item_size * (A_Index - 1),	"UInt")
-			 
+			button.ToStructPtr(&struct + item_size * (A_Index - 1))
+
 			if (A_Index == 7) ; only 7 buttons allowed
 				break
 		}
 
 		return &struct
-	}
+}
 		
 	/*
 	group: More about thumbbar buttons
