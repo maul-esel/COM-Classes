@@ -30,7 +30,7 @@ class SequentialStream extends Unknown
 	reads a specified number of bytes from the stream object into memory, starting at the current seek pointer.
 
 	Parameters:
-		byRef UPTR buffer - receives a pointer to the buffer the stream is read to
+		UPTR buffer - a pointer to the buffer the stream should be read to
 		UINT bytesToRead - the number of bytes to read
 		[opt] byRef UINT bytesRead - receives the number of bytes actually read
 
@@ -40,8 +40,7 @@ class SequentialStream extends Unknown
 	Remarks:
 		If the buffer contains a string, StrGet() might be of use.
 	*/
-
-	Read(byRef buffer, bytesToRead, byRef bytesRead := "")
+	Read(buffer, bytesToRead, byRef bytesRead := "")
 	{
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", buffer, "UInt", bytesToRead, "UInt*", bytesRead))
 	}
