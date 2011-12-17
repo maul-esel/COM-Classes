@@ -110,7 +110,7 @@ class Unknown
 	_GUID(byRef guid, sGUID)
 	{
 		VarSetCapacity(guid, 16, 0)
-		return DllCall("ole32\CLSIDFromString", "str", sGUID, "ptr", &guid) == 0x00 ? &guid : 0
+		return DllCall("ole32\CLSIDFromString", "str", sGUID, "ptr", &guid) >= 0 ? &guid : 0
 	}
 
 	/*
