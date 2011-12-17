@@ -97,9 +97,9 @@ class ShellItem  extends Unknown
 	Binds to a handler for an item as specified by the handler ID value (BHID).
 
 	Parameters:
-		IBindCtx bc - a raw interface pointer to an IBindCtx instance on a bind context object. Used to pass optional parameters to the handler. The contents of the bind context are handler-specific. For example, when binding to BHID_Stream, the STGM flags in the bind context indicate the mode of access desired (read or read/write).
 		GUID mode - a GUID that specifies which handler will be created, either as GUID string or as pointer.. See Remarks.
 		IID interface - the IID of the interface to retrieve, either as GUID string or as pointer.
+		[opt] IBindCtx bc - a raw interface pointer to an IBindCtx instance on a bind context object. Used to pass optional parameters to the handler. The contents of the bind context are handler-specific. For example, when binding to BHID_Stream, the STGM flags in the bind context indicate the mode of access desired (read or read/write).
 
 	Returns:
 		UPTR instance - a raw memory pointer to the created instance
@@ -121,13 +121,16 @@ class ShellItem  extends Unknown
 		BHID_AssociationArray - *Windows Vista and later:* Gets an IQueryAssociations object for use with an item or an array of items.
 		BHID_Filter - *Windows Vista and later:* Restricts usage to IFilter.
 		BHID_EnumAssocHandlers - *Windows 7 and later:* Retrieves an IEnumAssocHandlers that enumerates the association handlers for the given item. Returns an enumeration of recommended handlers, similar to calling SHAssocEnumHandlers with ASSOC_FILTER_RECOMMENDED.
+
+
+		In AHK v2, you can currently not pass pointers for the mode and interface parameters. Pass strings instead.
 	*/
-	BindToHandler(bc, mode, interface)
+	BindToHandler(mode, interface, bc := 0)
 	{
-		if interface is not integer
+		;if interface is not integer
 			interface := this._GUID(o, interface)
-		if mode is not integer
-			mode := this._GUID(m, interface)
+		;if mode is not integer
+			mode := this._GUID(m, mode)
 		if IsObject(bc)
 			bc := bc.ptr
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out))
