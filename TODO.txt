@@ -12,6 +12,10 @@ ImageList2 -> SetCallback / GetCallback
 
 Audio classes
 IUIAutomation
+IShellItem <============================================
+IShellItem2 <===========================================
+IShellLibrary
+IShellItemImageFactory
 
 PropertyStore / PropertyStoreCache -> GetValue / SetValue / GetValueAndState / SetValueAndState -> PROPVARIANT (difficult!)
 
