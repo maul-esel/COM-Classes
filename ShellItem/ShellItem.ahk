@@ -45,20 +45,48 @@ class ShellItem  extends Unknown
 
 	/*
 	Method: FromKnownFolder
-	Creates a Shell item object for a single file that exists inside a known folder.
+	Creates a Shell item object for a known folder.
 
 	Parameters:
 		GUID folder - the GUID of the known folder
-		[opt] STR file - the name of the file. Leave this empty to retrieve the folder itself.
+		[opt] HTOKEN user - An access token used to represent a particular user. This parameter is usually ommited, in which case the function tries to access the current user's instance of the folder. However, you may need to assign a value to hToken for those folders that can have multiple users but are treated as belonging to a single user. The most commonly used folder of this type is Documents.
+
+	Returns:
+		ShellItem item - the created item
 
 	Remarks:
-		*NOT WORKING!"
+		To call this function on public known folders, the caller must have Administrator privileges.
 	*/
-	FromKnownFolder(folder, file := 0)
+	FromKnownFolder(folder, user := 0)
 	{
-		MsgBox % "hr = " hr := DllCall("Shell32\SHCreateItemInKnownFolder", "ptr", this._GUID(a, folder), "uint", 0, "str", file, "ptr", this._GUID(i, this.IID), "ptr*", out)
-		MsgBox % "err = " A_LastError(hr)
-		MsgBox % "ptr = " out
+		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "ptr", this._GUID(a, folder), "uint", 0, "ptr", user, "ptr", this._GUID(i, this.IID), "ptr*", out))
+		return new ShellItem(out)
+	}
+
+	/*
+	Method: FromRelativePath
+	Creates and initializes a Shell item object from a relative parsing name.
+
+	Parameters:
+		STR path - the relative path to the item
+		[opt] ShellItem parent - the item the path is relative to (either as ShellItem instance or raw interface pointer). If this is empty, the current working directory is used.
+		[opt] IBindCtx bc - a raw interface pointer to an IBindCtx instance that controls the parsing operation.
+
+	Returns:
+		ShellItem item - the created item
+
+	Remarks:
+		Currently, this only works if a parent item is supplied.
+	*/
+	FromRelativePath(path, parent := 0, bc := 0)
+	{
+		if (!parent && !IsObject(parent))
+			parent := ShellItem.FromAbsolutePath(A_WorkingDir)
+		if IsObject(parent)
+			parent := parent.ptr
+		if IsObject(bc)
+			bc := bc.ptr
+		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", this._GUID(z, this.IID), "ptr*", out))
 		return new ShellItem(out)
 	}
 
@@ -102,7 +130,7 @@ class ShellItem  extends Unknown
 			mode := this._GUID(m, interface)
 		if IsObject(bc)
 			bc := bc.ptr
-		MsgBox % this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out)) " - " A_LastError(this.Error.code)
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out))
 		return out
 	}
 
