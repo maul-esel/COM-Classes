@@ -18,5 +18,3 @@ IShellLibrary
 IShellItemImageFactory
 
 PropertyStore / PropertyStoreCache -> GetValue / SetValue / GetValueAndState / SetValueAndState -> PROPVARIANT (difficult!)
-
-Struct classes -> ToStructPtr() -> opt. param "ptr"

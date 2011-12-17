@@ -31,19 +31,28 @@ class SIZE
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, 8, 0)
+		static struct
 
-		NumPut(this.cx,	struct,	00,	"Int")
-		NumPut(this.cy,	struct,	04,	"Int")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 8, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.cx,	1*ptr,	00,	"Int")
+		NumPut(this.cy,	1*ptr,	04,	"Int")
+
+		return ptr
 	}
 
 	/*
@@ -58,6 +67,6 @@ class SIZE
 	*/
 	FromStructPtr(ptr)
 	{
-		return new SIZE(NumGet(ptr, 00, "Int"), NumGet(ptr, 04, "Int"))
+		return new SIZE(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
 	}
 }

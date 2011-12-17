@@ -66,43 +66,52 @@ class PICTDESC
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		local size
-		this.cbSizeofstruct := size := 8 + (this.picType == PICTYPE.ICON || this.picType == PICTYPE.ENHMETAFILE ? A_PtrSize
+		static struct
+
+		this.cbSizeofstruct := 8 + (this.picType == PICTYPE.ICON || this.picType == PICTYPE.ENHMETAFILE ? A_PtrSize
 										: (this.picType == PICTYPE.BITMAP ? 2 * A_PtrSize
 										: (this.picType == PICTYPE.METAFILE ? 8 + A_PtrSize : 0)))
-		VarSetCapacity(struct, size, 0)
 
-		NumPut(this.cbSizeofstruct,	struct,	00,	"UInt")
-		NumPut(this.picType,		struct,	04,	"UInt")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, this.cbSizeofstruct, 0)
+			ptr := &struct
+		}
+
+		NumPut(this.cbSizeofstruct,	1*ptr,	00,	"UInt")
+		NumPut(this.picType,		1*ptr,	04,	"UInt")
 
 		if (this.picType == PICTYPE.BITMAP)
 		{
-			NumPut(this.bmp.hbitmap,struct, 08+0*A_PtrSize, "UPtr")
-			NumPut(this.bmp.hpal,	struct, 08+1*A_PtrSize, "UPtr")
+			NumPut(this.bmp.hbitmap,1*ptr, 08+0*A_PtrSize, "UPtr")
+			NumPut(this.bmp.hpal,	1*ptr, 08+1*A_PtrSize, "UPtr")
 		}
 		else if (this.picType == PICTYPE.METAFILE)
 		{
-			NumPut(this.wmf.hmeta,	struct,	08+0*A_PtrSize,	"UPtr")
-			NumPut(this.wmf.xExt,	struct,	08+1*A_PtrSize,	"Int")
-			NumPut(this.wmf.yExt,	struct,	12+1*A_PtrSize,	"Int")
+			NumPut(this.wmf.hmeta,	1*ptr,	08+0*A_PtrSize,	"UPtr")
+			NumPut(this.wmf.xExt,	1*ptr,	08+1*A_PtrSize,	"Int")
+			NumPut(this.wmf.yExt,	1*ptr,	12+1*A_PtrSize,	"Int")
 		}
 		else if (this.picType == PICTYPE.ICON)
 		{
-			NumPut(this.icon.hIcon,	struct,	08+0*A_PtrSize,	"UPtr")
+			NumPut(this.icon.hIcon,	1*ptr,	08+0*A_PtrSize,	"UPtr")
 		}
 		else if (this.picType == PICTYPE.ENHMETAFILE)
 		{
-			NumPut(this.emf.hemf,	struct,	08+0*A_PtrSize,	"UPtr")
+			NumPut(this.emf.hemf,	1*ptr,	08+0*A_PtrSize,	"UPtr")
 		}
 
-		return &struct
+		return ptr
 	}
 
 	/*
@@ -122,27 +131,27 @@ class PICTDESC
 	{
 		instance := new PICTDESC()
 
-		instance.cbSizeofstruct	:= NumGet(ptr,	00,	"UInt")
-		instance.picType		:= NumGet(ptr,	04,	"UInt")
+		instance.cbSizeofstruct	:= NumGet(1*ptr,	00,	"UInt")
+		instance.picType		:= NumGet(1*ptr,	04,	"UInt")
 
 		if (instance.picType == PICTYPE.BITMAP && instance.cbSizeofstruct == 8 + 2 * A_PtrSize)
 		{
-			instance.bmp.hbitmap:= NumGet(ptr,	08+0*A_PtrSize,	"UPtr")
-			instance.bmp.hpal	:= NumGet(ptr,	08+1*A_PtrSize,	"UPtr")
+			instance.bmp.hbitmap:= NumGet(1*ptr,	08+0*A_PtrSize,	"UPtr")
+			instance.bmp.hpal	:= NumGet(1*ptr,	08+1*A_PtrSize,	"UPtr")
 		}
 		else if (instance.picType == PICTYPE.METAFILE && instance.cbSizeofstruct == 16 + A_PtrSize)
 		{
-			instance.wmf.hmeta	:= NumGet(ptr,	08+0*A_PtrSize,	"UPtr")
-			instance.wmf.xExt	:= NumGet(ptr,	08+1*A_PtrSize,	"Int")
-			instance.wmf.yExt	:= NumGet(ptr,	12+1*A_PtrSize,	"Int")
+			instance.wmf.hmeta	:= NumGet(1*ptr,	08+0*A_PtrSize,	"UPtr")
+			instance.wmf.xExt	:= NumGet(1*ptr,	08+1*A_PtrSize,	"Int")
+			instance.wmf.yExt	:= NumGet(1*ptr,	12+1*A_PtrSize,	"Int")
 		}
 		else if (instance.picType == PICTYPE.ICON && instance.cbSizeofstruct == 8 + A_PtrSize)
 		{
-			instance.icon.hIcon	:= NumGet(ptr,	08+0*A_PtrSize,	"UPtr")
+			instance.icon.hIcon	:= NumGet(1*ptr,	08+0*A_PtrSize,	"UPtr")
 		}
 		else if (instance.picType == PICTYPE.ENHMETAFILE && instance.cbSizeofstruct == 8 + A_PtrSize)
 		{
-			instance.emf.hemf	:= NumGet(ptr,	08+0*A_PtrSize,	"UPtr")
+			instance.emf.hemf	:= NumGet(1*ptr,	08+0*A_PtrSize,	"UPtr")
 		}
 
 		return instance

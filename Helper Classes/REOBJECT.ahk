@@ -56,7 +56,7 @@ class REOBJECT
 	Field: sizel
 	A SIZE structure class instance specifying the size of the object. The unit of measure is 0.01 millimeters, which is a himetric measurement. A 0, 0 on insertion indicates that an object is free to determine its size until the modify flag is turned off.
 	*/
-	sizel := new SIZE(0,0)
+	sizel := new SIZE()
 
 	/*
 	Field: dvaspect
@@ -78,28 +78,36 @@ class REOBJECT
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, this.cbStruct,	0)
+		static struct
 
-		NumPut(this.cbStruct,	struct,	00+0*A_PtrSize,	"UInt")
-		NumPut(this.cp,			struct,	04+0*A_PtrSize,	"Int")
-		DllCall("Ole32.dll\CLSIDFromString", "str", this.clsid, "ptr", &struct + 08)
-		NumPut(this.poleobj,	struct,	24+0*A_PtrSize,	"UPtr")
-		NumPut(this.pstg,		struct,	24+1*A_PtrSize,	"UPtr")
-		NumPut(this.polesite,	struct,	24+2*A_PtrSize,	"UPtr")
-		NumPut(this.sizel.cx,	struct,	24+3*A_PtrSize,	"UInt")
-		NumPut(this.sizel.cy,	struct,	28+3*A_PtrSize,	"UInt")
-		NumPut(this.dvaspect,	struct,	32+3*A_PtrSize,	"UInt")
-		NumPut(this.dwFlags,	struct,	36+3*A_PtrSize,	"UInt")
-		NumPut(this.dwUser,		struct,	40+3*A_PtrSize,	"UInt")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, this.cbStruct,	0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.cbStruct,	1*ptr,	00+0*A_PtrSize,	"UInt")
+		NumPut(this.cp,			1*ptr,	04+0*A_PtrSize,	"Int")
+		DllCall("Ole32.dll\CLSIDFromString", "str", this.clsid, "ptr", ptr + 08)
+		NumPut(this.poleobj,	1*ptr,	24+0*A_PtrSize,	"UPtr")
+		NumPut(this.pstg,		1*ptr,	24+1*A_PtrSize,	"UPtr")
+		NumPut(this.polesite,	1*ptr,	24+2*A_PtrSize,	"UPtr")
+		this.sizel.ToStructPtr(ptr + 24 + 3*A_PtrSize)
+		NumPut(this.dvaspect,	1*ptr,	32+3*A_PtrSize,	"UInt")
+		NumPut(this.dwFlags,	1*ptr,	36+3*A_PtrSize,	"UInt")
+		NumPut(this.dwUser,		1*ptr,	40+3*A_PtrSize,	"UInt")
+
+		return ptr
 	}
 
 	/*
@@ -116,17 +124,17 @@ class REOBJECT
 	{
 		instance := new REOBJECT()
 
-		instance.cbStruct	:= NumGet(ptr,	00+0*A_PtrSize,	"UInt")
-		instance.cp			:= NumGet(ptr,	04+0*A_PtrSize,	"UInt")
+		instance.cbStruct	:= NumGet(1*ptr,	00+0*A_PtrSize,	"UInt")
+		instance.cp			:= NumGet(1*ptr,	04+0*A_PtrSize,	"UInt")
 		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr + 08, "ptr*", clsid)
 		instance.clsid		:= StrGet(clsid, "UTF-16")
-		instance.poleobj	:= NumGet(ptr,	24+0*A_PtrSize,	"UPtr")
-		instance.pstg		:= NumGet(ptr,	24+1*A_PtrSize,	"UPtr")
-		instance.polesite	:= NumGet(ptr,	24+2*A_PtrSize,	"UPtr")
+		instance.poleobj	:= NumGet(1*ptr,	24+0*A_PtrSize,	"UPtr")
+		instance.pstg		:= NumGet(1*ptr,	24+1*A_PtrSize,	"UPtr")
+		instance.polesite	:= NumGet(1*ptr,	24+2*A_PtrSize,	"UPtr")
 		instance.sizel 		:= SIZE.FromStructPtr(ptr + 24+3*A_PtrSize)
-		instance.dvaspect	:= NumGet(ptr,	32+3*A_PtrSize,	"UInt")
-		instance.dwFlags	:= NumGet(ptr,	36+3*A_PtrSize,	"UInt")
-		instance.dwUser		:= NumGet(ptr,	40+3*A_PtrSize,	"UInt")
+		instance.dvaspect	:= NumGet(1*ptr,	32+3*A_PtrSize,	"UInt")
+		instance.dwFlags	:= NumGet(1*ptr,	36+3*A_PtrSize,	"UInt")
+		instance.dwUser		:= NumGet(1*ptr,	40+3*A_PtrSize,	"UInt")
 
 		return instance
 	}

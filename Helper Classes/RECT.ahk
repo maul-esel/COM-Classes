@@ -46,21 +46,30 @@ class RECT
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, 16, 0)
+		static struct
 
-		NumPut(this.left,	struct,	00,	"Int")
-		NumPut(this.top,	struct,	04,	"Int")
-		NumPut(this.right,	struct,	08,	"Int")
-		NumPut(this.bottom,	struct,	12,	"Int")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 16, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.left,	1*ptr,	00,	"Int")
+		NumPut(this.top,	1*ptr,	04,	"Int")
+		NumPut(this.right,	1*ptr,	08,	"Int")
+		NumPut(this.bottom,	1*ptr,	12,	"Int")
+
+		return ptr
 	}
 
 	/*
@@ -75,9 +84,9 @@ class RECT
 	*/
 	FromStructPtr(ptr)
 	{
-		return new RECT(NumGet(ptr, 00, "Int")
-					,	NumGet(ptr, 04, "Int")
-					,	NumGet(ptr, 08, "Int")
-					,	NumGet(ptr, 12, "Int"))
+		return new RECT(NumGet(1*ptr, 00, "Int")
+					,	NumGet(1*ptr, 04, "Int")
+					,	NumGet(1*ptr, 08, "Int")
+					,	NumGet(1*ptr, 12, "Int"))
 	}
 }

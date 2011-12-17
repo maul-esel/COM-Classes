@@ -31,19 +31,28 @@ class FILETIME
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
-		ptr - a pointer to the struct in memory
+		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, 8, 0)
+		static struct
 
-		NumPut(this.dwLowDateTime,	struct,	0,	"UInt")
-		NumPut(this.dwHighDateTime,	struct,	4,	"UInt")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 8, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.dwLowDateTime,	1*ptr,	0,	"UInt")
+		NumPut(this.dwHighDateTime,	1*ptr,	4,	"UInt")
+
+		return ptr
 	}
 
 	/*
@@ -58,7 +67,7 @@ class FILETIME
 	*/
 	FromStructPtr(ptr)
 	{
-		return new FILETIME(NumGet(ptr, 00, "UInt"), NumGet(ptr, 04, "UInt"))
+		return new FILETIME(NumGet(1*ptr, 00, "UInt"), NumGet(1*ptr, 04, "UInt"))
 	}
 
 	/*

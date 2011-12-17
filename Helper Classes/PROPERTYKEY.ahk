@@ -22,19 +22,28 @@ class PROPERTYKEY
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, 20, 0)
+		static struct
 
-		DllCall("Ole32\CLSIDFromString", "str", this.fmtid, "ptr", &struct)
-		NumPut(this.pid,	struct,	16,	"UInt")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 20, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		DllCall("Ole32\CLSIDFromString", "str", this.fmtid, "ptr", ptr)
+		NumPut(this.pid,	1*ptr,	16,	"UInt")
+
+		return ptr
 	}
 
 	/*
@@ -52,8 +61,8 @@ class PROPERTYKEY
 		instance := new PROPERTYKEY()
 
 		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr, "ptr*", guid)
-		instance.fmtid	:= StrGet(guid, "UTF-16")
-		instance.pid	:= NumGet(ptr,	16,	"UInt")
+		instance.fmtid	:= StrGet(1*guid, "UTF-16")
+		instance.pid	:= NumGet(1*ptr,	16,	"UInt")
 
 		return instance
 	}

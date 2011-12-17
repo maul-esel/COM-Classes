@@ -1,4 +1,4 @@
-/*
+﻿/*
 class: IMAGEINFO
 a class containing information about an image in an image list. This structure is used with the IImageList::GetImageInfo function. 
 */
@@ -35,7 +35,7 @@ class IMAGEINFO
 	Remarks:
 		- This should be a RECT instance.
 	*/
-	rcImage := new RECT(0,0,0,0)
+	rcImage := new RECT()
 	
 	/*
 	Method: Constructor
@@ -53,38 +53,47 @@ class IMAGEINFO
 	
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
-	
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
+
 	Returns:
-		ptr - a pointer to the struct in memory
+		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr := 0)
 	{
-		VarSetCapacity(struct, 2*A_PtrSize + 24, 0)
-		
-		NumPut(this.hbmImage,		struct,		00+0*A_PtrSize,	"UPtr")
-		NumPut(this.hbmMask,		struct,		00+1*A_PtrSize,	"UPtr")
-		NumPut(this.Unused1,		struct,		00+2*A_PtrSize,	"Int")
-		NumPut(this.Unused2,		struct,		04+2*A_PtrSize,	"Int")
-		NumPut(this.rcImage.left,	struct,		08+2*A_PtrSize,	"Int")
-		NumPut(this.rcImage.top,	struct,		12+2*A_PtrSize,	"Int")
-		NumPut(this.rcImage.right,	struct,		16+2*A_PtrSize,	"Int")
-		NumPut(this.rcImage.bottom,	struct,		20+2*A_PtrSize,	"Int")
-		
-		return &struct
+		static struct
+
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 2*A_PtrSize + 24, 0)
+			ptr := &struct
+		}
+
+		NumPut(this.hbmImage,		1*ptr,		00+0*A_PtrSize,	"UPtr")
+		NumPut(this.hbmMask,		1*ptr,		00+1*A_PtrSize,	"UPtr")
+		NumPut(this.Unused1,		1*ptr,		00+2*A_PtrSize,	"Int")
+		NumPut(this.Unused2,		1*ptr,		04+2*A_PtrSize,	"Int")
+		this.rcImage.ToStructPtr(ptr + 08 + 2*A_PtrSize)
+
+		return ptr
 	}
 	
 	/*
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class
-	
+
+	Parameters:
+		UPTR ptr - a pointer to a IMAGEINFO struct in memory
+
 	Returns:
-		instance - the new IMAGEINFO instance
+		IMAGEINFO instance - the new IMAGEINFO instance
 	*/
 	FromStructPtr(ptr)
 	{
-		return new IMAGEINFO(NumGet(ptr,	00+0*A_PtrSize, "UPtr")
-						,	NumGet(ptr,		00+1*A_PtrSize, "UPtr")
+		return new IMAGEINFO(NumGet(1*ptr,	00+0*A_PtrSize, "UPtr")
+						,	NumGet(1*ptr,		00+1*A_PtrSize, "UPtr")
 						,	RECT.FromStructPtr(ptr + 08 + 2*A_PtrSize))
 	}
 }
