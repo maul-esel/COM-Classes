@@ -17,8 +17,7 @@ class RichEditOLE extends Unknown
 	Field: IID
 	This is IID_IRichEditOLE. It is required to create an instance.
 	*/
-	/*static IID := "{46EB5926-582E-4017-9FDF-E8998DAA0950}"
-*/
+	static IID := "{00020D00-0000-0000-C000-000000000046}"
 
 	/*
 	Field: ThrowOnCreation

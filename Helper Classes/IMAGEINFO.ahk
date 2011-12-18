@@ -42,9 +42,9 @@ class IMAGEINFO
 	creates a new instance of the class
 	
 	Parameters:
-		hbmImage - the initial value of the <hbmImage> field
-		hbmMask - the initial value of the <hbmMask> field
-		rcImage - the initial (RECT) value of the <rcImage> field
+		HBITMAP hbmImage - the initial value of the <hbmImage> field
+		HBITMAP hbmMask - the initial value of the <hbmMask> field
+		RECT rcImage - the initial (RECT) value of the <rcImage> field
 	*/
 	__New(hbmImage, hbmMask, rcImage)
 	{
