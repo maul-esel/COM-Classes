@@ -3,7 +3,7 @@ class: Picture
 implements the IPicture interface and manages a picture object and its properties.
 
 Requirements:
-	AutoHotkey - AHK v1.1+
+	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - Unknown
 	Helper Classes - Stream, PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
