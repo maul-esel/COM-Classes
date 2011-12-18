@@ -60,6 +60,7 @@ SaveHImage2File(handle, file, type := "~icon~")
 
 	if (hFile)
 	{
+		dwDone := 0, dwRead := 0, dwWritten := 0
 		VarSetCapacity(buf, 4096, 0)
 		while (dwDone < cbSize)
 		{
@@ -74,7 +75,10 @@ SaveHImage2File(handle, file, type := "~icon~")
 			else
 				break
 		}
+
 		hFile.Close()
+		ObjRelease(pStrm)
+		ObjRelease(pPict)
 		return dwDone == cbSize
 	}
 }
