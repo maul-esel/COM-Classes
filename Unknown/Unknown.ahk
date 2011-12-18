@@ -23,11 +23,12 @@ class Unknown
 	Fields:
 		HRESULT code - the HRESULT error code
 		STR description - the error description string in the system's language
+		BOOL isError - a shortcut to define whether an error occured or not
 
 	Remarks:
 		This field is updated by the internal helper method <_Error>, which should be called by almost all methods in inherited classes.
 	*/
-	Error := { "code" : 0, "description" : "" }
+	Error := { "code" : 0, "description" : "", "isError" : false }
 
 	/*
 	Field: ThrowOnCreation
@@ -109,7 +110,7 @@ class Unknown
 	_GUID(byRef guid, sGUID)
 	{
 		VarSetCapacity(guid, 16, 0)
-		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &guid) == 0x00 ? &guid : 0
+		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &guid) >= 0x00 ? &guid : 0
 	}
 
 	/*
@@ -131,14 +132,14 @@ class Unknown
 	_Error(error)
 	{
 		this.Error.code := error
-		
+
 		buffer_size := VarSetCapacity(buffer, 1024, 0)
 		DllCall("FormatMessageW", "uint", 0x1200, "ptr", 0, "uint", error, "uint", 0x10000, ptr, &buffer, "uint", buffer_size, ptr, 0)
-		error_msg := StrGet(&buffer)
+		error_msg := StrGet(&buffer, "UTF-16")
 
 		this.Error.description := error " - " error_msg
-		
-		return error >= 0x00
+
+		return this.Error.isError := error >= 0x00
 	}
 
 	/*

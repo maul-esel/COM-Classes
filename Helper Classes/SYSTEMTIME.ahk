@@ -58,25 +58,34 @@ class SYSTEMTIME
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
-		ptr - a pointer to the struct in memory
+		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr = 0)
 	{
-		VarSetCapacity(struct, 16, 0)
+		static struct
 
-		NumPut(this.wYear,			struct,	00,	"short")
-		NumPut(this.wMonth,			struct,	02,	"short")
-		NumPut(this.wDayOfWeek,		struct,	04,	"short")
-		NumPut(this.wDay,			struct,	06,	"short")
-		NumPut(this.wHour,			struct,	08,	"short")
-		NumPut(this.wMinute,		struct,	10,	"short")
-		NumPut(this.wSecond,		struct,	12,	"short")
-		NumPut(this.wMilliseconds,	struct,	14,	"short")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, 16, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.wYear,			1*ptr,	00,	"short")
+		NumPut(this.wMonth,			1*ptr,	02,	"short")
+		NumPut(this.wDayOfWeek,		1*ptr,	04,	"short")
+		NumPut(this.wDay,			1*ptr,	06,	"short")
+		NumPut(this.wHour,			1*ptr,	08,	"short")
+		NumPut(this.wMinute,		1*ptr,	10,	"short")
+		NumPut(this.wSecond,		1*ptr,	12,	"short")
+		NumPut(this.wMilliseconds,	1*ptr,	14,	"short")
+
+		return ptr
 	}
 
 	/*
@@ -89,18 +98,18 @@ class SYSTEMTIME
 	Returns:
 		SYSTEMTIME instance - the new SYSTEMTIME instance
 	*/
-	FromStructPtr()
+	FromStructPtr(ptr)
 	{
 		instance := new SYSTEMTIME()
 
-		instance.wYear			:= NumGet(ptr,	00, "short")
-		instance.wMonth			:= NumGet(ptr,	02,	"short")
-		instance.wDayOfWeek		:= NumGet(ptr,	04, "short")
-		instance.wDay			:= NumGet(ptr,	06,	"short")
-		instance.wHour			:= NumGet(ptr,	08,	"short")
-		instance.wMinute		:= NumGet(ptr,	10,	"short")
-		instance.wSecond		:= NumGet(ptr,	12,	"short")
-		instance.wMilliseconds	:= NumGet(ptr,	14,	"short")
+		instance.wYear			:= NumGet(1*ptr,	00, "short")
+		instance.wMonth			:= NumGet(1*ptr,	02,	"short")
+		instance.wDayOfWeek		:= NumGet(1*ptr,	04, "short")
+		instance.wDay			:= NumGet(1*ptr,	06,	"short")
+		instance.wHour			:= NumGet(1*ptr,	08,	"short")
+		instance.wMinute		:= NumGet(1*ptr,	10,	"short")
+		instance.wSecond		:= NumGet(1*ptr,	12,	"short")
+		instance.wMilliseconds	:= NumGet(1*ptr,	14,	"short")
 
 		return instance
 	}

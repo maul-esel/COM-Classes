@@ -43,43 +43,54 @@ class THUMBBUTTON
 
 	/*
 	Method: ToStructPtr
-	converts the instance to a script-usable struct
+	converts the instance to a script-usable struct and returns its memory adress.
+
+	Parameters:
+		[opt] UPTR ptr - the fixed memory address to copy the struct to.
 
 	Returns:
-		ptr - a pointer to the struct in memory
+		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr()
+	ToStructPtr(ptr = 0)
 	{
-		local struct
-		VarSetCapacity(struct, 16 + A_PtrSize + 520, 0)
+		static struct
 
-		NumPut(this.dwMask,		struct,	000+0*A_PtrSize,	"UInt")
-		NumPut(this.iId,		struct,	004+0*A_PtrSize,	"UInt")
-		NumPut(this.iBitmap,	struct,	008+0*A_PtrSize,	"UInt")
-		NumPut(this.hIcon,		struct,	012+0*A_PtrSize,	"UPtr")
-		StrPut(this.szTip,		&struct+012+1*A_PtrSize,	260)
-		NumPut(this.dwFlags,	struct,	532+1*A_PtrSize,	"UInt")
+		if (!ptr)
+		{
+			VarSetCapacity(struct, A_PtrSize + 536, 0)
+			ptr := &struct
+		}
 
-		return &struct
+		NumPut(this.dwMask,		1*ptr,	000+0*A_PtrSize,	"UInt")
+		NumPut(this.iId,		1*ptr,	004+0*A_PtrSize,	"UInt")
+		NumPut(this.iBitmap,	1*ptr,	008+0*A_PtrSize,	"UInt")
+		NumPut(this.hIcon,		1*ptr,	012+0*A_PtrSize,	"UPtr")
+		StrPut(this.szTip,		1*ptr + 012+1*A_PtrSize,	260,	"UTF-16")
+		NumPut(this.dwFlags,	1*ptr,	532+1*A_PtrSize,	"UInt")
+
+		return ptr
 	}
 
 	/*
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class
 
+	Parameters:
+		UPTR ptr - a pointer to a THUMBBUTTON struct in memory
+
 	Returns:
-		instance - the new THUMBBUTTON instance
+		THUMBBUTTON instance - the new THUMBBUTTON instance
 	*/
 	FromStructPtr(ptr)
 	{
 		local instance := new THUMBBUTTON()
 
-		instance.dwMask		:=	NumGet(ptr,	000+0*A_PtrSize,	"UInt")
-		instance.iId		:=	NumGet(ptr,	004+0*A_PtrSize,	"UInt")
-		instance.iBitmap	:=	NumGet(ptr,	008+0*A_PtrSize,	"UInt")
-		instance.hIcon		:=	NumGet(ptr,	012+0*A_PtrSize,	"UPtr")
-		instance.szTip		:=	StrGet(ptr +012+1*A_PtrSize,	260)
-		instance.dwFlags	:=	NumGet(ptr,	272+1*A_PtrSize,	"UInt")
+		instance.dwMask		:=	NumGet(1*ptr,	000+0*A_PtrSize,	"UInt")
+		instance.iId		:=	NumGet(1*ptr,	004+0*A_PtrSize,	"UInt")
+		instance.iBitmap	:=	NumGet(1*ptr,	008+0*A_PtrSize,	"UInt")
+		instance.hIcon		:=	NumGet(1*ptr,	012+0*A_PtrSize,	"UPtr")
+		instance.szTip		:=	StrGet(1*ptr  + 012+1*A_PtrSize,	260,	"UTF-16")
+		instance.dwFlags	:=	NumGet(1*ptr,	272+1*A_PtrSize,	"UInt")
 
 		return instance
 	}

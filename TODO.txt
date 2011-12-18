@@ -1,13 +1,25 @@
-PropertyStore -> GetAt -> PROPERTYKEY struct class
-Helper -> STATSTG -> finish
 ShellLinkW -> Load -> WIN32_FIND_DATA struct class
 ShellLinkW -> GetIDList / SetIDList
 ShellLinkW -> GetHotkey / SetHotkey
+IShellLinkA
+
 RichEditOLE -> IID
 RichEditOLE -> continue
 RichEditOLE -> example1
+
 ImageList2 -> SetCallback / GetCallback
-IPropertyStoreCache
+PropertyStore / PropertyStoreCache -> GetValue / SetValue / GetValueAndState / SetValueAndState -> PROPVARIANT (difficult!)
+
 Audio classes
 IUIAutomation
-PropertyStore -> GetValue / SetValue -> PROPSTAT (difficult!)
+IShellItem2
+IEnumShellItems / IShellItemArray
+IShellLibrary
+IShellItemImageFactory
+INameSpaceTreeControl / INameSpaceTreeControl2
+IUserNotification / IUserNotification2
+IFileDialog / IFileSaveDialog / IFileOpenDialog / IFileDialogCustomize / IFileDialogControlEvents / IFileDialog2
+IFileOperation
+IKnownFolder
+IOpenControlPanel
+ICustomDestinationList / IApplicationDestinations / IApplicationDocumentLists

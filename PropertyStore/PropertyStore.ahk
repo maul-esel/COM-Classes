@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - Unknown
-	Helper classes - (none)
+	Helper classes - PROPERTYKEY
 */
 class PropertyStore extends Unknown
 {
@@ -43,12 +43,12 @@ class PropertyStore extends Unknown
 		UINT index - The index of the property key in the array of PROPERTYKEY structures. This is a zero-based index.
 
 	Returns:
-		UPTR ptr - a pointer to a PROPERTYKEY structure *(To be replaced by PROPERTYKEY instance!)*
+		UPTR ptr - a PROPERTYKEY instance
 	*/
 	GetAt(index)
 	{
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", index, "ptr*", out))
-		return out
+		return new PROPERTYKEY(out)
 	}
 
 	/*
@@ -56,13 +56,15 @@ class PropertyStore extends Unknown
 	Gets data for a specific property.
 
 	Parameters:
-		PROPERTYKEY key - a reference to the PROPERTYKEY structure retrieved through IPropertyStore::GetAt. This structure contains a unique identifier for the property in question.
+		PROPERTYKEY key - a reference to the PROPERTYKEY structure retrieved through IPropertyStore::GetAt (either a raw memory pointer or a PROPERTYKEY instance).
 
 	Parameters:
 		UPTR ptr - a pointer to a PROPVARIANT structure *(To be replaced by PROPVARIANT instance!)*
 	*/
 	GetValue(key)
 	{
+		if IsObject(key)
+			key := key.ToStructPtr()
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr*", out))
 		return out
 	}
@@ -72,7 +74,7 @@ class PropertyStore extends Unknown
 	Sets a new property value, or replaces or removes an existing value.
 
 	Parameters:
-		PROPERTYKEY key - a reference to the PROPERTYKEY structure retrieved through IPropertyStore::GetAt. This structure contains a unique identifier for the property in question.
+		PROPERTYKEY key - a reference to the PROPERTYKEY structure retrieved through IPropertyStore::GetAt (either a raw memory pointer or a PROPERTYKEY instance).
 		UPTR ptr - a pointer to a PROPVARIANT structure
 
 	Returns:
@@ -80,6 +82,8 @@ class PropertyStore extends Unknown
 	*/
 	SetValue(key, value)
 	{
+		if IsObject(key)
+			key := key.ToStructPtr()
 		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr", value))
 	}
 

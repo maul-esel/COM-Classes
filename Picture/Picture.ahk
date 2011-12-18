@@ -6,7 +6,7 @@ Requirements:
 	AutoHotkey - AHK v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - Unknown
-	Helper Classes - Stream, PICTYPE, RECT, PICTUREATTRIBUTES
+	Helper Classes - Stream, PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
 */
 class Picture extends Unknown
 {
@@ -21,9 +21,30 @@ class Picture extends Unknown
 	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
 
 	Remarks:
-		You may obtain a pointer using OleCreatePictureIndirect (<http://msdn.microsoft.com/en-us/library/windows/desktop/ms694511>).
+		You may obtain an instance from the <FromPICTDESC()> method.
 	*/
 	static ThrowOnCreation := true
+
+	/*
+	Method: FromPICTDESC
+	(static) method that creates a Picture instance from a given PICTDESC struct
+
+	Parameters:
+		PICTDESC src - either a raw memory pointer or a PICTDESC struct class instance to create the instance from
+
+	Returns:
+		Picture instance - the created instance
+
+	Remarks:
+		- This function updates the Picture class' Error field. You may use it to obtain information about failure.
+	*/
+	FromPICTDESC(src)
+	{
+		if IsObject(src)
+			src := src.ToStructPtr()
+		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", Unknown._Guid(i, Picture.IID), "UInt", false, "ptr*", pPict))
+		return new Picture(pPict)
+	}
 
 	/*
 	group: meta-functions

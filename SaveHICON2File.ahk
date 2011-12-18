@@ -8,15 +8,16 @@ This is an example that uses a bunch of classes from the framework. It contains 
 #include Stream\Stream.ahk
 #include Helper Classes\IDI.ahk
 #include Helper Classes\PICTYPE.ahk
+#include Helper Classes\PICTDESC.ahk
 #include Helper Classes\STREAM_SEEK.ahk
 
-hIcon := DllCall("LoadIcon", "uint", 0, "Uint", IDI.HAND) ; load a system icon
-result := SaveIconToFile(hIcon, A_Desktop "\test.ico", true) ; save the icon to a file
+hIcon := DllCall("LoadIcon", "uptr", 0, "uint", IDI.HAND, "ptr") ; load a system icon
+result := SaveHICON2File(hIcon, A_Desktop "\test.ico", true) ; save the icon to a file
 MsgBox % "finished: " . (result ? "succeeded" : "failed") ; report to user
 return
 
 /*
-Function: SaveIconToFile
+Function: SaveHICON2File
 saves a HICON to a *.ico file
 
 Parameters:
@@ -28,7 +29,8 @@ Returns:
 	BOOL success - true on success, false otherwise.
 
 Remarks:
-	This function is a conversion from the C++ code posted <here at http://www.autohotkey.com/forum/viewtopic.php?t=72481>.
+	- This function is a conversion from the C++ code posted <here at http://www.autohotkey.com/forum/viewtopic.php?t=72481>.
+	- In the code below there is a comment that shows how to make this function save HBITMAPs instead of HICONs.
 */
 SaveIconToFile(hIcon, file, bAutoDelete = false)
 {
@@ -37,11 +39,22 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 		PICTDESC pd = {sizeof(pd), PICTYPE_ICON};
 		pd.icon.hicon = hico;
 	*/
-	VarSetCapacity(pd, 8+A_PtrSize, 0)
-	NumPut(8+A_PtrSize, pd, 0, "UInt") ; set cbSize
-	NumPut(PICTYPE.ICON, pd, 4, "UInt") ; the image is an icon
-	NumPut(hIcon, pd, 8, "UPtr") ; set the icon
-	
+	pd := new PICTDESC()
+	pd.picType := PICTYPE.ICON
+	pd.icon.hIcon := hicon
+
+	/*
+	Addition:
+	====================================================================
+	You may easily change this to save bitmaps.
+	To do so, replace the last 2 lines of code above by the following:
+	(start code)
+	pd.picType := PICTYPE.BITMAP
+	pd.bmp.hbitmap := hicon
+	(end)
+	Now you can pass the function a HBITMAP through the hIcon parameter.
+	*/
+
 	/*
 	initialize variables:
 		CComPtr<IPicture> pPict = NULL;
@@ -51,7 +64,7 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 	pPict := 0
 	pStrm := 0
 	cbSize := 0
-	
+
 	/*
 	create a stream, a picture and save the picture to the stream:
 		res = SUCCEEDED( ::CreateStreamOnHGlobal(NULL, TRUE, &pStrm) );
@@ -59,8 +72,7 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 		res = SUCCEEDED( pPict->SaveAsFile( pStrm, TRUE, &cbSize ) );
 	*/
 	pStrm := Stream.FromHGlobal(0)
-	DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", &pd, "UPtr", Unknown._Guid(i, Picture.IID), "UInt", bAutoDelete, "ptr*", pPict)
-	pPict := new Picture(pPict)
+	pPict := Picture.FromPICTDESC(pd)
 	cbSize := pPict.SaveAsFile(pStrm, true)
 
 	/*
@@ -75,7 +87,7 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 		HANDLE hFile = ::CreateFile(szFileName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
 	*/
 	hFile := FileOpen(file, "w")
-	
+
 	/*
 	if file creation succeeded:
 		if( INVALID_HANDLE_VALUE != hFile )
@@ -87,13 +99,13 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 			DWORD dwWritten = 0, dwRead = 0, dwDone = 0;
 		*/
 		dwWritten := 0, dwRead := 0, dwDone := 0
-		
+
 		/*
 		create buffer:
 			BYTE  buf[4096];
 		*/
 		VarSetCapacity(buf, 4096, 0)
-		
+
 		/*
 			while( dwDone < cbSize )
 		*/
@@ -110,7 +122,7 @@ SaveIconToFile(hIcon, file, bAutoDelete = false)
 					::WriteFile(hFile, buf, dwRead, &dwWritten, NULL);
 				*/
 				dwWritten := hFile.RawWrite(&buf, dwRead)
-				
+
 				/*
 				if something failed with writing: stop
 					if( dwWritten != dwRead )
