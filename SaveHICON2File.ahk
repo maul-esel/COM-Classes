@@ -32,7 +32,7 @@ Remarks:
 	- This function is a conversion from the C++ code posted <here at http://www.autohotkey.com/forum/viewtopic.php?t=72481>.
 	- In the code below there is a comment that shows how to make this function save HBITMAPs instead of HICONs.
 */
-SaveIconToFile(hIcon, file, bAutoDelete = false)
+SaveHICON2File(hIcon, file, bAutoDelete = false)
 {
 	/*
 	initialize the PICTDESC structure:
