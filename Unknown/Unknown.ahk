@@ -131,11 +131,11 @@ class Unknown
 	*/
 	_Error(error)
 	{
+		static ALLOCATE_BUFFER := 0x00000100, FROM_SYSTEM := 0x00001000, IGNORE_INSERTS := 0x00000200
 		this.Error.code := error
 
-		buffer_size := VarSetCapacity(buffer, 1024, 0)
-		DllCall("FormatMessageW", "uint", 0x1200, "ptr", 0, "uint", error, "uint", 0x10000, ptr, &buffer, "uint", buffer_size, ptr, 0)
-		error_msg := StrGet(&buffer)
+		size := DllCall("FormatMessage", "uint", ALLOCATE_BUFFER|FROM_SYSTEM|IGNORE_INSERTS, "ptr", 0, "uint", error, "uint", 0x10000, "ptr*", bufaddr, "uint", 0, "ptr", 0)
+		error_msg := StrGet(bufaddr, size)
 
 		this.Error.description := error " - " error_msg
 
