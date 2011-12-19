@@ -22,4 +22,4 @@ IFileDialog / IFileSaveDialog / IFileOpenDialog / IFileDialogCustomize / IFileDi
 IFileOperation
 IKnownFolder
 IOpenControlPanel
-ICustomDestinationList / IApplicationDestinations / IApplicationDocumentLists
+IApplicationDestinations / IApplicationDocumentLists
