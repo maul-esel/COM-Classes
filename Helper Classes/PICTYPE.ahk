@@ -4,6 +4,9 @@ an enumeration class describing the type of a picture object.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PICTYPE_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms687195)
 */
 class PICTYPE
 {

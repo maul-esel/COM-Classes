@@ -4,6 +4,9 @@ an enumeration class containing flags that control how a window is to be shown.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "SW_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms633548)
 */
 class SW
 {

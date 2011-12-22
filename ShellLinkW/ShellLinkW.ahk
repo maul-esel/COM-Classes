@@ -8,6 +8,9 @@ Requirements:
 	Base classes - Unknown
 	Helper classes - SLGP, SLR, SW, (WIN32_FIND_DATA)
 
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
+
 Remarks:
 	To create a shortcut, query the instance for IPersistFile and call its Save() method.
 */

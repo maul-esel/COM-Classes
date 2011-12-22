@@ -4,6 +4,9 @@ an enumeration class containing flags specifying how a mask is applied to an ima
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILR_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761425)
 */
 class ILR
 {

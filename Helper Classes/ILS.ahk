@@ -1,6 +1,9 @@
 /*
 class: ILS
 an enumeration class containing flags passed to the IImageList::Draw method in the fState member of IMAGELISTDRAWPARAMS.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775231)
 */
 class ILS
 {

@@ -1,6 +1,9 @@
 /*
 class: IMAGELISTSTATS
-Contains image list statistics. Used by IImageList2::GetStatistics. 
+Contains image list statistics. Used by IImageList2::GetStatistics.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761397)
 */
 class IMAGELISTSTATS
 {

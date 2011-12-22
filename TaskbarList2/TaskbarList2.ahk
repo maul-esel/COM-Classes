@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows XP, Windows 2000 Server or higher
 	Base classes - Unknown, TaskbarList
 	Helper classes - (none)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774638)
 */
 class TaskbarList2 extends TaskbarList
 {
@@ -15,13 +18,13 @@ class TaskbarList2 extends TaskbarList
 	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
-		
+
 	/*
 	Field: IID
 	This is IID_ITaskbarList2. It is required to create an instance.
 	*/
 	static IID := "{602D4995-B13A-429b-A66E-1935E44F4317}"
-	
+
 	/*
 	Method: MarkFullScreen
 	Marks a window as full-screen.
@@ -32,7 +35,7 @@ class TaskbarList2 extends TaskbarList
 
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL2 := new TaskbarList2()
@@ -40,7 +43,6 @@ class TaskbarList2 extends TaskbarList
 		Gui 2: +LastFound
 		ITBL2.MarkFullScreen(WinExist())
 		(end code)
-	***************************************************************************************************************	
 	*/
 	MarkFullScreen(hWin, ApplyRemove)
 	{

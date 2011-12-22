@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - Unknown
 	Helper Classes - Stream, PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680761)
 */
 class Picture extends Unknown
 {

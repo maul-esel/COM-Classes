@@ -1,7 +1,9 @@
 /*
 class: SIZE
-This class represents a SIZE struct.
-The SIZE structure specifies the width and height of a rectangle.
+specifies the width and height of a rectangle.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd145106)
 */
 class SIZE
 {

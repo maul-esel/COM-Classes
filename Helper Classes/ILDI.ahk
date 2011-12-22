@@ -5,6 +5,9 @@ an enumeration class containing flags for discarding an image from an image list
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILDI_" is omitted.
 	- <STANDBY> and <PURGE> are mutually exclusive. <RESETACCESS> can be combined with either.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761409)
 */
 class ILDI
 {

@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - Unknown, ObjectArray
 	Helper classes - (none)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378307)
 */
 class ObjectCollection extends ObjectArray
 {

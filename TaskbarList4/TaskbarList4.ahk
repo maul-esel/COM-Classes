@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 7, Windows Server 2008 R2 or higher
 	Base classes - Unknown, TaskbarList, TaskbarList2, TaskbarList3
 	Helper classes - STPFLAG
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562040)
 */
 class TaskbarList4 extends TaskbarList3
 {
@@ -15,13 +18,13 @@ class TaskbarList4 extends TaskbarList3
 	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
-		
+
 	/*
 	Field: IID
 	This is IID_ITaskbarList4. It is required to create an instance.
 	*/
 	static IID := "{c43dc798-95d1-4bea-9030-bb99e2983a1a}"
-		
+
 	/*
 	Method: SetTabProperties
 	Allows a tab to specify whether the main application frame window or the tab window should be used as a thumbnail or in the peek feature.
@@ -32,7 +35,7 @@ class TaskbarList4 extends TaskbarList3
 
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL4 := new TaskbarList4()

@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown, Persist
 	Helper classes - STGM
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms687223)
 */
 class PersistFile extends Persist
 {

@@ -7,6 +7,9 @@ Requirements:
 	OS - (any)
 	Base classes - (none)
 	Helper classes - (none)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680509)
 */
 class Unknown
 {

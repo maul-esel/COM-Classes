@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows Vista, Windows 2008 Server or higher
 	Base classes - Unknown
 	Helper classes - EDataFlow, ERole, DEVICE_STATE, MMDeviceCollection, MMDevice, MMNotificationClient
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd371399)
 */
 class MMDeviceEnumerator extends Unknown
 {

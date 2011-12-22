@@ -8,6 +8,9 @@ Requirements:
 	Base classes - Unknown
 	Helper classes - (none)
 
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380010)
+
 Remarks:
 	This is an abstract base class. If you want to use it's methods, create an instance of the derived Stream class.
 */

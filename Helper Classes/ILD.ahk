@@ -4,6 +4,9 @@ an enumeration class containing flags passed to the IImageList::Draw method in t
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILD_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775230)
 */
 class ILD
 {

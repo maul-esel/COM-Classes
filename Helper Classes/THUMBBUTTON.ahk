@@ -1,7 +1,9 @@
 /*
 class: THUMBBUTTON
-This class represents a THUMBBUTTON struct (<http://msdn.microsoft.com/en-us/library/windows/desktop/dd391559.aspx>)
-The THUMBBUTTON structure defines buttons used in a toolbar embedded in a window's thumbnail representation.
+defines buttons used in a toolbar embedded in a window's thumbnail representation.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391559)
 */
 class THUMBBUTTON
 {

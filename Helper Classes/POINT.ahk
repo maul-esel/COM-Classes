@@ -1,7 +1,9 @@
 /*
 class: POINT
-This class represents a POINT struct (<http://msdn.microsoft.com/en-us/library/dd162805.aspx>).
-The POINT structure defines the x- and y- coordinates of a point.
+defines the x- and y- coordinates of a point.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd162805)
 */
 class POINT
 {

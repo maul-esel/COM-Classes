@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - Unknown
 	Helper classes - PROPERTYKEY
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761474)
 */
 class PropertyStore extends Unknown
 {

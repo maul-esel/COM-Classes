@@ -6,7 +6,7 @@ Remarks:
 	- The field names exactly match the contants' names, except that the leading "FILE_ATTRIBUTE_" is omitted.
 
 Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/gg258117.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/gg258117)
 */
 class FILE_ATTRIBUTE
 {

@@ -4,6 +4,9 @@ an enumeration class specifying the origin from which to calculate the new seek-
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STREAM_SEEK_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380359)
 */
 class STREAM_SEEK
 {

@@ -5,8 +5,8 @@ an enumeration class specifying the conditions for performing the commit operati
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STGC_" is omitted.
 
-MSDN documentation:
-
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380320)
 */
 class STGC
 {

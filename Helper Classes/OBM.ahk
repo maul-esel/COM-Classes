@@ -4,6 +4,9 @@ an enumeration class containing the predefined system bitmaps.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "OBM_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd145033)
 */
 class OBM
 {

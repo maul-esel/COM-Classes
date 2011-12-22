@@ -1,6 +1,9 @@
 /*
 class: EDataFlow
 an enumeration class containing constants that indicate the direction in which audio data flows between an audio endpoint device and an application.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd370828)
 */
 class EDataFlow
 {

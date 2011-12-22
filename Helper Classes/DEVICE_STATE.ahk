@@ -4,6 +4,9 @@ an enumeration class containing constants that indicate the current state of an 
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "DEVICE_STATE_" / "DEVICE_STATE" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd370823)
 */
 class DEVICE_STATE
 {

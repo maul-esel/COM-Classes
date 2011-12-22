@@ -4,6 +4,9 @@ an enumeration class containing the predefined system cursors.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "IDC_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms648391)
 */
 class IDC
 {

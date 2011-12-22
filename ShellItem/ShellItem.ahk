@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows XP SP1 / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes -  SIGDN, SFGAO, SICHINT
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761144)
 */
 class ShellItem  extends Unknown
 {

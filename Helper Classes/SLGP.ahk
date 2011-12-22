@@ -4,6 +4,9 @@ an enumeration class containing flags that specify the type of path information 
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "SLGP_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774944)
 */
 class SLGP
 {

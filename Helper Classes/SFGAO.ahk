@@ -1,6 +1,9 @@
 /*
 class SFGAO
 an enumeration class containing flags that specify attributes that can be retrieved on an item (file or folder) or set of items.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762589)
 */
 class SFGAO
 {

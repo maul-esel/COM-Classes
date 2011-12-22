@@ -1,6 +1,9 @@
 /*
 class: SIGDN
 an enumeration class containing flags that specify the form of an item's display name to retrieve through IShellItem::GetDisplayName and SHGetNameFromIDList.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762544)
 */
 class SIGDN
 {

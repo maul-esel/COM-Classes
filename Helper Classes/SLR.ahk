@@ -4,6 +4,9 @@ an enumeration class containing flags that specify how to find the target of a s
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "SLR_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774952)
 */
 class SLR
 {
