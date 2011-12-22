@@ -88,7 +88,7 @@ class WIN32_FIND_DATA
 
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 44 + 274 * (A_IsUnicode ? 2 : 1), 0)
+			VarSetCapacity(struct, 636, 0)
 			ptr := &struct
 		}
 
@@ -100,8 +100,8 @@ class WIN32_FIND_DATA
 		NumPut(this.nFileSizeLow,		1*ptr,	32,	"UInt")
 		NumPut(this.dwReserved0,		1*ptr,	36,	"UInt")
 		NumPut(this.dwReserved1,		1*ptr,	40,	"UInt")
-		StrPut(this.cFileName,	ptr + 44,	260, A_IsUnicode ? "UTF-16" : "CP0")
-		StrPut(this.cAlternateFileName,	ptr + 44 + 260 * (A_IsUnicode ? 2 : 1), 14, A_IsUnicode ? "UTF-16" : "CP0")
+		StrPut(this.cFileName,			ptr + 44,	260,	"UTF-16")
+		StrPut(this.cAlternateFileName,	ptr + 608,	14,		"UTF-16")
 
 		return ptr
 	}
@@ -128,8 +128,8 @@ class WIN32_FIND_DATA
 		instance.nFileSizeLow		:= NumGet(1*ptr,	32,	"UInt")
 		instance.dwReserved0		:= NumGet(1*ptr,	36,	"UInt")
 		instance.dwReserved1		:= NumGet(1*ptr,	40,	"UInt")
-		instance.cFileName			:= StrGet(ptr + 44,	260, A_IsUnicode ? "UTF-16" : "CP0")
-		instance.cAlternateFileName	:= StrGet(ptr + 44 + 260 * (A_IsUnicode ? 2 : 1), 14, A_IsUnicode ? "UTF-16" : "CP0")
+		instance.cFileName			:= StrGet(ptr + 44,	260, "UTF-16")
+		instance.cAlternateFileName	:= StrGet(ptr + 608, 14, "UTF-16")
 
 		return instance
 	}
