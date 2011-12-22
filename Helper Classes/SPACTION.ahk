@@ -4,6 +4,9 @@ an enumeration class describing an action being performed that requires progress
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "SPACTION_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762545)
 */
 class SPACTION
 {
@@ -69,25 +72,25 @@ class SPACTION
 
 	/*
 	Field: DELETING
-	**Windows Vista and later.** A deletion is being performed.
+	*Windows Vista and later.* A deletion is being performed.
 	*/
 	static DELETING := 10
 
 	/*
 	Field: RENAMING
-	**Windows Vista and later.** A renaming action is being performed.
+	*Windows Vista and later.* A renaming action is being performed.
 	*/
 	static RENAMING := 11
 
 	/*
 	Field: FORMATTING
-	**Windows Vista and later.** A formatting action is being performed.
+	*Windows Vista and later.* A formatting action is being performed.
 	*/
 	static FORMATTING := 12
 
 	/*
 	Field: COPY_MOVING
-	**Windows 7 and later.** A copy or move action is being performed.
+	*Windows 7 and later.* A copy or move action is being performed.
 	*/
 	static COPY_MOVING := 13
 }

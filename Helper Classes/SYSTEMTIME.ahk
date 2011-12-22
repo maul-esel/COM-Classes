@@ -1,10 +1,12 @@
 /*
 class: SYSTEMTIME
-This class represents a SYSTEMTIME struct.
-The FILETIME structure specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
+specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
 
 Remarks:
 	The structure is initialized with the current date and time when an instance is created from scratch.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
 */
 class SYSTEMTIME
 {

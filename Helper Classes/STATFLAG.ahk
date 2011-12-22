@@ -1,9 +1,12 @@
 /*
 class: STATFLAG
-an enumeration class that indicate whether the method should try to return a name in the pwcsName member of the STATSTG structure. The values are used in the ILockBytes::Stat, IStorage::Stat, and IStream::Stat methods to save memory when the pwcsName member is not required.
+an enumeration class containing flags that indicate whether the method should try to return a name in the pwcsName member of the STATSTG structure. The values are used in the ILockBytes::Stat, IStorage::Stat, and IStream::Stat methods to save memory when the pwcsName member is not required.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STATFLAG_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380316)
 */
 class STATFLAG
 {

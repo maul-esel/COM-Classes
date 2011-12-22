@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - Unknown, PropertyStore
 	Helper classes - PSC, PROPERTYKEY, (PROPVARIANT)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761466)
 */
 class PropertyStoreCache extends PropertyStore
 {

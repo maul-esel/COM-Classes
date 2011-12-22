@@ -4,6 +4,9 @@ an enumeration class containing flags that control the current state of the prog
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "TBPF_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391697)
 */
 class TBPFLAG
 {

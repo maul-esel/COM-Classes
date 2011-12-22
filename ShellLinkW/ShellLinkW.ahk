@@ -6,7 +6,10 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows 2000 Server or higher
 	Base classes - Unknown
-	Helper classes - SLGP, SLR, SW, (WIN32_FIND_DATA)
+	Helper classes - SLGP, SLR, SW, WIN32_FIND_DATA
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
 
 Remarks:
 	To create a shortcut, query the instance for IPersistFile and call its Save() method.
@@ -39,9 +42,11 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data = 0)
 	{
-		VarSetCapacity(data, 664, 0) ; to be implemented properly
+		VarSetCapacity(s, 44 + 274 * (A_IsUnicode ? 2 : 1), 0)
 		VarSetCapacity(path, 260 * 2, 0)
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", 260, "ptr", data, "uint", flags))
+		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", 260, "ptr", s, "uint", flags)
+		data := new WIN32_FIND_DATA(s)
+		return this._Error(hr)
 	}
 
 	/*

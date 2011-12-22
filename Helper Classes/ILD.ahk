@@ -1,12 +1,18 @@
 /*
-class: IMAGELISTDRAWFLAGS
+class: ILD
 an enumeration class containing flags passed to the IImageList::Draw method in the fStyle member of IMAGELISTDRAWPARAMS.
+
+Remarks:
+	- The field names exactly match the contants' names, except that the leading "ILD_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775230)
 */
-class IMAGELISTDRAWFLAGS
+class ILD
 {
 	/*
 	Field: NORMAL
-	Draws the image using the background color for the image list. If the background color is the CLR_NONE value, the image is drawn transparently using the mask.
+	Draws the image using the background color for the image list. If the background color is the CLR.NONE value, the image is drawn transparently using the mask.
 	*/
 	static NORMAL := 0x00000000
 
@@ -66,7 +72,7 @@ class IMAGELISTDRAWFLAGS
 
 	/*
 	Field: OVERLAYMASK
-	To extract the overlay image from the fStyle member, use the logical AND to combine fStyle with the ILD_OVERLAYMASK value.
+	To extract the overlay image from the fStyle member, use the logical AND to combine fStyle with the <OVERLAYMASK> value.
 	*/
 	static OVERLAYMASK := 0x00000F00
 
@@ -90,7 +96,7 @@ class IMAGELISTDRAWFLAGS
 
 	/*
 	Field: ASYNC
-	**Windows Vista and later.** Draw the image if it is available in the cache. Do not extract it automatically. The called draw method returns E_PENDING to the calling component, which should then take an alternative action, such as, provide another image and queue a background task to force the image to be loaded via <ForceImagePresent at http://msdn.microsoft.com/en-us/library/bb761411.aspx> using the ILFIP_ALWAYS flag. The <ASYNC> flag then prevents the extraction operation from blocking the current thread and is especially important if a draw method is called from the user interface (UI) thread.
+	*Windows Vista and later.* Draw the image if it is available in the cache. Do not extract it automatically. The called draw method returns E_PENDING to the calling component, which should then take an alternative action, such as, provide another image and queue a background task to force the image to be loaded via ForceImagePresent (http://msdn.microsoft.com/en-us/library/bb761411.aspx) using the ILFIP.ALWAYS flag. The <ASYNC> flag then prevents the extraction operation from blocking the current thread and is especially important if a draw method is called from the user interface (UI) thread.
 	*/
 	static ASYNC := 0x00008000
 }

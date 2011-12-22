@@ -1,6 +1,12 @@
 /*
 class SICHINT
 an enumeration class used to determine how to compare two Shell items. IShellItem::Compare uses this.
+
+Remarks:
+	- The field names exactly match the contants' names, except that the leading "SICHINT_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762543)
 */
 class SICHINT
 {

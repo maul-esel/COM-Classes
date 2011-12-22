@@ -7,7 +7,10 @@ Requirements:
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
-	
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761490)
+
 Remarks:
 	- to get a HBITMAP or a HICON, use a DllCall to LoadImage, LoadBitmap, LoadIcon, LoadCursor, ...
 	- the HIMAGELIST (e.g. for LV_SetImageList() or IL_xxx functions) handle can be obtained using instance.ptr

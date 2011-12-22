@@ -1,6 +1,9 @@
 /*
 class: IMAGELISTDRAWPARAMS
 contains information about an image list draw operation and is used with the IImageList::Draw function.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761395)
 */
 class IMAGELISTDRAWPARAMS
 {

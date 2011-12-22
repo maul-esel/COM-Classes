@@ -4,6 +4,9 @@ an enumeration class containing flags to control specific states and behaviors o
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "THBF_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562321)
 */
 class THUMBBUTTONFLAGS
 {

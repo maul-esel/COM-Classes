@@ -1,6 +1,9 @@
 ﻿/*
 class: IMAGEINFO
-a class containing information about an image in an image list. This structure is used with the IImageList::GetImageInfo function. 
+a class containing information about an image in an image list. This structure is used with the IImageList::GetImageInfo function.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761393)
 */
 class IMAGEINFO
 {
@@ -9,38 +12,38 @@ class IMAGEINFO
 	A handle to the bitmap that contains the images. 
 	*/
 	hbmImage := 0
-	
+
 	/*
 	Field: hbmMask
 	A handle to a monochrome bitmap that contains the masks for the images. If the image list does not contain a mask, this member is 0.
 	*/
 	hbmMask := 0
-	
+
 	/*
 	Field: Unused1
 	Not used. This member should always be zero. 
 	*/
 	Unused1 := 0
-	
+
 	/*
 	Field: Unused2
     Not used. This member should always be zero.
 	*/
 	Unused2 := 0
-	
+
 	/*
 	Field: rcImage
     The bounding rectangle of the specified image within the bitmap specified by hbmImage.
-	
+
 	Remarks:
 		- This should be a RECT instance.
 	*/
 	rcImage := new RECT()
-	
+
 	/*
 	Method: Constructor
 	creates a new instance of the class
-	
+
 	Parameters:
 		HBITMAP hbmImage - the initial value of the <hbmImage> field
 		HBITMAP hbmMask - the initial value of the <hbmMask> field
@@ -50,7 +53,7 @@ class IMAGEINFO
 	{
 		this.hbmImage := hbmImage, this.hbmMask := hbmMask, this.rcImage := rcImage
 	}
-	
+
 	/*
 	Method: ToStructPtr
 	converts the instance to a script-usable struct and returns its memory adress.
@@ -79,7 +82,7 @@ class IMAGEINFO
 
 		return ptr
 	}
-	
+
 	/*
 	Method: FromStructPtr
 	(static) method that converts a script-usable struct into a new instance of the class

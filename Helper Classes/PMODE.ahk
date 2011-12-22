@@ -4,6 +4,9 @@ an enumeration class containing operation modes, e.g. for IOperationsProgressDia
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PDM_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775376)
 */
 class PMODE
 {

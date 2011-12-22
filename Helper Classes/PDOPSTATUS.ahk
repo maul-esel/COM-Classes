@@ -4,6 +4,9 @@ an enumeration class containing the possible return values for IOperationsProgre
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PDOPS_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762519)
 */
 class PDOPSTATUS
 {

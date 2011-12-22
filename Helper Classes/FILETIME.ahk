@@ -2,6 +2,9 @@
 class: FILETIME
 This class represents a FILETIME struct.
 The FILETIME structure contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724284)
 */
 class FILETIME
 {

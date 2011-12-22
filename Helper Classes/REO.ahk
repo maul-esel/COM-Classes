@@ -4,6 +4,11 @@ an enumeration class containing flags that specify what information should be pl
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "REO_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb787946) (part I)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774345) (part II)
+	- not all fields are documented on msdn.
 */
 class REO
 {

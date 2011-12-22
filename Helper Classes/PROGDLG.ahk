@@ -4,6 +4,10 @@ an enumeration class containing the possible flags for IOperationsProgressDialog
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PROGDLG_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775380) (part I)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775262) (part II)
 */
 class PROGDLG
 {
@@ -87,13 +91,13 @@ class PROGDLG
 
 	/*
 	Field: NOMULTIDAYESTIMATES
-	**Windows 7 and later.** If the estimated time to completion is greater than one day, do not display the time.
+	*Windows 7 and later.* If the estimated time to completion is greater than one day, do not display the time.
 	*/
 	static NOMULTIDAYESTIMATES := 0x00000800
 
 	/*
 	Field: DONTDISPLAYLOCATIONS
-	**Windows 7 and later.** Do not display the location line in the progress dialog.
+	*Windows 7 and later.* Do not display the location line in the progress dialog.
 	*/
 	static DONTDISPLAYLOCATIONS := 0x00001000
 }

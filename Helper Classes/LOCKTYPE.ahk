@@ -4,6 +4,9 @@ an enumeration class containing flags that  indicate the type of locking request
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "LOCK_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380048)
 */
 class LOCKTYPE
 {

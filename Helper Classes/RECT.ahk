@@ -1,7 +1,9 @@
 /*
 class: RECT
-This class represents a RECT struct (<http://msdn.microsoft.com/en-us/library/dd162897.aspx>)
-The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle.
+defines the coordinates of the upper-left and lower-right corners of a rectangle.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/dd162897)
 */
 class RECT
 {

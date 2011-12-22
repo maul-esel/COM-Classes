@@ -4,6 +4,9 @@ an enumeration class containing flags for retrieving an image's size.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILGOS_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761415)
 */
 class ILGOS
 {

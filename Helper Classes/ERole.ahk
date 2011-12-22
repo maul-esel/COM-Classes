@@ -1,6 +1,9 @@
 /*
 class: ERole
 an enumeration class containing constants that indicate the role that the system has assigned to an audio endpoint device.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd370842)
 */
 class ERole
 {

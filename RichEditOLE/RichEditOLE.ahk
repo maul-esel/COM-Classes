@@ -8,6 +8,9 @@ Requirements:
 	Base classes - Unknown
 	Helper classes - REO, REOBJECT, DVASPECT
 
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774306)
+
 Remarks:
 	- To create an instance of this class, call the (static) FromHWND() method.
 */

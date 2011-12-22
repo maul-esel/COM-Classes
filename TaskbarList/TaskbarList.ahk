@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - (none)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774652)
 */
 class TaskbarList extends Unknown
 {
@@ -15,13 +18,13 @@ class TaskbarList extends Unknown
 	This is CLSID_TaskbarList. It is required to create an instance.
 	*/
 	static CLSID := "{56FDF344-FD6D-11d0-958A-006097C9A090}"
-	
+
 	/*
 	Field: IID
 	This is IID_ITaskbarList. It is required to create an instance.
 	*/
 	static IID := "{56FDF342-FD6D-11d0-958A-006097C9A090}"
-	
+
 	/*
 	Method: HrInit
 	initializes the interface. You should call this before doing anything else.
@@ -33,17 +36,17 @@ class TaskbarList extends Unknown
 	{
 		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr))
 	}
-	
+
 	/*
 	Method: AddTab
 	adds a new item to the taskbar
-	
+
 	Parameters:
 		HWND hWin - the handle to the window to add.
-		
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL := new TaskbarList()
@@ -56,17 +59,17 @@ class TaskbarList extends Unknown
 	{
 		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 	}
-	
+
 	/*
 	Method: DeleteTab
 	deletes an item from the taskbar
-	
+
 	Parameters:
 		HWND hWin - the handle to the window to remove.
-		
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL := new TaskbarList()
@@ -78,17 +81,17 @@ class TaskbarList extends Unknown
 	{
 		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 	}
-	
+
 	/*
 	Method: ActivateTab
 	Activates an item on the taskbar.
-	
+
 	Parameters:
 		HWND hWin - the handle to the window whose item should be activated.
-	
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Remarks:
 		- The window is not actually activated; the window's item on the taskbar is merely displayed as active.
 
@@ -103,7 +106,7 @@ class TaskbarList extends Unknown
 	{
 		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
 	}
-	
+
 	/*
 	Method: SetActiveAlt
 	Marks a taskbar item as active but does not visually activate it.

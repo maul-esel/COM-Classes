@@ -3,10 +3,13 @@ class: PersistFile
 implements IPersistFile and enables an object to be loaded from or saved to a disk file, rather than a storage object or stream.
 
 Requirements:
-	AutoHotkey - AHK v1.1+
+	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown, Persist
 	Helper classes - STGM
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms687223)
 */
 class PersistFile extends Persist
 {

@@ -4,6 +4,9 @@ an enumeration class containing flags used in the type member of the STATSTG str
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STGTY_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380348)
 */
 class STGTY
 {

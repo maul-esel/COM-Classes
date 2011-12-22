@@ -4,6 +4,9 @@ an enumeration class containing flags that specify the desired data or view aspe
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "DVASPECT_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms690318)
 */
 class DVASPECT
 {

@@ -3,10 +3,13 @@ class: Persist
 implements IPersist and provides the CLSID of an object that can be stored persistently in the system.
 
 Requirements:
-	AutoHotkey - AHK v1.1+
+	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes - (none)
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms688695)
 */
 class Persist extends Unknown
 {

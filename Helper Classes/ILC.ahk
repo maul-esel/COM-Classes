@@ -4,6 +4,9 @@ an enumeration class containing image list creation flags.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILC_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775232)
 */
 class ILC
 {

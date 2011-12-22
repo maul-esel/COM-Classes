@@ -4,6 +4,9 @@ an enumeration class specifying attributes of a picture object as returned throu
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PICTURE_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680123)
 */
 class PICTUREATTRIBUTES
 {

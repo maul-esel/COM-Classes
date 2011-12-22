@@ -4,6 +4,9 @@ an enumeration class containing flags that specify the state of a property.
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "PSC_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762531)
 */
 class PSC
 {

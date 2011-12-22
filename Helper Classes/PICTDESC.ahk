@@ -1,7 +1,9 @@
 /*
 class: PICTDESC
-This class represents a PICTDESC struct (<http://msdn.microsoft.com/en-us/library/windows/desktop/ms693798>)
-The PICTDESC structure contains parameters to create a picture object through the OleCreatePictureIndirect function.
+contains parameters to create a picture object through the OleCreatePictureIndirect function.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms693798)
 */
 class PICTDESC
 {

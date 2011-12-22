@@ -1,7 +1,9 @@
 /*
 class: PROPERTYKEY
-This class represents a PROPERTYKEY struct (<http://msdn.microsoft.com/en-us/library/windows/desktop/bb773381>)
-The PROPERTYKEY structure programmatically identifies a property.
+programmatically identifies a property.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb773381)
 */
 class PROPERTYKEY
 {

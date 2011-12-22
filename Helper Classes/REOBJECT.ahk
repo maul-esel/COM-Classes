@@ -1,6 +1,9 @@
 /*
 class: REOBJECT
-The REOBJECT structure contains information about an object.
+contains information about a RichEdit-object.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb787946)
 */
 class REOBJECT
 {

@@ -4,6 +4,9 @@ an enumeration class containing flags for setting an image as "current" in an im
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "ILFIP_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761411)
 */
 class ILFIP
 {

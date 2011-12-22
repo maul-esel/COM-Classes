@@ -6,8 +6,8 @@ Remarks:
 	- The field names exactly match the contants' names, except that the leading "STGM_" is omitted.
 	- These elements are often combined using an | operator. They are interpreted in groups as listed in the following table. It is not valid to use more than one element from a single group.
 
-MSDN documentation:
-
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380337)
 */
 class STGM
 {

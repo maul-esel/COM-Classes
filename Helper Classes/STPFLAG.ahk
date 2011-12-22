@@ -4,6 +4,9 @@ an enumeration class used by the ITaskbarList4::SetTabProperties method to speci
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "STPF_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562320)
 */
 class STPFLAG
 {

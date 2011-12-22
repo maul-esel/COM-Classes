@@ -4,6 +4,9 @@ an enumeration class containing flags to specify which members of a THUMBBUTTON 
 
 Remarks:
 	- The field names exactly match the contants' names, except that the leading "THB_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562322)
 */
 class THUMBBUTTONMASK
 {

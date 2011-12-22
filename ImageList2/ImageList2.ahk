@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows Vista / Windows Server 2008 or newer
 	Base classes - Unknown, ImageList
 	Helper classes - ILGOS, ILDI, ILFIP, IMAGELISTDRAWPARAMS, IMAGELISTSTATS, ILC, ILR
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761419)
 */
 class ImageList2 extends ImageList
 {

@@ -2,6 +2,9 @@
 class: STATSTG
 This class represents a STATSTG struct.
 The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380319)
 */
 class STATSTG
 {

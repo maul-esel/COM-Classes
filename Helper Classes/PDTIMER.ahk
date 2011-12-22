@@ -3,7 +3,10 @@ class: PDTimer
 an enumeration class containing flags that indicate the action to be taken by the timer.
 
 Remarks:
-	- The field names exactly match the contants' names, except that the leading "PDTimer_" is omitted.
+	- The field names exactly match the contants' names, except that the leading "PDTIMER_" is omitted.
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775266)
 */
 class PDTimer
 {

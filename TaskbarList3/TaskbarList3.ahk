@@ -7,6 +7,9 @@ Requirements:
 	OS - Windows 7, Windows Server 2008 R2 or higher
 	Base classes - Unknown, TaskbarList, TaskbarList2
 	Helper classes - TBPFLAG, THUMBBUTTON, RECT
+
+Further documentation:
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391692)
 */
 class TaskbarList3 extends TaskbarList2
 {
@@ -32,7 +35,7 @@ class TaskbarList3 extends TaskbarList2
 
 	Returns:
 		BOOL success - true on success, false otherwise.
-				
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -81,10 +84,10 @@ class TaskbarList3 extends TaskbarList2
 	Parameters:
 		HWND hTab - the handle to the window to be registered as a tab
 		HWND hWin - the handle to thew window to hold the tab.
-	
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -103,10 +106,10 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		HWND hTab - the handle to the window whose thumbnail gonna be removed.
-	
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -126,10 +129,10 @@ class TaskbarList3 extends TaskbarList2
 	Parameters:
 		HWND hTab - the handle to the window to be inserted or moved.
 		HWND hBefore - the handle of the tab window whose thumbnail that hwndTab is inserted to the left of.
-	
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -150,10 +153,10 @@ class TaskbarList3 extends TaskbarList2
 	Parameters:
 		HWND hTab - the handle to the tab to become active.
 		HWND hWin - the handle to the window holding that tab.
-	
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -169,14 +172,14 @@ class TaskbarList3 extends TaskbarList2
 	/*
 	Method: ThumbBarAddButtons
 	Adds a thumbnail toolbar with a specified set of buttons to the thumbnail image of a window in a taskbar button flyout.
-	
+
 	Parameters:
 		HWND hWin - the handle to the window to work on
 		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
-		
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Remarks:
 		- You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
 		- The array may not have more than 7 members.
@@ -185,15 +188,15 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
-	
+
 	/*
 	Method: ThumbBarUpdateButtons
 	Shows, enables, disables, or hides buttons in a thumbnail toolbar as required by the window's current state.
-	
+
 	Parameters:
 		HWND hWin - the handle to the window to work on
 		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
-		
+
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
@@ -201,15 +204,15 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
 	}
-	
+
 	/*
 	Method: ThumbBarSetImageList
 	Specifies an image list that contains button images for the toolbar
-	
+
 	Parameters:
-		handle hWin - the handle to the window to work on
-		HImageList il - the handle to the imagelist
-		
+		HWND hWin - the handle to the window to work on
+		HIMAGELIST il - the handle to the imagelist
+
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
@@ -217,21 +220,21 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
 	}
-	
+
 	/*
 	Method: SetOverlayIcon
 	set the overlay icon for a taskbar button
 
-	params:
+	Parameters:
 		HWND hGui - the window handle of your gui
 		HICON Icon - handle to an icon
 		[opt] STR altText - an alt text version of the information conveyed by the overlay, for accessibility purposes.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Remarks:
-		To get a HICON, you might use <LoadImage at http://msdn.microsoft.com/de-de/library/ms648045>.
+		To get a HICON, you might use LoadImage (http://msdn.microsoft.com/de-de/library/ms648045).
 
 	Example:
 		(start code)
@@ -244,7 +247,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "wstr", altText))
 	}
-	
+
 	/*
 	Method: SetThumbnailTooltip
 	set a custom tooltip for your thumbnail
@@ -252,10 +255,10 @@ class TaskbarList3 extends TaskbarList2
 	Parameters:
 		HWND hGui - the window handle of your gui
 		STR Tooltip - the text to set as your tooltip
-			
+
 	Returns:
 		BOOL success - true on success, false otherwise.
-		
+
 	Example:
 		(start code)
 		ITBL3 := new TaskbarList3()
@@ -267,7 +270,7 @@ class TaskbarList3 extends TaskbarList2
 	{
 		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "wstr", Tooltip))
 	}
-	
+
 	/*
 	Method: SetThumbnailClip
 	limit the taskbar thumbnail of a gui to a specified size instead of the whole window
@@ -326,12 +329,12 @@ class TaskbarList3 extends TaskbarList2
 		
 	/*
 	group: More about thumbbar buttons
-	
+
 	Reacting to clicks:	
 	To react, you must monitor the WM_Command message.
 	(start code)
 	OnMessage(0x111, "WM_COMMAND")
-	
+
 	; ... add the thumbbuttons & show
 
 	WM_COMMAND(wp)
