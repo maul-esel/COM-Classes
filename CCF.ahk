@@ -68,6 +68,12 @@ provides more methods for IUnknown-derived instance arrays
 #include ObjectCollection\ObjectCollection.ahk
 
 /*
+class: EnumShellItems
+enumerates a collection of IShellItems
+*/
+#include EnumShellItems\EnumShellItems.ahk
+
+/*
 group: progress dialogs
 */
 /*
