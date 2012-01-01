@@ -5,7 +5,7 @@ Contains information about the file that is found by an API method.
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa365740)
 */
-class WIN32_FIND_DATA
+class WIN32_FIND_DATA extends StructBase
 {
 	/*
 	Field: dwFileAttributes
@@ -84,12 +84,9 @@ class WIN32_FIND_DATA
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 636, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.dwFileAttributes,	1*ptr, 00,	"UInt")
@@ -101,7 +98,7 @@ class WIN32_FIND_DATA
 		NumPut(this.dwReserved0,		1*ptr,	36,	"UInt")
 		NumPut(this.dwReserved1,		1*ptr,	40,	"UInt")
 		StrPut(this.cFileName,			ptr + 44,	260,	"UTF-16")
-		StrPut(this.cAlternateFileName,	ptr + 608,	14,		"UTF-16")
+		StrPut(this.cAlternateFileName,	ptr + 564,	14,		"UTF-16")
 
 		return ptr
 	}
@@ -118,7 +115,7 @@ class WIN32_FIND_DATA
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new WIN32_FIND_DATA()
+		local instance := new WIN32_FIND_DATA()
 
 		instance.dwFileAttributes	:= NumGet(1*ptr,	00,	"UInt")
 		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04)
@@ -129,8 +126,27 @@ class WIN32_FIND_DATA
 		instance.dwReserved0		:= NumGet(1*ptr,	36,	"UInt")
 		instance.dwReserved1		:= NumGet(1*ptr,	40,	"UInt")
 		instance.cFileName			:= StrGet(ptr + 44,	260, "UTF-16")
-		instance.cAlternateFileName	:= StrGet(ptr + 608, 14, "UTF-16")
+		instance.cAlternateFileName	:= StrGet(ptr + 564, 14, "UTF-16")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return 568 + 3 * FILETIME.GetRequiredSize()
 	}
 }

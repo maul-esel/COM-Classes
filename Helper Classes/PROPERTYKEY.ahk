@@ -5,7 +5,7 @@ programmatically identifies a property.
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb773381)
 */
-class PROPERTYKEY
+class PROPERTYKEY extends StructBase
 {
 	/*
 	Field: fmtid
@@ -34,12 +34,9 @@ class PROPERTYKEY
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 20, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		DllCall("Ole32\CLSIDFromString", "str", this.fmtid, "ptr", ptr)
@@ -60,12 +57,31 @@ class PROPERTYKEY
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new PROPERTYKEY()
+		local instance := new PROPERTYKEY()
 
 		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr, "ptr*", guid)
 		instance.fmtid	:= StrGet(1*guid, "UTF-16")
 		instance.pid	:= NumGet(1*ptr,	16,	"UInt")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return 20
 	}
 }

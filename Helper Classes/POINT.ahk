@@ -5,7 +5,7 @@ defines the x- and y- coordinates of a point.
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd162805)
 */
-class POINT
+class POINT extends StructBase
 {
 	/*
 	Field: x
@@ -44,12 +44,9 @@ class POINT
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 8, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.x,	1*ptr,	00,	"Int")
@@ -71,5 +68,24 @@ class POINT
 	FromStructPtr(ptr)
 	{
 		return new POINT(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return 8
 	}
 }

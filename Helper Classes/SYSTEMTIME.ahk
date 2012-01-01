@@ -8,7 +8,7 @@ Remarks:
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
 */
-class SYSTEMTIME
+class SYSTEMTIME extends StructBase
 {
 	/*
 	Field: wYear
@@ -70,12 +70,9 @@ class SYSTEMTIME
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 16, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.wYear,			1*ptr,	00,	"short")
@@ -102,7 +99,7 @@ class SYSTEMTIME
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new SYSTEMTIME()
+		local instance := new SYSTEMTIME()
 
 		instance.wYear			:= NumGet(1*ptr,	00, "short")
 		instance.wMonth			:= NumGet(1*ptr,	02,	"short")
@@ -114,6 +111,25 @@ class SYSTEMTIME
 		instance.wMilliseconds	:= NumGet(1*ptr,	14,	"short")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return 16
 	}
 
 	/*

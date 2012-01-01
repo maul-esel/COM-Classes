@@ -5,7 +5,7 @@ defines buttons used in a toolbar embedded in a window's thumbnail representatio
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391559)
 */
-class THUMBBUTTON
+class THUMBBUTTON extends StructBase
 {
 	/*
 	Field: dwMask
@@ -55,12 +55,9 @@ class THUMBBUTTON
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, A_PtrSize + 536, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.dwMask,		1*ptr,	000+0*A_PtrSize,	"UInt")
@@ -95,5 +92,23 @@ class THUMBBUTTON
 		instance.dwFlags	:=	NumGet(1*ptr,	272+1*A_PtrSize,	"UInt")
 
 		return instance
+	}
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return A_PtrSize + 536
 	}
 }

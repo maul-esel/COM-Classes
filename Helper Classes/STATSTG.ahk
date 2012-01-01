@@ -6,7 +6,7 @@ The STATSTG structure contains statistical data about an open storage, stream, o
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380319)
 */
-class STATSTG
+class STATSTG extends StructBase
 {
 	/*
 	Field: pwcsName
@@ -89,12 +89,9 @@ class STATSTG
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, A_PtrSize + 68, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.GetAdress("pwcsName"),	1*ptr,		00 + 0*A_PtrSize,	"UPtr")
@@ -124,7 +121,7 @@ class STATSTG
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new STATSTG()
+		local instance := new STATSTG()
 
 		instance.pwcsName			:= StrGet(NumGet(1*ptr, 0,	"UPtr"),	"UTF-16")
 		instance.type				:= NumGet(1*ptr,	00 + 1*A_PtrSize,	"UInt")
@@ -140,5 +137,24 @@ class STATSTG
 		instance.reserved			:= NumGet(1*ptr,	64 + 1*A_PtrSize,	"UInt")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return A_PtrSize + 44 + 3 * FILETIME.GetRequiredSize()
 	}
 }

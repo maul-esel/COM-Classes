@@ -5,7 +5,7 @@ a class containing information about an image in an image list. This structure i
 Further documentation:
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761393)
 */
-class IMAGEINFO
+class IMAGEINFO extends StructBase
 {
 	/*
 	Field: 	hbmImage
@@ -66,12 +66,9 @@ class IMAGEINFO
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 2*A_PtrSize + 24, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.hbmImage,		1*ptr,		00+0*A_PtrSize,	"UPtr")
@@ -98,5 +95,24 @@ class IMAGEINFO
 		return new IMAGEINFO(NumGet(1*ptr,	00+0*A_PtrSize, "UPtr")
 						,	NumGet(1*ptr,		00+1*A_PtrSize, "UPtr")
 						,	RECT.FromStructPtr(ptr + 08 + 2*A_PtrSize))
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data := "")
+	{
+		return 8 + 2 * A_PtrSize + RECT.GetRequiredSize()
 	}
 }
