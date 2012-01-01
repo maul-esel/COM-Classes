@@ -194,8 +194,30 @@ provides even more methods for the taskbar
 #include TaskbarList4\TaskbarList4.ahk
 
 /*
-group: helper structs
+group: UIAutomation
+*/
+/*
+class: UIAutomationCondition
+base interface for conditions
+*/
+#Include UIAutomationCondition\UIAutomationCondition.ahk
 
+/*
+class: UIAutomationNotCondition
+represents the negative of another condition
+*/
+#Include UIAutomationNotCondition\UIAutomationNotCondition.ahk
+
+/*
+class: UIAutomationBoolCondition
+represents a condition that can either be true or false
+*/
+#Include UIAutomationBoolCondition\UIAutomationBoolCondition.ahk
+
+/*
+group: helper structs
+*/
+/*
 class: StructBase
 a base class for all struct classes
 */
