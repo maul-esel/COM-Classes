@@ -186,3 +186,11 @@ class: TaskbarList4
 provides even more methods for the taskbar
 */
 #include TaskbarList4\TaskbarList4.ahk
+
+/*
+group: helper structs
+
+class: StructBase
+a base class for all struct classes
+*/
+#include Helper Classes\StructBase.ahk
