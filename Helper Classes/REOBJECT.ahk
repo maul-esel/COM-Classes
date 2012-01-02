@@ -168,6 +168,6 @@ class REOBJECT extends StructBase
 	*/
 	GetRequiredSize(data = "")
 	{
-		return 44 + 3 * A_PtrSize
+		return 36 + 3 * A_PtrSize + SIZE.GetRequiredSize()
 	}
 }

@@ -14,7 +14,7 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - Windows 7 / Widws Server 2008 R2
+	OS - Windows 7 / Windows Server 2008 R2 or higher
 */
 class THUMBBUTTONFLAGS
 {

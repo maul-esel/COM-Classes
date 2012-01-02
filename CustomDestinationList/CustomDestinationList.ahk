@@ -9,7 +9,7 @@ License:
 	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
 
 Documentation:
-	- *class documentation* (http://maul-esel.github.com/COM-Classes/)
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/CustomDestinationList)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378402)
 
 Requirements:

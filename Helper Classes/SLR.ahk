@@ -14,7 +14,7 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - Windos XP / Windows 2000 Server or higher
+	OS - Windows XP / Windows 2000 Server or higher
 */
 class SLR
 {

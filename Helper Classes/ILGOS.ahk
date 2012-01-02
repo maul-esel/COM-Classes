@@ -14,7 +14,7 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - Windows Vista / Windws 2008 or higher
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class ILGOS
 {

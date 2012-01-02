@@ -16,6 +16,9 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown
+
+Remarks:
+	This is an abstract base class. In case you want to use it's methods, create an instance of the derived Stream class.
 */
 class SequentialStream extends Unknown
 {
