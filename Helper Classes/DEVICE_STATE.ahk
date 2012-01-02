@@ -2,11 +2,19 @@
 class: DEVICE_STATE
 an enumeration class containing constants that indicate the current state of an audio endpoint device.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "DEVICE_STATE_" / "DEVICE_STATE" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/DEVICE_STATE)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd370823)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class DEVICE_STATE
 {

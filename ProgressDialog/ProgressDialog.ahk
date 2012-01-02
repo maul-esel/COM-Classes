@@ -1,15 +1,22 @@
-﻿/*
+/*
 class: ProgressDialog
-implements IProgressDialog and exposes methods to create, control and display a progress dialog.
+wraps the *IProgressDialog* interface and exposes methods to create, control and display a progress dialog.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ProgressDialog)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775248)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Windows XP or Windows Server 2003 or higher.
 	Base classes - Unknown
 	Helper classes - PROGDLG, PDTIMER
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775248)
 */
 class ProgressDialog extends Unknown
 {

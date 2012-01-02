@@ -2,11 +2,19 @@
 class: ILC
 an enumeration class containing image list creation flags.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "ILC_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ILC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775232)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows XP / Windows Server 2003 or higher
 */
 class ILC
 {

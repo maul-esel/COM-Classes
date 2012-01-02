@@ -1,15 +1,21 @@
 /*
 class: ObjectArray
-implements IObjectArray and exposes methods that enable clients to access items in a collection of objects that support IUnknown.
+wraps the *IObjectArray* interface and exposes methods that enable clients to access items in a collection of objects that support IUnknown.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ObjectArray)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378311)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - Unknown
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378311)
 */
 class ObjectArray extends Unknown
 {

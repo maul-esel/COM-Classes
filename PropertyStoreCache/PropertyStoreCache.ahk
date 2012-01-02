@@ -1,15 +1,22 @@
 /*
 class: PropertyStoreCache
-implements IPropertyStoreCache and exposes methods that allow a handler to manage various states for each property.
+wraps the *IPropertyStoreCache* interface and exposes methods that allow a handler to manage various states for each property.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PropertyStoreCache)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761466)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - Unknown, PropertyStore
 	Helper classes - PSC, PROPERTYKEY, (PROPVARIANT)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761466)
 */
 class PropertyStoreCache extends PropertyStore
 {

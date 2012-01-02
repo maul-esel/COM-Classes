@@ -1,12 +1,21 @@
-﻿/*
+/*
 class: UIAutomationNotCondition
-implements IUIAutomationNotCondition and represents a condition that is the negative of another condition.
+wraps the *IUIAutomationNotCondition* interface and represents a condition that is the negative of another condition.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/UIAutomationNotCondition)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ee696106)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista, Windows XP with SP3 and Platform Update for Windows Vista, Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008, Windows Server 2003 with SP2 and Platform Update for Windows Server 2008
 	Base classes - Unknown, UIAutomationCondition
-	Helper classes - (none)
 */
 class UIAutomationNotCondition extends UIAutomationCondition
 {

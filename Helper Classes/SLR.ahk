@@ -2,11 +2,19 @@
 class: SLR
 an enumeration class containing flags that specify how to find the target of a shell link.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "SLR_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/SLR)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774952)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windos XP / Windows 2000 Server or higher
 */
 class SLR
 {

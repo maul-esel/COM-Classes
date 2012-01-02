@@ -2,11 +2,19 @@
 class: ILR
 an enumeration class containing flags specifying how a mask is applied to an image.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "ILR_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/LGPL-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ILR)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761425)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class ILR
 {

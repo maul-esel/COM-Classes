@@ -1,9 +1,22 @@
 /*
 class: THUMBBUTTON
-defines buttons used in a toolbar embedded in a window's thumbnail representation.
+a structure class that defines buttons used in a toolbar embedded in a window's thumbnail representation.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/THUMBBUTTON)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391559)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7 / Windows Server 2008 R2
+	Base classes - StructBase
+	Helper classes - THUMBBUTTONFLAGS, THUMBBUTTONMASK
 */
 class THUMBBUTTON extends StructBase
 {

@@ -1,9 +1,21 @@
 /*
 class: SIZE
-specifies the width and height of a rectangle.
+a structure class that specifies the width and height of a rectangle.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/SIZE)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd145106)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windws 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
 */
 class SIZE extends StructBase
 {

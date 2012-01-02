@@ -1,15 +1,21 @@
 /*
 class: TaskbarList2
-implements the ITaskbarList2 interface and exposes a method to mark a window as a full-screen display.
+wraps the *ITaskbarList2* interface and exposes a method to mark a window as a full-screen display.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TaskbarList2)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774638)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP, Windows 2000 Server or higher
 	Base classes - Unknown, TaskbarList
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774638)
 */
 class TaskbarList2 extends TaskbarList
 {

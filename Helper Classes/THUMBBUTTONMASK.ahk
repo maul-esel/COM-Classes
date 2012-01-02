@@ -2,11 +2,19 @@
 class: THUMBBUTTONMASK
 an enumeration class containing flags to specify which members of a THUMBBUTTON structure contain valid data.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "THB_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/THUMBBUTTONMASK)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562322)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7 / Windows Server 2008 or higher
 */
 class THUMBBUTTONMASK
 {

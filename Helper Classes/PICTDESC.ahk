@@ -1,9 +1,22 @@
 /*
 class: PICTDESC
-contains parameters to create a picture object through the OleCreatePictureIndirect function.
+a structure class that contains parameters to create a picture object through the OleCreatePictureIndirect function.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PICTDESC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms693798)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
+	Helper classes - PICTYPE
 */
 class PICTDESC extends StructBase
 {

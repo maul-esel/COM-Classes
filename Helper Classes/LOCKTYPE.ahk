@@ -2,11 +2,19 @@
 class: LOCKTYPE
 an enumeration class containing flags that  indicate the type of locking requested for the specified range of bytes. The values are used in the ILockBytes::LockRegion and IStream::LockRegion methods.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "LOCK_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/LOCKTYPE)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380048)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windws 2000 Server or higher
 */
 class LOCKTYPE
 {

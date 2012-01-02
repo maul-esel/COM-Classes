@@ -1,15 +1,22 @@
 /*
 class: RichEditOLE
-implements IRichEditOLE and exposes the COM functionality of a rich edit control.
+wraps the *IRichEditOLE* interface and exposes the COM functionality of a rich edit control.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/RichEditOLE)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774306)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - REO, REOBJECT, DVASPECT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774306)
 
 Remarks:
 	- To create an instance of this class, call the (static) FromHWND() method.

@@ -1,15 +1,23 @@
 /*
 class: CustomDestinationList
-implements ICustomDestinationList and exposes methods that allow an application to provide a custom Jump List, including destinations and tasks, for display in the taskbar.
+wraps the *ICustomDestinationList* interface and exposes methods that allow an application to provide a custom Jump List, including destinations and tasks, for display in the taskbar.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378402)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - Unknown
 	Helper classes - KDC
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378402)
+	Other classes - ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
 */
 class CustomDestinationList extends Unknown
 {

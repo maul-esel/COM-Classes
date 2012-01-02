@@ -1,12 +1,21 @@
 /*
 class: UIAutomationBoolCondition
-implements IUIAutomationBoolCondition and represents a condition that can be either TRUE (selects all elements) or FALSE (selects no elements).
+wraps the *IUIAutomationBoolCondition* interface and epresents a condition that can be either TRUE (selects all elements) or FALSE (selects no elements).
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/UIAutomationBoolCondition)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ee671411)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista, Windows XP with SP3 and Platform Update for Windows Vista, Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008, Windows Server 2003 with SP2 and Platform Update for Windows Server 2008
 	Base classes - Unknown, UIAutomationCondition
-	Helper classes - (none)
 */
 class UIAutomationBoolCondition extends UIAutomationCondition
 {

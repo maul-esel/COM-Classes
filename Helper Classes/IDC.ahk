@@ -2,11 +2,19 @@
 class: IDC
 an enumeration class containing the predefined system cursors.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "IDC_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/IDC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms648391)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windws 2000 Server or higher
 */
 class IDC
 {

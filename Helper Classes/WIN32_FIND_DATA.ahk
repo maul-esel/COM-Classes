@@ -1,9 +1,22 @@
 /*
 class: WIN32_FIND_DATA
-Contains information about the file that is found by an API method.
+a structure class that contains information about the file that is found by an API method.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/WIN32_FIND_DATA)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa365740)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows XP / Windows Server 2003 or higher
+	Base classes - StructBase
+	Helper classes - FILETIME, FILE_ATTRIBUTE
 */
 class WIN32_FIND_DATA extends StructBase
 {

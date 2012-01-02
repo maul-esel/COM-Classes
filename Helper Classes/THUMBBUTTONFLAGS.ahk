@@ -1,12 +1,20 @@
 /*
 class: THUMBBUTTONFLAGS
-an enumeration class containing flags to control specific states and behaviors of a thumbbar button.
+an enumeration class containing flags to control specific states and behaviours of a thumbbar button.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "THBF_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/THUMBBUTTONFLAGS)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562321)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7 / Widws Server 2008 R2
 */
 class THUMBBUTTONFLAGS
 {

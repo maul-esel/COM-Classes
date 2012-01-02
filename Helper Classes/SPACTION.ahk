@@ -2,11 +2,19 @@
 class: SPACTION
 an enumeration class describing an action being performed that requires progress to be shown to the user using an IActionProgress / IOperationsProgressDialog interface.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "SPACTION_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/SPACTION)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762545)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows XP / Windows Server 2008 R2 or higher
 */
 class SPACTION
 {

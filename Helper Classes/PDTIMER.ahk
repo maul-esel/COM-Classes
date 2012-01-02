@@ -1,12 +1,20 @@
 /*
-class: PDTimer
+class: PDTIMER
 an enumeration class containing flags that indicate the action to be taken by the timer.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "PDTIMER_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PDTIMER)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775266)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 */
 class PDTimer
 {

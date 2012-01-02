@@ -1,10 +1,21 @@
 /*
 class: FILETIME
-This class represents a FILETIME struct.
-The FILETIME structure contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).
+a structure class that contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/FILETIME)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724284)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
 */
 class FILETIME extends StructBase
 {

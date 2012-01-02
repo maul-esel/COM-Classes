@@ -1,15 +1,22 @@
 /*
 class: ImageList
-implements IImageList and exposes methods that manipulate and interact with image lists.
+wraps the *IImageList* interface and exposes methods that manipulate and interact with image lists.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ImageList)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761490)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761490)
 
 Remarks:
 	- to get a HBITMAP or a HICON, use a DllCall to LoadImage, LoadBitmap, LoadIcon, LoadCursor, ...

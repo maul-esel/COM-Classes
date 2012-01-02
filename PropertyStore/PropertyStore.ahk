@@ -1,15 +1,22 @@
 /*
 class: PropertyStore
-implements the IPropertyStore interface and exposes methods for enumerating, getting, and setting property values.
+wraps the *IPropertyStore* interface and exposes methods for enumerating, getting, and setting property values.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PropertyStore)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761474)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - Unknown
 	Helper classes - PROPERTYKEY
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761474)
 */
 class PropertyStore extends Unknown
 {

@@ -1,18 +1,22 @@
 /*
 class: ShellLinkW
-implements the IShellLinkW interface and exposes methods that create, modify, and resolve Shell links.
+wraps the *IShellLinkW* interface and exposes methods that create, modify, and resolve Shell links.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ShellLinkW)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP / Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - SLGP, SLR, SW, WIN32_FIND_DATA
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
-
-Remarks:
-	To create a shortcut, query the instance for IPersistFile and call its Save() method.
 */
 class ShellLinkW extends Unknown
 {

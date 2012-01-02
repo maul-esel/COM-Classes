@@ -1,9 +1,21 @@
 /*
 class: PROPERTYKEY
-programmatically identifies a property.
+a structure class that programmatically identifies a property.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PROPERTYKEY)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb773381)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows Vista / Windows Server 2008 or higher
+	Base classes - StructBase
 */
 class PROPERTYKEY extends StructBase
 {

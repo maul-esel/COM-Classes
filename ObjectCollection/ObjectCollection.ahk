@@ -1,15 +1,21 @@
 /*
 class: ObjectCollection
-implements IObjectCollection and extends the IObjectArray interface by providing methods that enable clients to add and remove objects that support IUnknown in a collection.
+wraps the *IObjectCollection* interface and extends the IObjectArray interface by providing methods that enable clients to add and remove objects that support IUnknown in a collection.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ObjectCollection)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378307)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - Unknown, ObjectArray
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378307)
 */
 class ObjectCollection extends ObjectArray
 {

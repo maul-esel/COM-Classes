@@ -1,12 +1,24 @@
 /*
 class: SYSTEMTIME
-specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
+a structure class that specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/SYSTEMTIME)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
 
 Remarks:
 	The structure is initialized with the current date and time when an instance is created from scratch.
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
 */
 class SYSTEMTIME extends StructBase
 {

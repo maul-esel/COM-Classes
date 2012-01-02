@@ -1,15 +1,22 @@
 /*
 class: ImageList2
-implements the IImageList2 interface and provides additional methods for manipulating and interacting with image lists.
+wraps the *IImageList2* interface and provides additional methods for manipulating and interacting with image lists.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ImageList2)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761419)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or newer
 	Base classes - Unknown, ImageList
 	Helper classes - ILGOS, ILDI, ILFIP, IMAGELISTDRAWPARAMS, IMAGELISTSTATS, ILC, ILR
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761419)
 */
 class ImageList2 extends ImageList
 {

@@ -1,13 +1,21 @@
 /*
 class: PROGDLG
-an enumeration class containing the possible flags for IOperationsProgressDialog::StartProgressDialog().
+an enumeration class containing the possible flags for IOperationsProgressDialog::StartProgressDialog() and IProgressDialog::StartProgressDialog().
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "PROGDLG_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PROGDLG)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775380) (part I)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775262) (part II)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows XP / Windows 2000 Server; Windows Vista / Windows Server 2008 or higher (see msdn)
 */
 class PROGDLG
 {

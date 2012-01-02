@@ -1,6 +1,18 @@
 /*
 class: StructBase
 serves as base class for struct classes. Struct classes must derive from it.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/StructBase)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
 */
 class StructBase
 {

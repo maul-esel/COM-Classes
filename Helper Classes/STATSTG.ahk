@@ -1,10 +1,22 @@
 /*
 class: STATSTG
-This class represents a STATSTG struct.
-The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
+a structure class that contains statistical data about an open storage, stream, or byte-array object. This is used by he IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/STATSTG)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380319)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Wndows 2000 Server or higher
+	Base classes - StructBase
+	Helper classes - LOCKTYPE, FILETIME
 */
 class STATSTG extends StructBase
 {

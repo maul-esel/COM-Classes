@@ -1,15 +1,22 @@
 /*
 class: OperationsProgressDialog
-implements IOperationsProgressDialog and exposes methods to get, set, and query a progress dialog.
+wraps the *IOperationsProgressDialog* interface and exposes methods to get, set, and query a progress dialog.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/OperationsProgressDialog)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775368)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - PROGDLG, PDOPSTATUS, PMODE
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775368)
 */
 class OperationsProgressDialog extends Unknown
 {

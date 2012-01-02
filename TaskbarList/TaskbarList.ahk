@@ -1,15 +1,21 @@
 /*
 class: TaskbarList
-implements the ITaskbarList insterface and exposes methods that control the taskbar. It allows you to dynamically add, remove, and activate items on the taskbar.
+wraps the *ITaskbarList* interface and exposes methods that control the taskbar. It allows you to dynamically add, remove, and activate items on the taskbar.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TaskbarList)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774652)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
 	Base classes - Unknown
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774652)
 */
 class TaskbarList extends Unknown
 {

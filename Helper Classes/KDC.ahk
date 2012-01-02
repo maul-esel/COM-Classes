@@ -2,11 +2,19 @@
 class: KDC
 an enumeration class containing the predefined system jump list categories.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "KDC_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/KDC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378397)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7 / Windows Server 2008 R2 or higher
 */
 class KDC
 {

@@ -2,11 +2,19 @@
 class: CLR
 an enumeration class containing special values for COLORREF variables.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "CLR_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/CLR)
 	- *msdn* (for example http://msdn.microsoft.com/en-us/library/windows/desktop/bb761395, or in other places else where it's used).
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows Server 2000 or higher
 */
 class CLR
 {

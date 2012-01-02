@@ -2,11 +2,19 @@
 class: ILGOS
 an enumeration class containing flags for retrieving an image's size.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "ILGOS_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ILGOS)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761415)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows Vista / Windws 2008 or higher
 */
 class ILGOS
 {

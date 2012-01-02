@@ -1,9 +1,21 @@
 /*
 class: RECT
-defines the coordinates of the upper-left and lower-right corners of a rectangle.
+a structure class that defines the coordinates of the upper-left and lower-right corners of a rectangle.
 
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/dd162897)
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/RECT)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd162897)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
 */
 class RECT extends StructBase
 {
