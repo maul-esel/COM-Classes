@@ -1,12 +1,20 @@
 /*
 class: ILD
-an enumeration class containing flags passed to the IImageList::Draw method in the fStyle member of IMAGELISTDRAWPARAMS.
+an enumeration class containing flags passed to IImageList::Draw in the fStyle member of IMAGELISTDRAWPARAMS.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "ILD_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ILD)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb775230)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP / Windows Server 2003 or higher
 */
 class ILD
 {

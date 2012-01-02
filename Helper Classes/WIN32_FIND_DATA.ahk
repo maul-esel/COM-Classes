@@ -1,11 +1,24 @@
 /*
 class: WIN32_FIND_DATA
-Contains information about the file that is found by an API method.
+a structure class that contains information about the file that is found by an API method.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/WIN32_FIND_DATA)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa365740)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP / Windows Server 2003 or higher
+	Base classes - StructBase
+	Helper classes - FILETIME, FILE_ATTRIBUTE
 */
-class WIN32_FIND_DATA
+class WIN32_FIND_DATA extends StructBase
 {
 	/*
 	Field: dwFileAttributes
@@ -84,12 +97,9 @@ class WIN32_FIND_DATA
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 44 + 274 * (A_IsUnicode ? 2 : 1), 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.dwFileAttributes,	1*ptr, 00,	"UInt")
@@ -100,8 +110,8 @@ class WIN32_FIND_DATA
 		NumPut(this.nFileSizeLow,		1*ptr,	32,	"UInt")
 		NumPut(this.dwReserved0,		1*ptr,	36,	"UInt")
 		NumPut(this.dwReserved1,		1*ptr,	40,	"UInt")
-		StrPut(this.cFileName,	ptr + 44,	260, A_IsUnicode ? "UTF-16" : "CP0")
-		StrPut(this.cAlternateFileName,	ptr + 44 + 260 * (A_IsUnicode ? 2 : 1), 14, A_IsUnicode ? "UTF-16" : "CP0")
+		StrPut(this.cFileName,			ptr + 44,	260,	A_IsUnicode ? "UTF-16" : "CP0")
+		StrPut(this.cAlternateFileName,	ptr + 44 + 260 * (A_IsUnicode ? 2 : 1),	14,		A_IsUnicode ? "UTF-16" : "CP0")
 
 		return ptr
 	}
@@ -118,7 +128,7 @@ class WIN32_FIND_DATA
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new WIN32_FIND_DATA()
+		local instance := new WIN32_FIND_DATA()
 
 		instance.dwFileAttributes	:= NumGet(1*ptr,	00,	"UInt")
 		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04)
@@ -132,5 +142,24 @@ class WIN32_FIND_DATA
 		instance.cAlternateFileName	:= StrGet(ptr + 44 + 260 * (A_IsUnicode ? 2 : 1), 14, A_IsUnicode ? "UTF-16" : "CP0")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data = "")
+	{
+		return 20 + 3 * FILETIME.GetRequiredSize() + 274 * (A_IsUnicode ? 2 : 1)
 	}
 }

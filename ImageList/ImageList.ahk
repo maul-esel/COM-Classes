@@ -1,15 +1,22 @@
 /*
 class: ImageList
-implements IImageList and exposes methods that manipulate and interact with image lists.
+wraps the *IImageList* interface and exposes methods that manipulate and interact with image lists.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ImageList)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761490)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761490)
 
 Remarks:
 	- to get a HBITMAP or a HICON, use a DllCall to LoadImage, LoadBitmap, LoadIcon, LoadCursor, ...
@@ -240,7 +247,7 @@ class ImageList extends Unknown
 	*/
 	GetImageInfo(index)
 	{
-		VarSetCapacity(info, 2*A_PtrSize + 24, 0)
+		VarSetCapacity(info, IMAGEINFO.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return IMAGEINFO.FromStructPtr(&info)
 	}
@@ -307,7 +314,7 @@ class ImageList extends Unknown
 	*/
 	GetImageRect(index)
 	{
-		VarSetCapacity(info, 16, 0)
+		VarSetCapacity(info, RECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return RECT.FromStructPtr(&info)
 	}
@@ -539,7 +546,7 @@ class ImageList extends Unknown
 	*/
 	GetDragImage(byRef dragPos, byRef imagePos, byRef IL)
 	{
-		VarSetCapacity(POINT1, 8, 0), VarSetCapacity(POINT2, 8, 0)
+		VarSetCapacity(POINT1, POINT.GetRequiredSize(), 0), VarSetCapacity(POINT2, POINT.GetRequiredSize(), 0)
 		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
 
 		dragPos := POINT.FromStructPtr(&POINT1)

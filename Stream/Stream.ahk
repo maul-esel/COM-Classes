@@ -1,18 +1,22 @@
 /*
 class: Stream
-implements the IStream interface and lets you read and write data to stream objects.
+wraps the *IStream* interface and lets you read and write data to stream objects.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/Stream)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380034)
 
 Requirements:
 	AutoHotkey - AHK v1.1+
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown, SequentialStream
 	Helper classes - STGC, LOCKTYPE, STATFLAG, STREAM_SEEK, STATSTG
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380034)
-
-Remarks:
-	Although IStream inherits ISequentialStream and you can use ISequentialStream's methods on an IStream instance, a QueryInterface() call for ISequentialStream is not supported by the system implementation.
 */
 class Stream extends SequentialStream
 {
@@ -170,7 +174,7 @@ class Stream extends SequentialStream
 	*/
 	Stat(flag = 0)
 	{
-		VarSetCapacity(struct, A_PtrSize + 68, 0)
+		VarSetCapacity(struct, STATSTG.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", &struct, "uint", flag))
 		return STATSTG.FromStructPtr(&struct)
 	}

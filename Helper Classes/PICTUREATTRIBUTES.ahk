@@ -1,12 +1,20 @@
 /*
 class: PICTUREATTRIBUTES
-an enumeration class specifying attributes of a picture object as returned through the IPicture::get_Attributes method. 
+an enumeration class specifying attributes of a picture object as returned through IPicture::get_Attributes.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "PICTURE_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/PICTUREATTRIBUTES)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680123)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
 */
 class PICTUREATTRIBUTES
 {

@@ -1,18 +1,21 @@
 /*
 class: SequentialStream
-implements the ISequentialStream interface and supports simplified sequential access to stream objects.
+wraps the *ISequentialStream* interface and supports simplified sequential access to stream objects.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/SequentialStream)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380010)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - Unknown
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380010)
-
-Remarks:
-	This is an abstract base class. If you want to use it's methods, create an instance of the derived Stream class.
 */
 class SequentialStream extends Unknown
 {

@@ -2,8 +2,19 @@
 class: SIGDN
 an enumeration class containing flags that specify the form of an item's display name to retrieve through IShellItem::GetDisplayName and SHGetNameFromIDList.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/SIGDN)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762544)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP SP1 / Windows Server 2003 or higher
 */
 class SIGDN
 {

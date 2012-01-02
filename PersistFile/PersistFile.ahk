@@ -1,15 +1,22 @@
 /*
 class: PersistFile
-implements IPersistFile and enables an object to be loaded from or saved to a disk file, rather than a storage object or stream.
+wraps the *IPersistFile* interface and enables an object to be loaded from or saved to a disk file, rather than a storage object or stream.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/PersistFile)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms687223)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 	Base classes - Unknown, Persist
 	Helper classes - STGM
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms687223)
 */
 class PersistFile extends Persist
 {

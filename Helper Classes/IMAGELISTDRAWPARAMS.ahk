@@ -1,11 +1,24 @@
 /*
 class: IMAGELISTDRAWPARAMS
-contains information about an image list draw operation and is used with the IImageList::Draw function.
+a structure class that contains information about an image list draw operation and is used with IImageList::Draw.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/IMAGELISTDRAWPARAMS)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761395)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
+	Helper classes - ILS, ILD, CLR
 */
-class IMAGELISTDRAWPARAMS
+class IMAGELISTDRAWPARAMS extends StructBase
 {
 	/*
 	Field: cbSize
@@ -15,7 +28,7 @@ class IMAGELISTDRAWPARAMS
 		- In the implementation in the ImageList class, this is overwritten.
 		- It doesn't make sense to change it anyway. The correct value is calculated by this class at runtime.
 	*/
-	cbSize := 2 * A_PtrSize + 15 * 4
+	cbSize := this.GetRequiredSize()
 
 	/*
 	Field: himl
@@ -147,12 +160,9 @@ class IMAGELISTDRAWPARAMS
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, this.cbSize, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.cbSize,		1*ptr,	00 + 0*A_PtrSize,	"UInt")
@@ -188,7 +198,7 @@ class IMAGELISTDRAWPARAMS
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new IMAGELISTDRAWPARAMS()
+		local instance := new IMAGELISTDRAWPARAMS()
 
 		instance.cbSize		:= NumGet(1*ptr,	00 + 0*A_PtrSize,	"UInt")
 		instance.ptr		:= NumGet(1*ptr,	04 + 0*A_PtrSize,	"UPtr")
@@ -209,5 +219,24 @@ class IMAGELISTDRAWPARAMS
 		instance.crEffect	:= NumGet(1*ptr,	56 + 2*A_PtrSize,	"UInt")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data = "")
+	{
+		return 2 * A_PtrSize + 60
 	}
 }

@@ -1,14 +1,26 @@
 /*
 class: SYSTEMTIME
-specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
+a structure class that specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/SYSTEMTIME)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
 
 Remarks:
 	The structure is initialized with the current date and time when an instance is created from scratch.
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms724950)
 */
-class SYSTEMTIME
+class SYSTEMTIME extends StructBase
 {
 	/*
 	Field: wYear
@@ -70,12 +82,9 @@ class SYSTEMTIME
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 16, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.wYear,			1*ptr,	00,	"short")
@@ -102,7 +111,7 @@ class SYSTEMTIME
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new SYSTEMTIME()
+		local instance := new SYSTEMTIME()
 
 		instance.wYear			:= NumGet(1*ptr,	00, "short")
 		instance.wMonth			:= NumGet(1*ptr,	02,	"short")
@@ -114,6 +123,25 @@ class SYSTEMTIME
 		instance.wMilliseconds	:= NumGet(1*ptr,	14,	"short")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data = "")
+	{
+		return 16
 	}
 
 	/*

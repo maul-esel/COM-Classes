@@ -2,8 +2,19 @@
 class: EDataFlow
 an enumeration class containing constants that indicate the direction in which audio data flows between an audio endpoint device and an application.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/EDataFlow)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd370828)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class EDataFlow
 {

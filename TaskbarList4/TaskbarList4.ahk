@@ -1,15 +1,22 @@
 /*
 class: TaskbarList4
-implements the ITaskbarList4 interface and provides a method that allows the caller to control two property values for the tab thumbnail and peek feature.
+wraps the *ITaskbarList4* interface and provides a method that allows the caller to control two property values for the tab thumbnail and peek feature.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/TaskbarList4)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562040)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7, Windows Server 2008 R2 or higher
 	Base classes - Unknown, TaskbarList, TaskbarList2, TaskbarList3
 	Helper classes - STPFLAG
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562040)
 */
 class TaskbarList4 extends TaskbarList3
 {

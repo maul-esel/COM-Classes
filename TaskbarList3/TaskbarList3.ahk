@@ -1,15 +1,22 @@
 /*
 class: TaskbarList3
-implements the ITaskbarList3 interface and exposes methods that support the unified launching and switching taskbar button functionality added in Windows 7. This functionality includes thumbnail representations and switch targets based on individual tabs in a tabbed application, thumbnail toolbars, notification and status overlays, and progress indicators.
+wraps the *ITaskbarList3* interface and exposes methods that support the unified launching and switching taskbar button functionality added in Windows 7. This functionality includes thumbnail representations and switch targets based on individual tabs in a tabbed application, thumbnail toolbars, notification and status overlays, and progress indicators.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/TaskbarList3)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391692)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7, Windows Server 2008 R2 or higher
 	Base classes - Unknown, TaskbarList, TaskbarList2
 	Helper classes - TBPFLAG, THUMBBUTTON, RECT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391692)
 */
 class TaskbarList3 extends TaskbarList2
 {
@@ -277,7 +284,7 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		HWND hGui - the window handle of your gui
-		RECT clip - a RECT instance describing the area to show in the taskbar thumbnail
+		RECT clip - a RECT instance describing the area to show in the taskbar thumbnail (or a RECT memory pointer)
 
 	Returns:
 		BOOL success - true on success, false otherwise.
@@ -292,7 +299,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetThumbnailClip(hWin, clip)
 	{
-		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", clip.ToStructPtr()))
+		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", IsObject(clip) ? clip.ToStructPtr() : clip))
 	}
 
 	/*
@@ -309,7 +316,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ParseArray(array)
 	{
-		static item_size := A_PtrSize + 536, struct
+		static item_size := THUMBBUTTON.GetRequiredSize(), struct
 		local count := array.MaxIndex()
 
 		if (count > 7)

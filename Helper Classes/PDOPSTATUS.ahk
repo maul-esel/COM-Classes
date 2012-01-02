@@ -2,11 +2,19 @@
 class: PDOPSTATUS
 an enumeration class containing the possible return values for IOperationsProgressDialog::GetOperationStatus().
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "PDOPS_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/PDOPSTATUS)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762519)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class PDOPSTATUS
 {

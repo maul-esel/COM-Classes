@@ -1,15 +1,22 @@
 /*
 class: ShellItem
-implements the IShellItem interface and exposes methods that retrieve information about a Shell item. IShellItem and IShellItem2 are the preferred representations of items in any new code.
+wraps the *IShellItem* interface and exposes methods that retrieve information about a Shell item. IShellItem and IShellItem2 are the preferred representations of items in any new code.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ShellItem)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761144)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP SP1 / Windows Server 2003 or higher
 	Base classes - Unknown
 	Helper classes -  SIGDN, SFGAO, SICHINT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761144)
 */
 class ShellItem  extends Unknown
 {

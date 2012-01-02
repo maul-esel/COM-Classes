@@ -1,11 +1,23 @@
 /*
 class: IMAGELISTSTATS
-Contains image list statistics. Used by IImageList2::GetStatistics.
+a structure class that contains image list statistics. Used by IImageList2::GetStatistics.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/IMAGELISTSTATS)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761397)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows Vista / Windows Server 2008 or higher
+	Base classes - StructBase
 */
-class IMAGELISTSTATS
+class IMAGELISTSTATS extends StructBase
 {
 	/*
 	Field: cbSize
@@ -43,12 +55,9 @@ class IMAGELISTSTATS
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, 16, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.cbSize,		1*ptr,	00,	"UInt")
@@ -71,7 +80,7 @@ class IMAGELISTSTATS
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new IMAGELISTSTATS()
+		local instance := new IMAGELISTSTATS()
 
 		instance.cbSize 	:= NumGet(1*ptr,	00,	"UInt")
 		instance.cAlloc		:= NumGet(1*ptr,	04,	"Int")
@@ -79,5 +88,24 @@ class IMAGELISTSTATS
 		instance.cStandby	:= NumGet(1*ptr,	12,	"Int")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data = "")
+	{
+		return 16
 	}
 }

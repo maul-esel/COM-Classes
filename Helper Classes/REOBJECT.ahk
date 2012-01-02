@@ -1,17 +1,30 @@
 /*
 class: REOBJECT
-contains information about a RichEdit-object.
+a structure class that contains information about a RichEdit-object.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/REOBJECT)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb787946)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
+	Helper classes - REO, DVASPECT, SIZE
 */
-class REOBJECT
+class REOBJECT extends StructBase
 {
 	/*
 	Field: cbStruct
 	Structure size, in bytes. *DO NOT CHANGE THIS VALUE!*
 	*/
-	cbStruct := 44 + 3*A_PtrSize
+	cbStruct := this.GetRequiredSize()
 
 	/*
 	Field: cp
@@ -91,17 +104,14 @@ class REOBJECT
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, this.cbStruct,	0)
-			ptr := &struct
+			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.cbStruct,	1*ptr,	00+0*A_PtrSize,	"UInt")
 		NumPut(this.cp,			1*ptr,	04+0*A_PtrSize,	"Int")
-		DllCall("Ole32.dll\CLSIDFromString", "str", this.clsid, "ptr", ptr + 08)
+		DllCall("Ole32.dll\CLSIDFromString", "wstr", this.clsid, "ptr", ptr + 08)
 		NumPut(this.poleobj,	1*ptr,	24+0*A_PtrSize,	"UPtr")
 		NumPut(this.pstg,		1*ptr,	24+1*A_PtrSize,	"UPtr")
 		NumPut(this.polesite,	1*ptr,	24+2*A_PtrSize,	"UPtr")
@@ -125,7 +135,7 @@ class REOBJECT
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new REOBJECT()
+		local instance := new REOBJECT()
 
 		instance.cbStruct	:= NumGet(1*ptr,	00+0*A_PtrSize,	"UInt")
 		instance.cp			:= NumGet(1*ptr,	04+0*A_PtrSize,	"UInt")
@@ -140,5 +150,24 @@ class REOBJECT
 		instance.dwUser		:= NumGet(1*ptr,	40+3*A_PtrSize,	"UInt")
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- The data object is ignored by this class.
+	*/
+	GetRequiredSize(data = "")
+	{
+		return 44 + 3 * A_PtrSize
 	}
 }

@@ -1,11 +1,24 @@
 /*
 class: PICTDESC
-contains parameters to create a picture object through the OleCreatePictureIndirect function.
+a structure class that contains parameters to create a picture object through the OleCreatePictureIndirect function.
 
-Further documentation:
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/PICTDESC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms693798)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
+	Base classes - StructBase
+	Helper classes - PICTYPE
 */
-class PICTDESC
+class PICTDESC extends StructBase
 {
 	/*
 	Field: cbSizeofstruct
@@ -78,16 +91,9 @@ class PICTDESC
 	*/
 	ToStructPtr(ptr = 0)
 	{
-		static struct
-
-		this.cbSizeofstruct := 8 + (this.picType == PICTYPE.ICON || this.picType == PICTYPE.ENHMETAFILE ? A_PtrSize
-								: (this.picType == PICTYPE.BITMAP ? 2 * A_PtrSize
-								: (this.picType == PICTYPE.METAFILE ? 8 + A_PtrSize : 0)))
-
 		if (!ptr)
 		{
-			VarSetCapacity(struct, this.cbSizeofstruct, 0)
-			ptr := &struct
+			ptr := this.Allocate(this.cbSizeofstruct := this.GetRequiredSize())
 		}
 
 		NumPut(this.cbSizeofstruct,	1*ptr,	00,	"UInt")
@@ -131,7 +137,7 @@ class PICTDESC
 	*/
 	FromStructPtr(ptr)
 	{
-		instance := new PICTDESC()
+		local instance := new PICTDESC()
 
 		instance.cbSizeofstruct	:= NumGet(1*ptr,	00,	"UInt")
 		instance.picType		:= NumGet(1*ptr,	04,	"UInt")
@@ -157,5 +163,31 @@ class PICTDESC
 		}
 
 		return instance
+	}
+
+	/*
+	Method: GetRequiredSize
+	calculates the size a memory instance of this class requires.
+
+	Parameters:
+		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+
+	Returns:
+		UINT bytes - the number of bytes required
+
+	Remarks:
+		- This may be called as if it was a static method.
+		- If this method is called from an instance, the instance's <picType> value will be used. To override this or if the method is called as static method, the data object may contain a field called "pictype" which specifies the PICTYPE value for the calcuation. If none is give, PICTYPE.METAFILE is assumed, which needs most memory.
+	*/
+	GetRequiredSize(data = "")
+	{
+		picType := PICTYPE.METAFILE
+		if (this != PICTDESC)
+				picType := this.picType
+		if (IsObject(data) && data.HasKey("pictype"))
+				picType := data.picType
+		return 8 + (picType == PICTYPE.ICON || picType == PICTYPE.ENHMETAFILE ? A_PtrSize
+				: (picType == PICTYPE.BITMAP ? 2 * A_PtrSize
+				: (picType == PICTYPE.METAFILE ? 8 + A_PtrSize : 0)))
 	}
 }

@@ -1,12 +1,20 @@
 /*
 class: STPFLAG
-an enumeration class used by the ITaskbarList4::SetTabProperties method to specify tab properties.
+an enumeration class used by ITaskbarList4::SetTabProperties to specify tab properties.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "STPF_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/STPFLAG)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd562320)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 7 / Windows Server 2008 R2
 */
 class STPFLAG
 {

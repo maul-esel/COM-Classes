@@ -2,11 +2,19 @@
 class: FILE_ATTRIBUTE
 an enumeration class containing flags indicating file attributes. File attributes are metadata values stored by the file system on disk and are used by the system and are available to developers via various file I/O APIs.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "FILE_ATTRIBUTE_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/FILE_ATTRIBUTE)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/gg258117)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP/ Windows Server 2003
 */
 class FILE_ATTRIBUTE
 {

@@ -3,21 +3,23 @@ This folder holds classes that are used to represent structs or enumerations use
 
 ## Struct classes
 ### Requirements
-* the member names must exactly match those in the struct definition
-* the members must be accessible via get/set
-* each class must implement a method called `ToStructPtr(ptr = 0)` (optional parameter), that converts the current values into a structure in memory and returns a pointer to it. In case the `ptr` is given, it copies the value to that memory location instead (and returns it).
-* each class must implement a (static) `FromStructPtr(ptr)` method, which accepts a pointer to a memory struct and returns a new instance of the class.
+* The classes must derive from the StructBase class.
+* The field names must exactly match those in the struct definition.
+* The fields must be accessible via get/set.
+* Nested structs must be imlemented as separate struct classes. Add an instance of the nested struct, access the values like this: `struct.nestedstruct.field := value`
+* Each class must implement the abstract methods defined and documented in StructBase.
+* For more information, see the StructBase documentation.
 
 ### Usage
 Usually, it should be possible to pass either the struct instance or a pointer (for example obtained by calling `ToStructPtr()`) to a method.
 A COM class can also document the structs it can handle for each function (if not all can be handled).
 
-Of course, it must also be documented what struct instances can be passed, with a link to the class' documentation.
+Of course, it must also be documented what struct instances can be passed.
 
 # Enumeration classes
 ### Requirements
-* the member names must exactly match those in the enumeration definition, except a leading prefix (if present) is ommitted.
-* use static fields!
+* The member names must exactly match those in the enumeration definition, except that a leading prefix, if present, is ommitted.
+* Use static fields.
 
 ### Usage
 The enumeration members can be used in methods or for struct fields. Ensure the corresponding enumeration is documented.

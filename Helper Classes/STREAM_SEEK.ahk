@@ -1,12 +1,20 @@
 /*
 class: STREAM_SEEK
-an enumeration class specifying the origin from which to calculate the new seek-pointer location. They are used for the dworigin parameter in the IStream::Seek method. The new seek position is calculated using this value and the dlibMove parameter.
+an enumeration class specifying the origin from which to calculate the new seek-pointer location.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "STREAM_SEEK_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/STREAM_SEEK)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380359)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
 */
 class STREAM_SEEK
 {

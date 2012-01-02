@@ -2,11 +2,19 @@
 class: TBPFLAG
 an enumeration class containing flags that control the current state of the progress button.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "TBPF_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/TBPFLAG)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd391697)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 7 / Windows Server 20008 R2
 */
 class TBPFLAG
 {

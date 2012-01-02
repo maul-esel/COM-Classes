@@ -1,15 +1,21 @@
 /*
 class: Unknown
-implements the IUnknown interface and provides meta-functions and helper methods for inherited classes.
+wraps the *IUnknown* interface and provides meta-functions and helper methods for inherited classes.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/Unknown)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680509)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - (any)
 	Base classes - (none)
-	Helper classes - (none)
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680509)
 */
 class Unknown
 {

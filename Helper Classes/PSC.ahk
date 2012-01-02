@@ -2,11 +2,19 @@
 class: PSC
 an enumeration class containing flags that specify the state of a property.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "PSC_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/PSC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb762531)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class PSC
 {

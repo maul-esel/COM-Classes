@@ -2,11 +2,19 @@
 class: STGC
 an enumeration class specifying the conditions for performing the commit operation in the IStorage::Commit and IStream::Commit methods.
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "STGC_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/STGC)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/aa380320)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
 */
 class STGC
 {

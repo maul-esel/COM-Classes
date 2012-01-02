@@ -1,15 +1,23 @@
 /*
 class: Picture
-implements the IPicture interface and manages a picture object and its properties.
+wraps the *IPicture* interface and manages a picture object and its properties.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/Picture)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680761)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - Unknown
-	Helper Classes - Stream, PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms680761)
+	Helper Classes - PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
+	Other classes - Stream
 */
 class Picture extends Unknown
 {

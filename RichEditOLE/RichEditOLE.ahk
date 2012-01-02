@@ -1,15 +1,22 @@
 /*
 class: RichEditOLE
-implements IRichEditOLE and exposes the COM functionality of a rich edit control.
+wraps the *IRichEditOLE* interface and exposes the COM functionality of a rich edit control.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/RichEditOLE)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774306)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - REO, REOBJECT, DVASPECT
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774306)
 
 Remarks:
 	- To create an instance of this class, call the (static) FromHWND() method.
@@ -96,7 +103,7 @@ class RichEditOLE extends Unknown
 	*/
 	GetObject(index, flags)
 	{
-		VarSetCapacity(obj,	44+3*A_PtrSize, 0)
+		VarSetCapacity(obj,	REOBJECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &obj, "uint", flags))
 		return REOBJECT.FromStructPtr(&obj)
 	}
@@ -116,7 +123,7 @@ class RichEditOLE extends Unknown
 	*/
 	InsertObject(obj)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(obj) ? obj.ptr : obj))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(obj) ? obj.ToStructPtr() : obj))
 	}
 
 	/*

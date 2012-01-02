@@ -1,18 +1,22 @@
 /*
 class: ShellLinkW
-implements the IShellLinkW interface and exposes methods that create, modify, and resolve Shell links.
+wraps the *IShellLinkW* interface and exposes methods that create, modify, and resolve Shell links.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ShellLinkW)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows 2000 Server or higher
 	Base classes - Unknown
 	Helper classes - SLGP, SLR, SW, WIN32_FIND_DATA
-
-Further documentation:
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
-
-Remarks:
-	To create a shortcut, query the instance for IPersistFile and call its Save() method.
 */
 class ShellLinkW extends Unknown
 {
@@ -42,10 +46,10 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data = 0)
 	{
-		VarSetCapacity(s, 44 + 274 * (A_IsUnicode ? 2 : 1), 0)
-		VarSetCapacity(path, 260 * 2, 0)
+		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0)
+		VarSetCapacity(path, 520, 0)
 		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", 260, "ptr", s, "uint", flags)
-		data := new WIN32_FIND_DATA(s)
+		data := WIN32_FIND_DATA.FromStructPtr(&s)
 		return this._Error(hr)
 	}
 

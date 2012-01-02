@@ -1,12 +1,20 @@
 /*
 class: ILFIP
-an enumeration class containing flags for setting an image as "current" in an image list.
+an enumeration class containing flags for setting an image as "current" in an image list..
 
-Remarks:
-	- The field names exactly match the contants' names, except that the leading "ILFIP_" is omitted.
+Authors:
+	- maul.esel (https://github.com/maul-esel)
 
-Further documentation:
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
+
+Documentation:
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ILFIP)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761411)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows Vista / Windows Server 2008 or higher
 */
 class ILFIP
 {
