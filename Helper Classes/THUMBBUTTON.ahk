@@ -14,7 +14,7 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - Windows 7 / Windows Server 2008 R2
+	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - StructBase
 	Helper classes - THUMBBUTTONFLAGS, THUMBBUTTONMASK
 */
@@ -106,6 +106,7 @@ class THUMBBUTTON extends StructBase
 
 		return instance
 	}
+
 	/*
 	Method: GetRequiredSize
 	calculates the size a memory instance of this class requires.

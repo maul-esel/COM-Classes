@@ -69,7 +69,7 @@ class PROGDLG
 
 	/*
 	Field: DEFAULT
-	**Windows 7 and later.** Indicates default, normal operation progress dialog behavior. Same as <NORMAL>.
+	*Windows 7 and later.* Indicates default, normal operation progress dialog behavior. Same as <NORMAL>.
 	*/
 	static DEFAULT := 0x00000000
 

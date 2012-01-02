@@ -14,7 +14,7 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - Windows XP/ Windows Server 2003
+	OS - Windows XP / Windows Server 2003 or higher
 */
 class FILE_ATTRIBUTE
 {
