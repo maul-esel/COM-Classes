@@ -58,7 +58,7 @@ class PropertyStore extends Unknown
 	GetAt(index)
 	{
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", index, "ptr*", out))
-		return new PROPERTYKEY(out)
+		return PROPERTYKEY.FromStructPtr(out)
 	}
 
 	/*

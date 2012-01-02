@@ -283,7 +283,7 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		HWND hGui - the window handle of your gui
-		RECT clip - a RECT instance describing the area to show in the taskbar thumbnail
+		RECT clip - a RECT instance describing the area to show in the taskbar thumbnail (or a RECT memory pointer)
 
 	Returns:
 		BOOL success - true on success, false otherwise.
@@ -298,7 +298,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetThumbnailClip(hWin, clip)
 	{
-		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", clip.ToStructPtr()))
+		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", IsObject(clip) ? clip.ToStructPtr() : clip))
 	}
 
 	/*
@@ -315,7 +315,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ParseArray(array)
 	{
-		static item_size := A_PtrSize + 536, struct
+		static item_size := THUMBBUTTON.GetRequiredSize(), struct
 		local count := array.MaxIndex()
 
 		if (count > 7)

@@ -103,7 +103,7 @@ class RichEditOLE extends Unknown
 	*/
 	GetObject(index, flags)
 	{
-		VarSetCapacity(obj,	44+3*A_PtrSize, 0)
+		VarSetCapacity(obj,	REOBJECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &obj, "uint", flags))
 		return REOBJECT.FromStructPtr(&obj)
 	}
@@ -123,7 +123,7 @@ class RichEditOLE extends Unknown
 	*/
 	InsertObject(obj)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(obj) ? obj.ptr : obj))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(obj) ? obj.ToStructPtr() : obj))
 	}
 
 	/*

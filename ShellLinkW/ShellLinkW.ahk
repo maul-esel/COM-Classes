@@ -46,10 +46,10 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data := 0)
 	{
-		VarSetCapacity(s, 636, 0)
+		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0)
 		VarSetCapacity(path, 520, 0)
 		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", 260, "ptr", s, "uint", flags)
-		data := new WIN32_FIND_DATA(s)
+		data := WIN32_FIND_DATA.FromStructPtr(&s)
 		return this._Error(hr)
 	}
 

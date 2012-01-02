@@ -247,7 +247,7 @@ class ImageList extends Unknown
 	*/
 	GetImageInfo(index)
 	{
-		VarSetCapacity(info, 2*A_PtrSize + 24, 0)
+		VarSetCapacity(info, IMAGEINFO.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return IMAGEINFO.FromStructPtr(&info)
 	}
@@ -314,7 +314,7 @@ class ImageList extends Unknown
 	*/
 	GetImageRect(index)
 	{
-		VarSetCapacity(info, 16, 0)
+		VarSetCapacity(info, RECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return RECT.FromStructPtr(&info)
 	}
@@ -546,7 +546,7 @@ class ImageList extends Unknown
 	*/
 	GetDragImage(byRef dragPos, byRef imagePos, byRef IL)
 	{
-		VarSetCapacity(POINT1, 8, 0), VarSetCapacity(POINT2, 8, 0)
+		VarSetCapacity(POINT1, POINT.GetRequiredSize(), 0), VarSetCapacity(POINT2, POINT.GetRequiredSize(), 0)
 		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
 
 		dragPos := POINT.FromStructPtr(&POINT1)
