@@ -1,5 +1,5 @@
 /*
-class: INVOKE
+class: INVOKEKIND
 an enumeration class that specifies the way a function is invoked.
 
 Authors:
@@ -9,14 +9,14 @@ License:
 	- *LGPL* (http://www.gnu.org/licenses/lpgl-2.1.txt)
 
 Documentation:
-	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/INVOKE)
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/INVOKEKIND)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221691%28v=vs.85%29.aspx)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 */
-class INVOKE
+class INVOKEKIND
 {
 	/*
 	Field: FUNC
