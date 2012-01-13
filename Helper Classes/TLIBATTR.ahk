@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - StructBase
-	Helper classes - SYSKIND, (LIBFLAGS)
+	Helper classes - SYSKIND, LIBFLAGS
 */
 class TLIBATTR
 {
