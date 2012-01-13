@@ -10,7 +10,7 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TYPEATTR)
-	- *freetechsecrets* (http://winapi.freetechsecrets.com/ole/OLETYPEATTR.htm)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221003%28v=VS.85%29.aspx)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
