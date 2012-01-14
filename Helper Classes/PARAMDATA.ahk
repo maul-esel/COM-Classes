@@ -63,7 +63,7 @@ class PARAMDATA extends StructBase
 		}
 
 		NumPut(this.GetAdress("szName"),	1*ptr,	00, "UPtr")
-		NumPut(this.vt,						1*ptr,	00,	"UShort")
+		NumPut(this.vt,						1*ptr,	A_PtrSize,	"UShort")
 
 		return ptr
 	}
@@ -80,7 +80,7 @@ class PARAMDATA extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new PARAMDATA(StrGet(NumGet(1*ptr, 00, "UPtr")), NumGet(1*ptr, 00,	"UShort"))
+		return new PARAMDATA(StrGet(NumGet(1*ptr, 00, "UPtr")), NumGet(1*ptr, A_PtrSize,	"UShort"))
 	}
 
 	/*
