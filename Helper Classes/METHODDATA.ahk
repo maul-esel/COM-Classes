@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - StructBase
-	Helper classes - VARENUM, DISPID, MEMBERID, CALLCONV, DISPATCHF
+	Helper classes - VARENUM, DISPID, MEMBERID, CALLCONV, DISPATCHF, PARAMDATA
 */
 class METHODDATA extends StructBase
 {
@@ -102,10 +102,10 @@ class METHODDATA extends StructBase
 	(static) method that converts a script-usable struct into a new instance of the class.
 
 	Parameters:
-		UPTR ptr - a pointer to a PARAMDATA struct in memory
+		UPTR ptr - a pointer to a METHODDATA struct in memory
 
 	Returns:
-		PARAMDATA instance - the new PARAMDATA instance
+		METHODDATA instance - the new METHODDATA instance
 	*/
 	FromStructPtr(ptr)
 	{
