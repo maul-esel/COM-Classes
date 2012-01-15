@@ -18,7 +18,7 @@ Requirements:
 	Base classes - StructBase
 	Helper classes - SYSKIND, LIBFLAGS
 */
-class TLIBATTR
+class TLIBATTR extends StructBase
 {
 	/*
 	Field: guid
