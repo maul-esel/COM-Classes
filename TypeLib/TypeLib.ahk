@@ -46,7 +46,7 @@ class TypeLib extends Unknown
 	*/
 	FromFile(file, index := 1)
 	{
-		this._Error(DllCall("OleAut32.dll\LoadTypeLib", "str", file . "\\" . index, "Ptr*", out))
+		this._Error(DllCall("OleAut32.dll\LoadTypeLib", "str", file . "\" . index, "Ptr*", out))
 		return new TypeLib(out)
 	}
 
