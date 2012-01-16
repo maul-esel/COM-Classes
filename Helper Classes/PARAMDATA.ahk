@@ -28,7 +28,7 @@ class PARAMDATA extends StructBase
 
 	/*
 	Field: vt
-	The parameter type. You may use the fields of the VARENUM clas for convenience. If more than one parameter type is accepted, VARENUM.VARIANT should be specified.
+	The parameter type. You may use the fields of the VARENUM class for convenience. If more than one parameter type is accepted, VARENUM.VARIANT should be specified.
 	*/
 	vt := 0
 

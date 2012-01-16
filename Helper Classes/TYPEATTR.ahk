@@ -118,7 +118,7 @@ class TYPEATTR extends StructBase
 
 	/*
 	Field: tdescAlias
-	If TypeKind == TKIND_ALIAS, specifies the type for which this type is an alias
+	If typekind is TYPEKIND.ALIAS, specifies the type for which this type is an alias.
 	*/
 	tdescAlias := new TYPEDESC()
 
@@ -150,7 +150,7 @@ class TYPEATTR extends StructBase
 		NumPut(this.dwReserved,			1*ptr,	20+0*A_PtrSize,	"UInt")
 		NumPut(this.memidConstructor,	1*ptr,	24+0*A_PtrSize,	"Int")
 		NumPut(this.memidDestructor,	1*ptr,	28+0*A_PtrSize,	"Int")
-		NumPut(this.GetAdress("lpstrSchema",	1*ptr,	32+0*A_PtrSize,	"UPtr")
+		NumPut(this.GetAdress("lpstrSchema"),	1*ptr,	32+0*A_PtrSize,	"UPtr")
 		NumPut(this.cbSizeInstance,		1*ptr,	32+1*A_PtrSize,	"UInt")
 		NumPut(this.typekind,			1*ptr,	36+1*A_PtrSize,	"UInt")
 		NumPut(this.cFuncs,				1*ptr,	40+1*A_PtrSize,	"UShort")
@@ -222,7 +222,7 @@ class TYPEATTR extends StructBase
 	{
 		td := (this == TYPEATTR) ? TYPEDESC : this.tdescAlias
 		idl := (this == TYPEATTR) ? IDLDESC : this.idldescType
-		data := (this == TYPEATTR) ? {} : data
+		data := IsObject(data) ? {} : data
 		return 56 + 1 * A_PtrSize + td.GetRequiredSize(data) + idl.GetRequiredSize(data)
 	}
 }
