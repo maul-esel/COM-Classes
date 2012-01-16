@@ -17,7 +17,7 @@ Requirements:
 	OS - (unknown)
 	Base classes - Unknown
 	Other classes - (TypeComp)
-	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, (TYPEDESC, IDLDESC)
+	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, IDLDESC, (TYPEDESC)
 */
 class TypeInfo extends Unknown
 {
