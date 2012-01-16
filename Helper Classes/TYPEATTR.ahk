@@ -118,7 +118,7 @@ class TYPEATTR extends StructBase
 
 	/*
 	Field: tdescAlias
-	If TypeKind == TKIND_ALIAS, specifies the type for which this type is an alias
+	If typekind is TYPEKIND.ALIAS, specifies the type for which this type is an alias.
 	*/
 	tdescAlias := new TYPEDESC()
 
