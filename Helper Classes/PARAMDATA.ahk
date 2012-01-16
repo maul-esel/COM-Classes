@@ -40,7 +40,7 @@ class PARAMDATA extends StructBase
 		[opt] STR name - the initial value for the <szName> field.
 		[opt] USHORT vt - the initial value for the <vt> field.
 	*/
-	__New(name = "", vt:= 0)
+	__New(name := "", vt := 0)
 	{
 		this.szName := name, this.vt := vt
 	}
@@ -55,7 +55,7 @@ class PARAMDATA extends StructBase
 	Returns:
 		UPTR ptr - a pointer to the struct in memory
 	*/
-	ToStructPtr(ptr = 0)
+	ToStructPtr(ptr := 0)
 	{
 		if (!ptr)
 		{
@@ -97,7 +97,7 @@ class PARAMDATA extends StructBase
 		- This may be called as if it was a static method.
 		- The data object is ignored by this class.
 	*/
-	GetRequiredSize(data = "")
+	GetRequiredSize(data := "")
 	{
 		return A_PtrSize + 2
 	}
