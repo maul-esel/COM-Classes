@@ -40,7 +40,7 @@ class PARAMDATA extends StructBase
 		[opt] STR name - the initial value for the <szName> field.
 		[opt] USHORT vt - the initial value for the <vt> field.
 	*/
-	__New(name = "", vt:= 0)
+	__New(name = "", vt = 0)
 	{
 		this.szName := name, this.vt := vt
 	}
