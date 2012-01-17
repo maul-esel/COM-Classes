@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP SP1 / Windows Server 2003 or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes -  SIGDN, SFGAO, SICHINT
 */
 class ShellItem  extends Unknown

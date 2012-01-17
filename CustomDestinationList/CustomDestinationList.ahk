@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7 / Windows Server 2008 R2 or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - KDC
 	Other classes - ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
 */

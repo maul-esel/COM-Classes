@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - (TypeComp)
 	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, IDLDESC, (TYPEDESC)
 */

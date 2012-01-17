@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista, Windows 2008 Server or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - EDataFlow, ERole, DEVICE_STATE
 	Other classes - (MMDeviceCollection, MMDevice, MMNotificationClient)
 */
