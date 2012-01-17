@@ -11,10 +11,10 @@ Remarks:
 */
 
 /*
-class: _CCF_ErrorHandler_
+class: _CCF_Error_Handler_
 the base class that includes error handling
 */
-#include _CCF_ErrorHandler_\_CCF_ErrorHandler_.ahk
+#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 
 /*
 class: Unknown

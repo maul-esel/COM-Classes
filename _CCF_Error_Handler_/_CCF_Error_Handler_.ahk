@@ -5,7 +5,7 @@ serves as base class for all other classes and implements some error handling. T
 Requirements:
 	AutoHotkey - AHK v2 alpha
 */
-class _CCF_ErrorHandler_
+class _CCF_Error_Handler_
 {
 	/*
 	Method: __Call
