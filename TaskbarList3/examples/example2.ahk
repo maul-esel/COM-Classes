@@ -1,4 +1,5 @@
 ﻿#SingleInstance force
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #include ..\..\TaskbarList\TaskbarList.ahk
 #include ..\..\TaskbarList2\TaskbarList2.ahk

@@ -1,4 +1,5 @@
-﻿#include ..\..\Unknown\Unknown.ahk
+﻿#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\Unknown\Unknown.ahk
 #include ..\ShellLinkW.ahk
 #include ..\..\Persist\Persist.ahk
 #include ..\..\PersistFile\PersistFile.ahk
