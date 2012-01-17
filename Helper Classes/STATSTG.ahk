@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Wndows 2000 Server or higher
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - LOCKTYPE, FILETIME
 */
 class STATSTG extends StructBase

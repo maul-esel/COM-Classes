@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or higher
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 */
 class IMAGELISTSTATS extends StructBase
 {

@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - VARENUM
 */
 class PARAMDATA extends StructBase
