@@ -15,9 +15,9 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (any)
-	Base classes - (none)
+	Base classes - _CCF_ErrorHandler_
 */
-class Unknown
+class Unknown extends _CCF_ErrorHandler_
 {
 	/*
 	Field: IID_IUnknown
