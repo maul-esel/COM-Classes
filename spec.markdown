@@ -157,13 +157,16 @@ It is also recommended to use the same capitalization as in the interface name, 
 * Unicode vs. ANSI: [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/printerFriendly/articles/Unicode.html)
 * 64bit vs. 32bit: [...]()
 * AutoHotkey:
+
     * AutoHotkey\_L documentation: [DllCall](), with a section on [structures]()
     * DllCall type mapping: [...]()
 * Object-oriented programming:
+
     * [Wikipedia: OOP]()
     * [Wikipedia: Classes]()
     * [Wikipedia: Interfaces]()
 * COM
+
     * msdn: [Component Object Model]()
     * IUnknown: [...]()
     * IDispatch: [...]()
