@@ -1,5 +1,5 @@
----
-title: CCF specification
+﻿---
+title: "CCF specification"
 permalink: spec.html
 layout: spec_layout
 
