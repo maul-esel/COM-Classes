@@ -44,6 +44,9 @@ AutoHotkey\_H version *1.x* (by HotKeyIt, based on AutoHotkey\_L) is compatible 
 
 For the version *2.x* of AutoHotkey\_H, it should be compatible to the code in the ***master*** branch, too.
 
+#### Important differences to consider
+...
+
 ### Unicode & ANSI
 For AutoHotkey\_L, it is important to ensure the **Unicode build** is supported as well as the **ANSI build**.
 This is important when doing calls to `StrGet()` and `StrPut()`, when handling the capacity of structs containing strings (not as pointers, but as character arrays), when calling any COM method or `DllCall()` function that receives or outputs strings (use the appropriate string type, `"wstr"` or `"astr"`).
@@ -54,9 +57,6 @@ In AutoHotkey v2, special handling for Unicode strings **can and should be ommit
 AutoHotkey\_L and AutoHotkey v2 (and therefore AutoHotkey\_H) are compatible with 64bit - Windows. The CCF classes should **support 64bit**, too.
 
 To achieve this, it is required to use `A_PtrSize` to calculate structure offsets and size and similar and to use the `"Ptr"` type in method calls and calls to `NumGet()` and `NumPut()`. One should pay attention to the fact that a lot of types actually map to this type, including HWND, HBITMAP, HANDLE, ...
-
-#### Important differences to consider
-...
 
 ***
 
