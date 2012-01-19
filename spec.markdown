@@ -1,3 +1,7 @@
+---
+title: CCF specification
+permalink: spec.html
+---
 # CCF specification
 ## Introduction
 This is the official specification for the [**COM Classes Framework (CCF)**](https://github.com/maul-esel/COM-Classes "CCF github repo"). It is intended to define explicit guidelines classes in the CCF must fulfill.
