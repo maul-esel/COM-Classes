@@ -1,6 +1,7 @@
 ---
 title: CCF specification
 permalink: spec.html
+
 ---
 # CCF specification
 ## Introduction
@@ -18,27 +19,27 @@ This section defines the different version guidelines a class must fulfill.
 ### AHK branches
 As there are more and more different branches of AutoHotkey out there, it is very important to specify compatibility requirements.
 
-#### AutoHotkey (AHK "classic", "basic", "vanilla") ![](bad.png)
+#### ![](bad.png) AutoHotkey (AHK "classic", "basic", "vanilla")
 AutoHotkey classic (by Chris Mallett, currently version *1.0.48.05*, no longer developed) is **not supported** by the CCF. This framework is entirely based on classes which are not supported by AutoHotkey classic.
 
-#### IronAHK ![](bad.png)
+#### ![](bad.png) IronAHK
 IronAHK (by polyethene, .NET version of AutoHotkey, currently alpha ~*0.7*) is **not supported** as well, for the same reason as AutoHotkey classic.
 
 In addition, COM is deeply integrated in the system, it is not guaranteed to work on non-Windows system.
 
 Last but not least it is questionable whether COM calls as they are realized right now would be allowed by the .NET framework or not.
 
-#### AutoHotkey\_L ![](ok.png)
+#### ![](ok.png) AutoHotkey\_L
 AutoHotkey\_L (by Lexikos / Steve Gray, based on AutoHotkey classic, currently version ~*1.1*) should be **fully supported** by all classes.
 
 All AutoHotkey\_L code must be placed in the [***AHK\_Lv1.1***](https://github.com/maul-esel/COM-Classes/tree/AHK\_Lv1.1) branch of the main git repository.
 
-#### AutoHotkey v2 alpha ![](ok.png)
+#### ![](ok.png) AutoHotkey v2 alpha
 AutoHotkey v2 (by Lexikos / Steve Gray, based on AutoHotkey\_L, currently alpha) should be **fully supported** as well. However, as it currently has a lot of breaking changes, ensuring compatibility with the latest version is very difficult and requires a lot of maintenance.
 
 Code for AutoHotkey v2 should be placed in the [***master***](https://github.com/maul-esel/COM-Classes/tree/master) branch of the main github repository.
 
-#### AutoHotkey\_H ![](ok.png)
+#### ![](ok.png) AutoHotkey\_H
 AutoHotkey\_H version *1.x* (by HotKeyIt, based on AutoHotkey\_L) is compatible to AutoHotkey\_L, so it should obviously be **compatible** to the code in the ***AHK\_Lv1.1*** branch.
 
 For the version *2.x* of AutoHotkey\_H, it should be compatible to the code in the ***master*** branch, too.
