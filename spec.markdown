@@ -161,11 +161,13 @@ It is also recommended to use the same capitalization as in the interface name, 
 
     * AutoHotkey\_L documentation: [DllCall](), with a section on [structures]()
     * DllCall type mapping: [...]()
+
 * Object-oriented programming:
 
     * [Wikipedia: OOP]()
     * [Wikipedia: Classes]()
     * [Wikipedia: Interfaces]()
+
 * COM
 
     * msdn: [Component Object Model]()
