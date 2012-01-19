@@ -9,7 +9,7 @@ div#content
 	padding: 10px;
 	margin-left: 15%;
 	text-align: justify;
-	font-family: Calibri;
+	font-family: Calibri, Arial, sans-serif;
 	border: solid lightgray 1px
 }
 
@@ -41,6 +41,8 @@ code
 	background-color: #EEEEEE;
 	padding: 1px;
 	border: solid #AEAEAE 0.5px;
+	font-size: 80%;
+	font-family: "Courier New", "Lucida Console", monospace;
 }
 
 h2 { counter-reset: level_2; }
