@@ -1,0 +1,62 @@
+body
+{
+	counter-reset: level_1 level_2 level_3
+}
+
+div#content
+{
+	width: 70%;
+	padding: 10px;
+	margin-left: 15%;
+	text-align: justify;
+	font-family: Calibri;
+	border: solid lightgray 1px
+}
+
+a:link
+{
+	text-decoration: none;
+	color: navy;
+	font-weight: bold
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+h1
+{
+	text-align: center
+}
+
+p, ol, ul, code
+{
+	padding-left: 5%;
+	padding-right: 5%
+}
+
+code
+{
+	background-color: #EEEEEE;
+	padding: 1px;
+	border: solid #AEAEAE 0.5px;
+}
+
+h2 { counter-reset: level_2; }
+h2:before
+{
+	content: counter(level_1) ". ";
+	counter-increment: level_1;
+}
+h3 { counter-reset: level_3; }
+h3:before
+{
+	content: counter(level_1) "." counter(level_2) " ";
+	counter-increment: level_2;
+}
+h4:before
+{
+	content: counter(level_1) "." counter(level_2) "." counter(level_3) " ";
+	counter-increment: level_3;
+}
