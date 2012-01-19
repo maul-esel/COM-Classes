@@ -1,6 +1,7 @@
 ---
 title: CCF specification
 permalink: spec.html
+layout: spec_layout
 
 ---
 # CCF specification
