@@ -3,6 +3,7 @@
 #Include ..\..\TaskbarList\TaskbarList.ahk
 #Include ..\..\TaskbarList2\TaskbarList2.ahk
 #Include ..\TaskbarList3.ahk
+#Include ..\..\Helper Classes\StructBase.ahk
 #Include ..\..\Helper Classes\RECT.ahk
 #Include ..\..\Helper Classes\TBPFLAG.ahk
 
