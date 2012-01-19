@@ -3,6 +3,7 @@
 #include ..\..\TaskbarList\TaskbarList.ahk
 #include ..\..\TaskbarList2\TaskbarList2.ahk
 #include ..\TaskbarList3.ahk
+#Include ..\..\Helper Classes\StructBase.ahk
 #include ..\..\Helper Classes\IDI.ahk
 #include ..\..\Helper Classes\THUMBBUTTON.ahk
 #include ..\..\Helper Classes\THUMBBUTTONMASK.ahk
@@ -11,6 +12,7 @@
 OnExit GuiClose
 OnMessage(0x111, "WM_COMMAND") ; monitor clicks on buttons
 
+Gui, Add, Text,, Hover over Taskbar Symbol`nand mind the Buttons...
 Gui +LastFound
 hGui := WinExist() ; get window handle
 Gui Show, w150 h100 ; show gui
