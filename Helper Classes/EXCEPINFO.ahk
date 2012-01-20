@@ -1,6 +1,6 @@
 /*
 class: EXCEPINFO
-a structure class that contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).
+a structure class that describes an exception that occurred during IDispatch::Invoke.
 
 Authors:
 	- maul.esel (https://github.com/maul-esel)
