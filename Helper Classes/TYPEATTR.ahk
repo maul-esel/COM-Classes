@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - DISPID, MEMBERID, TYPEKIND, IDLDESC, (TYPEDESC)
+	Helper classes - DISPID, MEMBERID, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
 */
 class TYPEATTR extends StructBase
 {

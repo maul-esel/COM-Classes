@@ -17,7 +17,7 @@ Requirements:
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - (TypeComp)
-	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, IDLDESC, (TYPEDESC)
+	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
 */
 class TypeInfo extends Unknown
 {
