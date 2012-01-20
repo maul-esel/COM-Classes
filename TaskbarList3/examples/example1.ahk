@@ -12,7 +12,7 @@ License:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7, Windows Server 2008 R2 or higher
-	Classes - CCF (see #include directives for mor detail)
+	Classes - CCF (see #include directives for more details)
 */
 
 #SingleInstance
