@@ -170,7 +170,7 @@ class TypeLib extends Unknown
 	Retrieves the documentation string for the library, the complete Help file name and path, and the context identifier for the library Help topic in the Help file.
 
 	Parameters:
-		INT index - The index of the type description whose documentation is to be returned. If index is -1, then the documentation for the library itself is returned.
+		INT id - The member id of the type description whose documentation is to be returned. For some special cases, you may use the fields of the MEMBERID class for convenience.
 		[opt] byRef STR name - Receives the name of the specified item.
 		[opt] byRef STR doc - Receives the documentation string for the specified item.
 		[opt] byRef UINT context - Receives the Help context identifier (ID) associated with the specified item.
@@ -178,8 +178,11 @@ class TypeLib extends Unknown
 
 	Returns:
 		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If MEMBERID.NIL is passed as index, the documentation for the library itself is returned.
 	*/
-	GetDocumentation(index, byRef name := "", byRef doc := "", byRef context := "", byRef helpfile := "")
+	GetDocumentation(id, byRef name := "", byRef doc := "", byRef context := "", byRef helpfile := "")
 	{
 		bool := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
 		name := StrGet(pName), doc := StrGet(pDoc), helpfile := StrGet(pHelpfile)
