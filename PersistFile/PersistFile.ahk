@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
-	Base classes - Unknown, Persist
+	Base classes - _CCF_Error_Handler_, Unknown, Persist
 	Helper classes - STGM
 */
 class PersistFile extends Persist

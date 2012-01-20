@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - (unknown)
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - (TypeComp)
 	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, IDLDESC, (TYPEDESC)
 */
@@ -201,5 +201,53 @@ class TypeInfo extends Unknown
 	Invoke(instance, memid, flags, byRef params, byRef result = "", byRef exception = "", byRef err_index = 0)
 	{
 
+	}
+
+	/*
+	Method: GetDocumentation
+	Retrieves the documentation string, the complete Help file name and path, and the context ID for the Help topic for a specified type description.
+
+	Parameters:
+		INT id - The member id of the member whose documentation is to be returned. For some special cases, you may use the fields of the MEMBERID class for convenience.
+		[opt] byRef STR name - Receives the name of the specified item.
+		[opt] byRef STR doc - Receives the documentation string for the specified item.
+		[opt] byRef UINT context - Receives the Help context identifier (ID) associated with the specified item.
+		[opt] byRef STR helpfile - Receives the fully-qualified name of the Help file.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If MEMBERID.NIL is passed as id, the documentation for the library itself is returned.
+	*/
+	GetDocumentation(id, byRef name = "", byRef doc = "", byRef context = "", byRef helpfile = "")
+	{
+		bool := this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
+		name := StrGet(pName), doc := StrGet(pDoc), helpfile := StrGet(pHelpfile)
+		return bool
+	}
+
+	/*
+	Method: GetDllEntry
+	Retrieves a description or specification of an entry point for a function in a DLL.
+
+	Parameters:
+		INT id - The ID of the member whose documentation is to be returned. For some special cases, you may use the fields of the MEMBERID class for convenience.
+		UINT invkind - The kind of member identified by id. This is important for properties, because one id can identify up to three separate functions. You may use the fields of the INVOKEKIND class for convenience.
+		[opt] byRef STR dll - receives the name of the DLL.
+		[opt] byRef STR name - receives the name of the entry point. If the entry point is specified by an ordinal, this argument is null.
+		[opt] byRef SHORT ordinal - if the function is defined by an ordinal, receives the ordinal.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If there is no DLL entry point for the function, an error occurs.
+	*/
+	GetDllEntry(id, invkind, byRef dll = "", byRef name = "", byRef ordinal = 0)
+	{
+		bool := this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "ptr*", pDll, "ptr*", pName, "Short*", ordinal))
+		dll := StrGet(pDll), name := StrGet(pName)
+		return bool
 	}
 }

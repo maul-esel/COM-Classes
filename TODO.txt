@@ -11,7 +11,7 @@ PropertyStore / PropertyStoreCache -> GetValue / SetValue / GetValueAndState / S
 Audio classes
 IUIAutomation & friends
 IShellItem2
-IEnumShellItems / IShellItemArray
+IShellItemArray
 IShellLibrary
 IShellItemImageFactory
 INameSpaceTreeControl / INameSpaceTreeControl2

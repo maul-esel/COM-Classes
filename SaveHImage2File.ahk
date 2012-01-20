@@ -18,6 +18,7 @@ Remarks:
 
 Example:
 	(start code)
+	#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 	#include Unknown\Unknown.ahk
 	#include Picture\Picture.ahk
 	#include SequentialStream\SequentialStream.ahk

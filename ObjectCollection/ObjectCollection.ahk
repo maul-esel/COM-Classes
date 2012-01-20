@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7 / Windows Server 2008 R2 or higher
-	Base classes - Unknown, ObjectArray
+	Base classes - _CCF_Error_Handler_, Unknown, ObjectArray
 */
 class ObjectCollection extends ObjectArray
 {

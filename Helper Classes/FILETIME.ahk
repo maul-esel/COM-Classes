@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 */
 class FILETIME extends StructBase
 {

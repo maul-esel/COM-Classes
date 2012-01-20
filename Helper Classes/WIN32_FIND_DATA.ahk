@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows Server 2003 or higher
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - FILETIME, FILE_ATTRIBUTE
 */
 class WIN32_FIND_DATA extends StructBase

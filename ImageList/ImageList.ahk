@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows Server 2003 or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
 
 Remarks:

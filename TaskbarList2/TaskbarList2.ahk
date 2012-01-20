@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP, Windows 2000 Server or higher
-	Base classes - Unknown, TaskbarList
+	Base classes - _CCF_Error_Handler_, Unknown, TaskbarList
 */
 class TaskbarList2 extends TaskbarList
 {

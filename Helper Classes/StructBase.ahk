@@ -13,8 +13,9 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
+	Base classes - _CCF_Error_Handler_
 */
-class StructBase
+class StructBase extends _CCF_Error_Handler_
 {
 	/*
 	group: private

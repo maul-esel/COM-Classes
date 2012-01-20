@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7 / Windows Server 2008 R2 or higher
-	Base classes - StructBase
+	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - THUMBBUTTONFLAGS, THUMBBUTTONMASK
 */
 class THUMBBUTTON extends StructBase

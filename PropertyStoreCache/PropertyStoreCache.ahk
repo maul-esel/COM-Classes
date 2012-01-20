@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows Vista / Windows Server 2008 or higher
-	Base classes - Unknown, PropertyStore
+	Base classes - _CCF_Error_Handler_, Unknown, PropertyStore
 	Helper classes - PSC, PROPERTYKEY, (PROPVARIANT)
 */
 class PropertyStoreCache extends PropertyStore
