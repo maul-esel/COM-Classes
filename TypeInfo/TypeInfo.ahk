@@ -17,7 +17,7 @@ Requirements:
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - (TypeComp)
-	Helper classes - DISPID, MEMBERID, (TYPEATTR), TYPEKIND, IDLDESC, (TYPEDESC)
+	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
 */
 class TypeInfo extends Unknown
 {
@@ -131,7 +131,7 @@ class TypeInfo extends Unknown
 		UINT index - The index of the implemented type whose handle is returned. The valid range is 0 to the cImplTypes field in the TYPEATTR structure.
 
 	Returns:
-		UINT handle - A handle for the implemented interface (if any). This handle can be passed to ITypeInfo::GetRefTypeInfo to get the type description.
+		UINT handle - A handle for the implemented interface (if any). This handle can be passed to <GetRefTypeInfo()> to get the type description.
 	*/
 	GetRefTypeOfImplType(index)
 	{
@@ -249,5 +249,133 @@ class TypeInfo extends Unknown
 		bool := this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "ptr*", pDll, "ptr*", pName, "Short*", ordinal))
 		dll := StrGet(pDll), name := StrGet(pName)
 		return bool
+	}
+
+	/*
+	Method: GetRefTypeInfo
+	If a type description references other type descriptions, this retrieves the referenced type descriptions.
+
+	Parameters:
+		UINT handle - A handle to the referenced type description to return, such as returned by <GetRefTypeOfImplType()>.
+
+	Returns:
+		TypeInfo referenced - a TypeInfo instance for the referenced type
+	*/
+	GetRefTypeInfo(handle)
+	{
+		this._Error(DllCall(NumGet(This.vt+14*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		return new TypeInfo(out)
+	}
+
+	/*
+	Method: AddressOfMember
+	Retrieves the addresses of static functions or variables, such as those defined in a DLL.
+
+	Parameters:
+		UINT id - the ID of the static member whose address is to be retrieved. In some special cases, you may use the fields of MEMBERID class for convenience.
+		[opt] UINT kind - Indicates whether the member is a property, and if so, what kind. You may use the fields of the INVOKEKIND class for convenience. If the member is not a property, you may leave this empty.
+
+	Returns:
+		PTR adress - the address of the member. The address is valid until the caller releases its reference to the type description.
+	*/
+	AddressOfMember(id, kind = 0)
+	{
+		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "UInt", id, "UInt", kind, "UPtr*", out))
+		return out
+	}
+
+	/*
+	Method: CreateInstance
+	Creates a new instance of a type that describes a component object class (coclass).
+
+	Parameters:
+		IUnknown outer - The controlling IUnknown. If Null, then a stand-alone instance is created. If valid, then an aggregate object is created. (whatever that means)
+		IID iid - An ID for the interface that the caller will use to communicate with the resulting object.
+
+	Returns:
+		PTR obj - a pointer to the instance of the created object.
+
+	Remarks:
+		For types that describe a component object class (coclass), CreateInstance creates a new instance of the class. Normally, CreateInstance calls CoCreateInstance with the type description's GUID. For an Application object, it first calls GetActiveObject. If the application is active, GetActiveObject returns the active object; otherwise, if GetActiveObject fails, CreateInstance calls CoCreateInstance.
+	*/
+	CreateInstance(outer, iid)
+	{
+		if iid is not integer
+			iid := Unknown._Guid(s, iid)
+		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(outer) ? outer.ptr : outer, "ptr", iid, "ptr*", out))
+		return out
+	}
+
+	/*
+	Method: GetMops
+	Retrieves marshaling information.
+
+	Parameters:
+		UINT id - The member ID that indicates which marshaling information is needed. In some special cases, you may use the fields of MEMBERID class for convenience.
+
+	Returns:
+		STR mops - The opcode string used in marshaling the fields of the structure described by the referenced type description, or null if there is no information to return.
+
+	Remarks:
+		If the passed-in member ID is MEMBERID.NIL, the function returns the opcode string for marshaling the fields of the structure described by the type description.
+	*/
+	GetMops(id)
+	{
+		this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "UInt", id, "Ptr*", out))
+		return StrGet(out)
+	}
+
+	/*
+	Method: GetContainingTypeLib
+	Retrieves the containing type library and the index of the type description within that type library.
+
+	Parameters:
+		[opt] byRef TypeInfo lib - receives a TypeLib instance containing the type description
+		[opt] byRef UINT index - receives the index of the type description within the containing type library.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+	*/
+	GetContainingTypeLib(byRef lib = "", byRef index = 0)
+	{
+		bool := this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "Ptr*", out, "UInt*", index))
+		lib := IsObject(TypeLib) ? new TypeLib(out) : out
+		return bool
+	}
+
+	/*
+	Method: ReleaseTypeAttr
+	Releases a TYPEATTR previously returned by <GetTypeAttr()>.
+
+	Parameters:
+		TYPEATTR attr - the structure to release
+	*/
+	ReleaseTypeAttr(attr)
+	{
+		DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+	}
+
+	/*
+	Method: ReleaseFuncDesc
+	Releases a FUNCDESC previously returned by <GetFuncDesc()>.
+
+	Parameters:
+		FUNCDESC attr - the structure to release
+	*/
+	ReleaseFuncDesc(attr)
+	{
+		DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+	}
+
+	/*
+	Method: ReleaseVarDesc
+	Releases a VARDESC previously returned by <GetVarDesc()>.
+
+	Parameters:
+		VARDESC attr - the structure to release
+	*/
+	ReleaseVarDesc(attr)
+	{
+		DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
 	}
 }

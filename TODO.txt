@@ -1,3 +1,5 @@
+Struct classes: Add "OriginalPointer()" (only available if created by "FromStructPtr()") to receive the original pointer (needed for those "Release*()" methods)
+
 ShellLinkW -> GetIDList / SetIDList
 ShellLinkW -> GetHotkey / SetHotkey
 IShellLinkA
