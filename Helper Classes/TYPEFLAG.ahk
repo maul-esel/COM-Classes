@@ -25,10 +25,10 @@ class TYPEFLAG
 	static FAPPOBJECT := 0x1
 
 	/*
-	Field: FAPPOBJECT
+	Field: FCANCREATE
 	Instances of the type can be created by ITypeInfo::CreateInstance.
 	*/
-	static FAPPOBJECT := 0x2
+	static FCANCREATE := 0x2
 
 	/*
 	Field: FLICENSED
