@@ -1,6 +1,7 @@
 /*
 Example: Demonstrates the usage of *TaskbarList3.ahk*
 	* OverlayIcon over TaskBarEntry is drawn
+	* Restricting the taskbar thumbnail
 	* Usage of ProgressBar on TaskBarEntry
 
 Authors:
@@ -14,7 +15,6 @@ Requirements:
 	OS - Windows 7, Windows Server 2008 R2 or higher
 	Classes - CCF (see #include directives for more details)
 */
-
 #SingleInstance
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk

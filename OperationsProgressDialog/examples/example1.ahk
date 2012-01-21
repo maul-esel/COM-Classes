@@ -1,4 +1,22 @@
-﻿#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+﻿/*
+Example: Demonstrates the usage of *OperationsProgressDialog.ahk*
+	* Showing a system progress dialog
+	* Updating the file currently working on
+	* Pretending to upload the data to the internet (no real action is done).
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
+	Classes - CCF (see #include directives for more details)
+*/
+#SingleInstance off
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\OperationsProgressDialog.ahk
 #include ..\..\Helper Classes\PDOPSTATUS.ahk
@@ -6,7 +24,7 @@
 #include ..\..\ShellItem\ShellItem.ahk
 
 src := ShellItem.FromAbsolutePath(A_WinDir)
-dest := ShellItem.FromAbsolutePath("http://www.cia.net/upload/files/" A_UserName)
+dest := ShellItem.FromAbsolutePath("http://www.cia.com/upload/files/" A_UserName)
 
 size_total := 0
 LoopFiles, %A_WinDir%\system32\*.dll

@@ -1,3 +1,18 @@
+/*
+Example: Demonstrates the usage of *TaskbarList.ahk*
+	* Hiding and showing taskbar entries
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
+	Classes - CCF (see #include directives for more details)
+*/
 #SingleInstance
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk
