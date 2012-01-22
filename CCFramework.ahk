@@ -142,7 +142,7 @@ class CCFramework extends _CCF_Error_Handler_
 	*/
 	CreateVARIANTARG(value)
 	{
-		return CreateVARIANT(value)
+		return CCFramework.CreateVARIANT(value)
 	}
 
 	/*

@@ -17,7 +17,7 @@ Requirements:
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - KDC
-	Other classes - ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
+	Other classes - CCFramework, ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
 */
 class CustomDestinationList extends Unknown
 {
@@ -65,9 +65,16 @@ class CustomDestinationList extends Unknown
 	*/
 	BeginList(byRef slots := "", removedType := "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}", byRef removedItems := "")
 	{
-		;if removedType is not integer
-			removedType := this._GUID(removedType)
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
+		free_mem := false
+		if !CCFramework.isInteger(removedType)
+		{
+			removedType := CCFramework.String2GUID(removedType)
+			free_mem := true
+		}
+		bool := this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
+		if free_mem
+			CCFramework.FreeMemory(removedType)
+		return bool
 	}
 
 	/*
@@ -152,9 +159,15 @@ class CustomDestinationList extends Unknown
 	*/
 	GetRemovedDestinations(type := "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}")
 	{
-		;if type is not integer
-			type := this._GUID(type)
+		free_mem := false
+		if !CCFramework.isInteger(type)
+		{
+			type := CCFramework.String2GUID(type)
+			free_mem := true
+		}
 		this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", type, "ptr*", out))
+		if free_mem
+			CCFramework.FreeMemory(type)
 		return out
 	}
 

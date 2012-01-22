@@ -17,6 +17,7 @@ Requirements:
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
+	Other classes - CCFramework
 
 Remarks:
 	- to get a HBITMAP or a HICON, use a DllCall to LoadImage, LoadBitmap, LoadIcon, LoadCursor, ...
@@ -40,7 +41,7 @@ class ImageList extends Unknown
 	Field: hModule
 	The module handle to the Comctl32 library, as returned by LoadLibrary()
 	*/
-	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll")
+	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll", "UPtr")
 	
 	/*
 	Field: ThrowOnCreation
@@ -70,7 +71,9 @@ class ImageList extends Unknown
 		if (!il)
 			il := IL_Create()
 
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", this._GUID(i, ImageList.IID), "ptr*", ptr)
+		local iid := CCFramework.String2GUID(ImageList.IID)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", iid, "ptr*", ptr)
+		CCFramework.FreeMemory(iid)
 		return new ImageList(ptr)
 	}
 	
@@ -298,7 +301,9 @@ class ImageList extends Unknown
 	*/
 	Clone()
 	{
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", this._GUID(i, ImageList.IID), "ptr*", out))
+		local iid := CCFramework.String2GUID(ImageList.IID)
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", iid, "ptr*", out))
+		CCFramework.FreeMemory(iid)
 		return new ImageList(out)
 	}
 	
@@ -653,6 +658,6 @@ class ImageList extends Unknown
 	{
 		hM := ImageList.hModule
 		ImageList.hModule := 0
-		return DllCall("FreeLibrary", "uint", hM)
+		return DllCall("FreeLibrary", "UPtr", hM)
 	}
 }

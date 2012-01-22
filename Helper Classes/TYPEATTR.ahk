@@ -23,6 +23,10 @@ class TYPEATTR extends StructBase
 	/*
 	Field: guid
 	The GUID (string) of the TypeInfo
+
+	Remarks:
+		When retrieved from an instance created by <FromStructPtr()>, this is a GUID string.
+		Otherwise, you may either set it to a string or a raw memory pointer to the GUID.
 	*/
 	guid := ""
 
@@ -145,7 +149,10 @@ class TYPEATTR extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		DllCall("Ole32.dll\CLSIDFromString", "str", this.guid, "ptr", ptr)
+		if !CCFramework.isInteger(this.guid)
+			CCFramework.String2GUID(this.guid, ptr)
+		else
+			CCFramework.CopyMemory(this.guid, ptr, 16)
 		NumPut(this.lcid,				1*ptr,	16+0*A_PtrSize,	"UInt")
 		NumPut(this.dwReserved,			1*ptr,	20+0*A_PtrSize,	"UInt")
 		NumPut(this.memidConstructor,	1*ptr,	24+0*A_PtrSize,	"Int")
@@ -181,8 +188,7 @@ class TYPEATTR extends StructBase
 	{
 		local instance := new TYPEATTR()
 
-		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr, "ptr*", clsid)
-		instance.guid				:= StrGet(clsid, "UTF-16")
+		instance.guid				:= CCFramework.GUID2String(ptr)
 		instance.lcid				:= NumGet(1*ptr,	16+0*A_PtrSize,	"UInt")
 		instance.dwReserved			:= NumGet(1*ptr,	20+0*A_PtrSize,	"UInt")
 		instance.memidConstructor	:= NumGet(1*ptr,	24+0*A_PtrSize,	"Int")

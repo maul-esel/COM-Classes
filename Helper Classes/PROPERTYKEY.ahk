@@ -16,6 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - _CCF_Error_Handler_, StructBase
+	Other classes - CCFramework
 */
 class PROPERTYKEY extends StructBase
 {
@@ -24,7 +25,8 @@ class PROPERTYKEY extends StructBase
 	A unique GUID for the property.
 
 	Remarks:
-		This is retrieved and set as *GUID string*.
+		When retrieved from an instance created by <FromStructPtr()>, this is a GUID string.
+		Otherwise, you may either set it to a string or a raw memory pointer to the GUID.
 	*/
 	fmtid := ""
 
@@ -51,7 +53,11 @@ class PROPERTYKEY extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		DllCall("Ole32\CLSIDFromString", "str", this.fmtid, "ptr", ptr)
+		if !CCFramework.isInteger(this.fmtid)
+			CCFramework.String2GUID(this.fmtid, ptr)
+		else
+			CCFramework.CopyMemory(this.fmtid, ptr, 16)
+
 		NumPut(this.pid,	1*ptr,	16,	"UInt")
 
 		return ptr
@@ -71,8 +77,7 @@ class PROPERTYKEY extends StructBase
 	{
 		local instance := new PROPERTYKEY()
 
-		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr, "ptr*", guid)
-		instance.fmtid	:= StrGet(1*guid, "UTF-16")
+		instance.fmtid	:= CCFramework.GUID2String(ptr)
 		instance.pid	:= NumGet(1*ptr,	16,	"UInt")
 
 		return instance

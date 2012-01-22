@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - TypeInfo, (TypeComp)
+	Other classes - CCFramework, TypeInfo, (TypeComp)
 	Helper classes - TYPEKIND, TLIBATTR, MEMBERID
 */
 class TypeLib extends Unknown
@@ -67,9 +67,11 @@ class TypeLib extends Unknown
 	*/
 	FromRegistry(guid, vMajor, vMinor)
 	{
-		;if guid is not integer
-			guid := Unknown._Guid(g, guid)
+		if !CCFramework.isInteger(guid)
+			guid := CCFramework.String2GUID(guid), free_mem := true
 		this._Error(DllCall("OleAut32.dll\LoadRegTypeLib", "Ptr", guid, "UShort", vMajor, "UShort", vMinor, "UInt", 0, "ptr*", out))
+		if free_mem
+			CCFramework.FreeMemory(guid)
 		return new TypeLib(out)
 	}
 
@@ -130,9 +132,11 @@ class TypeLib extends Unknown
 	*/
 	GetTypeInfoOfGuid(guid)
 	{
-		;if guid is not integer
-			guid := Unknown._Guid(g, guid)
+		if !CCFramework.isInteger(guid)
+			guid := CCFramework.String2GUID(guid), free_mem := true
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", guid, "ptr*", out))
+		if free_mem
+			CCFramework.FreeMemory(guid)
 		return IsObject(TypeInfo) ? new TypeInfo(out) : out
 	}
 

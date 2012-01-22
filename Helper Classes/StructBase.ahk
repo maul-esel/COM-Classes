@@ -14,6 +14,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	Base classes - _CCF_Error_Handler_
+	Other classes - CCFramework
 */
 class StructBase extends _CCF_Error_Handler_
 {
@@ -21,12 +22,6 @@ class StructBase extends _CCF_Error_Handler_
 	group: private
 	These methods and fields are for use by this class only.
 
-	Field: heap
-	static field that holds a handle to the process' default heap. This is used to allocate memory.
-	*/
-	static heap := DllCall("GetProcessHeap", "Ptr")
-
-	/*
 	Field: buffers
 	an array holding the buffers alocated by this struct instance. For internal use only.
 	*/
@@ -78,7 +73,7 @@ class StructBase extends _CCF_Error_Handler_
 	allocates a specified amount of bytes from the heap and returns a handle to it. The buffer is initalzed with 0.
 
 	Parameters:
-		UINt bytes - the number of bytes to allocate
+		UINT bytes - the number of bytes to allocate
 
 	Returns:
 		UPTR buffer - a pointer to the buffer allocated
@@ -88,9 +83,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	Allocate(bytes)
 	{
-		static HEAP_GENERATE_EXCEPTIONS := 0x00000004, HEAP_ZERO_MEMORY := 0x00000008
-
-		buffer := DllCall("HeapAlloc", "UPtr", StructBase.heap, "UInt", HEAP_GENERATE_EXCEPTIONS|HEAP_ZERO_MEMORY, "UInt", bytes)
+		buffer := CCFramework.AllocateMemory(bytes)
 		if (buffer)
 		{
 			this.buffers.Insert(buffer)
@@ -113,7 +106,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	Free(buffer)
 	{
-		bool := DllCall("HeapFree", "UPtr", StructBase.heap, "UInt", 0, "UPtr", buffer)
+		bool := CCFramework.FreeMemory(buffer)
 		if (bool)
 		{
 			this.buffers.Remove(this.FindBufferKey(buffer))

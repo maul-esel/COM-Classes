@@ -17,6 +17,7 @@ Requirements:
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - REO, DVASPECT, SIZE
+	Other classes - CCFramework
 */
 class REOBJECT extends StructBase
 {
@@ -37,7 +38,8 @@ class REOBJECT extends StructBase
 	Class identifier of the object.
 
 	Remarks:
-		- This is always a CLSID *string*.
+		When retrieved from an instance created by <FromStructPtr()>, this is a GUID string.
+		Otherwise, you may either set it to a string or a raw memory pointer to the GUID.
 	*/
 	clsid := ""
 
@@ -111,7 +113,12 @@ class REOBJECT extends StructBase
 
 		NumPut(this.cbStruct,	1*ptr,	00+0*A_PtrSize,	"UInt")
 		NumPut(this.cp,			1*ptr,	04+0*A_PtrSize,	"Int")
-		DllCall("Ole32.dll\CLSIDFromString", "str", this.clsid, "ptr", ptr + 08)
+
+		if !CCFramework.isInteger(this.clsid)
+			CCFramework.String2GUID(this.fmtid, ptr + 08)
+		else
+			CCFramework.CopyMemory(this.clsid, ptr + 08, 16)
+
 		NumPut(this.poleobj,	1*ptr,	24+0*A_PtrSize,	"UPtr")
 		NumPut(this.pstg,		1*ptr,	24+1*A_PtrSize,	"UPtr")
 		NumPut(this.polesite,	1*ptr,	24+2*A_PtrSize,	"UPtr")
@@ -139,8 +146,7 @@ class REOBJECT extends StructBase
 
 		instance.cbStruct	:= NumGet(1*ptr,	00+0*A_PtrSize,	"UInt")
 		instance.cp			:= NumGet(1*ptr,	04+0*A_PtrSize,	"UInt")
-		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr + 08, "ptr*", clsid)
-		instance.clsid		:= StrGet(clsid, "UTF-16")
+		instance.clsid		:= CCFramework.GUID2String(ptr + 08)
 		instance.poleobj	:= NumGet(1*ptr,	24+0*A_PtrSize,	"UPtr")
 		instance.pstg		:= NumGet(1*ptr,	24+1*A_PtrSize,	"UPtr")
 		instance.polesite	:= NumGet(1*ptr,	24+2*A_PtrSize,	"UPtr")

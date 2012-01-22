@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - (TypeComp)
+	Other classes - CCFramework, TypeLib, (TypeComp)
 	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
 */
 class TypeInfo extends Unknown
@@ -300,9 +300,13 @@ class TypeInfo extends Unknown
 	*/
 	CreateInstance(outer, iid)
 	{
-		;if iid is not integer
-			iid := Unknown._Guid(s, iid)
+		if !CCFramework.isInteger(iid)
+		{
+			iid := CCFramework.String2GUID(iid), free_mem := true
+		}
 		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(outer) ? outer.ptr : outer, "ptr", iid, "ptr*", out))
+		if free_mem
+			CCFramework.FreeMemory(iid)
 		return out
 	}
 

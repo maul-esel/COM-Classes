@@ -73,7 +73,8 @@ class STATSTG extends StructBase
 	Indicates the class identifier for the storage object; set to CLSID_NULL for new storage objects. This member is not used for streams or byte arrays.
 
 	Remarks:
-		Set this field to the CLSID's string representation.
+		When retrieved from an instance created by <FromStructPtr()>, this is a GUID string.
+		Otherwise, you may either set it to a string or a raw memory pointer to the GUID.
 	*/
 	clsid := 0
 
@@ -114,7 +115,12 @@ class STATSTG extends StructBase
 		this.atime.ToStructPtr(ptr + 28 + A_PtrSize)
 		NumPut(this.grfMode,				1*ptr,		36 + 1*A_PtrSize,	"UInt")
 		NumPut(this.grfLocksSupported,		1*ptr,		40 + 1*A_PtrSize,	"UInt")
-		DllCall("Ole32\CLSIDFromString", "str", this.clsid, "ptr", ptr + 44 + A_PtrSize)
+
+		if !CCFramework.isInteger(this.clsid)
+			CCFramework.String2GUID(this.clsid, ptr + 44 + A_PtrSize)
+		else
+			CCFramework.CopyMemory(this.clsid, ptr + 44 + A_PtrSize, 16)
+
 		NumPut(this.grfStateBits,			1*ptr,		60 + 1*A_PtrSize,	"UInt")
 		NumPut(this.reserved,				1*ptr,		64 + 1*A_PtrSize,	"UInt")
 
@@ -143,8 +149,7 @@ class STATSTG extends StructBase
 		instance.atime := FILETIME.FromStructPtr(ptr + 28 + A_PtrSize)
 		instance.grfMode			:= NumGet(1*ptr,	36 + 1*A_PtrSize,	"UInt")
 		instance.grfLocksSupported	:= NumGet(1*ptr,	40 + 1*A_PtrSize,	"UInt")
-		DllCall("Ole32\StringFromCLSID", "ptr", ptr + 44 + A_PtrSize, "ptr*", clsid)
-		instance.clsid				:= StrGet(clsid, "UTF-16")
+		instance.clsid				:= CCFramework.GUID2String(ptr + 44 + A_PtrSize)
 		instance.grfStateBits		:= NumGet(1*ptr,	60 + 1*A_PtrSize,	"UInt")
 		instance.reserved			:= NumGet(1*ptr,	64 + 1*A_PtrSize,	"UInt")
 

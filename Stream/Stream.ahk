@@ -64,7 +64,7 @@ class Stream extends SequentialStream
 	*/
 	Seek(move, dwOrigin)
 	{
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "UINT64*", pos))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "Uint64*", pos))
 		return pos
 	}
 
