@@ -1,5 +1,23 @@
-﻿#NoEnv
-﻿#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+﻿/*
+Example: Demonstrates the usage of *ShellLinkW.ahk*
+	* Creating a new shell link (shortcut)
+	* Setting its properties
+	* Saving it to a file.
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP / Windows 2000 Server or higher
+	Classes - CCF (see #include directives for more details)
+*/
+#NoEnv
+#SingleInstance off
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\ShellLinkW.ahk
 #include ..\..\Persist\Persist.ahk

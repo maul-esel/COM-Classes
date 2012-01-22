@@ -1,4 +1,21 @@
-#SingleInstance
+/*
+Example: Demonstrates the usage of *ImageList.ahk*
+	* Image list manipulation using the ImageList class
+	* Loading system bitmaps, icons and cursors into the image list
+	* Show the result in a listview
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK_L v1.1+
+	OS - Windows XP / Windows Server 2003 or higher
+	Classes - CCF (see #include directives for more details)
+*/
+#SingleInstance force
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\ImageList.ahk
