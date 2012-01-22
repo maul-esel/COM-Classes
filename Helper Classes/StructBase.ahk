@@ -109,7 +109,7 @@ class StructBase extends _CCF_Error_Handler_
 		BOOL success - true on success, false otherwise
 
 	Remarks:
-		Call this method if you're sure the memory is no longer needed. The <deconstructor> automatically calls ths on all <buffers>.
+		Call this method if you're sure the memory is no longer needed. The <deconstructor> automatically calls this on all <buffers>.
 	*/
 	Free(buffer)
 	{
