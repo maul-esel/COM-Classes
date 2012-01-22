@@ -17,8 +17,14 @@ the base class that includes error handling
 #include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 
 /*
+class: CCFramework
+the main class
+*/
+#include CCFramework.ahk
+
+/*
 class: Unknown
-the base class for all other CCF classes (except for Helper Classes)
+the base class for all other CCF interface classes
 */
 #include Unknown\Unknown.ahk
 
