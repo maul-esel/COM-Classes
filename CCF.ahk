@@ -176,7 +176,7 @@ defines "ShellLink" as the encoding-specific version
 Remarks:
 	- In v2, this is always ShellLinkW
 */
-ShellLink := ShellLinkW
+global ShellLink := ShellLinkW
 
 /*
 group: Taskbar
