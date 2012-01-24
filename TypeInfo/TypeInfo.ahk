@@ -300,13 +300,12 @@ class TypeInfo extends Unknown
 	*/
 	CreateInstance(outer, iid)
 	{
+		local mem
+
 		if !CCFramework.isInteger(iid)
-		{
-			iid := CCFramework.String2GUID(iid), free_mem := true
-		}
+			VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(iid, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(outer) ? outer.ptr : outer, "ptr", iid, "ptr*", out))
-		if free_mem
-			CCFramework.FreeMemory(iid)
 		return out
 	}
 

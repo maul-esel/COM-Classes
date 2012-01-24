@@ -65,16 +65,12 @@ class CustomDestinationList extends Unknown
 	*/
 	BeginList(byRef slots := "", removedType := "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}", byRef removedItems := "")
 	{
-		free_mem := false
+		local mem
+
 		if !CCFramework.isInteger(removedType)
-		{
-			removedType := CCFramework.String2GUID(removedType)
-			free_mem := true
-		}
-		bool := this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
-		if free_mem
-			CCFramework.FreeMemory(removedType)
-		return bool
+			VarSetCapacity(mem, 16, 00), removedType := CCFramework.String2GUID(removedType, &mem)
+
+		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
 	}
 
 	/*
@@ -159,15 +155,12 @@ class CustomDestinationList extends Unknown
 	*/
 	GetRemovedDestinations(type := "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}")
 	{
-		free_mem := false
+		local mem
+
 		if !CCFramework.isInteger(type)
-		{
-			type := CCFramework.String2GUID(type)
-			free_mem := true
-		}
+			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", type, "ptr*", out))
-		if free_mem
-			CCFramework.FreeMemory(type)
 		return out
 	}
 

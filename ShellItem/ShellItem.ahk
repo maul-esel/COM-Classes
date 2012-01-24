@@ -70,17 +70,14 @@ class ShellItem  extends Unknown
 	*/
 	FromKnownFolder(folder, user := 0)
 	{
-		free_mem := false
+		local iid, mem1, mem2
+
 		if !CCFramework.isInteger(folder)
-		{
-			folder := CCFramework.String2GUID(folder)
-			free_mem := true
-		}
-		local iid := CCFramework.String2GUID(this.IID)
+			VarSetCapacity(mem1, 16, 00), folder := CCFramework.String2GUID(folder, &mem1)
+
+		VarSetCapacity(mem2, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem2)
 		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "ptr", folder, "uint", 0, "ptr", user, "ptr", iid, "ptr*", out))
-		if free_mem
-			CCFramework.FreeMemory(folder)
-		CCFramework.FreeMemory(iid)
+
 		return new ShellItem(out)
 	}
 
@@ -145,21 +142,18 @@ class ShellItem  extends Unknown
 	*/
 	BindToHandler(mode, interface, bc := 0)
 	{
+		local mem1, mem2
+
 		if !CCFramework.isInteger(interface)
-		{
-			interface := CCFramework.String2GUID(interface), free_mem1 := true
-		}
+			VarSetCapacity(mem1, 16, 00), interface := CCFramework.String2GUID(interface, &mem1)
+
 		if !CCFramework.isInteger(mode)
-		{
-			mode := CCFramework.String2GUID(mode), free_mem2 := true
-		}
+			VarSetCapacity(mem2, 16, 00), mode := CCFramework.String2GUID(mode, &mem2)
+
 		if IsObject(bc)
 			bc := bc.ptr
+
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out))
-		if free_mem1
-			CCFramework.FreeMemory(interface)
-		if free_mem2
-			CCFramework.FreeMemory(mode)
 		return out
 	}
 

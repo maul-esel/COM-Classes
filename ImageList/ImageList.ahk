@@ -68,12 +68,13 @@ class ImageList extends Unknown
 	*/
 	FromHIMAGELIST(il := 0)
 	{
+		local iid, mem
+
 		if (!il)
 			il := IL_Create()
 
-		local iid := CCFramework.String2GUID(ImageList.IID)
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(ImageList.IID, &mem)
 		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", iid, "ptr*", ptr)
-		CCFramework.FreeMemory(iid)
 		return new ImageList(ptr)
 	}
 	
@@ -301,9 +302,10 @@ class ImageList extends Unknown
 	*/
 	Clone()
 	{
-		local iid := CCFramework.String2GUID(ImageList.IID)
+		local iid, mem
+
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(ImageList.IID, &mem)
 		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", iid, "ptr*", out))
-		CCFramework.FreeMemory(iid)
 		return new ImageList(out)
 	}
 	

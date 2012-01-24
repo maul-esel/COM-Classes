@@ -58,15 +58,12 @@ class ObjectArray extends Unknown
 	*/
 	GetAt(index, type)
 	{
-		free_mem := false
+		local mem
+
 		if !CCFramework.isInteger(type)
-		{
-			type := CCFramework.String2GUID(type)
-			free_mem := true
-		}
+			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr", type, "ptr*", out))
-		if free_mem
-			CCFramework.FreeMemory(type)
 		return out
 	}
 }
