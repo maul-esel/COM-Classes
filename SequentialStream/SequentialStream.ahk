@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 
 Remarks:
 	This is an abstract base class. In case you want to use it's methods, create an instance of the derived Stream class.

@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP / Windows 2000 Server or higher
-	Base classes - Unknown
+	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - SLGP, SLR, SW, WIN32_FIND_DATA
 */
 class ShellLinkW extends Unknown

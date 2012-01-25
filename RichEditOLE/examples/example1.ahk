@@ -1,4 +1,8 @@
+/*
+	THIS EXAMPLE IS INCOMPLETE!!!
+*/
 #SingleInstance force
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\RichEditOLE.ahk
 
@@ -26,11 +30,3 @@ return
 GuiClose:
 ExitApp
 return
-
-A_LastError(error:="t") ; by Bentschi (german forum), slightly modified
-{
-  buffer_size := VarSetCapacity(buffer, 1024, 0)
-  Loop, % DllCall("FormatMessageA", "uint", 0x1200, ptr := (A_PtrSize) ? "ptr" : "uint", 0, "uint", error != "t" ? error : A_LastError, "uint", 0x10000, ptr, &buffer, "uint", buffer_size, ptr, 0)
-    error_msg .= Chr(NumGet(buffer, A_Index-1, "uchar"))
-  return (error != "t" ? error : A_LastError) " - " error_msg
-}

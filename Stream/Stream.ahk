@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
-	Base classes - Unknown, SequentialStream
+	Base classes - _CCF_Error_Handler_, Unknown, SequentialStream
 	Helper classes - STGC, LOCKTYPE, STATFLAG, STREAM_SEEK, STATSTG
 */
 class Stream extends SequentialStream
@@ -64,7 +64,7 @@ class Stream extends SequentialStream
 	*/
 	Seek(move, dwOrigin)
 	{
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "UINT64*", pos))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "Uint64*", pos))
 		return pos
 	}
 

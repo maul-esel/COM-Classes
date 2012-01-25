@@ -15,7 +15,7 @@ Documentation:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7, Windows Server 2008 R2 or higher
-	Base classes - Unknown, TaskbarList, TaskbarList2
+	Base classes - _CCF_Error_Handler_, Unknown, TaskbarList, TaskbarList2
 	Helper classes - TBPFLAG, THUMBBUTTON, RECT
 */
 class TaskbarList3 extends TaskbarList2

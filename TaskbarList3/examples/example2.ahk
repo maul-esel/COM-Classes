@@ -1,8 +1,26 @@
-﻿#SingleInstance force
+﻿/*
+Example: Demonstrates the usage of *TaskbarList3.ahk*
+	* Creation and Usage of TaskBarButtons (shown on Preview window when hoovering over TaskBarEntry)
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7, Windows Server 2008 R2 or higher
+	Classes - CCF (see #include directives for more details)
+*/
+
+#SingleInstance force
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #include ..\..\TaskbarList\TaskbarList.ahk
 #include ..\..\TaskbarList2\TaskbarList2.ahk
 #include ..\TaskbarList3.ahk
+#Include ..\..\Helper Classes\StructBase.ahk
 #include ..\..\Helper Classes\IDI.ahk
 #include ..\..\Helper Classes\THUMBBUTTON.ahk
 #include ..\..\Helper Classes\THUMBBUTTONMASK.ahk
@@ -11,9 +29,10 @@
 OnExit GuiClose
 OnMessage(0x111, "WM_COMMAND") ; monitor clicks on buttons
 
+Gui, Add, Text,, Hover over Taskbar Symbol`nand mind the Buttons...
 Gui +LastFound
 hGui := WinExist() ; get window handle
-Gui Show, w150 h100 ; show gui
+Gui Show, h100 ; show gui
 
 tbl := new TaskbarList3() ; create instance
 tbl.HrInit() ; init instance

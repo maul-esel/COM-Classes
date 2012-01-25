@@ -1,8 +1,27 @@
+/*
+Example: Demonstrates the usage of *TaskbarList3.ahk*
+	* OverlayIcon over TaskBarEntry is drawn
+	* Restricting the taskbar thumbnail
+	* Usage of ProgressBar on TaskBarEntry
+
+Authors:
+	- maul.esel (https://github.com/maul-esel)
+
+License:
+	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
+
+Requirements:
+	AutoHotkey - AHK v2 alpha
+	OS - Windows 7, Windows Server 2008 R2 or higher
+	Classes - CCF (see #include directives for more details)
+*/
 #SingleInstance
+#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\..\TaskbarList\TaskbarList.ahk
 #Include ..\..\TaskbarList2\TaskbarList2.ahk
 #Include ..\TaskbarList3.ahk
+#Include ..\..\Helper Classes\StructBase.ahk
 #Include ..\..\Helper Classes\RECT.ahk
 #Include ..\..\Helper Classes\TBPFLAG.ahk
 

@@ -11,13 +11,15 @@ Returns:
 	BOOL success - true on success, false otherwise.
 
 Requirements:
-	Unknown, Picture, SequentialStream, Stream, PICTDESC, PICTYPE, STREAM_SEEK
+	CCFramework, Unknown, Picture, SequentialStream, Stream, PICTDESC, PICTYPE, STREAM_SEEK
 
 Remarks:
 	- This function is a conversion + extension from the C++ code posted <here at http://www.autohotkey.com/forum/viewtopic.php?t=72481>.
 
 Example:
 	(start code)
+	#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+	#include CCFramework.ahk
 	#include Unknown\Unknown.ahk
 	#include Picture\Picture.ahk
 	#include SequentialStream\SequentialStream.ahk
@@ -26,6 +28,7 @@ Example:
 	#include Helper Classes\PICTYPE.ahk
 	#include Helper Classes\PICTDESC.ahk
 	#include Helper Classes\STREAM_SEEK.ahk
+	#include SaveHImage2File.ahk
 
 	hIcon := DllCall("LoadIcon", "uptr", 0, "uint", IDI.HAND, "ptr") ; load a system icon
 	result := SaveHImage2File(hIcon, A_Desktop "\test.ico") ; save the icon to a file
