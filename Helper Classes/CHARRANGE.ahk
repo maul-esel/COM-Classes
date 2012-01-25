@@ -61,7 +61,7 @@ class CHARRANGE extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		NumPut(thi.cpMin,	1*ptr,	00,	"UInt")
+		NumPut(this.cpMin,	1*ptr,	00,	"UInt")
 		NumPut(this.cpMax,	1*ptr,	04,	"UInt")
 
 		return ptr
