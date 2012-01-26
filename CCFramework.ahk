@@ -162,7 +162,7 @@ class CCFramework extends _CCF_Error_Handler_
 	{
 		static ALLOCATE_BUFFER := 0x00000100, FROM_SYSTEM := 0x00001000, IGNORE_INSERTS := 0x00000200
 
-		size := DllCall("FormatMessageW", "UInt", ALLOCATE_BUFFER|FROM_SYSTEM|IGNORE_INSERTS, "UPtr", 0, "UInt", error, "UInt", 0, "UPtr*", bufaddr, "UInt", 0)
+		size := DllCall("FormatMessageW", "UInt", ALLOCATE_BUFFER|FROM_SYSTEM|IGNORE_INSERTS, "UPtr", 0, "UInt", error, "UInt", 0, "UPtr*", bufaddr, "UInt", 0, "UPtr", 0)
 		msg := StrGet(bufaddr, size, "UTF-16")
 
 		return error . " - " . msg
