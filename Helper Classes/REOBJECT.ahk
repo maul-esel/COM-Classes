@@ -115,7 +115,7 @@ class REOBJECT extends StructBase
 		NumPut(this.cp,			1*ptr,	04+0*A_PtrSize,	"Int")
 
 		if this.clsid is not integer
-			CCFramework.String2GUID(this.fmtid, ptr + 08)
+			CCFramework.String2GUID(this.clsid, ptr + 08)
 		else
 			CCFramework.CopyMemory(this.clsid, ptr + 08, 16)
 

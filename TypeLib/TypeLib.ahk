@@ -67,13 +67,12 @@ class TypeLib extends Unknown
 	*/
 	FromRegistry(guid, vMajor, vMinor)
 	{
-		local lib, mem
+		local mem
 
 		if guid is not integer
-			VarSetCapacity(mem, 16, 00), lib := CCFramework.String2GUID(guid, &mem)
-		else lib := guid
+			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
 
-		this._Error(DllCall("OleAut32.dll\LoadRegTypeLib", "Ptr", lib, "UShort", vMajor, "UShort", vMinor, "UInt", 0, "ptr*", out))
+		this._Error(DllCall("OleAut32.dll\LoadRegTypeLib", "Ptr", guid, "UShort", vMajor, "UShort", vMinor, "UInt", 0, "ptr*", out))
 		return new TypeLib(out)
 	}
 

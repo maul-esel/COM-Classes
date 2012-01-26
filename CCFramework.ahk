@@ -120,7 +120,7 @@ class CCFramework extends _CCF_Error_Handler_
 			SAFEARRAY array - an AHK-wrapper object for a safearray which has 1 dimension with 1 field (index 0) that contains the given value
 
 	Remarks:
-		The type is calculated atumatically based on the value. If you want it to have a special type, create a value with ComObjParameter:
+		The type is calculated automatically based on the value. If you want it to have a special type, create a value with ComObjParameter:
 		> dispVariant := CCFramework.CreateVARIANT(ComObjParameter(VT_DISPATCH, disp_ptr))
 	*/
 	CreateVARIANT(value)

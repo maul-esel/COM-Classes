@@ -17,6 +17,7 @@ Requirements:
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
 	Helper classes - SYSKIND, LIBFLAGS
+	Other classes - CCFramework
 */
 class TLIBATTR extends StructBase
 {
