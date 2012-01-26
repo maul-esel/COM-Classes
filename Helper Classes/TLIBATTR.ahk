@@ -23,6 +23,10 @@ class TLIBATTR extends StructBase
 	/*
 	Field: guid
 	The globally unique identifier.
+
+	Remarks:
+		When retrieved from an instance created by <FromStructPtr()>, this is a GUID string.
+		Otherwise, you may either set it to a string or a raw memory pointer to the GUID.
 	*/
 	guid := ""
 
@@ -73,7 +77,10 @@ class TLIBATTR extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		DllCall("Ole32.dll\CLSIDFromString", "str", this.guid, "ptr", ptr)
+		if this.guid is not integer
+			CCFramework.String2GUID(this.guid, ptr)
+		else
+			CCFramework.CopyMemory(this.guid, ptr, 16)
 		NumPut(this.lcid,			1*ptr,	16,	"UInt")
 		NumPut(this.syskind,		1*ptr,	20,	"UInt")
 		NumPut(this.wMajorVerNum,	1*ptr,	24,	"UShort")
@@ -97,8 +104,7 @@ class TLIBATTR extends StructBase
 	{
 		local instance := new TLIBATTR()
 
-		DllCall("Ole32.dll\StringFromCLSID", "ptr", ptr, "ptr*", guid)
-		instance.guid			:= StrGet(guid, "UTF-16")
+		instance.guid			:= CCFramework.GUID2String(ptr)
 		instance.lcid			:= NumGet(1*ptr,	16,	"UInt")
 		instance.syskind		:= NumGet(1*ptr,	20,	"UInt")
 		instance.wMajorVerNum	:= NumGet(1*ptr,	24,	"UShort")

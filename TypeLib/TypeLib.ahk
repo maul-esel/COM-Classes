@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - TypeInfo, (TypeComp)
+	Other classes - CCFramework, TypeInfo, (TypeComp)
 	Helper classes - TYPEKIND, TLIBATTR, MEMBERID
 */
 class TypeLib extends Unknown
@@ -67,9 +67,13 @@ class TypeLib extends Unknown
 	*/
 	FromRegistry(guid, vMajor, vMinor)
 	{
+		local lib, mem
+
 		if guid is not integer
-			guid := Unknown._Guid(g, guid)
-		this._Error(DllCall("OleAut32.dll\LoadRegTypeLib", "Ptr", guid, "UShort", vMajor, "UShort", vMinor, "UInt", 0, "ptr*", out))
+			VarSetCapacity(mem, 16, 00), lib := CCFramework.String2GUID(guid, &mem)
+		else lib := guid
+
+		this._Error(DllCall("OleAut32.dll\LoadRegTypeLib", "Ptr", lib, "UShort", vMajor, "UShort", vMinor, "UInt", 0, "ptr*", out))
 		return new TypeLib(out)
 	}
 
@@ -130,8 +134,11 @@ class TypeLib extends Unknown
 	*/
 	GetTypeInfoOfGuid(guid)
 	{
+		local mem
+
 		if guid is not integer
-			guid := Unknown._Guid(g, guid)
+			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", guid, "ptr*", out))
 		return IsObject(TypeInfo) ? new TypeInfo(out) : out
 	}

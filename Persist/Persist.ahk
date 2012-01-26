@@ -16,6 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP / Windows Server 2003 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
+	Other classes - CCFramework
 */
 class Persist extends Unknown
 {
@@ -42,7 +43,6 @@ class Persist extends Unknown
 	{
 		VarSetCapacity(guid, 16, 0)
 		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "ptr", &guid))
-		DllCall("Ole32.dll\StringFromCLSID", "ptr", &guid, "ptr*", clsid)
-		return StrGet(clsid, "UTF-16")
+		return CCFramework.GUID2String(&guid)
 	}
 }

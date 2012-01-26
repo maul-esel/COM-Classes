@@ -18,6 +18,7 @@ Requirements:
 #NoEnv
 #SingleInstance off
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\CCFramework.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\ShellLinkW.ahk
 #include ..\..\Persist\Persist.ahk

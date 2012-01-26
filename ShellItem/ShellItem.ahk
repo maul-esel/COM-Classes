@@ -17,6 +17,7 @@ Requirements:
 	OS - Windows XP SP1 / Windows Server 2003 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes -  SIGDN, SFGAO, SICHINT
+	Other classes - CCFramework
 */
 class ShellItem  extends Unknown
 {
@@ -58,7 +59,7 @@ class ShellItem  extends Unknown
 	Creates a Shell item object for a known folder.
 
 	Parameters:
-		GUID folder - the GUID of the known folder
+		GUID folder - the GUID of the known folder, as string or pointer
 		[opt] HTOKEN user - An access token used to represent a particular user. This parameter is usually ommited, in which case the function tries to access the current user's instance of the folder. However, you may need to assign a value to hToken for those folders that can have multiple users but are treated as belonging to a single user. The most commonly used folder of this type is Documents.
 
 	Returns:
@@ -69,7 +70,14 @@ class ShellItem  extends Unknown
 	*/
 	FromKnownFolder(folder, user = 0)
 	{
-		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "ptr", this._GUID(a, folder), "uint", 0, "ptr", user, "ptr", this._GUID(i, this.IID), "ptr*", out))
+		local iid, mem1, mem2
+
+		if folder is not integer
+			VarSetCapacity(mem1, 16, 00), folder := CCFramework.String2GUID(folder, &mem1)
+
+		VarSetCapacity(mem2, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem2)
+		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "ptr", folder, "uint", 0, "ptr", user, "ptr", iid, "ptr*", out))
+
 		return new ShellItem(out)
 	}
 
@@ -131,18 +139,20 @@ class ShellItem  extends Unknown
 		BHID_AssociationArray - *Windows Vista and later:* Gets an IQueryAssociations object for use with an item or an array of items.
 		BHID_Filter - *Windows Vista and later:* Restricts usage to IFilter.
 		BHID_EnumAssocHandlers - *Windows 7 and later:* Retrieves an IEnumAssocHandlers that enumerates the association handlers for the given item. Returns an enumeration of recommended handlers, similar to calling SHAssocEnumHandlers with ASSOC_FILTER_RECOMMENDED.
-
-
-		In AHK v2, you can currently not pass pointers for the mode and interface parameters. Pass strings instead.
 	*/
 	BindToHandler(mode, interface, bc = 0)
 	{
-		;if interface is not integer
-			interface := this._GUID(o, interface)
-		;if mode is not integer
-			mode := this._GUID(m, mode)
+		local mem1, mem2
+
+		if !CCFramework.isInteger(interface)
+			VarSetCapacity(mem1, 16, 00), interface := CCFramework.String2GUID(interface, &mem1)
+
+		if !CCFramework.isInteger(mode)
+			VarSetCapacity(mem2, 16, 00), mode := CCFramework.String2GUID(mode, &mem2)
+
 		if IsObject(bc)
 			bc := bc.ptr
+
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out))
 		return out
 	}

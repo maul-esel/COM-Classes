@@ -17,7 +17,7 @@ Requirements:
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - KDC
-	Other classes - ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
+	Other classes - CCFramework, ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
 */
 class CustomDestinationList extends Unknown
 {
@@ -65,8 +65,11 @@ class CustomDestinationList extends Unknown
 	*/
 	BeginList(byRef slots = "", removedType = "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}", byRef removedItems = "")
 	{
+		local mem
+
 		if removedType is not integer
-			removedType := this._GUID(removedType)
+			VarSetCapacity(mem, 16, 00), removedType := CCFramework.String2GUID(removedType, &mem)
+
 		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
 	}
 
@@ -152,8 +155,11 @@ class CustomDestinationList extends Unknown
 	*/
 	GetRemovedDestinations(type = "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}")
 	{
+		local mem
+
 		if type is not integer
-			type := this._GUID(type)
+			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", type, "ptr*", out))
 		return out
 	}

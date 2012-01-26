@@ -16,6 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
+	Other classes - CCFramework
 */
 class ObjectArray extends Unknown
 {
@@ -57,8 +58,11 @@ class ObjectArray extends Unknown
 	*/
 	GetAt(index, type)
 	{
+		local mem
+
 		if type is not integer
-			type := this._GUID(type)
+			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr", type, "ptr*", out))
 		return out
 	}

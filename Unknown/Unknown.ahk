@@ -16,6 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - (any)
 	Base classes - _CCF_Error_Handler_
+	Other classes - CCFramework
 */
 class Unknown extends _CCF_Error_Handler_
 {
@@ -103,26 +104,6 @@ class Unknown extends _CCF_Error_Handler_
 	/*
 	group: internal functions
 
-	Method: _GUID
-	internal helper method for inherited classes that converts a GUID string to a pointer to a GUID.
-
-	Parameters:
-		byRef GUID guid - a variable that receives the GUID
-		STR sGUID - the string representation of the GUID
-
-	Returns:
-		UPTR pointer - a pointer to the new GUID.
-
-	Developer remarks:
-		In cases where you need to pass a IID or CLSID to a method, you can use this to create it inline.
-	*/
-	_GUID(byRef guid, sGUID)
-	{
-		VarSetCapacity(guid, 16, 0)
-		return DllCall("ole32\CLSIDFromString", "wstr", sGUID, "ptr", &guid) >= 0x00 ? &guid : 0
-	}
-
-	/*
 	Method: _Error
 	internal helper function for inherited classes that updates the instance's <Error> object.
 
@@ -136,18 +117,11 @@ class Unknown extends _CCF_Error_Handler_
 		Pass any HRESULT return values to this function to update the Error field.
 		In most cases, you should also return this function's return value.
 
-		In case your method doesn't return a HRESULT, call this methd with error code 0 to clear the object.
+		In case your method doesn't return a HRESULT, call this method with error code 0 to clear the object.
 	*/
 	_Error(error)
 	{
-		static ALLOCATE_BUFFER := 0x00000100, FROM_SYSTEM := 0x00001000, IGNORE_INSERTS := 0x00000200
-		this.Error.code := error
-
-		size := DllCall("FormatMessageW", "uint", ALLOCATE_BUFFER|FROM_SYSTEM|IGNORE_INSERTS, "ptr", 0, "uint", error, "uint", 0x10000, "ptr*", bufaddr, "uint", 0, "ptr", 0)
-		error_msg := StrGet(bufaddr, size, "UTF-16")
-
-		this.Error.description := error " - " error_msg
-
+		this.Error.code := error, this.Error.description := CCFramework.FormatError(error)
 		return this.Error.isError := error >= 0x00
 	}
 
@@ -158,14 +132,16 @@ class Unknown extends _CCF_Error_Handler_
 	Queries the COM object for an interface.
 
 	Parameters:
-		string sIID - the string representation of the queried interface
+		IID iid - the string representation of or raw interface pointer to the queried interface
 
 	Returns:
 		UPTR pointer - a pointer to the interface or zero.
 	*/
-	QueryInterface(sIID)
+	QueryInterface(iid)
 	{
-		return ComObjQuery(this.ptr, sIID)
+		if iid is integer
+			iid := CCFramework.GUID2String(iid)
+		return ComObjQuery(this.ptr, iid)
 	}
 
 	/*

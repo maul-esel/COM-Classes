@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - (TypeComp)
+	Other classes - CCFramework, TypeLib, (TypeComp)
 	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
 */
 class TypeInfo extends Unknown
@@ -300,8 +300,11 @@ class TypeInfo extends Unknown
 	*/
 	CreateInstance(outer, iid)
 	{
+		local mem
+
 		if iid is not integer
-			iid := Unknown._Guid(s, iid)
+			VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(iid, &mem)
+
 		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(outer) ? outer.ptr : outer, "ptr", iid, "ptr*", out))
 		return out
 	}
