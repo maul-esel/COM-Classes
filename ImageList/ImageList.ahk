@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - IDC, IDI, ILDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
+	Helper classes - IDC, IDI, IMAGELISTDRAWPARAMS, ILIF, IMAGEINFO, IMAGELISTDRAWFLAGS, OBM, POINT, RECT
 	Other classes - CCFramework
 
 Remarks:
