@@ -113,13 +113,13 @@ The name of a class must exactly match the interface name, except that a leading
 This "I" is part of a naming convention itself and indicates the name belongs to an interface.
 In the conventions of object-oriented programming, it would not make sense to create an instance of an interface, which this code would imply:
 
-{% highlight ahk linenos %}
+{% highlight ahk %}
 instance := new IUnknown()
 {% endhighlight %}
 
 Contrary, this code does not make this implication:
 
-{% highlight ahk linenos %}
+{% highlight ahk %}
 instance := new Unknown()
 {% endhighlight %}
 
@@ -203,7 +203,7 @@ This must be properly documented, and at least one *"constructor method"* (see a
 
 Other static fields may include module handles for frequently used DLL, such as
 
-{% highlight ahk linenos %}
+{% highlight ahk %}
 static hModule := DllCall("LoadLibrary", "str", "CommCtrl")
 {% endhighlight %}
 
@@ -220,14 +220,14 @@ For example, a property named `prop` would usually be represented by `get_prop()
 Dynamic properties should be defined for those. That means a class can implement the `__get()` and `__set()` meta-functions and dynamically call the get-/ set- method for a property.
 This enables the user to do
 
-{% highlight ahk linenos %}
+{% highlight ahk %}
 instance.prop := 123
 MsgBox % instance.prop
 {% endhighlight %}
 
 instead of
 
-{% highlight ahk linenos %}
+{% highlight ahk %}
 instance.set_prop(123)
 MsgBox % instance.get_prop()
 {% endhighlight %}
