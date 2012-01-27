@@ -95,7 +95,7 @@ AutoHotkey\_L and AutoHotkey v2 (and therefore AutoHotkey\_H) are compatible wit
 
 To achieve this, it is required to use `A_PtrSize` to calculate structure offsets and size
 and to use the `"Ptr"` type in calls to `NumGet()`, `NumPut()` and `DllCall()` (COM method calls as well as regular library calls).
-One should pay attention to the fact that a lot of types actually map to this type, including HWND, HBITMAP, HANDLE, ...
+One should pay attention to the fact that a lot of types actually map to this type, including `HWND`, `HBITMAP`, `HANDLE`, ...
 
 ***
 
@@ -148,7 +148,7 @@ Interface classes must wrap all methods the wrapped interface has. They must be 
 
 ### More methods
 Classes may also provide more methods that ease common tasks for the user. They can combine multiple method calls together, and possibly do calls to other DLL functions.
-As an example, the `ImageList` class can define a method called `AddFile(path)` which loads an image from a file and adds it to the timage list.
+As an example, the `ImageList` class can define a method called `AddFile(path)` which loads an image from a file and adds it to the image list.
 
 #### constructor methods
 A special case are so-called *"constructor method"*. Those are methods that can be called as if they were static (i.e. that do not rely on instance information)
