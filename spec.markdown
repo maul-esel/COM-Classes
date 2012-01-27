@@ -4,23 +4,38 @@ permalink: spec.html
 layout: spec_layout
 
 ---
+
 # CCF specification
 ## Introduction
-This is the official specification for the [**COM Classes Framework (CCF)**](https://github.com/maul-esel/COM-Classes "CCF github repo"). It is intended to define explicit guidelines classes in the CCF must fulfill.
+This is the official specification for the [**COM Classes Framework (CCF)**](https://github.com/maul-esel/COM-Classes "CCF github repo").
+It defines explicit guidelines classes in the CCF must fulfill.
 
-The CCF is a collection of AutoHotkey classes that wrap COM interfaces in the standardized way described here. It is intended to help AutoHotkey scripters & programmers and ease the access to those interfaces.
+The CCF is a collection of AutoHotkey classes that wrap COM interfaces in the standardized way described here.
+It is intended to help AutoHotkey scripters & programmers and ease the access to those interfaces.
 
 This specification assumes you have at least a (very) basic understanding of *interfaces* and *classes*. Experiences with AutoHotkey and its advanced features, namely `DllCall()` and memory handling, as well as a basic understanding of COM are very helpful, too. If you're missing any of those, check out the links on the bottom of this page.
+
+***
+
+## Definitions
+### COM Classes Framework
+The *COM Classes Framework*, or *CCF*, describes a collection of AutoHotkey classes that provide comfortable access to COM non-dispatch interfaces from the AutoHotkey scripting language.
+These classes are written in AutoHotkey themselves. They must conform to the guidelines defined below and are stored in a github repository at https://github.com/maul-esel/COM-Classes.
+
+### AutoHotkey
+*AutoHotkey* is a scripting language originally developed by Chris Mallett.
+In this document, the term *"AutoHotkey"* refers to the original version (also called AutoHotkey "*basic*", "*classic*" or "*vanilla*") as well as to several custom forks,
+namely *AutoHotkey\_L*, *AutoHotkey\_H* and *IronAHK*.
 
 ***
 
 ## Versions
 This section defines the different version guidelines a class must fulfill.
 
-### AHK branches
+### AutoHotkey branches
 As there are more and more different branches of AutoHotkey out there, it is very important to specify compatibility requirements.
 
-#### ![](bad.png) AutoHotkey (AHK "classic", "basic", "vanilla")
+#### ![](bad.png) AutoHotkey ("classic", "basic", "vanilla")
 AutoHotkey classic (by Chris Mallett, currently version *1.0.48.05*, no longer developed) is **not supported** by the CCF. This framework is entirely based on classes which are not supported by AutoHotkey classic.
 
 #### ![](bad.png) IronAHK
