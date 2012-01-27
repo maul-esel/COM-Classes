@@ -113,15 +113,15 @@ The name of a class must exactly match the interface name, except that a leading
 This "I" is part of a naming convention itself and indicates the name belongs to an interface.
 In the conventions of object-oriented programming, it would not make sense to create an instance of an interface, which this code would imply:
 
-```
+{% highlight ahk linenos %}
 instance := new IUnknown()
-```
+{% endhighlight %}
 
 Contrary, this code does not make this implication:
 
-```
+{% highlight ahk linenos %}
 instance := new Unknown()
-```
+{% endhighlight %}
 
 It is also recommended to use the same capitalization as in the interface name, even though it doesn't matter in AutoHotkey.
 
@@ -203,9 +203,9 @@ This must be properly documented, and at least one *"constructor method"* (see a
 
 Other static fields may include module handles for frequently used DLL, such as
 
-```
+{% highlight ahk linenos %}
 static hModule := DllCall("LoadLibrary", "str", "CommCtrl")
-```
+{% endhighlight %}
 
 or other relevant information.
 
@@ -220,17 +220,17 @@ For example, a property named `prop` would usually be represented by `get_prop()
 Dynamic properties should be defined for those. That means a class can implement the `__get()` and `__set()` meta-functions and dynamically call the get-/ set- method for a property.
 This enables the user to do
 
-```
+{% highlight ahk linenos %}
 instance.prop := 123
 MsgBox % instance.prop
-```
+{% endhighlight %}
 
 instead of
 
-```
+{% highlight ahk linenos %}
 instance.set_prop(123)
 MsgBox % instance.get_prop()
-```
+{% endhighlight %}
 
 The second code would still be valid though.
 
