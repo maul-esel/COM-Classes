@@ -17,6 +17,7 @@ Requirements:
 */
 #SingleInstance
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\..\TaskbarList\TaskbarList.ahk
 #Include ..\..\TaskbarList2\TaskbarList2.ahk

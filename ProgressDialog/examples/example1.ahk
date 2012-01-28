@@ -16,6 +16,7 @@ Requirements:
 */
 #SingleInstance
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#Include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\ProgressDialog.ahk
 
