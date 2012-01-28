@@ -124,7 +124,7 @@ class STATSTG extends StructBase
 		NumPut(this.grfStateBits,			1*ptr,		60 + 1*A_PtrSize,	"UInt")
 		NumPut(this.reserved,				1*ptr,		64 + 1*A_PtrSize,	"UInt")
 
-		return &struct
+		return ptr
 	}
 
 	/*
