@@ -205,13 +205,7 @@ class ShellItem  extends Unknown
 	*/
 	GetAttributes(requested, byRef attr)
 	{
-		this._Error(0)
-		hr := DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", requested, "UInt*", attr)
-		if (hr == 0)
-			return true
-		else if (hr == 1)
-			return false
-		else return this._Error(hr)
+		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", requested, "UInt*", attr))
 	}
 
 	/*
