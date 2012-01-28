@@ -140,6 +140,7 @@ class STATSTG extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new STATSTG()
+		instance.SetOriginalPointer(ptr)
 
 		instance.pwcsName			:= StrGet(NumGet(1*ptr, 0,	"UPtr"),	"UTF-16")
 		instance.type				:= NumGet(1*ptr,	00 + 1*A_PtrSize,	"UInt")

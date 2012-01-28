@@ -105,6 +105,7 @@ class TLIBATTR extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new TLIBATTR()
+		instance.SetOriginalPointer(ptr)
 
 		instance.guid			:= CCFramework.GUID2String(ptr)
 		instance.lcid			:= NumGet(1*ptr,	16,	"UInt")

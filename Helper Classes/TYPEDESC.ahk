@@ -101,6 +101,7 @@ class TYPEDESC extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new TYPEDESC()
+		instance.SetOriginalPointer(ptr)
 
 		instance.vt := NumGet(1*ptr, A_PtrSize, "UInt")
 		if (CCFramework.HasEnumFlag(instance.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(instance.vt, VARENUM.ARRAY))

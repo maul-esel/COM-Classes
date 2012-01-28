@@ -76,6 +76,7 @@ class PROPERTYKEY extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new PROPERTYKEY()
+		instance.SetOriginalPointer(ptr)
 
 		instance.fmtid	:= CCFramework.GUID2String(ptr)
 		instance.pid	:= NumGet(1*ptr,	16,	"UInt")

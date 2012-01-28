@@ -95,10 +95,12 @@ class RECT extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new RECT(NumGet(1*ptr, 00, "Int")
+		local instance := new RECT(NumGet(1*ptr, 00, "Int")
 					,	NumGet(1*ptr, 04, "Int")
 					,	NumGet(1*ptr, 08, "Int")
 					,	NumGet(1*ptr, 12, "Int"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

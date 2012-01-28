@@ -81,6 +81,7 @@ class IMAGELISTSTATS extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new IMAGELISTSTATS()
+		instance.SetOriginalPointer(ptr)
 
 		instance.cbSize 	:= NumGet(1*ptr,	00,	"UInt")
 		instance.cAlloc		:= NumGet(1*ptr,	04,	"Int")

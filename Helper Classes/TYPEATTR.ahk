@@ -188,6 +188,7 @@ class TYPEATTR extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new TYPEATTR()
+		instance.SetOriginalPointer(ptr)
 
 		instance.guid				:= CCFramework.GUID2String(ptr)
 		instance.lcid				:= NumGet(1*ptr,	16+0*A_PtrSize,	"UInt")

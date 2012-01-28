@@ -78,7 +78,9 @@ class SIZE extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new SIZE(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
+		local instance := new SIZE(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

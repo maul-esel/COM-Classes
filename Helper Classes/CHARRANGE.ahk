@@ -79,7 +79,9 @@ class CHARRANGE extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new CHARRANGE(NumGet(1*ptr,	00, "UInt"), NumGet(1*ptr,	04,	"UInt"))
+		local instance := new CHARRANGE(NumGet(1*ptr,	00, "UInt"), NumGet(1*ptr,	04,	"UInt"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*
