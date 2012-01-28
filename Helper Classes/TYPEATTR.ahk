@@ -227,10 +227,8 @@ class TYPEATTR extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
-		local td, idl, data
-		td := (this == TYPEATTR) ? TYPEDESC : this.tdescAlias
-		idl := (this == TYPEATTR) ? IDLDESC : this.idldescType
-		data := IsObject(data) ? {} : data
+		local td, idl
+		td := (this == TYPEATTR) ? TYPEDESC : this.tdescAlias, idl := (this == TYPEATTR) ? IDLDESC : this.idldescType
 		return 56 + 1 * A_PtrSize + td.GetRequiredSize(data) + idl.GetRequiredSize(data)
 	}
 }
