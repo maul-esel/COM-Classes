@@ -46,14 +46,14 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data := 0)
 	{
-		local s, bool
+		local struct, bool
 		static MAX_PATH := 260
 
-		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * 2, 0)
+		VarSetCapacity(struct, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * 2, 0)
 
-		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", s, "uint", flags))
+		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", &struct, "uint", flags))
 
-		data := WIN32_FIND_DATA.FromStructPtr(&s)
+		data := WIN32_FIND_DATA.FromStructPtr(&struct)
 		return bool
 	}
 
