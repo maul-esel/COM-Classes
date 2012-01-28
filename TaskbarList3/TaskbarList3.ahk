@@ -181,7 +181,8 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		HWND hWin - the handle to the window to work on
-		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
+		THUMBBUTTON[] array - an array of THUMBBUTTON instances, either as AHK array or as pointer to an array in memory.
+		[opt] UINT count - if "array" is a memory pointer, specify the number of buttons in the array here. If ommitted and "array" is an AHK array, the number is calculated using the array's maxIndex() method.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
@@ -190,9 +191,15 @@ class TaskbarList3 extends TaskbarList2
 		- You cannot delete buttons later, and you *cannot add buttons later*. Only call this method 1 time!
 		- The array may not have more than 7 members.
 	*/
-	ThumbBarAddButtons(hWin, array)
+	ThumbBarAddButtons(hWin, array, count := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
+		local bool, free_mem := false
+		if IsObject(array)
+			count := count ? count : array.maxIndex(), array := this.ParseArray(array), free_mem := true
+		bool := this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", count, "UPtr", array))
+		if free_mem
+			CCFramework.FreeMemory(array)
+		return bool
 	}
 
 	/*
@@ -201,14 +208,21 @@ class TaskbarList3 extends TaskbarList2
 
 	Parameters:
 		HWND hWin - the handle to the window to work on
-		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
+		THUMBBUTTON[] array - an array of THUMBBUTTON instances, either as AHK array or as pointer to an array in memory.
+		[opt] UINT count - if "array" is a memory pointer, specify the number of buttons in the array here. If ommitted and "array" is an AHK array, the number is calculated using the array's maxIndex() method.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
-	ThumbBarUpdateButtons(hWin, array)
+	ThumbBarUpdateButtons(hWin, array, count := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", array.MaxIndex(), "UPtr", this.ParseArray(array)))
+		local bool, free_mem := false
+		if IsObject(array)
+			count := count ? count : array.maxIndex(), array := this.ParseArray(array), free_mem := true
+		bool := this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", count, "UPtr", array))
+		if free_mem
+			CCFramework.FreeMemory(array)
+		return bool
 	}
 
 	/*
@@ -311,26 +325,26 @@ class TaskbarList3 extends TaskbarList2
 		THUMBBUTTON[] array - an array of THUMBBUTTON instances (see the bottom of this page).
 
 	Returns:
-		UPTR pointer - the pointer to the array in memory
+		UPTR pointer - the pointer to the array in memory. When no longer needed, you should free this by calling CCFramework.FreeMemory() on it.
 	*/
 	ParseArray(array)
 	{
-		static item_size := THUMBBUTTON.GetRequiredSize(), struct
-		local count := array.MaxIndex()
+		static item_size := THUMBBUTTON.GetRequiredSize()
+		local count := array.MaxIndex(), ptr
 
 		if (count > 7)
 			count := 7
 
-		VarSetCapacity(struct, item_size * count, 0)
+		ptr := CCFramework.AllocateMemory(item_size * count)
 		for each, button in array ; loop through all button definitions
 		{
-			button.ToStructPtr(&struct + item_size * (A_Index - 1))
+			button.ToStructPtr(ptr + item_size * (A_Index - 1))
 
 			if (A_Index == 7) ; only 7 buttons allowed
 				break
 		}
 
-		return &struct
+		return ptr
 }
 		
 	/*
