@@ -55,7 +55,7 @@ class StructBase extends _CCF_Error_Handler_
 	called when the instance is released. Frees all allocated memory.
 
 	Remarks:
-		You do not call ths method from your code. Instead, AutoHotkey calls it when the istance is no longer needed.
+		You do not call this method from your code. Instead, AutoHotkey calls it when the instance is no longer needed.
 	*/
 	__Delete()
 	{
@@ -65,6 +65,7 @@ class StructBase extends _CCF_Error_Handler_
 			this.Free(buffer)
 		}
 		this.buffers.SetCapacity(0)
+		this.ReleaseOriginalPointer()
 	}
 
 	/*
@@ -165,12 +166,54 @@ class StructBase extends _CCF_Error_Handler_
 		UINT bytes - the number of bytes required
 
 	Developer Remarks:
-		- Implement this method so that it can be called as if t was a staic method: do not depend on instance fields.
+		- Implement this method so that it can be called as if it was a static method: do not depend on instance fields.
 		- Also do not depend on the data object. Make the method work without any data.
 		- Document the fields the data object can have.
 	*/
 	GetRequiredSize(data := "")
 	{
 		throw Exception("Abstract method was not overridden.", -1)
+	}
+
+	/*
+	Method: GetOriginalPointer
+	if the current instance was created by a call to <FromStructPtr()>, this returns the pointer it was created from.
+
+	Returns:
+		UPTR ptr - the pointer
+
+	Developer Remarks:
+		To make this work, any derived class must call <SetOriginalPointer()> from within its <FromStructPtr()> method.
+	*/
+	GetOriginalPointer()
+	{
+		return this._internal_orig_ptr_
+	}
+
+	/*
+	Method: SetOriginalPointer
+	sets the original pointer field. *This may only be used by derived classes.*
+
+	Parameters:
+		UPTR ptr - the pointer to set
+	*/
+	SetOriginalPointer(ptr)
+	{
+		this._internal_orig_ptr_ := ptr
+	}
+
+	; the field holding the original pointer
+	_internal_orig_ptr_ := 0
+
+	/*
+	Method: ReleaseOriginalPointer
+	if the current instance was created by a call to <FromStructPtr()>, and the pointer passed to the method was previoulsy allocated using CCFramework.AllocateMemory(), this releases the pointer the instance was created from.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+	*/
+	ReleaseOriginalPointer()
+	{
+		return CCFramework.FreeMemory(this.GetOriginalPointer())
 	}
 }
