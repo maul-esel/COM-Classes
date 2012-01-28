@@ -188,7 +188,7 @@ class ImageList extends Unknown
 	Draws an image list item in the specified device context.
 	
 	Parameters:
-		ILDRAWPARAMS params - either a *pointer* to a valid struct or an instance of the ILDRAWPARAMS class, specifying the options.
+		IMAGELISTDRAWPARAMS params - either a *pointer* to a valid struct or an instance of the IMAGELISTDRAWPARAMS class, specifying the options.
 		
 	Returns:
 		BOOL success - true on success, false otherwise
