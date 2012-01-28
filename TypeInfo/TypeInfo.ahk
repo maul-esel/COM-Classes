@@ -124,7 +124,6 @@ class TypeInfo extends Unknown
 		{
 			array.Insert(StrGet(NumGet(&arr + (A_Index - 1) * A_PtrSize, 00, "UPtr"), "UTF-16"))
 		}
-		VarSetCapacity(arr, 00)
 		return bool
 	}
 
