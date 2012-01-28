@@ -77,7 +77,7 @@ class TypeInfo extends Unknown
 	GetFuncDesc(index)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
 		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out) : out
 	}
 
@@ -97,7 +97,7 @@ class TypeInfo extends Unknown
 	GetVarDesc(index)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
 		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out) : out
 	}
 
@@ -255,7 +255,7 @@ class TypeInfo extends Unknown
 	GetDllEntry(id, invkind, byRef dll := "", byRef name := "", byRef ordinal := 0)
 	{
 		local bool, pDll, pName
-		bool := this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "ptr*", pDll, "ptr*", pName, "Short*", ordinal))
+		bool := this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "Uint", id, "UInt", invkind, "ptr*", pDll, "ptr*", pName, "Short*", ordinal))
 		dll := StrGet(pDll), name := StrGet(pName)
 		return bool
 	}
@@ -273,7 +273,7 @@ class TypeInfo extends Unknown
 	GetRefTypeInfo(handle)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UInt", handle, "ptr*", out))
 		return new TypeInfo(out)
 	}
 
