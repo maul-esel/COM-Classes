@@ -150,16 +150,16 @@ class ShellLinkW extends Unknown
 	Gets the command-line arguments associated with a Shell link object.
 
 	Parameters:
-		[opt] INT size - the maximum number of characters to retrieve. By default 300.
+		[opt] INT maxChars - the maximum number of characters to retrieve. By default 300.
 
 	Returns:
 		STR args - the arguments
 	*/
-	GetArguments(size := 300)
+	GetArguments(maxChars := 300)
 	{
 		local args
-		VarSetCapacity(args, size * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "str", args, "Int", size))
+		VarSetCapacity(args, maxChars * 2, 0)
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "str", args, "Int", maxChars))
 		return args
 	}
 
