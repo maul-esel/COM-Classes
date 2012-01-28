@@ -17,7 +17,7 @@ Requirements:
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper Classes - PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
-	Other classes - Stream
+	Other classes - Stream, CCFramework
 */
 class Picture extends Unknown
 {
@@ -51,10 +51,11 @@ class Picture extends Unknown
 	*/
 	FromPICTDESC(src)
 	{
-		local i, pPict
+		local mem, iid, pPict
 		if IsObject(src)
 			src := src.ToStructPtr()
-		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", Unknown._Guid(i, Picture.IID), "UInt", false, "ptr*", pPict))
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(Picture.IID, &mem)
+		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", iid, "UInt", false, "ptr*", pPict))
 		return new Picture(pPict)
 	}
 

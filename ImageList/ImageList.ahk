@@ -564,10 +564,11 @@ class ImageList extends Unknown
 	*/
 	GetDragImage(byRef dragPos, byRef imagePos, byRef IL)
 	{
-		local pt1, pt2, out, bool
+		local mem, iid, pt1, pt2, out, bool
 
 		VarSetCapacity(pt1, POINT.GetRequiredSize(), 0), VarSetCapacity(pt2, POINT.GetRequiredSize(), 0)
-		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &pt1, "ptr", &pt2, "ptr", &IID, "ptr", out))
+		, VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &pt1, "ptr", &pt2, "ptr", iid, "ptr", out))
 
 		dragPos := POINT.FromStructPtr(&pt1)
 		imagePos := POINT.FromStructPtr(&pt2)

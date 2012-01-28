@@ -17,6 +17,7 @@ Requirements:
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - REO, REOBJECT, DVASPECT
+	Other classes - CCFramework
 
 Remarks:
 	- To create an instance of this class, call the (static) FromHWND() method.
@@ -135,7 +136,7 @@ class RichEditOLE extends Unknown
 
 	Parameters:
 		INT index - Index of the object to convert. If this parameter is REO.IOB_SELECTION, the selected object is to be converted.
-		STR clsid - Class identifier of the class to which the object is converted *(as a CLSID string)*.
+		GUID clsid - Class identifier of the class to which the object is converted (as a CLSID string or raw pointer).
 		STR type - User-visible type name of the class to which the object is converted.
 
 	Returns:
@@ -143,7 +144,10 @@ class RichEditOLE extends Unknown
 	*/
 	ConvertObject(index, clsid, type)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", this._GUID(clsid), "str", type))
+		local mem
+		if !CCFramework.isInteger(clsid)
+			VarSetCapacity(mem, 16, 00), clsid := CCFramework.String2GUID(clsid, &mem)
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", clsid, "str", type))
 	}
 
 	/*
@@ -151,15 +155,20 @@ class RichEditOLE extends Unknown
 	handles Activate As behavior by unloading all objects of the old class, telling OLE to treat those objects as objects of the new class, and reloading the objects. If objects cannot be reloaded, they are deleted.
 
 	Parameters:
-		STR old - Class identifier of the old class *(as a CLSID string)*.
-		STR new - Class identifier of the new class *(as a CLSID string)*.
+		GUID old - Class identifier of the old class (as a CLSID string or raw pointer).
+		GUID new - Class identifier of the new class (as a CLSID string or raw pointer).
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
 	ActivateAs(old, new)
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", this._GUID(old), "ptr", this._GUID(new)))
+		local mem1, mem2
+		if !CCFramework.isInteger(old)
+			VarSetCapacity(mem1, 16, 00), old := CCFramework.String2GUID(old, &mem1)
+		if !CCFramework.isInteger(new)
+			VarSetCapacity(mem2, 16, 00), new := CCFramework.String2GUID(new, &mem2)
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", old, "ptr", new))
 	}
 
 	/*

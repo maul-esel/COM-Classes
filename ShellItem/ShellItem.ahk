@@ -48,10 +48,11 @@ class ShellItem  extends Unknown
 	*/
 	FromAbsolutePath(path, bc := 0)
 	{
-		local a, out
+		local mem, iid, out
 		if IsObject(bc)
 			bc := bc.ptr
-		DllCall("Shell32\SHCreateItemFromParsingName", "str", path, "ptr", bc, "ptr", this._GUID(a, this.IID), "ptr*", out)
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		DllCall("Shell32\SHCreateItemFromParsingName", "str", path, "ptr", bc, "ptr", iid, "ptr*", out)
 		return new ShellItem(out)
 	}
 
@@ -99,14 +100,15 @@ class ShellItem  extends Unknown
 	*/
 	FromRelativePath(path, parent := 0, bc := 0)
 	{
-		local out, z
+		local out, mem, iid
 		if (!parent && !IsObject(parent))
 			parent := ShellItem.FromAbsolutePath(A_WorkingDir)
 		if IsObject(parent)
 			parent := parent.ptr
 		if IsObject(bc)
 			bc := bc.ptr
-		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", this._GUID(z, this.IID), "ptr*", out))
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", iid, "ptr*", out))
 		return new ShellItem(out)
 	}
 
