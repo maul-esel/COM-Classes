@@ -446,7 +446,7 @@ class ImageList extends Unknown
 	*/
 	BeginDrag(index, xHotspot, yHotspot)
 	{
-		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", iTrack, "int", xHotspot, "int", yHotspot))
+		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", index, "int", xHotspot, "int", yHotspot))
 	}
 	
 	/*

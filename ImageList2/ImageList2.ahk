@@ -48,7 +48,7 @@ class ImageList2 extends ImageList
 	*/
 	Resize(width, height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "ptr", this.ptr, "int", w, "int", h))
+		return this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
 	}
 
 	/*

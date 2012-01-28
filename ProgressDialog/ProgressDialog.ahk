@@ -51,7 +51,7 @@ class ProgressDialog extends Unknown
 	*/
 	StartProgressDialog(flags := 0, hParent := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", _flags, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", flags, "UInt", 0))
 	}
 
 	/*

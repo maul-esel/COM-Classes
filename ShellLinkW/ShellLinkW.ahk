@@ -282,12 +282,12 @@ class ShellLinkW extends Unknown
 
 	Parameters:
 		HWND hwnd - A handle to the window that the Shell will use as the parent for a dialog box. The Shell displays the dialog box if it needs to prompt the user for more information while resolving a Shell link.
-		UINT fFlags - action flags. You can use the fields of the SLR class for convenience.
+		UINT flags - action flags. You can use the fields of the SLR class for convenience.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	Resolve()
+	Resolve(hwnd, flags)
 	{
 		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uptr", hwnd, "uint", flags))
 	}

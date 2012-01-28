@@ -100,7 +100,7 @@ class Stream extends SequentialStream
 	*/
 	CopyTo(destination, byteCount, byRef bytesRead := "", byRef bytesWritten := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uptr", (IsObject(stream) ? stream.ptr : stream), "uint64", byteCount, "uint64*", bytesRead, "uint64*", bytesWritten))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uptr", (IsObject(destination) ? destination.ptr : destination), "uint64", byteCount, "uint64*", bytesRead, "uint64*", bytesWritten))
 	}
 
 	/*
