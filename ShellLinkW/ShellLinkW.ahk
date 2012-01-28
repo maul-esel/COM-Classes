@@ -47,9 +47,12 @@ class ShellLinkW extends Unknown
 	GetPath(byRef path, flags, byRef data := 0)
 	{
 		local s
-		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0)
-		VarSetCapacity(path, 520, 0)
-		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", 260, "ptr", s, "uint", flags)
+		static MAX_PATH := 260
+
+		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * 2, 0)
+
+		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", s, "uint", flags)
+
 		data := WIN32_FIND_DATA.FromStructPtr(&s)
 		return this._Error(hr)
 	}
@@ -119,8 +122,11 @@ class ShellLinkW extends Unknown
 	GetWorkingDirectory()
 	{
 		local dir
-		VarSetCapacity(dir, 260 * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "str", dir, "Int", 260))
+		static MAX_PATH := 260
+
+		VarSetCapacity(dir, MAX_PATH * 2, 0)
+		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "str", dir, "Int", MAX_PATH))
+
 		return dir
 	}
 
@@ -241,8 +247,9 @@ class ShellLinkW extends Unknown
 	*/
 	GetIconLocation(ByRef path, ByRef index)
 	{
-		VarSetCapacity(path, 260 * 2, 0)
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "str", path, "int", 260, "int*", index))
+		static MAX_PATH := 260
+		VarSetCapacity(path, MAX_PATH * 2, 0)
+		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "str", path, "int", MAX_PATH, "int*", index))
 	}
 
 	/*
