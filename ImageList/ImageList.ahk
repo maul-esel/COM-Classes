@@ -199,16 +199,13 @@ class ImageList extends Unknown
 	*/
 	Draw(params)
 	{
-		local struct
 		if (IsObject(params))
-			struct := params.ToStructPtr()
-		else
-			struct := params
-			
-		NumPut(2 * A_PtrSize + 15 * 4,	struct,	00, "UInt") ; overwrite cbSize & himl
-		NumPut(this.ptr,	struct,		04, "UPtr")
-		
-		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", struct))
+			params := params.ToStructPtr()
+
+		NumPut(2 * A_PtrSize + 15 * 4,	params,	00, "UInt") ; overwrite cbSize & himl
+		NumPut(this.ptr,	params,		04, "UPtr")
+
+		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", params))
 	}
 	
 	/*
