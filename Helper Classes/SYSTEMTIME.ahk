@@ -160,6 +160,6 @@ class SYSTEMTIME extends StructBase
 		if (IsObject(src))
 			src := src.ToStructPtr()
 		VarSetCapacity(dest, 16, 0), DllCall("FileTimeToSystemTime", "ptr", src, "ptr", &dest)
-		return SYSTEMTIME.FromStructPtr(dest)
+		return SYSTEMTIME.FromStructPtr(&dest)
 	}
 }
