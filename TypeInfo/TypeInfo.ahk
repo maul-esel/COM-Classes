@@ -274,7 +274,7 @@ class TypeInfo extends Unknown
 	GetRefTypeInfo(handle)
 	{
 		local out
-		this._Error(DllCall(NumGet(This.vt+14*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "ptr*", out))
 		return new TypeInfo(out)
 	}
 
