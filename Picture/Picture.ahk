@@ -268,7 +268,7 @@ class Picture extends Unknown
 		INT ySrc - The vertical offset in the source picture from which to start copying.
 		INT wSrc - The horizontal extent to copy from the source picture.
 		INT hSrc - The vertical extent to copy from the source picture.
-		RECT rect - a rectangle containing the position of the destination within a metafile device context if hdc is a metafile DC. Cannot be NULL in such cases.
+		RECT rect - a rectangle containing the position of the destination within a metafile device context if dc is a metafile DC. Cannot be NULL in such cases.
 					This can either be a RECT instance or a pointer ot a valid struct in memory.
 
 	Returns:
@@ -276,7 +276,7 @@ class Picture extends Unknown
 	*/
 	Render(dc, x, y, w, h, xSrc, ySrc, wSrc, hSrc, rect := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", IsObject(rect) ? rect.ToStructPtr() : rect))
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "UPtr", dc, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", IsObject(rect) ? rect.ToStructPtr() : rect))
 	}
 
 	/*
