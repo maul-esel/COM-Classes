@@ -39,6 +39,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	FindBufferKey(buffer)
 	{
+		local key, val
 		for key, val in this.buffers
 		{
 			if (val == buffer)
@@ -58,6 +59,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	__Delete()
 	{
+		local index, buffer
 		for index, buffer in this.buffers
 		{
 			this.Free(buffer)
@@ -83,6 +85,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	Allocate(bytes)
 	{
+		local buffer
 		buffer := CCFramework.AllocateMemory(bytes)
 		if (buffer)
 		{
@@ -106,6 +109,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	Free(buffer)
 	{
+		local bool
 		bool := CCFramework.FreeMemory(buffer)
 		if (bool)
 		{

@@ -46,6 +46,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	EnumAudioEndpoints(dataFlow, mask)
 	{
+		local devices
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr*", devices))
 		return new MMDeviceCollection(devices)
 	}
@@ -66,6 +67,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	GetDefaultAudioEndpoint(dataFlow, role)
 	{
+		local device
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr*", device))
 		return new MMDevice(device)
 	}
@@ -82,6 +84,7 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	GetDevice(id)
 	{
+		local device
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr*", device))
 		return new MMDevice(device)
 	}

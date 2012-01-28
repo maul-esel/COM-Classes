@@ -82,6 +82,7 @@ class TLIBATTR extends StructBase
 			CCFramework.String2GUID(this.guid, ptr)
 		else
 			CCFramework.CopyMemory(this.guid, ptr, 16)
+
 		NumPut(this.lcid,			1*ptr,	16,	"UInt")
 		NumPut(this.syskind,		1*ptr,	20,	"UInt")
 		NumPut(this.wMajorVerNum,	1*ptr,	24,	"UShort")

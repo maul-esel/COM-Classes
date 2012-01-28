@@ -181,6 +181,7 @@ class PICTDESC extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
+		local picType
 		picType := PICTYPE.METAFILE
 		if (this != PICTDESC)
 				picType := this.picType

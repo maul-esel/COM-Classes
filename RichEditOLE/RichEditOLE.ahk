@@ -47,6 +47,7 @@ class RichEditOLE extends Unknown
 	*/
 	FromHWND(ctrl)
 	{
+		local ptr
 		result := DllCall("SendMessage", "uptr", ctrl, "uint", 0x400 + 60, "uint", 0, "ptr*", ptr)
 		return new RichEditOLE(ptr)
 	}
@@ -60,6 +61,7 @@ class RichEditOLE extends Unknown
 	*/
 	GetClientSite()
 	{
+		local client
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", client))
 		return client
 	}
@@ -103,6 +105,7 @@ class RichEditOLE extends Unknown
 	*/
 	GetObject(index, flags)
 	{
+		local obj
 		VarSetCapacity(obj,	REOBJECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &obj, "uint", flags))
 		return REOBJECT.FromStructPtr(&obj)

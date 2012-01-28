@@ -161,6 +161,7 @@ class ImageList2 extends ImageList
 	*/
 	GetStatistics()
 	{
+		local struct
 		VarSetCapacity(struct, IMAGELISTSTATS.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+40*A_PtrSize), "ptr", this.ptr, "ptr", &struct))
 		return IMAGELISTSTATS.FromStructPtr(&struct)

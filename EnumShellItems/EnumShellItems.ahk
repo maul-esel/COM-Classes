@@ -93,6 +93,7 @@ class EnumShellItems
 	*/
 	Clone()
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr*", out))
 		return new EnumShellItems(out)
 	}

@@ -100,6 +100,7 @@ class PersistFile extends Persist
 	*/
 	GetCurFile()
 	{
+		local path
 		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "ptr*", &path))
 		return path
 	}

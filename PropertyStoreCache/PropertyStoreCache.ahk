@@ -38,6 +38,7 @@ class PropertyStoreCache extends PropertyStore
 	*/
 	GetState(key)
 	{
+		local state
 		if IsObject(key)
 			key := key.ToStructPtr()
 		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "ptr", key, "uint*", state))
@@ -58,12 +59,13 @@ class PropertyStoreCache extends PropertyStore
 	*/
 	GetValueAndState(key, byRef value, byRef state)
 	{
+		local bool, val
 		if IsObject(key)
 			key := key.ToStructPtr()
 		VarSetCapacity(val, 16, 0)
-		result := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr", &val, "uint*", state))
+		bool := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr", &val, "uint*", state))
 		;value := PROPVARIANT.FromStructPtr(&val)
-		return result
+		return bool
 	}
 
 	/*

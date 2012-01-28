@@ -40,6 +40,7 @@ class UIAutomationBoolCondition extends UIAutomationCondition
 	*/
 	get_BooleanValue()
 	{
+		local value
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", value))
 		return value
 	}

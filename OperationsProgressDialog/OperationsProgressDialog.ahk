@@ -202,6 +202,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	GetOperationStatus()
 	{
+		local status
 		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt*", status))
 		return status
 	}

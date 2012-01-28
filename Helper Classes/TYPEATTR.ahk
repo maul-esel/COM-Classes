@@ -153,6 +153,7 @@ class TYPEATTR extends StructBase
 			CCFramework.String2GUID(this.guid, ptr)
 		else
 			CCFramework.CopyMemory(this.guid, ptr, 16)
+
 		NumPut(this.lcid,				1*ptr,	16+0*A_PtrSize,	"UInt")
 		NumPut(this.dwReserved,			1*ptr,	20+0*A_PtrSize,	"UInt")
 		NumPut(this.memidConstructor,	1*ptr,	24+0*A_PtrSize,	"Int")
@@ -226,6 +227,7 @@ class TYPEATTR extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
+		local td, idl, data
 		td := (this == TYPEATTR) ? TYPEDESC : this.tdescAlias
 		idl := (this == TYPEATTR) ? IDLDESC : this.idldescType
 		data := IsObject(data) ? {} : data

@@ -51,6 +51,7 @@ class Picture extends Unknown
 	*/
 	FromPICTDESC(src)
 	{
+		local i, pPict
 		if IsObject(src)
 			src := src.ToStructPtr()
 		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", Unknown._Guid(i, Picture.IID), "UInt", false, "ptr*", pPict))
@@ -183,6 +184,7 @@ class Picture extends Unknown
 	*/
 	get_Handle()
 	{
+		local handle
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", handle))
 		return handle
 	}
@@ -198,6 +200,7 @@ class Picture extends Unknown
 	*/
 	get_hPal()
 	{
+		local hPal
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", hPal))
 		return hPal
 	}
@@ -213,6 +216,7 @@ class Picture extends Unknown
 	*/
 	get_Type()
 	{
+		local type
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "short*", type))
 		return type
 	}
@@ -228,6 +232,7 @@ class Picture extends Unknown
 	*/
 	get_Width()
 	{
+		local width
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int*", width))
 		return width
 	}
@@ -243,6 +248,7 @@ class Picture extends Unknown
 	*/
 	get_Height()
 	{
+		local height
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "int*", height))
 		return height
 	}
@@ -300,6 +306,7 @@ class Picture extends Unknown
 	*/
 	get_CurDC()
 	{
+		local hDC
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr*", hDC))
 		return hDC
 	}
@@ -332,6 +339,7 @@ class Picture extends Unknown
 	*/
 	get_KeepOriginalFormat()
 	{
+		local keep
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "uint*", keep))
 		return keep
 	}
@@ -378,6 +386,7 @@ class Picture extends Unknown
 	*/
 	SaveAsFile(stream, fSaveMemCopy)
 	{
+		local cbSize
 		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "ptr", (IsObject(stream) ? stream.ptr : stream), "uint", fSaveMemCopy, "int*", cbSize))
 		return cbSize
 	}
@@ -393,6 +402,7 @@ class Picture extends Unknown
 	*/
 	get_Attributes()
 	{
+		local attr
 		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "uint*", attr))
 		return attr
 	}

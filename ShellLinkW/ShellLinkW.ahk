@@ -46,6 +46,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data := 0)
 	{
+		local s
 		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0)
 		VarSetCapacity(path, 520, 0)
 		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", 260, "ptr", s, "uint", flags)
@@ -87,6 +88,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetDescription(maxChars := 300)
 	{
+		local descr
 		VarSetCapacity(descr, maxChars * 2, 0)
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "str", descr, "int", maxChars))
 		return descr
@@ -116,6 +118,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetWorkingDirectory()
 	{
+		local dir
 		VarSetCapacity(dir, 260 * 2, 0)
 		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "str", dir, "Int", 260))
 		return dir
@@ -142,11 +145,13 @@ class ShellLinkW extends Unknown
 
 	Parameters:
 		[opt] INT size - the maximum number of characters to retrieve. By default 300.
+
 	Returns:
 		STR args - the arguments
 	*/
 	GetArguments(size := 300)
 	{
+		local args
 		VarSetCapacity(args, size * 2, 0)
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "str", args, "Int", size))
 		return args
@@ -176,6 +181,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetHotkey()
 	{
+		local hotkey
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "short*", hotkey))
 		return hotkey
 	}
@@ -202,6 +208,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetShowCmd()
 	{
+		local cmd
 		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "int*", cmd))
 		return cmd
 	}

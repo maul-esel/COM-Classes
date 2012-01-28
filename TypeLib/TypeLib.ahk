@@ -46,6 +46,7 @@ class TypeLib extends Unknown
 	*/
 	FromFile(file, index := 1)
 	{
+		local out
 		this._Error(DllCall("OleAut32.dll\LoadTypeLib", "str", file . "\" . index, "Ptr*", out))
 		return new TypeLib(out)
 	}
@@ -67,7 +68,7 @@ class TypeLib extends Unknown
 	*/
 	FromRegistry(guid, vMajor, vMinor)
 	{
-		local mem
+		local mem, out
 
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
@@ -101,6 +102,7 @@ class TypeLib extends Unknown
 	*/
 	GetTypeInfo(index)
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", index, "ptr*", out))
 		return IsObject(TypeInfo) ? new TypeInfo(out) : out
 	}
@@ -117,6 +119,7 @@ class TypeLib extends Unknown
 	*/
 	GetTypeInfoType(index)
 	{
+		local type
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", index, "UInt*", type))
 		return type
 	}
@@ -133,7 +136,7 @@ class TypeLib extends Unknown
 	*/
 	GetTypeInfoOfGuid(guid)
 	{
-		local mem
+		local mem, out
 
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
@@ -154,6 +157,7 @@ class TypeLib extends Unknown
 	*/
 	GetLibAttr()
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr*", out))
 		return TLIBATTR.FromStructPtr(out)
 	}
@@ -167,6 +171,7 @@ class TypeLib extends Unknown
 	*/
 	GetTypeComp()
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "ptr*", out))
 		return IsObject(TypeComp) ? new TypeComp(out) : out
 	}
@@ -190,6 +195,7 @@ class TypeLib extends Unknown
 	*/
 	GetDocumentation(id, byRef name := "", byRef doc := "", byRef context := "", byRef helpfile := "")
 	{
+		local bool, pName, pDoc, pHelpfile
 		bool := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
 		name := StrGet(pName), doc := StrGet(pDoc), helpfile := StrGet(pHelpfile)
 		return bool
@@ -210,6 +216,7 @@ class TypeLib extends Unknown
 	*/
 	IsName(byRef name)
 	{
+		local hash, bool
 		hash := DllCall("OleAut32.dll\LHashValOfName", "UInt", 0, "str", name)
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "str", name, "UInt", hash, "UInt*", bool))
 		return bool
