@@ -1,6 +1,6 @@
 /*
 class: UIAutomationBoolCondition
-wraps the *IUIAutomationBoolCondition* interface and epresents a condition that can be either TRUE (selects all elements) or FALSE (selects no elements).
+wraps the *IUIAutomationBoolCondition* interface and represents a condition that can be either TRUE (selects all elements) or FALSE (selects no elements).
 
 Authors:
 	- maul.esel (https://github.com/maul-esel)
