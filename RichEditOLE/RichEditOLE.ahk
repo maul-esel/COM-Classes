@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - REO, REOBJECT, DVASPECT
+	Helper classes - REO, REOBJECT, DVASPECT, CHARRANGE, CF
 	Other classes - CCFramework
 
 Remarks:
@@ -232,5 +232,86 @@ class RichEditOLE extends Unknown
 	HandsOffStorage(index)
 	{
 		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index))
+	}
+
+	/*
+	Method: SaveCompleted
+	tells a rich edit control that the most recent save operation has been completed and that it should hold onto a different storage for the object.
+
+	Parameters:
+		INT index - Index of the object whose storage is being specified. If this parameter is REO.IOB_SELECTION, the selected object is used.
+		Storage stg - New storage for the object. If the storage is not NULL, the rich edit control releases any storage it is currently holding for the object and uses this new storage instead. This may be passed as raw pointer or class instance.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+	*/
+	SaveCompleted(index, stg)
+	{
+		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "Int", index, "Ptr", IsObject(stg) ? stg.ptr : stg))
+	}
+
+	/*
+	Method: InPlaceDeactivate
+	tells a rich edit control to deactivate the currently active in-place object, if any.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If there is no active in-place object, the method succeeds.
+	*/
+	InPlaceDeactivate()
+	{
+		return this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "Ptr", this.ptr))
+	}
+
+	/*
+	Method: ContextSensitiveHelp
+	tells a rich edit control that it should transition into or out of context-sensitive help mode. A rich edit control calls the <ContextSensitiveHelp> method of any in-place object which is currently active if a state change is occurring.
+
+	Parameters:
+		BOOL enter - Indicator of whether the control is entering context-sensitive help mode (TRUE) or leaving it (FALSE).
+
+	Returns:
+		BOOL success - true on success, false otherwise
+	*/
+	ContextSensitiveHelp(enter)
+	{
+		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "UInt", enter))
+	}
+
+	/*
+	Method: GetClipboardData
+	retrieves a clipboard object for a range in an edit control.
+
+	Parameters:
+		CHARRANGE range - structure specifying the range for which to create the clipboard object. This may be a class instance or a raw memory pointer.
+		UINT reco - The clipboard operation flag. You may use the fields of the RECO class for convenience.
+
+	Returns:
+		DataObject obj - the IDataObject interface of the clipboard object representing the range specified, either as class instance (if available) or raw interface pointer.
+	*/
+	GetClipboardData(range, reco)
+	{
+		local obj
+		this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(range) ? range.ToStructPtr() : range, "UInt", reco, "Ptr*", obj))
+		return IsObject(DataObject) ? new DataObject(obj) : obj
+	}
+
+	/*
+	Method: ImportDataObject
+	imports a clipboard object into a rich edit control, replacing the current selection.
+
+	Parameters:
+		DataObject obj - IDataObject interface for the clipboard object to import, either as class instance or raw interface pointer.
+		UINT cf - Clipboard format to use. A value of zero will use the best available format. You may use the fields of the CF class for convenience.
+		[opt] UPTR hMetaPict - Handle to a metafile containing the icon view of an object. The handle is used only if the DVASPECT.ICON display aspect is required by a Paste Special operation.
+
+	Returns:
+		BOOL success - true on success, false otherwise
+	*/
+	ImportDataObject(obj, cf, hMetaPict := 0)
+	{
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(obj) ? obj.ptr : obj, "UInt", cf, "Ptr", hMetaPict))
 	}
 }
