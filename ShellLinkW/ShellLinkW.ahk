@@ -280,7 +280,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetRelativePath(path)
 	{
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "str", path, "uint", 0))
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "str", path, "uint", 0)) ; msdn: param 2 is reserved
 	}
 
 	/*

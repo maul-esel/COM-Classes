@@ -142,7 +142,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetLine(line, text)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0)) ; msdn: last param is reserved
 	}
 
 	/*
@@ -160,7 +160,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetCancelMsg(text)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0)) ; msdn: last param is reserved
 	}
 
 	/*
@@ -178,7 +178,7 @@ class ProgressDialog extends Unknown
 	*/
 	Timer(action)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0)) ; msdn: last param is reserved
 	}
 
 	/*
