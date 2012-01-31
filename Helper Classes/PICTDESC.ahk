@@ -138,6 +138,7 @@ class PICTDESC extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new PICTDESC()
+		instance.SetOriginalPointer(ptr)
 
 		instance.cbSizeofstruct	:= NumGet(1*ptr,	00,	"UInt")
 		instance.picType		:= NumGet(1*ptr,	04,	"UInt")
@@ -181,6 +182,7 @@ class PICTDESC extends StructBase
 	*/
 	GetRequiredSize(data = "")
 	{
+		local picType
 		picType := PICTYPE.METAFILE
 		if (this != PICTDESC)
 				picType := this.picType

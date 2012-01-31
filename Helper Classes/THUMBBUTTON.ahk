@@ -96,6 +96,7 @@ class THUMBBUTTON extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new THUMBBUTTON()
+		instance.SetOriginalPointer(ptr)
 
 		instance.dwMask		:=	NumGet(1*ptr,	000+0*A_PtrSize,	"UInt")
 		instance.iId		:=	NumGet(1*ptr,	004+0*A_PtrSize,	"UInt")

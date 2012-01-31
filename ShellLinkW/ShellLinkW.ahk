@@ -46,11 +46,14 @@ class ShellLinkW extends Unknown
 	*/
 	GetPath(byRef path, flags, byRef data = 0)
 	{
-		VarSetCapacity(s, WIN32_FIND_DATA.GetRequiredSize(), 0)
-		VarSetCapacity(path, 520, 0)
-		hr := DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", 260, "ptr", s, "uint", flags)
-		data := WIN32_FIND_DATA.FromStructPtr(&s)
-		return this._Error(hr)
+		local struct, bool
+		static MAX_PATH := 260
+
+		VarSetCapacity(struct, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * 2, 0)
+		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", MAX_PATH, "ptr", &struct, "uint", flags))
+
+		data := WIN32_FIND_DATA.FromStructPtr(&struct)
+		return bool
 	}
 
 	/*
@@ -87,6 +90,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetDescription(maxChars = 300)
 	{
+		local descr
 		VarSetCapacity(descr, maxChars * 2, 0)
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "wstr", descr, "int", maxChars))
 		return descr
@@ -116,8 +120,12 @@ class ShellLinkW extends Unknown
 	*/
 	GetWorkingDirectory()
 	{
-		VarSetCapacity(dir, 260 * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "wstr", dir, "Int", 260))
+		local dir
+		static MAX_PATH := 260
+
+		VarSetCapacity(dir, MAX_PATH * 2, 0)
+		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "wstr", dir, "Int", MAX_PATH))
+
 		return dir
 	}
 
@@ -141,14 +149,16 @@ class ShellLinkW extends Unknown
 	Gets the command-line arguments associated with a Shell link object.
 
 	Parameters:
-		[opt] INT size - the maximum number of characters to retrieve. By default 300.
+		[opt] INT maxChars - the maximum number of characters to retrieve. By default 300.
+
 	Returns:
 		STR args - the arguments
 	*/
-	GetArguments(size = 300)
+	GetArguments(maxChars = 300)
 	{
-		VarSetCapacity(args, size * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "wstr", args, "Int", size))
+		local args
+		VarSetCapacity(args, maxChars * 2, 0)
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "wstr", args, "Int", maxChars))
 		return args
 	}
 
@@ -176,6 +186,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetHotkey()
 	{
+		local hotkey
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "short*", hotkey))
 		return hotkey
 	}
@@ -202,6 +213,7 @@ class ShellLinkW extends Unknown
 	*/
 	GetShowCmd()
 	{
+		local cmd
 		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "int*", cmd))
 		return cmd
 	}
@@ -234,8 +246,9 @@ class ShellLinkW extends Unknown
 	*/
 	GetIconLocation(ByRef path, ByRef index)
 	{
-		VarSetCapacity(path, 260 * 2, 0)
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "wstr", path, "int", 260, "int*", index))
+		static MAX_PATH := 260
+		VarSetCapacity(path, MAX_PATH * 2, 0)
+		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "wstr", path, "int", MAX_PATH, "int*", index))
 	}
 
 	/*
@@ -275,12 +288,12 @@ class ShellLinkW extends Unknown
 
 	Parameters:
 		HWND hwnd - A handle to the window that the Shell will use as the parent for a dialog box. The Shell displays the dialog box if it needs to prompt the user for more information while resolving a Shell link.
-		UINT fFlags - action flags. You can use the fields of the SLR class for convenience.
+		UINT flags - action flags. You can use the fields of the SLR class for convenience.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	Resolve()
+	Resolve(hwnd, flags)
 	{
 		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uptr", hwnd, "uint", flags))
 	}

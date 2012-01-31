@@ -110,6 +110,7 @@ class METHODDATA extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new METHODDATA()
+		instance.SetOriginalPointer(ptr)
 
 		instance.szName := StrGet(NumGet(1*ptr,	00+0*A_PtrSize,	"UPtr"))
 		instance.ppdata	:= NumGet(1*ptr,	00+1*A_PtrSize,	"UPtr")

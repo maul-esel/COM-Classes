@@ -15,6 +15,7 @@ Requirements:
 */
 #SingleInstance force
 #include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\TaskbarList.ahk
 

@@ -143,6 +143,7 @@ class REOBJECT extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new REOBJECT()
+		instance.SetOriginalPointer(ptr)
 
 		instance.cbStruct	:= NumGet(1*ptr,	00+0*A_PtrSize,	"UInt")
 		instance.cp			:= NumGet(1*ptr,	04+0*A_PtrSize,	"UInt")

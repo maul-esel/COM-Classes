@@ -155,7 +155,7 @@ class CustomDestinationList extends Unknown
 	*/
 	GetRemovedDestinations(type = "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}")
 	{
-		local mem
+		local mem, out
 
 		if type is not integer
 			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)

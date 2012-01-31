@@ -112,6 +112,7 @@ class SYSTEMTIME extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new SYSTEMTIME()
+		instance.SetOriginalPointer(ptr)
 
 		instance.wYear			:= NumGet(1*ptr,	00, "short")
 		instance.wMonth			:= NumGet(1*ptr,	02,	"short")
@@ -156,10 +157,10 @@ class SYSTEMTIME extends StructBase
 	*/
 	FromFILETIME(src)
 	{
+		local dest
 		if (IsObject(src))
 			src := src.ToStructPtr()
-		VarSetCapacity(dest, 16, 0)
-		DllCall("FileTimeToSystemTime", "ptr", src, "ptr", &dest)
-		return SYSTEMTIME.FromStructPtr(dest)
+		VarSetCapacity(dest, 16, 0), DllCall("FileTimeToSystemTime", "ptr", src, "ptr", &dest)
+		return SYSTEMTIME.FromStructPtr(&dest)
 	}
 }

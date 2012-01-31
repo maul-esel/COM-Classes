@@ -199,6 +199,7 @@ class IMAGELISTDRAWPARAMS extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new IMAGELISTDRAWPARAMS()
+		instance.SetOriginalPointer(ptr)
 
 		instance.cbSize		:= NumGet(1*ptr,	00 + 0*A_PtrSize,	"UInt")
 		instance.ptr		:= NumGet(1*ptr,	04 + 0*A_PtrSize,	"UPtr")

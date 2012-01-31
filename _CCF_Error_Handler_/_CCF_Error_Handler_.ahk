@@ -13,6 +13,8 @@ class _CCF_Error_Handler_
 	*/
 	__Call(method, params*)
 	{
+		local param_list, i, p
+
 		if !IsFunc("Obj" . method)
 		{
 			param_list := ""

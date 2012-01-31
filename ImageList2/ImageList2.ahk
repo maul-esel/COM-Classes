@@ -48,7 +48,7 @@ class ImageList2 extends ImageList
 	*/
 	Resize(width, height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "ptr", this.ptr, "int", w, "int", h))
+		return this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
 	}
 
 	/*
@@ -161,6 +161,7 @@ class ImageList2 extends ImageList
 	*/
 	GetStatistics()
 	{
+		local struct
 		VarSetCapacity(struct, IMAGELISTSTATS.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+40*A_PtrSize), "ptr", this.ptr, "ptr", &struct))
 		return IMAGELISTSTATS.FromStructPtr(&struct)
@@ -219,6 +220,6 @@ class ImageList2 extends ImageList
 	*/
 	ReplaceFromImageList(index, src, srcIndex, punk = 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+43*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", IsObject(src) ? src.ptr : src, "INT", srcIndex, "ptr", punk, "uint", 0))
+		return this._Error(DllCall(NumGet(this.vt+43*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", IsObject(src) ? src.ptr : src, "Int", srcIndex, "ptr", punk, "uint", 0))
 	}
 }

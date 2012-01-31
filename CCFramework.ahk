@@ -34,6 +34,7 @@ class CCFramework extends _CCF_Error_Handler_
 	*/
 	GUID2String(guid)
 	{
+		local string
 		DllCall("Ole32.dll\StringFromCLSID", "UPtr", guid, "UPtr*", string)
 		return StrGet(string, "UTF-16")
 	}
@@ -126,6 +127,7 @@ class CCFramework extends _CCF_Error_Handler_
 	CreateVARIANT(value)
 	{
 		static VT_VARIANT := 0xC, VT_BYREF := 0x4000
+		local array, arr_data
 
 		array := ComObjArray(VT_VARIANT, 1)
 		array[0] := value
@@ -161,6 +163,7 @@ class CCFramework extends _CCF_Error_Handler_
 	FormatError(error)
 	{
 		static ALLOCATE_BUFFER := 0x00000100, FROM_SYSTEM := 0x00001000, IGNORE_INSERTS := 0x00000200
+		local size, msg, bufaddr
 
 		size := DllCall("FormatMessageW", "UInt", ALLOCATE_BUFFER|FROM_SYSTEM|IGNORE_INSERTS, "UPtr", 0, "UInt", error, "UInt", 0, "UPtr*", bufaddr, "UInt", 0, "UPtr", 0)
 		msg := StrGet(bufaddr, size, "UTF-16")

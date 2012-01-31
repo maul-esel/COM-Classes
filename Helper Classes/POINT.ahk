@@ -79,7 +79,9 @@ class POINT extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new POINT(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
+		local instance := new POINT(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

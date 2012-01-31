@@ -41,6 +41,7 @@ class PropertyStore extends Unknown
 	*/
 	GetCount()
 	{
+		local count
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", count))
 		return count
 	}
@@ -57,6 +58,7 @@ class PropertyStore extends Unknown
 	*/
 	GetAt(index)
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", index, "ptr*", out))
 		return PROPERTYKEY.FromStructPtr(out)
 	}
@@ -73,6 +75,7 @@ class PropertyStore extends Unknown
 	*/
 	GetValue(key)
 	{
+		local out
 		if IsObject(key)
 			key := key.ToStructPtr()
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr*", out))

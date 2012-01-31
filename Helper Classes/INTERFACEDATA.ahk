@@ -81,7 +81,9 @@ class INTERFACEDATA extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new INTERFACEDATA(NumGet(1*ptr,	00,	"UPtr"), NumGet(1*ptr,	A_PtrSize,	"UInt"))
+		local instance := new INTERFACEDATA(NumGet(1*ptr,	00,	"UPtr"), NumGet(1*ptr,	A_PtrSize,	"UInt"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

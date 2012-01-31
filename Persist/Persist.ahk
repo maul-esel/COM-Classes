@@ -41,6 +41,7 @@ class Persist extends Unknown
 	*/
 	GetClassID()
 	{
+		local guid
 		VarSetCapacity(guid, 16, 0)
 		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "ptr", &guid))
 		return CCFramework.GUID2String(&guid)

@@ -80,7 +80,9 @@ class IDLDESC extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new IDLDESC(NumGet(1*ptr,	00,	"UInt"), NumGet(1*ptr,	04,	"UShort"))
+		local instance := new IDLDESC(NumGet(1*ptr,	00,	"UInt"), NumGet(1*ptr,	04,	"UShort"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

@@ -47,6 +47,7 @@ class Stream extends SequentialStream
 	*/
 	FromHGlobal(handle, autoRelease = true)
 	{
+		local ptr
 		this._Error(DllCall("Ole32.dll\CreateStreamOnHGlobal", "UPtr", handle, "UInt", autoRelease, "ptr*", ptr))
 		return new Stream(ptr)
 	}
@@ -64,6 +65,7 @@ class Stream extends SequentialStream
 	*/
 	Seek(move, dwOrigin)
 	{
+		local pos
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "Uint64*", pos))
 		return pos
 	}
@@ -98,7 +100,7 @@ class Stream extends SequentialStream
 	*/
 	CopyTo(destination, byteCount, byRef bytesRead = "", byRef bytesWritten = "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uptr", (IsObject(stream) ? stream.ptr : stream), "uint64", byteCount, "uint64*", bytesRead, "uint64*", bytesWritten))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uptr", (IsObject(destination) ? destination.ptr : destination), "uint64", byteCount, "uint64*", bytesRead, "uint64*", bytesWritten))
 	}
 
 	/*
@@ -174,6 +176,7 @@ class Stream extends SequentialStream
 	*/
 	Stat(flag = 0)
 	{
+		local struct
 		VarSetCapacity(struct, STATSTG.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", &struct, "uint", flag))
 		return STATSTG.FromStructPtr(&struct)
@@ -188,6 +191,7 @@ class Stream extends SequentialStream
 	*/
 	Clone()
 	{
+		local ptr
 		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "ptr*", ptr))
 		return new Stream(ptr)
 	}

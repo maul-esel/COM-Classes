@@ -40,6 +40,7 @@ class UIAutomationNotCondition extends UIAutomationCondition
 	*/
 	GetChild()
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", out))
 		return new UIAutomationCondition(out)
 	}

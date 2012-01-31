@@ -80,7 +80,9 @@ class PARAMDATA extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new PARAMDATA(StrGet(NumGet(1*ptr, 00, "UPtr")), NumGet(1*ptr, A_PtrSize,	"UShort"))
+		local instance := new PARAMDATA(StrGet(NumGet(1*ptr, 00, "UPtr")), NumGet(1*ptr, A_PtrSize,	"UShort"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*

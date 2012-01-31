@@ -78,7 +78,9 @@ class FILETIME extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		return new FILETIME(NumGet(1*ptr, 00, "UInt"), NumGet(1*ptr, 04, "UInt"))
+		local instance := new FILETIME(NumGet(1*ptr, 00, "UInt"), NumGet(1*ptr, 04, "UInt"))
+		instance.SetOriginalPointer(ptr)
+		return instance
 	}
 
 	/*
@@ -112,10 +114,10 @@ class FILETIME extends StructBase
 	*/
 	FromSYSTEMTIME(src)
 	{
+		local dest
 		if (IsObject(src))
 			src := src.ToStructPtr()
-		VarSetCapacity(dest, 8, 0)
-		DllCall("SystemTimeToFileTime", "ptr", src, "ptr", &dest)
+		VarSetCapacity(dest, 8, 0), DllCall("SystemTimeToFileTime", "ptr", src, "ptr", &dest)
 		return FILETIME.FromStructPtr(&dest)
 	}
 }

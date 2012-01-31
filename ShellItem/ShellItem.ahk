@@ -48,9 +48,11 @@ class ShellItem  extends Unknown
 	*/
 	FromAbsolutePath(path, bc = 0)
 	{
+		local mem, iid, out
 		if IsObject(bc)
 			bc := bc.ptr
-		DllCall("Shell32\SHCreateItemFromParsingName", "str", path, "ptr", bc, "ptr", this._GUID(a, this.IID), "ptr*", out)
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		DllCall("Shell32\SHCreateItemFromParsingName", "str", path, "ptr", bc, "ptr", iid, "ptr*", out)
 		return new ShellItem(out)
 	}
 
@@ -70,7 +72,7 @@ class ShellItem  extends Unknown
 	*/
 	FromKnownFolder(folder, user = 0)
 	{
-		local iid, mem1, mem2
+		local iid, mem1, mem2, out
 
 		if folder is not integer
 			VarSetCapacity(mem1, 16, 00), folder := CCFramework.String2GUID(folder, &mem1)
@@ -98,13 +100,15 @@ class ShellItem  extends Unknown
 	*/
 	FromRelativePath(path, parent = 0, bc = 0)
 	{
+		local out, mem, iid
 		if (!parent && !IsObject(parent))
 			parent := ShellItem.FromAbsolutePath(A_WorkingDir)
 		if IsObject(parent)
 			parent := parent.ptr
 		if IsObject(bc)
 			bc := bc.ptr
-		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", this._GUID(z, this.IID), "ptr*", out))
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", iid, "ptr*", out))
 		return new ShellItem(out)
 	}
 
@@ -142,7 +146,7 @@ class ShellItem  extends Unknown
 	*/
 	BindToHandler(mode, interface, bc = 0)
 	{
-		local mem1, mem2
+		local mem1, mem2, out
 
 		if !CCFramework.isInteger(interface)
 			VarSetCapacity(mem1, 16, 00), interface := CCFramework.String2GUID(interface, &mem1)
@@ -166,6 +170,7 @@ class ShellItem  extends Unknown
 	*/
 	GetParent()
 	{
+		local parent
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "ptr*", parent))
 		return new ShellItem(parent)
 	}
@@ -182,6 +187,7 @@ class ShellItem  extends Unknown
 	*/
 	GetDisplayName(flag = 0)
 	{
+		local name
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", flag, "ptr*", name))
 		return StrGet(name, "UTF-16")
 	}
@@ -199,13 +205,7 @@ class ShellItem  extends Unknown
 	*/
 	GetAttributes(requested, byRef attr)
 	{
-		this._Error(0)
-		hr := DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", requested, "UInt*", attr)
-		if (hr == 0)
-			return true
-		else if (hr == 1)
-			return false
-		else return this._Error(hr)
+		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", requested, "UInt*", attr))
 	}
 
 	/*
@@ -221,6 +221,7 @@ class ShellItem  extends Unknown
 	*/
 	Compare(compareTo, hint = 0)
 	{
+		local result
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "Ptr", IsObject(compareTo) ? compareTo.ptr : compareTo, "UInt", hint, "Int*", result))
 		return result
 	}

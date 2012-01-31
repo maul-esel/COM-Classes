@@ -17,7 +17,7 @@ Requirements:
 	OS - Windows 2000 Professional / Windows 2000 Server
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper Classes - PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
-	Other classes - Stream
+	Other classes - Stream, CCFramework
 */
 class Picture extends Unknown
 {
@@ -51,9 +51,11 @@ class Picture extends Unknown
 	*/
 	FromPICTDESC(src)
 	{
+		local mem, iid, pPict
 		if IsObject(src)
 			src := src.ToStructPtr()
-		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", Unknown._Guid(i, Picture.IID), "UInt", false, "ptr*", pPict))
+		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(Picture.IID, &mem)
+		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", iid, "UInt", false, "ptr*", pPict))
 		return new Picture(pPict)
 	}
 
@@ -183,6 +185,7 @@ class Picture extends Unknown
 	*/
 	get_Handle()
 	{
+		local handle
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", handle))
 		return handle
 	}
@@ -198,6 +201,7 @@ class Picture extends Unknown
 	*/
 	get_hPal()
 	{
+		local hPal
 		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", hPal))
 		return hPal
 	}
@@ -213,6 +217,7 @@ class Picture extends Unknown
 	*/
 	get_Type()
 	{
+		local type
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "short*", type))
 		return type
 	}
@@ -228,6 +233,7 @@ class Picture extends Unknown
 	*/
 	get_Width()
 	{
+		local width
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int*", width))
 		return width
 	}
@@ -243,6 +249,7 @@ class Picture extends Unknown
 	*/
 	get_Height()
 	{
+		local height
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "int*", height))
 		return height
 	}
@@ -261,7 +268,7 @@ class Picture extends Unknown
 		INT ySrc - The vertical offset in the source picture from which to start copying.
 		INT wSrc - The horizontal extent to copy from the source picture.
 		INT hSrc - The vertical extent to copy from the source picture.
-		RECT rect - a rectangle containing the position of the destination within a metafile device context if hdc is a metafile DC. Cannot be NULL in such cases.
+		RECT rect - a rectangle containing the position of the destination within a metafile device context if dc is a metafile DC. Cannot be NULL in such cases.
 					This can either be a RECT instance or a pointer ot a valid struct in memory.
 
 	Returns:
@@ -269,7 +276,7 @@ class Picture extends Unknown
 	*/
 	Render(dc, x, y, w, h, xSrc, ySrc, wSrc, hSrc, rect = 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", IsObject(rect) ? rect.ToStructPtr() : rect))
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "UPtr", dc, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", IsObject(rect) ? rect.ToStructPtr() : rect))
 	}
 
 	/*
@@ -300,6 +307,7 @@ class Picture extends Unknown
 	*/
 	get_CurDC()
 	{
+		local hDC
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr*", hDC))
 		return hDC
 	}
@@ -332,6 +340,7 @@ class Picture extends Unknown
 	*/
 	get_KeepOriginalFormat()
 	{
+		local keep
 		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "uint*", keep))
 		return keep
 	}
@@ -378,6 +387,7 @@ class Picture extends Unknown
 	*/
 	SaveAsFile(stream, fSaveMemCopy)
 	{
+		local cbSize
 		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "ptr", (IsObject(stream) ? stream.ptr : stream), "uint", fSaveMemCopy, "int*", cbSize))
 		return cbSize
 	}
@@ -393,6 +403,7 @@ class Picture extends Unknown
 	*/
 	get_Attributes()
 	{
+		local attr
 		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "uint*", attr))
 		return attr
 	}

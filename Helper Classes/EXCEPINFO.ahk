@@ -116,6 +116,7 @@ class EXCEPINFO extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new EXCEPINFO()
+		instance.SetOriginalPointer(ptr)
 
 		instance.wCode				:= NumGet(1*ptr,	00+0*A_PtrSize,	"Short")
 		instance.wReserved			:= NumGet(1*ptr,	02+0*A_PtrSize,	"Short")

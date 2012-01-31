@@ -129,6 +129,7 @@ class WIN32_FIND_DATA extends StructBase
 	FromStructPtr(ptr)
 	{
 		local instance := new WIN32_FIND_DATA()
+		instance.SetOriginalPointer(ptr)
 
 		instance.dwFileAttributes	:= NumGet(1*ptr,	00,	"UInt")
 		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04)

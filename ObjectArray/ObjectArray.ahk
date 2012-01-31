@@ -41,6 +41,7 @@ class ObjectArray extends Unknown
 	*/
 	GetCount()
 	{
+		local count
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "UInt*", count))
 		return count
 	}
@@ -58,7 +59,7 @@ class ObjectArray extends Unknown
 	*/
 	GetAt(index, type)
 	{
-		local mem
+		local mem, out
 
 		if type is not integer
 			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)

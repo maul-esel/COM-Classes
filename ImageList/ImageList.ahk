@@ -68,7 +68,7 @@ class ImageList extends Unknown
 	*/
 	FromHIMAGELIST(il = 0)
 	{
-		local iid, mem
+		local iid, mem, ptr
 
 		if (!il)
 			il := IL_Create()
@@ -98,6 +98,7 @@ class ImageList extends Unknown
 	*/
 	Add(bitmap, maskbitmap = 0)
 	{
+		local int
 		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
 		return int
 	}
@@ -115,6 +116,7 @@ class ImageList extends Unknown
 	*/
 	ReplaceIcon(hIcon, index = -1)
 	{
+		local int
 		this._Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
 		return int
 	}
@@ -176,6 +178,7 @@ class ImageList extends Unknown
 	*/
 	AddMasked(bitmap, color)
 	{
+		local int
 		this._Error(DllCall(NumGet(this.vt+7*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", color, "int*", int))
 		return int
 	}
@@ -185,7 +188,7 @@ class ImageList extends Unknown
 	Draws an image list item in the specified device context.
 	
 	Parameters:
-		ILDRAWPARAMS params - either a *pointer* to a valid struct or an instance of the ILDRAWPARAMS class, specifying the options.
+		IMAGELISTDRAWPARAMS params - either a *pointer* to a valid struct or an instance of the IMAGELISTDRAWPARAMS class, specifying the options.
 		
 	Returns:
 		BOOL success - true on success, false otherwise
@@ -197,14 +200,12 @@ class ImageList extends Unknown
 	Draw(params)
 	{
 		if (IsObject(params))
-			struct := params.ToStructPtr()
-		else
-			struct := params
+			params := params.ToStructPtr()
 
-		NumPut(2 * A_PtrSize + 15 * 4,	struct,	00, "UInt") ; overwrite cbSize & himl
-		NumPut(this.ptr,	struct,		04, "UPtr")
+		NumPut(2 * A_PtrSize + 15 * 4,	params,	00, "UInt") ; overwrite cbSize & himl
+		NumPut(this.ptr,	params,		04, "UPtr")
 
-		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", struct))
+		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", params))
 	}
 	
 	/*
@@ -235,6 +236,7 @@ class ImageList extends Unknown
 	*/
 	GetIcon(index, flags)
 	{
+		local hIcon
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "int", index, "uint", flags, "uint*", hIcon))
 		return hIcon
 	}
@@ -251,6 +253,7 @@ class ImageList extends Unknown
 	*/
 	GetImageInfo(index)
 	{
+		local info
 		VarSetCapacity(info, IMAGEINFO.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return IMAGEINFO.FromStructPtr(&info)
@@ -283,6 +286,7 @@ class ImageList extends Unknown
 	*/
 	Merge(index1, index2, xoffset, yoffset, punk2 = false)
 	{
+		local out
 		if (!punk2)
 			punk2 := this
 		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
@@ -302,7 +306,7 @@ class ImageList extends Unknown
 	*/
 	Clone()
 	{
-		local iid, mem
+		local iid, mem, out
 
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(ImageList.IID, &mem)
 		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", iid, "ptr*", out))
@@ -321,6 +325,7 @@ class ImageList extends Unknown
 	*/
 	GetImageRect(index)
 	{
+		local info
 		VarSetCapacity(info, RECT.GetRequiredSize(), 0)
 		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
 		return RECT.FromStructPtr(&info)
@@ -367,6 +372,7 @@ class ImageList extends Unknown
 	*/
 	GetImageCount()
 	{
+		local count
 		this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "int*", count))
 		return count
 	}
@@ -407,6 +413,7 @@ class ImageList extends Unknown
 	*/
 	SetBkColor(color)
 	{
+		local oldColor
 		this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "uint", color, "uint*", oldColor))
 		return oldColor
 	}
@@ -420,6 +427,7 @@ class ImageList extends Unknown
 	*/
 	GetBkColor()
 	{
+		local color
 		this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "uint*", color))
 		return color
 	}
@@ -438,7 +446,7 @@ class ImageList extends Unknown
 	*/
 	BeginDrag(index, xHotspot, yHotspot)
 	{
-		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", iTrack, "int", xHotspot, "int", yHotspot))
+		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", index, "int", xHotspot, "int", yHotspot))
 	}
 	
 	/*
@@ -553,11 +561,14 @@ class ImageList extends Unknown
 	*/
 	GetDragImage(byRef dragPos, byRef imagePos, byRef IL)
 	{
-		VarSetCapacity(POINT1, POINT.GetRequiredSize(), 0), VarSetCapacity(POINT2, POINT.GetRequiredSize(), 0)
-		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &POINT1, "ptr", &POINT2, "ptr", &IID, "ptr", out))
+		local mem, iid, pt1, pt2, out, bool
 
-		dragPos := POINT.FromStructPtr(&POINT1)
-		imagePos := POINT.FromStructPtr(&POINT2)
+		VarSetCapacity(pt1, POINT.GetRequiredSize(), 0), VarSetCapacity(pt2, POINT.GetRequiredSize(), 0)
+		, VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
+		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &pt1, "ptr", &pt2, "ptr", iid, "ptr", out))
+
+		dragPos := POINT.FromStructPtr(&pt1)
+		imagePos := POINT.FromStructPtr(&pt2)
 		IL := new ImageList(out)
 
 		return bool
@@ -580,6 +591,7 @@ class ImageList extends Unknown
 	*/
 	GetItemFlags(index)
 	{
+		local flags
 		this._Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
 		return flags
 	}
@@ -596,6 +608,7 @@ class ImageList extends Unknown
 	*/
 	GetOverlayImage(index)
 	{
+		local out
 		this._Error(DllCall(NumGet(this.vt+31*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
 		return out
 	}
@@ -658,6 +671,7 @@ class ImageList extends Unknown
 	*/
 	Unload()
 	{
+		local hM
 		hM := ImageList.hModule
 		ImageList.hModule := 0
 		return DllCall("FreeLibrary", "UPtr", hM)
