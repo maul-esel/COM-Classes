@@ -132,10 +132,16 @@ class CCFramework extends _CCF_Error_Handler_
 		array := ComObjArray(VT_VARIANT, 1)
 		array[0] := value
 
-		DllCall("oleaut32\SafeArrayAccessData", "UPtr", ComObjValue(array), "UPtr*", arr_data)
-		DllCall("oleaut32\SafeArrayUnaccessData", "UPtr", ComObjValue(array))
+		/* Work in progress:
+		 *	DllCall("oleaut32\SafeArrayAccessData", "UPtr", ComObjValue(array), "UPtr*", arr_data)
+		 *	DllCall("oleaut32\SafeArrayUnaccessData", "UPtr", ComObjValue(array))
+		 */
+		VarSetCapacity(arr_data, 16, 00), DllCall("oleaut32\SafeArrayGetElement", "Ptr", ComObjValue(array), "Int*", 0, "Ptr", arr_data)
 
-		return { "ref" : ComObjValue(ComObjParameter(VT_BYREF|VT_VARIANT, arr_data)), "array" : array }
+		/* Work in progress:
+		 *	return { "ref" : ComObjValue(ComObjParameter(VT_BYREF|VT_VARIANT, arr_data)), "array" : array }
+		 */
+		return { "ref" : arr_data }
 	}
 
 	/*
