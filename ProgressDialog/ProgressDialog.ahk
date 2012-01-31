@@ -133,6 +133,7 @@ class ProgressDialog extends Unknown
 	Parameters:
 		INT line - the line whose text should be set (1 - 3)
 		STR text - the text to set
+		[opt] BOOL compact - true to compact path strings if they are too large to fit on a line. The paths are compacted with "PathCompactPath".
 
 	Returns:
 		BOOL success - true on success, false otherwise
@@ -140,9 +141,9 @@ class ProgressDialog extends Unknown
 	Example:
 >	MyProgress.SetLine(1, "This is line 1")
 	*/
-	SetLine(line, text)
+	SetLine(line, text, compact := false)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", 0, "UInt", 0)) ; msdn: last param is reserved
+		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", compact, "UInt", 0)) ; msdn: last param is reserved
 	}
 
 	/*
