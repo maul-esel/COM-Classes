@@ -250,6 +250,6 @@ class TypeLib extends Unknown
 	ReleaseTLibAttr(attr)
 	{
 		this._Error(0)
-		DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+		DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 }

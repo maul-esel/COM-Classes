@@ -368,7 +368,7 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseTypeAttr(attr)
 	{
-		DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+		DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 
 	/*
@@ -380,7 +380,7 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseFuncDesc(attr)
 	{
-		DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+		DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 
 	/*
@@ -392,6 +392,6 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseVarDesc(attr)
 	{
-		DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(attr) ? attr.ToStructPtr() : attr)
+		DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 }
