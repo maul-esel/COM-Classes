@@ -279,26 +279,26 @@ But minor updates, additions and improvements, especially now in the beginnings,
 
 * AutoHotkey:
 
-    * AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm), with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
+    - AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm), with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
 
-    * DllCall type mapping: [...]()
+    - DllCall type mapping: [...]()
 
 * Object-oriented programming:
 
-    * [Wikipedia: OOP](http://en.wikipedia.org/wiki/Object-oriented_programming)
+    - [Wikipedia: OOP](http://en.wikipedia.org/wiki/Object-oriented_programming)
 
-    * [Wikipedia: Class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29)
+    - [Wikipedia: Class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29)
 
-    * [Wikipedia: Interface](http://en.wikipedia.org/wiki/Interface_%28computing%29#Software_interfaces_in_object_oriented_languages)
+    - [Wikipedia: Interface](http://en.wikipedia.org/wiki/Interface_%28computing%29#Software_interfaces_in_object_oriented_languages)
 
 * COM
 
-    * msdn: [Component Object Model]()
+    - msdn: [Component Object Model]()
 
-    * IUnknown: [...]()
+    - IUnknown: [...]()
 
-    * IDispatch: [...]()
+    - IDispatch: [...]()
 
-    * COM in memory: [...]()
+    - COM in memory: [...]()
 
-    * COM interfaces in AutoHotkey: [Tutorial]()
+    - COM interfaces in AutoHotkey: [Tutorial]()
