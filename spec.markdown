@@ -7,7 +7,7 @@ layout: spec_layout
 
 # CCF specification
 ## Introduction
-This is the official specification for the [**COM Classes Framework (CCF)**](https://github.com/maul-esel/COM-Classes "CCF github repo").
+This is the official specification for the [**COM Classes Framework (CCF)**](https://github.com/maul-esel/COM-Classes "CCF github repository").
 It defines explicit guidelines classes in the CCF must fulfill.
 
 The CCF is a collection of AutoHotkey classes that wrap COM interfaces in the standardized way described here.
@@ -19,10 +19,13 @@ If you're missing any of those, check out the links on the bottom of this page.
 
 ***
 
+## This document
+Within this document, all highlighted code is for AutoHotkey. Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a "variable".
+
 ## Definitions
 ### COM Classes Framework
 The *COM Classes Framework*, or *CCF*, describes a collection of AutoHotkey classes that provide comfortable access to COM non-dispatch interfaces from the AutoHotkey scripting language.
-These classes are written in AutoHotkey themselves. They must conform to the guidelines defined below and are stored in a github repository at https://github.com/maul-esel/COM-Classes.
+These classes are written in AutoHotkey themselves. They must conform to the guidelines defined below and are stored in a github repository at [https://github.com/maul-esel/COM-Classes](https://github.com/maul-esel/COM-Classes).
 
 ### AutoHotkey
 *AutoHotkey* is a scripting language originally developed by Chris Mallett.
@@ -54,7 +57,7 @@ All AutoHotkey\_L code must be placed in the [***AHK\_Lv1.1***](https://github.c
 AutoHotkey v2 (by Lexikos / Steve Gray, based on AutoHotkey\_L, currently alpha) should be **fully supported** as well.
 However, as it currently has a lot of breaking changes, ensuring compatibility with the latest version is very difficult and requires a lot of maintenance.
 
-Code for AutoHotkey v2 should be placed in the [***master***](https://github.com/maul-esel/COM-Classes/tree/master) branch of the main github repository.
+Code for AutoHotkey v2 should be placed in the [***master***](https://github.com/maul-esel/COM-Classes/tree/master) branch of the main git repository.
 
 #### AutoHotkey\_H ![](ok.png)
 AutoHotkey\_H version *1.x* (by HotKeyIt, based on AutoHotkey\_L) is compatible to AutoHotkey\_L, so it should obviously be **compatible** to the code in the ***AHK\_Lv1.1*** branch.
@@ -62,7 +65,7 @@ AutoHotkey\_H version *1.x* (by HotKeyIt, based on AutoHotkey\_L) is compatible 
 For the version *2.x* of AutoHotkey\_H, it should be compatible to the code in the ***master*** branch, too.
 
 #### IronAHK ![](bad.png)
-IronAHK (by polyethene, .NET version of AutoHotkey, currently alpha ~*0.7*) is **not supported** as well, for the same reason as AutoHotkey classic:
+IronAHK (by polyethene, .NET version of AutoHotkey, currently alpha ~*0.7*) is **not supported**, for the same reason as AutoHotkey classic:
 It currently does not support classes.
 
 If a possible future version of IronAHK supports class syntax, the CCF might contain classes compatible to IronAHK. However, the following facts must be considered:
@@ -70,9 +73,11 @@ If a possible future version of IronAHK supports class syntax, the CCF might con
 * COM is deeply integrated in the system, it is not guaranteed to work on non-Windows system.
 Especially how COM is laid out in memory and which interfaces are implemented by which classes might differ.
 
-* IronAHK is built on top of the .NET framework. It is questionable whether COM calls as they are realized right now (i.e. calls to functions in memory) would be allowed by the .NET framework.
+* IronAHK is built on top of the .NET framework. It is questionable whether COM calls as they are realized right now (i.e. calls to functions in memory) would be allowed by the .NET framework, as they call unmanaged code.
 
 * If the syntax or behaviour of IronAHK differs from other versions (i.e. AutoHotkey\_L or AutoHotkey v2), there must be a separate branch for it.
+
+* There might be some builtin feature which makes CCF unnecessary.
 
 #### Important differences to consider
 When transferring code from AutoHotkey\_L to AutoHotkey v2 or vice versa, important differences to consider include:
@@ -85,7 +90,7 @@ When transferring code from AutoHotkey\_L to AutoHotkey v2 or vice versa, import
 ### Unicode & ANSI
 For AutoHotkey\_L, it is important to ensure the **Unicode build** is supported as well as the **ANSI build**.
 This is important when doing calls to `StrGet()` and `StrPut()` (always specify the encoding, such as `"UTF-16"`),
-when handling the capacity of structs containing strings (not as pointers, but as character arrays; Unicode strings require twice the memory of ANSI strings),
+when handling the capacity of structures containing strings (not as pointers, but as character arrays; Unicode strings require twice the memory of ANSI strings),
 when calling any COM method or `DllCall()` function that receives or outputs strings (use the appropriate string type, `"wstr"` or `"astr"`).
 
 In AutoHotkey v2, special handling for Unicode strings **can and should be ommitted**, as AutoHotkey v2 is Unicode-only. However, ANSI strings must still be handled.
@@ -101,7 +106,7 @@ One should pay attention to the fact that a lot of types actually map to this ty
 
 ## Interfaces
 Basically, it is possible to wrap any interface. However, due to native COM support in all supported versions of AutoHotkey,
-it is useless to wrap a "dual" interface or a dispatch interface that inherits `IDispatch` and exposes all its methods and properties via `IDispatch`.
+it is useless to wrap a "dual" interface that exposes all its methods and properties via `IDispatch`.
 
 Besides that, there are currently no limitations of what interfaces can be added to CCF.
 
@@ -130,11 +135,11 @@ The ultimate base class for almost all classes in the CCF is `_CCF_Error_Handler
 This class only defines the meta-function `__call()` and throws an exception if an unknown method is called on any derived class or class instance.
 
 #### Unknown
-For all interface classes, the direct base class is `Unknown`. This class implements the methods of `IUnknown` which all COM interfaces inherit.
+For all interface classes, the base class is `Unknown` (which of course inherits `_CCF_Error_Handler_`). This class implements the methods of `IUnknown` which all COM interfaces inherit.
 Besides that, the `Unknown` class also has some methods that should make life easier for derived classes.
 
 #### StructBase
-So-called *"struct classes"* derive from `StructBase`. This class also has some methods to be used by derived classes.
+So-called *"structure classes"* derive from `StructBase`. This class also has some methods to be used by derived classes.
 
 ### The framework class
 The `CCFramework` class is a class that contains methods to be used by all other framework classes as well as end-users.
@@ -145,6 +150,8 @@ This is a static class (an exception is thrown when an instance is created).
 ## Methods
 ### Interface methods
 Interface classes must wrap all methods the wrapped interface has. They must be named the same way (and the capitalization should match, too).
+
+Read more on parameter and return value handling below.
 
 ### More methods
 Classes may also provide more methods that ease common tasks for the user. They can combine multiple method calls together, and possibly do calls to other DLL functions.
@@ -166,10 +173,27 @@ Such a method must obtain a COM interface pointer in a special way (might be a `
 ***
 
 ## Parameters & return values
-...
+A parameter's name may differ from the name it has in the "original" interface. It should be short and descriptive. The parameter order may as well differ from the interface, for example if default values can be supplied.
 
-### `out` and `byRef` parameters
-...
+Any parameter that is a GUID (or an IID or a CLSID) should accept a string representation, such as `{7C476BA2-02B1-48f4-8048-B24619DDC058}` as well as a raw memory pointer to a GUID structure. The class can differentiate between those using the `is` operator (or in AutoHotkey v2, `CCFramework.isInteger()`).
+
+Any other parameter that is a structure must accept both an instance of a helper class and a raw memory pointer. The distinction can be made in the same way.
+
+### Return values, `out` and `byRef` parameters
+Most methods return `HRESULT` values. You must pass those to the instance's `_Error()` method (defined in `Unknown`). This method updates the instance's `Error` object and returns a boolean (`true` means success, `false` failure). If none of the other guidelines in this section applies to a method, it must return that boolean.
+
+When a method has 1 `out` (or `retval`) parameter that receives a value during the call, it must return this value. However, `_Error()` must still be called with the `HRESULT`.
+
+If this parameter is a COM interface pointer or a pointer to a structure, wrap it in an instance of a helper or interface class. Do this conditionally to make it work without this class:
+
+{% highlight ahk %}return IsObject(OtherInterface) ? new OtherInterface(ptr) : ptr ; or:
+return IsObject(HelperClass) ? HelperClass.FromStructPtr(ptr) : ptr{% endhighlight %}
+
+Sometimes there are several `out` or `byRef` parameters in a method. In this case, the method must return the boolean as described above and handle the `out` parameters via AutoHotkey's `byRef`. The above guideline about wrapping pointers in instances applies here as well.
+
+In case a method does not return a `HRESULT` at all, it must clear the error object by calling {% highlight ahk %}this._Error(0){% endhighlight %}. Unless the method returns nothing at all (`void`), the method's return value must be returned to the user, and `out` parameters must always be handled `byRef`.
+
+In case a parameter is passed to the method, altered and its value is different on return, this parameter is handled `byRef`.
 
 ***
 
@@ -236,8 +260,29 @@ The second code would still be valid though.
 
 ***
 
-## Directory structure
+## Header files
 ...
+
+***
+
+## Repository structure
+Interface classes must be put in `%CLASSNAME%/%CLASSNAME%.ahk`, e.g. `ImageList/ImageList.ahk`. This directory must also hold a `README.md` in the following form:
+
+    ## %CLASSNAME% README:
+    This class implements the ***%INTERFACENAME%*** interface.
+
+    ## Links:
+    * [Author: %AUTHOR%](%WEBSITE%) ; or mail
+    * [Documentation](%LINK%) ; usually something like http://maul-esel.github.com/COM-Classes/%BRANCH%/%CLASSNAME%
+    * [msdn Documentation](%MSDN_LINK%) ; or other documentation source
+    * [License: %LICENSE%](%LICENSE_LINK%)
+
+    ## Description ; this is optional
+    ...
+
+Helper classes are put in `Helper Classes/%CLASSNAME%.ahk`, header files go in `%SUBJECT% header.ahk` (in the root folder of the repository). `SUBJECT` is the "subject" the included classes are about or what they have in common. Examples would be `UIAutomation header.ahk` or `Type Information header.ahk`.
+
+Examples go in `%CLASSNAME%/examples/example%N%.ahk`, where `N` is a increasing number, starting from 1.
 
 ***
 
