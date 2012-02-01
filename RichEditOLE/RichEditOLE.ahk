@@ -21,6 +21,9 @@ Requirements:
 
 Remarks:
 	- To create an instance of this class, call the (static) FromHWND() method.
+	- The standard implementation returned by FromHWND() also implements ITextDocument. You can call QueryInterface() on the return value and supply its IID ("{8CC497C0-A1DF-11ce-8098-00AA0047BE5D}").
+		Use ComObjEnwrap() to retrieve a dispatch object which can be used from your script.
+		Also note there's an undocumented ITextDocument2 interface ("{01c25500-4268-11d1-883a-3c8b00c10000}"). Search "TOM.h" on google to get the header with its definition.
 */
 class RichEditOLE extends Unknown
 {
