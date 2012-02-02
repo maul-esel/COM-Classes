@@ -13,19 +13,23 @@ It defines explicit guidelines classes in the CCF must fulfill.
 The CCF is a collection of AutoHotkey classes that wrap COM interfaces in the standardized way described here.
 It is intended to help AutoHotkey scripters & programmers and ease the access to those interfaces.
 
-This specification assumes you have at least a (very) basic understanding of *interfaces* and *classes*.
+This specification assumes the reader has at least a (very) basic understanding of *interfaces* and *classes*.
 Experiences with AutoHotkey and its advanced features, namely `DllCall()` and memory handling, as well as a basic understanding of COM are required, too.
-If you're missing any of those, check out the links on the bottom of this page.
+If you're missing any of those, check out [the links](#links) on the bottom of this page.
 
 ***
 
 ## This document
-Within this document, all highlighted code is for AutoHotkey. Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a "variable".
+Within this document, all highlighted code is for AutoHotkey.
+Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a variable.
+
+***
 
 ## Definitions
 ### COM Classes Framework
 The *COM Classes Framework*, or *CCF*, describes a collection of AutoHotkey classes that provide comfortable access to COM non-dispatch interfaces from the AutoHotkey scripting language.
-These classes are written in AutoHotkey themselves. They must conform to the guidelines defined below and are stored in a github repository at [https://github.com/maul-esel/COM-Classes](https://github.com/maul-esel/COM-Classes).
+These classes are written in AutoHotkey themselves. They must conform to the guidelines defined below
+and are stored in a github repository at [https://github.com/maul-esel/COM-Classes](https://github.com/maul-esel/COM-Classes).
 
 ### AutoHotkey
 *AutoHotkey* is a scripting language originally developed by Chris Mallett.
@@ -73,7 +77,8 @@ If a possible future version of IronAHK supports class syntax, the CCF might con
 * COM is deeply integrated in the system, it is not guaranteed to work on non-Windows system.
 Especially how COM is laid out in memory and which interfaces are implemented by which classes might differ.
 
-* IronAHK is built on top of the .NET framework. It is questionable whether COM calls as they are realized right now (i.e. calls to functions in memory) would be allowed by the .NET framework, as they call unmanaged code.
+* IronAHK is built on top of the .NET framework. It is questionable whether COM calls as they are realized right now (i.e. calls to functions in memory)
+	would be allowed by the .NET framework, as they call unmanaged code.
 
 * If the syntax or behaviour of IronAHK differs from other versions (i.e. AutoHotkey\_L or AutoHotkey v2), there must be a separate branch for it.
 
@@ -82,7 +87,7 @@ Especially how COM is laid out in memory and which interfaces are implemented by
 #### Important differences to consider
 When transferring code from AutoHotkey\_L to AutoHotkey v2 or vice versa, important differences to consider include:
 
-* string handling (see *"Unicode & ANSI"* below)
+* string handling (see [*"Unicode & ANSI"*](#unicode__ansi) below)
 * `Loop` syntax: in AutoHotkey v2, the `count` parameter is always an expression
 * version comments
 * the `is` operator (as of 27. 01. 2012, AutoHotkey v2 does not include such; it must be replaced by calls to `CCFramework.isInteger()`)
@@ -135,19 +140,34 @@ The ultimate base class for almost all classes in the CCF is `_CCF_Error_Handler
 This class only defines the meta-function `__call()` and throws an exception if an unknown method is called on any derived class or class instance.
 
 #### Unknown
-For all interface classes, the base class is `Unknown` (which of course inherits `_CCF_Error_Handler_`). This class implements the methods of `IUnknown` which all COM interfaces inherit.
+For all interface classes, the base class is `Unknown` (which of course inherits `_CCF_Error_Handler_`).
+This class implements the methods of `IUnknown` which all COM interfaces inherit.
 Besides that, the `Unknown` class also has some methods that should make life easier for derived classes.
 
 #### StructBase
 So-called *"structure classes"* derive from `StructBase`. This class also has some methods to be used by derived classes.
 
+### Inheritance
+In COM, interfaces can inherit from another interface. They inherit all methods and properties. All COM interfaces inherit `IUnknown`.
+
+This rule must be obeyed by CCF classes, too. Do not include base interfaces' methods into a class. Instead, wrap it into a separate class and extend this class.
+Also note that this applies to [the repository structure](#repository_structure) as well - only one interface class per folder.
+
 ### The framework class
 The `CCFramework` class is a class that contains methods to be used by all other framework classes as well as end-users.
-This is a static class (an exception is thrown when an instance is created).
+This is a static class (an exception is thrown when an attempt is made to create an instance).
 
 ***
 
 ## Methods
+### The constructor
+The constructor for all interface classes is defined in `Unknown`.
+It accepts one optional parameter, `ptr`, which can be used to supply a valid interface pointer to create an instance for instead of creating a COM instance from scratch.
+It makes use of some [static class fields](#static_fields) and sets some [instance fields](#instance_fields).
+
+The constructor uses `ComObjCreate()` to create an instance. In cases where this does not work or there's a better way, **do not override the constructor!**
+Instead add one or several [constructor methods](#constructor_methods).
+
 ### Interface methods
 Interface classes must wrap all methods the wrapped interface has. They must be named the same way (and the capitalization should match, too).
 
@@ -160,10 +180,12 @@ As an example, the `ImageList` class can define a method called `AddFile(path)` 
 #### constructor methods
 A special case are so-called *"constructor methods"*. Those are methods that can be called as if they were static (i.e. that do not rely on instance information)
 and that create a new instance of the class from some given information.
-These methods can especially be useful if just creating an instance with `ComObjCreate()` (which is used by the constructor `Unknown.__New()`) doesn't make sense or is impossible (see *"ThrowOnCreation"* below).
 
-These methods should be named *"From[INFO]"* where *[INFO]* is the type of the given information. For example, constructor methods could be named `FromFile()` (or `FromPath()`),
-`FromHBITMAP()`, `FromRECT()` (which would accept a structure), ...
+These methods can especially be useful if just creating an instance with `ComObjCreate()` (which is used by the constructor) doesn't make sense or is impossible.
+In such a case, do not override the constructor, instead set the [static field](#static_fields) `ThrowOnCreation` to `true` and provide a constructor method.
+
+These methods should be named `From%INFO%` where *%INFO%* is the type of the given information. For example, constructor methods could be named `FromFile()` (or `FromPath()`),
+`FromHBITMAP()`, `FromRECT()`, ...
 
 Such a method must obtain a COM interface pointer in a special way (might be a `DllCall()`) and then create a new instance, supplying that pointer.
 
@@ -173,27 +195,40 @@ Such a method must obtain a COM interface pointer in a special way (might be a `
 ***
 
 ## Parameters & return values
-A parameter's name may differ from the name it has in the "original" interface. It should be short and descriptive. The parameter order may as well differ from the interface, for example if default values can be supplied.
+A parameter's name may differ from the name it has in the "original" interface. It should be short and descriptive.
+The parameter order may as well differ from the interface, for example if default values can be supplied.
 
-Any parameter that is a GUID (or an IID or a CLSID) should accept a string representation, such as `{7C476BA2-02B1-48f4-8048-B24619DDC058}` as well as a raw memory pointer to a GUID structure. The class can differentiate between those using the `is` operator (or in AutoHotkey v2, `CCFramework.isInteger()`).
+Any parameter that is a GUID (or an IID or a CLSID) should accept a string representation,
+such as `{7C476BA2-02B1-48f4-8048-B24619DDC058}` as well as a raw memory pointer to a GUID structure.
+The class can differentiate between those using the `is` operator (or in AutoHotkey v2, `CCFramework.isInteger()`).
 
-Any other parameter that is a structure must accept both an instance of a helper class and a raw memory pointer. The distinction can be made in the same way.
+Any other parameter that is a structure must accept both an instance of a helper class and a raw memory pointer. The distinction can be made using `IsObject()`.
+In case it's a class instance, `instance.ToStructPtr()` is passed to the COM method. If the method releases a structure's memory which had previously been allocated by the same instance,
+`instance.GetOriginalPointer()` is passed instead.
+
+If a parameter is another COM interface, a method also needs to support both a raw interface pointer or an instance of another interface class. `IsObject()` may be used here as well.
+If it's an object, the COM method receives `instance.ptr`.
 
 ### Return values, `out` and `byRef` parameters
-Most methods return `HRESULT` values. You must pass those to the instance's `_Error()` method (defined in `Unknown`). This method updates the instance's `Error` object and returns a boolean (`true` means success, `false` failure). If none of the other guidelines in this section applies to a method, it must return that boolean.
+Most methods return `HRESULT` values. Those must be passed to the instance's `_Error()` method (defined in `Unknown`).
+This method updates the instance's `Error` object and returns a boolean (`true` means success, `false` failure).
+If none of the other guidelines in this section applies to a method, the method must return that boolean.
 
 When a method has 1 `out` parameter that receives a value during the call, it must return this value. However, `_Error()` must still be called with the `HRESULT`.
 
-If this parameter is a COM interface pointer or a pointer to a structure, wrap it in an instance of a helper or interface class. Do this conditionally to make it work without this class:
+If this parameter is a COM interface pointer or a pointer to a structure, wrap it in an instance of a helper or interface class.
+Do this conditionally to make it work without this class:
 
 {% highlight ahk %}return IsObject(OtherInterface) ? new OtherInterface(ptr) : ptr ; or:
 return IsObject(HelperClass) ? HelperClass.FromStructPtr(ptr) : ptr{% endhighlight %}
 
-Sometimes there are several `out` parameters in a method. In this case, the method must return the boolean as described above and handle the `out` parameters via AutoHotkey's `byRef`. The above guideline about wrapping pointers in instances applies here as well.
+Sometimes there are several `out` parameters in a method. In this case, the method must return the boolean as described above and handle the `out` parameters via AutoHotkey's `byRef`.
+The above guideline about wrapping pointers in instances applies here as well.
 
-In case a method does not return a `HRESULT` at all, it must clear the error object by calling {% highlight ahk %}this._Error(0){% endhighlight %}. Unless the method returns nothing at all (`void`), the method's return value must be returned to the user, and `out` parameters must always be handled `byRef`.
+In case a method does not return a `HRESULT` at all, it must clear the error object by calling `this._Error(0)`.
+Unless the method returns nothing at all (`void`), the method's return value must be returned to the user, and `out` parameters must always be handled `byRef`.
 
-In case a parameter is passed to the method, altered and its value is different on return, this parameter is handled `byRef`.
+In case a parameter is passed to the method, altered and its value is different on return, this parameter is always handled `byRef`.
 
 ***
 
@@ -214,34 +249,45 @@ In case a parameter is passed to the method, altered and its value is different 
 ***
 
 ## class fields
-...
 
-### static
-All interface classes must supply a static `IID` field which holds the string representation of the interface identifier.
+### static fields
+All interface classes must always supply a static `IID` field which holds the string representation of the interface identifier.
+
 If there is a default (system) implementation for an interface available, a static `CLSID` field for the string representation of the class identifier must be set.
-The constructor (`Unknown.__New()`) makes use of those two variables.
+The constructor makes use of those two variables.
 
 However, if a CLSID can't be supplied or it doesn't make sense to create an instance with `IID` and `CLSID` out of context or without special handling,
-the static field `ThrowOnCreation` can be set to `true` to prevent a user from doing so.
-This must be properly documented.
+the static field `ThrowOnCreation` can be set to `true` to prevent a user from doing so. If an attempt is made to create an instance of such a class
+without supplying a valid interface pointer, `Unknown` throws an exception. This must be properly documented for each class.
+If this field is ommitted, it is assumed to be `false`.
 
 Other static fields may include module handles for frequently used DLL, such as
 
 {% highlight ahk %}
-static hModule := DllCall("LoadLibrary", "str", "CommCtrl")
+static hModule := DllCall("LoadLibrary", "str", "CommCtrl") ; if the interface is in this DLL, this call increases performance
 {% endhighlight %}
 
 or other relevant information.
 
-### instance
-All interface classes inherit the instance fields `ptr`, which holds the COM interface pointer,
-`vt`, which holds the pointer to the COM instance's vTable and `Error` which contains error information for the user.
+### instance fields
+The class constructor makes 2 instance fields available: `ptr` and `vt`, which hold pointers to the interface and its vTable.
+They are mainly intended for internal use.
+
+Whenever a method calls `_Error()`, the instance field `Error` is updated. This is an object with 3 fields:
+
+field			| description
+----------------|-------------------------------------------------------------------------------------------------------------
+`code`			| receives the original `HRESULT` error code
+`description`	| receives a description string for the error code in the native system language
+`isError`		| a boolean which contains `true` if the `HRESULT` is an error and `false` if the `HRESULT` indicates success
+
+These are thought for the user, not for internal use.
 
 #### dynamic properties
 In some cases, interfaces have properties. These are typically represented by get- and set methods.
 For example, a property named `prop` would usually be represented by `get_prop()` and `set_prop(value)` (or `put_prop(value)`) methods.
 
-Dynamic properties should be defined for those. That means a class can implement the `__get()` and `__set()` meta-functions and dynamically call the get-/ set- method for a property.
+Dynamic properties should be defined for those. That means a class can implement the `__Get()` and `__Set()` meta-functions and dynamically call the get-/ set- method for a property.
 This enables the user to do
 
 {% highlight ahk %}
@@ -260,8 +306,33 @@ The second code would still be valid though.
 
 ***
 
-## Header files
-...
+## "Header" files
+In the context of CC, *"header files"* are files that `#include` other classes and provide some more advantages.
+For example, a "header" file might also contain a "type definition" like
+
+{% highlight ahk %}global ShellLink := A_IsUnicode ? ShellLinkW : ShellLinkA ; super-global is required here{% endhighlight %}
+
+This would make `ShellLink` an alias for another class.
+
+Relative paths must be used for including. The "header" file assumes the "default including directory" is its own (the CCF) directory. It may change this value.
+So a typical usage of a "header" file might be:
+
+{% highlight ahk %}
+#include %A_ScriptDir%\CCF ; change default include directory
+#include CCF.ahk ; see below
+
+#include %A_ScriptDir% ; reset include directory
+#include OtherFile.ahk ; not part of the CCF
+{% endhighlight %}
+
+### CCF.ahk
+The main "header" file for CCF is `CCF.ahk`. Add `#include` directives for every new class here, with a short comment.
+
+### partial headers
+If several interface and helper classes are related to a specific "topic", a "partial header" file might be created:
+a "header" that only includes classes related to that topic (and the base classes, of course).
+
+A user should be able to use everything related to that topic by just including this single "header" file, all dependencies must be included.
 
 ***
 
@@ -280,7 +351,8 @@ Interface classes must be put in `%CLASSNAME%/%CLASSNAME%.ahk`, e.g. `ImageList/
     ## Description ; this is optional
     ...
 
-Helper classes are put in `Helper Classes/%CLASSNAME%.ahk`, header files go in `%SUBJECT% header.ahk` (in the root folder of the repository). `SUBJECT` is the "subject" the included classes are about or what they have in common. Examples would be `UIAutomation header.ahk` or `Type Information header.ahk`.
+Helper classes are put in `Helper Classes/%CLASSNAME%.ahk`, header files go in `%SUBJECT% header.ahk` (in the root folder of the repository).
+`SUBJECT` is the "subject" the included classes are about or what they have in common. Examples would be `UIAutomation header.ahk` or `Type Information header.ahk`.
 
 Examples go in `%CLASSNAME%/examples/example%N%.ahk`, where `N` is a increasing number, starting from 1.
 
@@ -310,7 +382,7 @@ Examples go in `%CLASSNAME%/examples/example%N%.ahk`, where `N` is a increasing 
 ***
 
 ## Summary
-These guidelines are obligatory for classes to be added to the CCF. Major violations of those can prevent your code from being added to the CCF.
+These guidelines are obligatory for classes to be added to the CCF. Major violations of those can prevent code from being added to the CCF.
 
 However, they're not set in stone. This doesn't mean they'll change every week, making any code "invalid".
 But minor updates, additions and improvements, especially now in the beginnings, are likely to happen.
@@ -318,32 +390,24 @@ But minor updates, additions and improvements, especially now in the beginnings,
 ***
 
 ## Links
-* Unicode vs. ANSI: [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/printerFriendly/articles/Unicode.html)
+* Unicode vs. ANSI: [The Absolute Minimum Every Software Developer Absolutely,
+	Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/printerFriendly/articles/Unicode.html)
 
 * 64bit vs. 32bit: [...]()
 
 * AutoHotkey:
-
-    - AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm), with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
-
+    - AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm),
+		with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
     - DllCall type mapping: [...]()
 
 * Object-oriented programming:
-
     - [Wikipedia: OOP](http://en.wikipedia.org/wiki/Object-oriented_programming)
-
     - [Wikipedia: Class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29)
-
     - [Wikipedia: Interface](http://en.wikipedia.org/wiki/Interface_%28computing%29#Software_interfaces_in_object_oriented_languages)
 
 * COM
-
     - msdn: [Component Object Model]()
-
     - IUnknown: [...]()
-
     - IDispatch: [...]()
-
     - COM in memory: [...]()
-
     - COM interfaces in AutoHotkey: [Tutorial]()
