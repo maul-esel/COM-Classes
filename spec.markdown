@@ -158,7 +158,7 @@ Classes may also provide more methods that ease common tasks for the user. They 
 As an example, the `ImageList` class can define a method called `AddFile(path)` which loads an image from a file and adds it to the image list.
 
 #### constructor methods
-A special case are so-called *"constructor method"*. Those are methods that can be called as if they were static (i.e. that do not rely on instance information)
+A special case are so-called *"constructor methods"*. Those are methods that can be called as if they were static (i.e. that do not rely on instance information)
 and that create a new instance of the class from some given information.
 These methods can especially be useful if just creating an instance with `ComObjCreate()` (which is used by the constructor `Unknown.__New()`) doesn't make sense or is impossible (see *"ThrowOnCreation"* below).
 
@@ -182,14 +182,14 @@ Any other parameter that is a structure must accept both an instance of a helper
 ### Return values, `out` and `byRef` parameters
 Most methods return `HRESULT` values. You must pass those to the instance's `_Error()` method (defined in `Unknown`). This method updates the instance's `Error` object and returns a boolean (`true` means success, `false` failure). If none of the other guidelines in this section applies to a method, it must return that boolean.
 
-When a method has 1 `out` (or `retval`) parameter that receives a value during the call, it must return this value. However, `_Error()` must still be called with the `HRESULT`.
+When a method has 1 `out` parameter that receives a value during the call, it must return this value. However, `_Error()` must still be called with the `HRESULT`.
 
 If this parameter is a COM interface pointer or a pointer to a structure, wrap it in an instance of a helper or interface class. Do this conditionally to make it work without this class:
 
 {% highlight ahk %}return IsObject(OtherInterface) ? new OtherInterface(ptr) : ptr ; or:
 return IsObject(HelperClass) ? HelperClass.FromStructPtr(ptr) : ptr{% endhighlight %}
 
-Sometimes there are several `out` or `byRef` parameters in a method. In this case, the method must return the boolean as described above and handle the `out` parameters via AutoHotkey's `byRef`. The above guideline about wrapping pointers in instances applies here as well.
+Sometimes there are several `out` parameters in a method. In this case, the method must return the boolean as described above and handle the `out` parameters via AutoHotkey's `byRef`. The above guideline about wrapping pointers in instances applies here as well.
 
 In case a method does not return a `HRESULT` at all, it must clear the error object by calling {% highlight ahk %}this._Error(0){% endhighlight %}. Unless the method returns nothing at all (`void`), the method's return value must be returned to the user, and `out` parameters must always be handled `byRef`.
 
@@ -223,7 +223,7 @@ The constructor (`Unknown.__New()`) makes use of those two variables.
 
 However, if a CLSID can't be supplied or it doesn't make sense to create an instance with `IID` and `CLSID` out of context or without special handling,
 the static field `ThrowOnCreation` can be set to `true` to prevent a user from doing so.
-This must be properly documented, and at least one *"constructor method"* (see above) must be supplied.
+This must be properly documented.
 
 Other static fields may include module handles for frequently used DLL, such as
 
