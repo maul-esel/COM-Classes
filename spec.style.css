@@ -1,5 +1,6 @@
-body { counter-reset: level_1 level_2 level_3; }
+body { counter-reset: counter_h2 counter_h3 counter_h4; } /* init counters */
 
+/* main content styling */
 div#content
 {
 	width: 70%;
@@ -10,13 +11,22 @@ div#content
 	border: solid lightgray 1px
 }
 
-a:link { text-decoration: none; color: navy; font-weight: bold; }
-a:hover { text-decoration: underline; }
+/* indentation */
+div#content > * { margin-left: 5%; margin-right: 5% } /* default indentation */
+div#content > h1, #content > h2 { margin: auto } /* do not indent h1 (title) and h2 (top sections) */
+div#content > h3 { margin-left: 2.5%;  margin-right: 2.5% } /* gradually indent h3 and h4 */
+div#content > h4 { margin-left: 3.5%;  margin-right: 3.5% }
 
-p, ol, ul, *:not(pre) > code, div { padding-left: 5%; padding-right: 5% }
+/* Link styles */
+a:link { text-decoration: none; color: navy; font-weight: bold; } /* default style (not visited) */
+a:hover { text-decoration: underline; } /* underline hovered link */
+a[href=""] { color: darkred } /* color invalid links */
 
+/* code styles
+ * - syntax highlighting is in code.style.css
+ */
 pre, code { font-family: "Courier New", "Lucida Console", monospace; }
-*:not(pre) > code, pre
+*:not(pre) > code, pre /* do not apply to <code> already in <pre> (double border & small font) */
 {
 	font-size: 80%;
 	background-color: #EEEEEE;
@@ -24,12 +34,23 @@ pre, code { font-family: "Courier New", "Lucida Console", monospace; }
 	border: solid #AEAEAE 0.5px;
 }
 
-h1 { text-align: center; }
+h1 { text-align: center; } /* center title */
 
-h2 { counter-reset: level_2; }
-h2:before { content: counter(level_1) ". "; counter-increment: level_1; }
+/* section numbering */
+h2:before, h3:before, h4:before { color: rgb(50, 50, 50) } /* number color */
 
-h3 { counter-reset: level_3; }
-h3:before { content: counter(level_1) "." counter(level_2) " "; counter-increment: level_2; }
+h2 { counter-reset: counter_h3; }
+h2:before { content: counter(counter_h2) ". "; counter-increment: counter_h2 }
 
-h4:before { content: counter(level_1) "." counter(level_2) "." counter(level_3) " "; counter-increment: level_3; }
+h3 { counter-reset: counter_h4; }
+h3:before { content: counter(counter_h2) "." counter(counter_h3) " "; counter-increment: counter_h3 }
+
+h4:before { content: counter(counter_h2) "." counter(counter_h3) "." counter(counter_h4) " "; counter-increment: counter_h4 }
+
+/* table styles */
+td, th {
+	border: solid #AAA 1px;
+	padding: 3px
+}
+tr:first-child td { border-top: solid black 3px } /* bold line on top of table body */
+tbody tr:nth-child(odd) { background-color: lightgray } /* use different colors for odd and even rows */
