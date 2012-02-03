@@ -307,7 +307,7 @@ The second code would still be valid though.
 ***
 
 ## "Header" files
-In the context of CC, *"header files"* are files that `#include` other classes and provide some more advantages.
+In the context of CCF, *"header files"* are files that `#include` other classes and provide some more advantages.
 For example, a "header" file might also contain a "type definition" like
 
 {% highlight ahk %}global ShellLink := A_IsUnicode ? ShellLinkW : ShellLinkA ; super-global is required here{% endhighlight %}
@@ -390,24 +390,21 @@ But minor updates, additions and improvements, especially now in the beginnings,
 ***
 
 ## Links
-* Unicode vs. ANSI: [The Absolute Minimum Every Software Developer Absolutely,
+1. Unicode vs. ANSI: [The Absolute Minimum Every Software Developer Absolutely,
 	Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/printerFriendly/articles/Unicode.html)
+2. 64bit vs. 32bit: [...]()
+3. AutoHotkey:
+	- AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm),	with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
+	- DllCall type mapping: [...]()
 
-* 64bit vs. 32bit: [...]()
+4. Object-oriented programming:
+	- [Wikipedia: OOP](http://en.wikipedia.org/wiki/Object-oriented_programming)
+	- [Wikipedia: Class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29)
+	- [Wikipedia: Interface](http://en.wikipedia.org/wiki/Interface_%28computing%29#Software_interfaces_in_object_oriented_languages)
 
-* AutoHotkey:
-    - AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm),
-		with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
-    - DllCall type mapping: [...]()
-
-* Object-oriented programming:
-    - [Wikipedia: OOP](http://en.wikipedia.org/wiki/Object-oriented_programming)
-    - [Wikipedia: Class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29)
-    - [Wikipedia: Interface](http://en.wikipedia.org/wiki/Interface_%28computing%29#Software_interfaces_in_object_oriented_languages)
-
-* COM
-    - msdn: [Component Object Model]()
-    - IUnknown: [...]()
-    - IDispatch: [...]()
-    - COM in memory: [...]()
-    - COM interfaces in AutoHotkey: [Tutorial]()
+5. COM
+	- msdn: [Component Object Model]()
+	- IUnknown: [...]()
+	- IDispatch: [...]()
+	- COM in memory: [...]()
+	- COM interfaces in AutoHotkey: [Tutorial]()
