@@ -170,6 +170,12 @@ manages shell links (*.lnk files) (Unicode version)
 #include ShellLinkW\ShellLinkW.ahk
 
 /*
+class: ShellLinkA
+manages shell links (*.lnk files) (ANSI version)
+*/
+#include ShellLinkA\ShellLinkA.ahk
+
+/*
 typedef: ShellLink
 defines "ShellLink" as the encoding-specific version
 
