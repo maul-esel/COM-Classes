@@ -26,12 +26,6 @@ class ObjectCollection extends ObjectArray
 	static IID := "{5632b1a4-e38a-400a-928a-d4cd632302959}"
 
 	/*
-	Field: ThrowOnCreation
-	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
-	*/
-	static ThrowOnCreation := true
-
-	/*
 	Method: AddObject
 	Adds a single object to the collection.
 
