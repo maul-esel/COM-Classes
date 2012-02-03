@@ -1,6 +1,6 @@
 /*
-class: ShellLinkW
-wraps the *IShellLinkW* interface and exposes methods that create, modify, and resolve Shell links.
+class: ShellLinkA
+wraps the *IShellLinkA* interface and exposes methods that create, modify, and resolve Shell links.
 
 Authors:
 	- maul.esel (https://github.com/maul-esel)
@@ -9,7 +9,7 @@ License:
 	- *LGPL* (http://www.gnu.org/licenses/lgpl-2.1.txt)
 
 Documentation:
-	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ShellLinkW)
+	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/ShellLinkA)
 	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb774950)
 
 Requirements:
@@ -18,7 +18,7 @@ Requirements:
 	Base classes - _CCF_Error_Handler_, Unknown
 	Helper classes - SLGP, SLR, SW, WIN32_FIND_DATA
 */
-class ShellLinkW extends Unknown
+class ShellLinkA extends Unknown
 {
 	/*
 	Field: CLSID
@@ -49,8 +49,9 @@ class ShellLinkW extends Unknown
 		local struct, bool
 		static MAX_PATH := 260
 
-		VarSetCapacity(struct, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * 2, 0)
-		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "wstr", path, "int", MAX_PATH, "ptr", &struct, "uint", flags))
+		VarSetCapacity(struct, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * A_IsUnicode ? 2 : 1, 0)
+
+		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", &struct, "uint", flags))
 
 		data := WIN32_FIND_DATA.FromStructPtr(&struct)
 		return bool
@@ -91,8 +92,8 @@ class ShellLinkW extends Unknown
 	GetDescription(maxChars = 300)
 	{
 		local descr
-		VarSetCapacity(descr, maxChars * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "wstr", descr, "int", maxChars))
+		VarSetCapacity(descr, maxChars * A_IsUnicode ? 2 : 1, 0)
+		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "str", descr, "int", maxChars))
 		return descr
 	}
 
@@ -108,7 +109,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetDescription(description)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "wstr", description))
+		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "str", description))
 	}
 
 	/*
@@ -123,8 +124,8 @@ class ShellLinkW extends Unknown
 		local dir
 		static MAX_PATH := 260
 
-		VarSetCapacity(dir, MAX_PATH * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "wstr", dir, "Int", MAX_PATH))
+		VarSetCapacity(dir, MAX_PATH * A_IsUnicode ? 2 : 1, 0)
+		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "str", dir, "Int", MAX_PATH))
 
 		return dir
 	}
@@ -141,7 +142,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetWorkingDirectory(dir)
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "wstr", dir))
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "str", dir))
 	}
 
 	/*
@@ -157,8 +158,8 @@ class ShellLinkW extends Unknown
 	GetArguments(maxChars = 300)
 	{
 		local args
-		VarSetCapacity(args, maxChars * 2, 0)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "wstr", args, "Int", maxChars))
+		VarSetCapacity(args, maxChars * A_IsUnicode ? 2 : 1, 0)
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "str", args, "Int", maxChars))
 		return args
 	}
 
@@ -174,7 +175,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetArguments(args)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "wstr", args))
+		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", args))
 	}
 
 	/*
@@ -247,8 +248,8 @@ class ShellLinkW extends Unknown
 	GetIconLocation(ByRef path, ByRef index)
 	{
 		static MAX_PATH := 260
-		VarSetCapacity(path, MAX_PATH * 2, 0)
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "wstr", path, "int", MAX_PATH, "int*", index))
+		VarSetCapacity(path, MAX_PATH * A_IsUnicode ? 2 : 1, 0)
+		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "str", path, "int", MAX_PATH, "int*", index))
 	}
 
 	/*
@@ -264,7 +265,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetIconLocation(path, index)
 	{
-		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "wstr", path, "int", index))
+		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "str", path, "int", index))
 	}
 
 	/*
@@ -279,7 +280,7 @@ class ShellLinkW extends Unknown
 	*/
 	SetRelativePath(path)
 	{
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "wstr", path, "uint", 0)) ; msdn: param 2 is reserved
+		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "str", path, "uint", 0)) ; msdn: param 2 is reserved
 	}
 
 	/*
@@ -310,6 +311,6 @@ class ShellLinkW extends Unknown
 	*/
 	SetPath(path)
 	{
-		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "wstr", path))
+		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "str", path))
 	}
 }

@@ -27,10 +27,10 @@ class ObjectArray extends Unknown
 	static IID := "{92CA9DCD-5622-4bba-A805-5E9F541BD8C9}"
 
 	/*
-	Field: ThrowOnCreation
-	indicates that attempting to create an instance of this class without supplying a valid pointer should throw an exception.
+	Field: CLSID
+	This is CLSID_EnumerableObjectCollection. It is required to create an instance.
 	*/
-	static ThrowOnCreation := true
+	static CLSID := "{2d3468c1-36a7-43b6-ac24-d3f02fd9607a}"
 
 	/*
 	Method: GetCount

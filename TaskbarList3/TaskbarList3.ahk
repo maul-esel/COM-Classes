@@ -346,7 +346,7 @@ class TaskbarList3 extends TaskbarList2
 		}
 
 		return ptr
-}
+	}
 
 	/*
 	group: More about thumbbar buttons

@@ -220,6 +220,6 @@ class ImageList2 extends ImageList
 	*/
 	ReplaceFromImageList(index, src, srcIndex, punk = 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+43*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", IsObject(src) ? src.ptr : src, "Int", srcIndex, "ptr", punk, "uint", 0))
+		return this._Error(DllCall(NumGet(this.vt+43*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", IsObject(src) ? src.ptr : src, "Int", srcIndex, "ptr", punk, "uint", 0)) ; msdn: last param is not used
 	}
 }
