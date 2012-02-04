@@ -110,7 +110,7 @@ class CCFramework extends _CCF_Error_Handler_
 
 	/*
 	Method: CreateVARIANT
-	creates a VARIANT structure from a given value
+	creates a VARIANT wrapper object from a given value
 
 	Parameters:
 		VAR value - the value to store in the VARIANT structure
@@ -147,6 +147,30 @@ class CCFramework extends _CCF_Error_Handler_
 	CreateVARIANTARG(value)
 	{
 		return CCFramework.CreateVARIANT(value)
+	}
+
+	/*
+	Method: BuildVARIANT
+	builds a VARIANT wrapper object from a given pointer
+
+	Parameters:
+		PTR ptr - the pointer to the VARIANT structure in memory
+
+	Returns:
+		OBJ variant - see <CreateVARIANT>
+	*/
+	BuildVARIANT(ptr)
+	{
+		return CCFramework.CreateVARIANT(ComObjParameter(NumGet(1*ptr, 00, "UShort"), NumGet(1*ptr, 08, "Int64")))
+	}
+
+	/*
+	Method: BuildVARIANTARG
+	an alias for <BuildVARIANT>.
+	*/
+	BuildVARIANTARG(ptr)
+	{
+		return CCFramework.BuildVARIANT(ptr)
 	}
 
 	/*
