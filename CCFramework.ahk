@@ -130,6 +130,9 @@ class CCFramework extends _CCF_Error_Handler_
 		static VT_VARIANT := 0xC, VT_BYREF := 0x4000, VT_UNKNOWN := 0xD
 		local array, arr_data, variant
 
+		if (IsObject(value) && value.HasKey("ref") && value.HasKey("vt") && value.HasKey("value"))
+			return value
+
 		array := ComObjArray(VT_VARIANT, 1)
 		array[0] := value
 
