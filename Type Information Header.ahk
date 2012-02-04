@@ -29,15 +29,15 @@ includes all classes related to the type information system
 
 #include IDLDESC.ahk
 ;#include VARDESC.ahk
-;#include PARAMDESCEX.ahk
-;#include PARAMDESC.ahk
+#include PARAMDESCEX.ahk
+#include PARAMDESC.ahk
 ;#include FUNCDESC.ahk
 ;#include ARRAYDESC.ahk
 ;#include ELEMDESC.ahk
 #include TYPEDESC.ahk
 
-;#include CUSTDATAITEM.ahk
-;#include CUSTDATA.ahk
+#include CUSTDATAITEM.ahk
+#include CUSTDATA.ahk
 #include PARAMDATA.ahk
 #include METHODDATA.ahk
 #include INTERFACEDATA.ahk
