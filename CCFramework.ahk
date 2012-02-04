@@ -116,9 +116,10 @@ class CCFramework extends _CCF_Error_Handler_
 		VAR value - the value to store in the VARIANT structure
 
 	Returns:
-		OBJ variant - an object representing the variant, containing 2 fields:
-			UPTR ref - the pointer to the VARIANT structure
-			SAFEARRAY array - an AHK-wrapper object for a safearray which has 1 dimension with 1 field (index 0) that contains the given value
+		OBJ variant - an object representing the variant, containing 3 fields:
+			PTR ref - the pointer to the VARIANT structure
+			UINT vt - the value type of the VARIANT structure
+			VAR value - the value in the structure: a string, integer, pointer, COM wrapper object (for dispatch objects), ...
 
 	Remarks:
 		The type is calculated automatically based on the value. If you want it to have a special type, create a value with ComObjParameter:
@@ -126,22 +127,17 @@ class CCFramework extends _CCF_Error_Handler_
 	*/
 	CreateVARIANT(value)
 	{
-		static VT_VARIANT := 0xC, VT_BYREF := 0x4000
-		local array, arr_data
+		static VT_VARIANT := 0xC, VT_BYREF := 0x4000, VT_UNKNOWN := 0xD
+		local array, arr_data, variant
 
 		array := ComObjArray(VT_VARIANT, 1)
 		array[0] := value
 
-		/* Work in progress:
-		 *	DllCall("oleaut32\SafeArrayAccessData", "UPtr", ComObjValue(array), "UPtr*", arr_data)
-		 *	DllCall("oleaut32\SafeArrayUnaccessData", "UPtr", ComObjValue(array))
-		 */
-		VarSetCapacity(arr_data, 16, 00), DllCall("oleaut32\SafeArrayGetElement", "Ptr", ComObjValue(array), "Int*", 0, "Ptr", arr_data)
+		DllCall("oleaut32\SafeArrayAccessData", "Ptr", ComObjValue(array), "Ptr*", arr_data)
+		variant := CCFramework.AllocateMemory(16), CCFramework.CopyMemory(arr_data, variant, 16)
+		DllCall("oleaut32\SafeArrayUnaccessData", "Ptr", ComObjValue(array))
 
-		/* Work in progress:
-		 *	return { "ref" : ComObjValue(ComObjParameter(VT_BYREF|VT_VARIANT, arr_data)), "array" : array }
-		 */
-		return { "ref" : arr_data }
+		return { "ref" : variant, "vt" : NumGet(1*variant, 00, "UShort"), "value" : IsObject(array[0]) && NumGet(1*variant, 00, "UShort") == VT_UNKNOWN ? ComObjValue(array[0]) : array[0] }
 	}
 
 	/*
