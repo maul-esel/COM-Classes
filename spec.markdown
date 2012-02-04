@@ -47,7 +47,6 @@ This section defines the different forks and versions the classes in the CCF mus
 This means the code must not throw syntax errors or fail silently as well as it should work as documented.
 
 ### AutoHotkey branches
-
 #### AutoHotkey ("classic", "basic", "vanilla") ![](bad.png)
 AutoHotkey classic (by Chris Mallett, currently version *1.0.48.05*, no longer developed) is **not supported** by the CCF.
 This framework is entirely based on classes which are not supported by AutoHotkey classic.
@@ -113,7 +112,10 @@ One should pay attention to the fact that a lot of types actually map to this ty
 Basically, it is possible to wrap any interface. However, due to native COM support in all supported versions of AutoHotkey,
 it is useless to wrap a "dual" interface that exposes all its methods and properties via `IDispatch`.
 
-Besides that, there are currently no limitations of what interfaces can be added to CCF.
+If any method in an interface receives a structure *by value* (and not *by reference*),
+the entire interface cannot be wrapped as AutoHotkey does not support this (and incomplete interfaces are not allowed).
+
+Besides those, there are currently no limitations of what interfaces can be added to CCF.
 
 ***
 
@@ -123,15 +125,11 @@ The name of a class must exactly match the interface name, except that a leading
 This "I" is part of a naming convention itself and indicates the name belongs to an interface.
 In the conventions of object-oriented programming, it would not make sense to create an instance of an interface, which this code would imply:
 
-{% highlight ahk %}
-instance := new IUnknown()
-{% endhighlight %}
+{% highlight ahk %}instance := new IUnknown(){% endhighlight %}
 
 Contrary, this code does not make this implication:
 
-{% highlight ahk %}
-instance := new Unknown()
-{% endhighlight %}
+{% highlight ahk %}instance := new Unknown(){% endhighlight %}
 
 It is also recommended to use the same capitalization as in the interface name, even though it doesn't matter in AutoHotkey.
 
@@ -195,6 +193,7 @@ Such a method must obtain a COM interface pointer in a special way (might be a `
 ***
 
 ## Parameters & return values
+### Regular parameters
 A parameter's name may differ from the name it has in the "original" interface. It should be short and descriptive.
 The parameter order may as well differ from the interface, for example if default values can be supplied.
 
@@ -243,13 +242,40 @@ In case a parameter is passed to the method, altered and its value is different 
 
 ***
 
-## VARIANT and VARIANTARG parameters and fields
-...
+## `VARIANT` and `VARIANTARG` parameters and fields
+The `VARIANT` structure is not wrapped in a Helper class. Instead, special handling for it is implemented in the `CCFramework` class.
+
+The `CCFramework.CreateVARIANT(value)` method creates a `VARIANT` wrapper object for the given value. This value can be
+
+* another wrapper object. It is returned as is.
+* a simple value, e.g. an integer or string. AutoHotkey-builtin COM wrapper objects are accepted, too. The type is calculated automatically by AutoHotkey.
+* a typed value created using `ComObjParameter()`. This is required to give values a special meaning
+	(e.g. if it should be of type`VT_ERROR` instead of `VT_I4`, which is the default for integers).
+
+The wrapper object is an AutoHotkey object with 3 fields:
+
+field	| description
+--------|-------------------------------------------------------------------------
+`ref`	| contains a pointer to the VARIANT structure in memory
+`vt`	| contains the variable tpye, as defined e.g. in the VARENUM helper class
+`value`	| contains the value: an integer, string or COM wrapper object
+
+A COM method that accepts a `VARIANT` should receive the `ref` field with a type of `"Ptr"`.
+In case the `VARIANT` must be placed in a structure (by value, not by reference), the structure class can call `CCFramework.CopyMemory()` to copy it.
+To get a wrapper object from a pointer, `CCFramework.BuildVARIANT(ptr)` can be used.
+
+Using these management functions, a method or structure field can receive all value types listed above.
+When setting the field value on a structure class instance created using the `FromStructPtr(ptr)` method, the field always receives a wrapper object.
+This should be documented on each `VARIANT` field or parameter.
+
+The `VARIANTARG` structure is essentially the same as the `VARIANT` structure.
+The handling methods `CCFramework.CreateVARIANTARG(value)` and `CCFramework.BuildVARIANTARG(ptr)` are simply aliases for the `VARIANT` handling methods.
+For better readability (and maintainability) classes should still differentiate between those.
+Besides this, all guidelines defined above apply to `VARIANTARG` structures, too.
 
 ***
 
 ## class fields
-
 ### static fields
 All interface classes must always supply a static `IID` field which holds the string representation of the interface identifier.
 
@@ -263,9 +289,7 @@ If this field is ommitted, it is assumed to be `false`.
 
 Other static fields may include module handles for frequently used DLL, such as
 
-{% highlight ahk %}
-static hModule := DllCall("LoadLibrary", "str", "CommCtrl") ; if the interface is in this DLL, this call increases performance
-{% endhighlight %}
+{% highlight ahk %}static hModule := DllCall("LoadLibrary", "str", "CommCtrl") ; increases performance if the interface is in this DLL{% endhighlight %}
 
 or other relevant information.
 
@@ -394,7 +418,7 @@ But minor updates, additions and improvements, especially now in the beginnings,
 	Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/printerFriendly/articles/Unicode.html)
 2. 64bit vs. 32bit: [...]()
 3. AutoHotkey:
-	- AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm),	with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
+	- AutoHotkey\_L documentation: [DllCall](http://l.autohotkey.net/docs/commands/DllCall.htm), with a section on [structures](http://l.autohotkey.net/docs/commands/DllCall.htm#struct)
 	- DllCall type mapping: [...]()
 
 4. Object-oriented programming:
