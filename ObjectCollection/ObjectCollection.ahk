@@ -23,7 +23,7 @@ class ObjectCollection extends ObjectArray
 	Field: IID
 	This is IID_IObjectCollection. It is required to create an instance.
 	*/
-	static IID := "{5632b1a4-e38a-400a-928a-d4cd632302959}"
+	static IID := "{5632b1a4-e38a-400a-928a-d4cd63230295}"
 
 	/*
 	Method: AddObject
