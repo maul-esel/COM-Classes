@@ -250,7 +250,7 @@ The `CCFramework.CreateVARIANT(value)` method creates a `VARIANT` wrapper object
 * another wrapper object. It is returned as is.
 * a simple value, e.g. an integer or string. AutoHotkey-builtin COM wrapper objects are accepted, too. The type is calculated automatically by AutoHotkey.
 * a typed value created using `ComObjParameter()`. This is required to give values a special meaning
-	(e.g. if it should be of type`VT_ERROR` instead of `VT_I4`, which is the default for integers).
+	(e.g. if it should be of type `VT_ERROR` instead of `VT_I4`, which is the default for integers).
 
 The wrapper object is an AutoHotkey object with 3 fields:
 
