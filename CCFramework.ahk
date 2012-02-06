@@ -128,10 +128,12 @@ class CCFramework extends _CCF_Error_Handler_
 	CreateVARIANT(value)
 	{
 		static VT_VARIANT := 0xC, VT_BYREF := 0x4000, VT_UNKNOWN := 0xD
-		local array, arr_data, variant
+		local array, arr_data, variant, err
 
+		err := ComObjError(false)
 		if (IsObject(value) && value.HasKey("ref") && value.HasKey("vt") && value.HasKey("value"))
 			return value
+		ComObjError(err)
 
 		array := ComObjArray(VT_VARIANT, 1)
 		array[0] := value
