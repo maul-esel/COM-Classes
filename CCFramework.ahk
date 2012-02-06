@@ -140,7 +140,7 @@ class CCFramework extends _CCF_Error_Handler_
 		variant := CCFramework.AllocateMemory(16), CCFramework.CopyMemory(arr_data, variant, 16)
 		DllCall("oleaut32\SafeArrayUnaccessData", "Ptr", ComObjValue(array))
 
-		return { "ref" : variant, "vt" : NumGet(1*variant, 00, "UShort"), "value" : IsObject(array[0]) && NumGet(1*variant, 00, "UShort") == VT_UNKNOWN ? ComObjValue(array[0]) : array[0] }
+		return { "ref" : variant, "vt" : NumGet(1*variant, 00, "UShort"), "value" : NumGet(1*variant, 00, "UShort") == VT_UNKNOWN ? NumGet(1*variant, 08, "Ptr") : array[0] }
 	}
 
 	/*
