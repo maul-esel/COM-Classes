@@ -108,10 +108,10 @@ class EXCEPINFO extends StructBase
 	(static) method that converts a script-usable struct into a new instance of the class
 
 	Parameters:
-		UPTR ptr - a pointer to a FILETIME struct in memory
+		UPTR ptr - a pointer to a EXCEPINFO struct in memory
 
 	Returns:
-		FILETIME instance - the new FILETIME instance
+		EXCEPINFO instance - the new EXCEPINFO instance
 	*/
 	FromStructPtr(ptr)
 	{
