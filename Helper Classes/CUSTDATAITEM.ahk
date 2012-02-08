@@ -65,6 +65,7 @@ class CUSTDATAITEM extends StructBase
 	*/
 	ToStructPtr(ptr := 0)
 	{
+		local variant
 		if (!ptr)
 		{
 			ptr := this.Allocate(this.GetRequiredSize())
@@ -74,7 +75,9 @@ class CUSTDATAITEM extends StructBase
 			CCFramework.String2GUID(this.guid, ptr)
 		else
 			CCFramework.CopyMemory(this.guid, ptr, 16)
-		CCFramework.CopyMemory(CCFramework.CreateVARIANTARG(this.varValue).ref, ptr + 16, 16)
+
+		; copy VARIANT to memory and free its memory again:
+		CCFramework.CopyMemory(variant := CCFramework.CreateVARIANTARG(this.varValue).ref, ptr + 16, 16), CCFramework.FreeMemory(variant)
 
 		return ptr
 	}

@@ -74,7 +74,7 @@ class DISPPARAMS extends StructBase
 	*/
 	ToStructPtr(ptr := 0)
 	{
-		local arg_array, named_array, arg_count, named_count
+		local arg_array, named_array, arg_count, named_count, variant
 		if (!ptr)
 		{
 			ptr := this.Allocate(this.GetRequiredSize())
@@ -84,7 +84,8 @@ class DISPPARAMS extends StructBase
 		{
 			arg_count := this.cArgs == -1 ? this.rgvarg.maxIndex() : this.cArgs, arg_array := this.Allocate(arg_count * 16)
 			Loop arg_count
-				CCFramework.CopyMemory(CCFramework.CreateVARIANTARG(this.rgvarg[A_Index]).ref, arg_array + (A_Index - 1) * 16, 16)
+				CCFramework.CopyMemory(variant := CCFramework.CreateVARIANTARG(this.rgvarg[A_Index]).ref, arg_array + (A_Index - 1) * 16, 16)
+				, CCFramework.FreeMemory(variant) ; copy VARIANT to memory and free its memory again
 		}
 		else
 			arg_array := this.rgvarg, arg_count := this.cArgs

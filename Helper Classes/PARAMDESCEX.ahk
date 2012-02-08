@@ -60,13 +60,15 @@ class PARAMDESCEX extends StructBase
 	*/
 	ToStructPtr(ptr := 0)
 	{
+		local variant
 		if (!ptr)
 		{
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
 		NumPut(this.cBytes, 1*ptr, 00, "UInt")
-		CCFramework.CopyMemory(CCFramework.CreateVARIANTARG(this.varDefaultValue).ref, ptr + 4, 16)
+		; copy VARIANT to memory and free its memory again:
+		CCFramework.CopyMemory(variant := CCFramework.CreateVARIANTARG(this.varDefaultValue).ref, ptr + 4, 16), CCFramework.FreeMemory(variant)
 
 		return ptr
 	}
