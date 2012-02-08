@@ -42,8 +42,7 @@ class INTERFACEDATA extends StructBase
 	*/
 	__New(methods := 0, count := 0)
 	{
-		this.pmethdata := 0
-		this.cMembers := count
+		this.pmethdata := 0, this.cMembers := count
 	}
 
 	/*
