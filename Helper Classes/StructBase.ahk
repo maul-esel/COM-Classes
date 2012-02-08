@@ -59,12 +59,7 @@ class StructBase extends _CCF_Error_Handler_
 	*/
 	__Delete()
 	{
-		local index, buffer
-		for index, buffer in this.buffers
-		{
-			this.Free(buffer)
-		}
-		this.buffers.SetCapacity(0)
+		this.FreeAllMemory()
 		this.ReleaseOriginalPointer()
 	}
 
@@ -106,17 +101,33 @@ class StructBase extends _CCF_Error_Handler_
 		BOOL success - true on success, false otherwise
 
 	Remarks:
-		Call this method if you're sure the memory is no longer needed. The <deconstructor> automatically calls this on all <buffers>.
+		Call this method if you're sure the memory is no longer needed. If you want to free all memory, call <FreeAllMemory>.
 	*/
 	Free(buffer)
 	{
-		local bool
-		bool := CCFramework.FreeMemory(buffer)
+		local bool := CCFramework.FreeMemory(buffer)
 		if (bool)
 		{
 			this.buffers.Remove(this.FindBufferKey(buffer))
 		}
 		return bool
+	}
+
+	/*
+	Method: FreeAllMemory
+	frees the memory on all <buffers>.
+
+	Remarks:
+		This method is called automatically by the <deconstructor>.
+	*/
+	FreeAllMemory()
+	{
+		local index, buffer
+		for index, buffer in this.buffers
+		{
+			this.Free(buffer)
+		}
+		this.buffers.SetCapacity(0)
 	}
 
 	/*
