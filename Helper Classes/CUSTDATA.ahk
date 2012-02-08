@@ -72,7 +72,7 @@ class CUSTDATA extends StructBase
 		array := this.prgCustData, count := this.cCustData
 		if IsObject(this.prgCustData)
 		{
-			count := this.cCustData ? this.cCustData : this.prgCustData.maxIndex(), array := CCFramework.AllocateMemory(count * size)
+			count := this.cCustData ? this.cCustData : this.prgCustData.maxIndex(), array := this.Allocate(count * size)
 			Loop this.prgCustData.maxIndex()
 			{
 				item := this.prgCustData[A_Index], item := IsObject(item) ? item.ToStructPtr() : item
