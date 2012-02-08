@@ -24,8 +24,11 @@ class CUSTDATA extends StructBase
 	/*
 	Field: cCustData
 	The number of custom data items in the <prgCustData> array.
+
+	Remarks:
+		If you set <prgCustData> to an AHK-array, you may also leave this field uncahnged. In this case the count is assumed to be the array length.
 	*/
-	cCustData := 0
+	cCustData := -1
 
 	/*
 	Field: prgCustData
@@ -45,7 +48,7 @@ class CUSTDATA extends StructBase
 		[opt] CUSTDATAITEM[] array - the initial value for the <prgCustData> field
 		[opt] UINT count - the initial value for the <cCustData> field
 	*/
-	__New(array := 0, count := 0)
+	__New(array := 0, count := -1)
 	{
 		this.prgCustData := array, this.cCustData := count
 	}
@@ -69,16 +72,18 @@ class CUSTDATA extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		array := this.prgCustData, count := this.cCustData
 		if IsObject(this.prgCustData)
 		{
-			count := this.cCustData ? this.cCustData : this.prgCustData.maxIndex(), array := this.Allocate(count * size)
+			count := this.cCustData != -1 ? this.cCustData : this.prgCustData.maxIndex(), array := this.Allocate(count * size)
 			Loop this.prgCustData.maxIndex()
 			{
-				item := this.prgCustData[A_Index], item := IsObject(item) ? item.ToStructPtr() : item
-				CCFramework.CopyMemory(item, array + (A_PtrSize - 1) * size, size)
+				IsObject(this.prgCustData[A_Index])
+					? this.prgCustData[A_Index].ToStructPtr(array + (A_PtrSize - 1) * size)
+					: CCFramework.CopyMemory(this.prgCustData[A_Index],  array + (A_PtrSize - 1) * size, size)
 			}
 		}
+		else
+			array := this.prgCustData, count := this.cCustData
 
 		NumPut(count, 1*ptr, 00, "UInt")
 		NumPut(array, 1*ptr, 04, "Ptr")
@@ -98,13 +103,11 @@ class CUSTDATA extends StructBase
 	*/
 	FromStructPtr(ptr)
 	{
-		local instance, count, array, size := CUSTDATAITEM.GetRequiredSize()
-
-		count := NumGet(1*ptr, 00, "UInt"), array := []
+		local instance, array := [], size := CUSTDATAITEM.GetRequiredSize(), count := NumGet(1*ptr, 00, "UInt"), arr_ptr := NumGet(1*ptr, 04, "Ptr")
 		Loop count
-			array.Insert(CUSTDATAITEM.FromStructPtr(ptr + (A_Index - 1) * size))
+			array.Insert(CUSTDATAITEM.FromStructPtr(arr_ptr + (A_Index - 1) * size))
 
-		instance := new CUSTDATA(count, array)
+		instance := new CUSTDATA(array, count)
 		instance.SetOriginalPointer(ptr)
 		return instance
 	}
