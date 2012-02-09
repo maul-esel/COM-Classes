@@ -19,12 +19,6 @@ If you're missing any of those, check out [the links](#links) on the bottom of t
 
 ***
 
-## This document
-Within this document, all highlighted code is for AutoHotkey.
-Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a variable.
-
-***
-
 ## Definitions
 ### COM Classes Framework
 The *COM Classes Framework*, or *CCF*, describes a collection of AutoHotkey classes that provide comfortable access to COM non-dispatch interfaces from the AutoHotkey scripting language.
@@ -33,12 +27,27 @@ and are stored in a github repository at [https://github.com/maul-esel/COM-Class
 
 ### AutoHotkey
 *AutoHotkey* is a scripting language originally developed by Chris Mallett.
-In this document, the term *"AutoHotkey"* refers to the original version (also called AutoHotkey *"basic"*, *"classic"* or *"vanilla"*) as well as to several custom forks,
-namely *AutoHotkey\_L*, *AutoHotkey\_H* and *IronAHK*.
+Custom AutoHotkey forks and versions include the original version (also called AutoHotkey *"basic"*, *"classic"* or *"vanilla"*), as well as *AutoHotkey\_L*, *AutoHotkey\_H* and *IronAHK*.
+In this document, the term *"AutoHotkey"* usually refers to the [supported forks](versions).
 
 ### Interface classes
 Within this specification, the term *"interface classes"* refers to classes that *"wrap"* a COM interface.
 That means they have the same methods as the interface and redirect any call to a COM instance pointer.
+
+***
+
+## This document
+### code blocks
+Within this document, all highlighted code is for AutoHotkey.
+Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a variable.
+
+### memory
+The term ***"persistent memory"*** describes any memory directly or indirectly allocated via `CCFramework.AllocateMemory()`.
+This allocated memory stays valid until it is explicitly released, usually (directly or indirectly) by `CCFramework.FreeMemory()`.
+
+***"non-persistent memory"*** is everything allocated with `VarSetCapacity()`. This only stays valid as long as the corresponding variable is valid.
+So if it's a local variable in a method, the memory is no longer valid when the method is left.
+This may be intended (unneeded memory is automatically freed) or not (the memory is still needed).
 
 ***
 
@@ -105,6 +114,27 @@ AutoHotkey\_L and AutoHotkey v2 (and therefore AutoHotkey\_H) are compatible wit
 To achieve this, it is required to use `A_PtrSize` to calculate structure offsets and size
 and to use the `"Ptr"` type in calls to `NumGet()`, `NumPut()` and `DllCall()` (COM method calls as well as regular library calls).
 One should pay attention to the fact that a lot of types actually map to this type, including `HWND`, `HBITMAP`, `HANDLE`, ...
+
+***
+
+## General guidelines
+Some guidelines apply to all kind of classes, methods and code in the CCF. Those are listed here.
+
+### Minimizing allocated memory
+All code should not allocate more memory than actually needed. To do so, it may either allocate non-persistent memory or free allocated memory when no longer needed.
+However, sometimes the memory must be still valid when the method allocating it is left.
+
+### Avoid pollution of the global namespace
+Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](header_files)).
+Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local.
+
+### Array handling
+Whenever an array is expected, the handling code must be able to handle a raw memory pointer to the array or an AutoHotkey array.
+In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](structure_classes) or it can be mixed.
+
+#### VARIANT arrays
+The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can either be a raw memory pointer to the string or an array of arbitrary values for the `VARIANT`.
+Those must be converted to [wrapper objects]( "VARIANT handling").
 
 ***
 
