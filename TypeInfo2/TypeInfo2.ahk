@@ -114,6 +114,7 @@ class TypeInfo2 extends TypeInfo
 
 	/*
 	Method: GetCustData
+	Gets the custom data.
 
 	Parameters:
 		GUID guid - The GUID used to identify the data. This may either be passed as string or raw memory pointer.
