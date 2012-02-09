@@ -28,12 +28,12 @@ includes all classes related to the type information system
 #include INVOKEKIND.ahk
 
 #include IDLDESC.ahk
-;#include VARDESC.ahk
+#include VARDESC.ahk
 #include PARAMDESCEX.ahk
 #include PARAMDESC.ahk
 ;#include FUNCDESC.ahk
 #include ARRAYDESC.ahk
-;#include ELEMDESC.ahk
+#include ELEMDESC.ahk
 #include TYPEDESC.ahk
 
 #include CUSTDATAITEM.ahk
