@@ -32,7 +32,7 @@ includes all classes related to the type information system
 #include PARAMDESCEX.ahk
 #include PARAMDESC.ahk
 ;#include FUNCDESC.ahk
-;#include ARRAYDESC.ahk
+#include ARRAYDESC.ahk
 ;#include ELEMDESC.ahk
 #include TYPEDESC.ahk
 
@@ -49,13 +49,13 @@ includes all classes related to the type information system
 #include VARENUM.ahk
 #include CALLCONV.ahk
 #include EXCEPINFO.ahk
-;#include DISPPARAMS.ahk
+#include DISPPARAMS.ahk
 ;#include BINDPTR.ahk
 
 #include ..\
 #include Unknown\Unknown.ahk
 #include TypeInfo\TypeInfo.ahk
-;#include TypeInfo2\TypeInfo2.ahk
+#include TypeInfo2\TypeInfo2.ahk
 #include TypeLib\TypeLib.ahk
-;#include TypeLib2\TypeLib2.ahk
+#include TypeLib2\TypeLib2.ahk
 ;#include TypeComp\TypeComp.ahk
