@@ -232,10 +232,20 @@ In case a parameter is passed to the method, altered and its value is different 
 ***
 
 ## Helper classes
-...
+Besides the so-called "interface classes", CCF also holds other classes that help the user to use interface classes.
+They're called "helper classes" and there are currently 2 types of them:
 
 ### Structure classes
-...
+Structure classes are classes that represent memory structures. They inherit `StructBase` and implement the methods `FromStructPtr(ptr)`, `ToStructPtr()` and `GetRequiredSize()`.
+For a documentation of those, see the `StructBase` documentation.
+
+Besides that, structure classes have all fields that the represented structure has. They must be named exactly the same.
+Nested structures are represented by instances of the matching helper class by default. However, they must also accept pointers to the nested instances.
+
+If there is a *named* union in the structure, it is represented by an object wit the specific fields.
+*Unnamed* unions are simply ignored, the members are accessible via the "main" structure class.
+
+For handling of arrays, see above.
 
 ### Enumeration classes
 ...
