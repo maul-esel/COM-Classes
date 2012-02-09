@@ -17,7 +17,7 @@ Requirements:
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - CCFramework, TypeLib, (TypeComp)
-	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
+	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, ARRAYDESC, DISPATCHF
 */
 class TypeInfo extends Unknown
 {
@@ -200,14 +200,24 @@ class TypeInfo extends Unknown
 	Invokes a method, or accesses a property of an object, that implements the interface described by the type description.
 
 	Parameters:
-		UPTR instance - a pointer to an instance (or a class instance) of the interface described by this type description.
+		PTR instance - a pointer to an instance (or a class instance) of the interface described by this type description.
 		UINT memid - the member id identifying the mamber to be called.
-		UINT flags - Flags describing the context of the invoke call. You may use the fields of the DISPATCH enum class for convenience.
+		USHORT flags - Flags describing the context of the invoke call. You may use the fields of the DISPATCHF enum class for convenience.
+		byRef DISPPARAMS params - An array of arguments, an array of DISPIDs for named arguments, and counts of the number of elements in each array.
+		[opt] byRef VARIANT result - if the method returns anything, this receives a VARIANT wrapper object (or a pointer if CCFramework is not available)
+		[opt] byRef EXCEPINFO exception - receives information about an exception if it occured
+		[opt] byRef err_index - if there is an argument with an invalid type, this receives the index of this argument
 
+	Returns:
+		BOOL success - true on success, false otherwise.
 	*/
 	Invoke(instance, memid, flags, byRef params, byRef result := "", byRef exception := "", byRef err_index := 0)
 	{
-
+		local bool := this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index))
+		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
+		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
+		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception) : exception
+		return bool
 	}
 
 	/*
