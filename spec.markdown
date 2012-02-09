@@ -321,10 +321,10 @@ MsgBox % instance.prop
 
 instead of
 
-```ahk
+{% highlight ahk %}
 instance.set_prop(123)
 MsgBox % instance.get_prop()
-```
+{% endhighlight %}
 
 The second code would still be valid though.
 
