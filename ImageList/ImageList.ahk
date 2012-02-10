@@ -274,7 +274,7 @@ class ImageList extends Unknown
 	*/
 	Copy(iDest, iSrc, swap)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
+		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface(Unknown.IID), "int", iSrc, "uint", swap ? 1 : 0))
 	}
 	
 	/*
@@ -289,7 +289,7 @@ class ImageList extends Unknown
 		local out
 		if (!punk2)
 			punk2 := this
-		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
+		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface(Unknown.IID), "int", index2
 					, "int", xoffset, "int", yoffset, "UPtr", this._GUID(this.IID), "ptr*", out))
 			return new ImageList(out)
 	}
@@ -527,7 +527,7 @@ class ImageList extends Unknown
 	{
 		if (il == 0)
 			il := this
-		return this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
+		return this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface(Unknown.IID)
 																	, "int", index, "int", xHotspot, "int", yHotspot))
 	}
 	
