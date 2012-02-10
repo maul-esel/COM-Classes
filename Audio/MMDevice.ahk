@@ -7,7 +7,7 @@ class MMDevice extends Unknown
 	; enum at http://msdn.microsoft.com/en-us/library/ms693716%28VS.85%29.aspx
 	Activate(outputType, clsctx, params := 0)
 	{
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", this._GUID(outputType.IID), "uint", clsctx, "uint", params, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", CCFramework.String2GUID(outputType.IID), "uint", clsctx, "uint", params, "ptr*", out))
 		return new outputType(out)
 	}
 	

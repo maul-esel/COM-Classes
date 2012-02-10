@@ -290,7 +290,7 @@ class ImageList extends Unknown
 		if (!punk2)
 			punk2 := this
 		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface(Unknown.IID), "int", index2
-					, "int", xoffset, "int", yoffset, "UPtr", this._GUID(this.IID), "ptr*", out))
+					, "int", xoffset, "int", yoffset, "UPtr", CCFramework.String2GUID(this.IID), "ptr*", out))
 			return new ImageList(out)
 	}
 	
