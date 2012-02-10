@@ -31,7 +31,7 @@ includes all classes related to the type information system
 #include VARDESC.ahk
 #include PARAMDESCEX.ahk
 #include PARAMDESC.ahk
-;#include FUNCDESC.ahk
+#include FUNCDESC.ahk
 #include ARRAYDESC.ahk
 #include ELEMDESC.ahk
 #include TYPEDESC.ahk

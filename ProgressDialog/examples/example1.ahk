@@ -32,7 +32,7 @@ if (!progress.StartProgressDialog()) ; show the dialog
 
 Loop 100
 {
-	progress.SetProgress(A_Index) ; update progress
+	progress.SetProgress(A_Index, 100) ; update progress
 	sleep 500
 	if (progress.HasUserCanceled()) ; if user canceled:
 	{
