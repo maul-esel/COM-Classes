@@ -41,7 +41,7 @@ class ImageList extends Unknown
 	Field: hModule
 	The module handle to the Comctl32 library, as returned by LoadLibrary()
 	*/
-	static hModule := DllCall("LoadLibrary", "str", "Comctl32.dll", "UPtr")
+	static hModule := DllCall("LoadLibrary", "Str", "Comctl32.dll", "Ptr")
 	
 	/*
 	Field: ThrowOnCreation
@@ -74,7 +74,7 @@ class ImageList extends Unknown
 			il := IL_Create()
 
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(ImageList.IID, &mem)
-		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "ptr", il, "UPtr", iid, "ptr*", ptr)
+		DllCall("Comctl32.dll\HIMAGELIST_QueryInterface", "Ptr", il, "Ptr", iid, "Ptr*", ptr, "Int")
 		return new ImageList(ptr)
 	}
 	
@@ -99,7 +99,7 @@ class ImageList extends Unknown
 	Add(bitmap, maskbitmap := 0)
 	{
 		local int
-		this._Error(DllCall(NumGet(this.vt+3*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", maskbitmap, "int*", int))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", bitmap, "Ptr", maskbitmap, "Int*", int, "Int"))
 		return int
 	}
 	
@@ -112,12 +112,12 @@ class ImageList extends Unknown
 		[opt] INT index - the index of the icon to be replaced. Leave this empty or use -1 to append the icon to the list.
 		
 	Returns:
-		INT index - the new image list index of the icon
+		INT int - the new image list index of the icon
 	*/
 	ReplaceIcon(hIcon, index := -1)
 	{
 		local int
-		this._Error(DllCall(NumGet(this.vt+4*A_PtrSize), "ptr", this.ptr, "int", index, "uint", hIcon, "int*", int))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", hIcon, "Int*", int, "Int"))
 		return int
 	}
 	
@@ -135,7 +135,7 @@ class ImageList extends Unknown
 	*/
 	SetOverlayImage(image, overlay)
 	{
-		return this._Error(DllCall(NumGet(this.vt+5*A_PtrSize), "ptr", this.ptr, "int", image, "int", overlay))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", image, "Int", overlay, "Int"))
 	}
 	
 	/*
@@ -153,11 +153,11 @@ class ImageList extends Unknown
 	Remarks:
 		IImageList::Replace copies the bitmap to an internal data structure.
 		You must use the DeleteObject function to delete bitmap and maskbitmap when you don't need them anymore:
->		DllCall("Gdi32\DeleteObject", "uint", bitmap)
+>		DllCall("Gdi32\DeleteObject", "Ptr", bitmap)
 	*/
 	Replace(index, bitmap, maskbitmap := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+6*A_PtrSize), "ptr", this.ptr, "int", index, "uint", bitmap, "uint", maskbitmap))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", bitmap, "Ptr", maskbitmap, "Int"))
 	}
 	
 	/*
@@ -179,7 +179,7 @@ class ImageList extends Unknown
 	AddMasked(bitmap, color)
 	{
 		local int
-		this._Error(DllCall(NumGet(this.vt+7*A_PtrSize), "ptr", this.ptr, "uint", bitmap, "uint", color, "int*", int))
+		this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", bitmap, "UInt", color, "Int*", int))
 		return int
 	}
 	
@@ -203,9 +203,9 @@ class ImageList extends Unknown
 			params := params.ToStructPtr()
 
 		NumPut(2 * A_PtrSize + 15 * 4,	params,	00, "UInt") ; overwrite cbSize & himl
-		NumPut(this.ptr,	params,		04, "UPtr")
+		NumPut(this.ptr,	params,		04, "Ptr")
 
-		return this._Error(DllCall(NumGet(this.vt+8*A_PtrSize), "ptr", this.ptr, "ptr", params))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", params, "Int"))
 	}
 	
 	/*
@@ -220,7 +220,7 @@ class ImageList extends Unknown
 	*/
 	Remove(index)
 	{
-		return this._Error(DllCall(NumGet(this.vt+9*A_PtrSize), "ptr", this.ptr, "int", index))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Int"))
 	}
 	
 	/*
@@ -237,7 +237,7 @@ class ImageList extends Unknown
 	GetIcon(index, flags)
 	{
 		local hIcon
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "int", index, "uint", flags, "uint*", hIcon))
+		this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt", flags, "Ptr*", hIcon))
 		return hIcon
 	}
 	
@@ -255,7 +255,7 @@ class ImageList extends Unknown
 	{
 		local info
 		VarSetCapacity(info, IMAGEINFO.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
+		this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", &info, "Int"))
 		return IMAGEINFO.FromStructPtr(&info)
 	}
 	
@@ -270,11 +270,10 @@ class ImageList extends Unknown
 		
 	Remarks:
 		*NOT WORKING!*
-	
 	*/
 	Copy(iDest, iSrc, swap)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", iDest, "ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", iSrc, "uint", swap ? 1 : 0))
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", iDest, "Ptr", this.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "Int", iSrc, "UInt", swap ? 1 : 0, "Int"))
 	}
 	
 	/*
@@ -289,9 +288,8 @@ class ImageList extends Unknown
 		local out
 		if (!punk2)
 			punk2 := this
-		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "int", index2
-					, "int", xoffset, "int", yoffset, "UPtr", this._GUID(this.IID), "ptr*", out))
-			return new ImageList(out)
+		this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index1, "Ptr", punk2.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "Int", index2, "Int", xoffset, "Int", yoffset, "Ptr", this._GUID(this.IID), "Ptr*", out, "Int"))
+		return new ImageList(out)
 	}
 	
 	/*
@@ -309,7 +307,7 @@ class ImageList extends Unknown
 		local iid, mem, out
 
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(ImageList.IID, &mem)
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UPtr", iid, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", iid, "Ptr*", out, "Int"))
 		return new ImageList(out)
 	}
 	
@@ -327,7 +325,7 @@ class ImageList extends Unknown
 	{
 		local info
 		VarSetCapacity(info, RECT.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &info))
+		this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", &info, "Int"))
 		return RECT.FromStructPtr(&info)
 	}
 	
@@ -336,15 +334,15 @@ class ImageList extends Unknown
 	Gets the dimensions of images in an image list. All images in an image list have the same dimensions.
 	
 	Parameters:
-		byref INT width - receives the width
-		byref INT height - receives the height
+		byRef INT width - receives the width
+		byRef INT height - receives the height
 		
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	GetIconSize(ByRef width, ByRef height)
+	GetIconSize(byRef width, byRef height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "int*", width, "int*", height))
+		return this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int*", width, "Int*", height, "Int"))
 	}
 	
 	/*
@@ -360,7 +358,7 @@ class ImageList extends Unknown
 	*/
 	SetIconSize(width, height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
+		return this._Error(DllCall(NumGet(this.vt, 17*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", width, "Int", height, "Int"))
 	}
 	
 	/*
@@ -373,7 +371,7 @@ class ImageList extends Unknown
 	GetImageCount()
 	{
 		local count
-		this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "int*", count))
+		this._Error(DllCall(NumGet(this.vt, 18*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int*", count, "Int"))
 		return count
 	}
 	
@@ -382,7 +380,7 @@ class ImageList extends Unknown
 	Resizes an existing image list.
 	
 	Parameters:
-		INT count - the new image count
+		UINT count - the new image count
 		
 	Returns:
 		BOOL success - true on success, false otherwise
@@ -394,7 +392,7 @@ class ImageList extends Unknown
 	*/
 	SetImageCount(count)
 	{
-		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "ptr", this.ptr, "uint", count))
+		return this._Error(DllCall(NumGet(this.vt, 19*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", count, "Int"))
 	}
 	
 	/*
@@ -414,7 +412,7 @@ class ImageList extends Unknown
 	SetBkColor(color)
 	{
 		local oldColor
-		this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "ptr", this.ptr, "uint", color, "uint*", oldColor))
+		this._Error(DllCall(NumGet(this.vt, 20*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", color, "UInt*", oldColor, "Int"))
 		return oldColor
 	}
 	
@@ -428,7 +426,7 @@ class ImageList extends Unknown
 	GetBkColor()
 	{
 		local color
-		this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "ptr", this.ptr, "uint*", color))
+		this._Error(DllCall(NumGet(this.vt, 21*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", color, "Int"))
 		return color
 	}
 	
@@ -446,7 +444,7 @@ class ImageList extends Unknown
 	*/
 	BeginDrag(index, xHotspot, yHotspot)
 	{
-		return this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "ptr", this.ptr, "int", index, "int", xHotspot, "int", yHotspot))
+		return this._Error(DllCall(NumGet(this.vt, 22*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Int", xHotspot, "Int", yHotspot, "Int"))
 	}
 	
 	/*
@@ -458,7 +456,7 @@ class ImageList extends Unknown
 	*/
 	EndDrag()
 	{
-		return this._Error(DllCall(NumGet(this.vt+23*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 23*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 	
 	/*
@@ -475,7 +473,7 @@ class ImageList extends Unknown
 	*/
 	DragEnter(hwnd, x, y)
 	{
-		return this._Error(DllCall(NumGet(this.vt+24*A_PtrSize), "ptr", this.ptr, "uint", hwnd, "int", x, "int", y))
+		return this._Error(DllCall(NumGet(this.vt, 24*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hwnd, "Int", x, "Int", y, "Int"))
 	}
 	
 	/*
@@ -490,7 +488,7 @@ class ImageList extends Unknown
 	*/
 	DragLeave(hwnd)
 	{
-		return this._Error(DllCall(NumGet(this.vt+25*A_PtrSize), "ptr", this.ptr, "uint", hwnd))
+		return this._Error(DllCall(NumGet(this.vt, 25*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hwnd, "Int"))
 	}
 		
 	/*
@@ -507,7 +505,7 @@ class ImageList extends Unknown
 	*/
 	DragMove(x, y)
 	{
-		return this._Error(DllCall(NumGet(this.vt+26*A_PtrSize), "ptr", this.ptr, "int", x, "int", y))
+		return this._Error(DllCall(NumGet(this.vt, 26*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", x, "Int", y, "Int"))
 	}
 	
 	/*
@@ -527,8 +525,7 @@ class ImageList extends Unknown
 	{
 		if (il == 0)
 			il := this
-		return this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "ptr", this.ptr, "ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}")
-																	, "int", index, "int", xHotspot, "int", yHotspot))
+		return this._Error(DllCall(NumGet(this.vt, 27*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", il.QueryInterface("{00000000-0000-0000-C000-000000000046}"), "Int", index, "Int", xHotspot, "Int", yHotspot, "Int"))
 	}
 	
 	/*
@@ -543,7 +540,7 @@ class ImageList extends Unknown
 	*/
 	DragShowNoLock(show)
 	{
-		return this._Error(DllCall(NumGet(this.vt+28*A_PtrSize), "ptr", this.ptr, "uint", show))
+		return this._Error(DllCall(NumGet(this.vt, 28*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", show, "Int"))
 	}
 	
 	/*
@@ -565,11 +562,12 @@ class ImageList extends Unknown
 
 		VarSetCapacity(pt1, POINT.GetRequiredSize(), 0), VarSetCapacity(pt2, POINT.GetRequiredSize(), 0)
 		, VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
-		bool := this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "ptr", this.ptr, "ptr", &pt1, "ptr", &pt2, "ptr", iid, "ptr", out))
+
+		bool := this._Error(DllCall(NumGet(this.vt, 29*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", &pt1, "Ptr", &pt2, "Ptr", iid, "Ptr*", out, "Int"))
 
 		dragPos := POINT.FromStructPtr(&pt1)
-		imagePos := POINT.FromStructPtr(&pt2)
-		IL := new ImageList(out)
+		, imagePos := POINT.FromStructPtr(&pt2)
+		, IL := new ImageList(out)
 
 		return bool
 	}
@@ -587,12 +585,12 @@ class ImageList extends Unknown
 	Remarks:
 		possible flag values:
 			ILIF.ALPHA - Indicates that the item in the imagelist has an alpha channel.
-			ILIF.LOWQUALITY - **Windows Vista and later.** Indicates that the item in the imagelist was generated via a StretchBlt method, consequently image quality may have degraded.
+			ILIF.LOWQUALITY - *Windows Vista and later.* Indicates that the item in the imagelist was generated via a StretchBlt method, consequently image quality may have degraded.
 	*/
 	GetItemFlags(index)
 	{
 		local flags
-		this._Error(DllCall(NumGet(this.vt+30*A_PtrSize), "ptr", this.ptr, "int", index, "uint*", flags))
+		this._Error(DllCall(NumGet(this.vt, 30*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt*", flags, "Int"))
 		return flags
 	}
 	
@@ -609,7 +607,7 @@ class ImageList extends Unknown
 	GetOverlayImage(index)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+31*A_PtrSize), "ptr", this.ptr, "int", index, "int*", out))
+		this._Error(DllCall(NumGet(this.vt, 31*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Int*", out, "Int"))
 		return out
 	}
 		
@@ -627,7 +625,7 @@ class ImageList extends Unknown
 	*/
 	AddSystemBitmap(bmp)
 	{
-		return this.Add(DllCall("LoadBitmapW", "uint", 0, "uint", bmp))
+		return this.Add(DllCall("LoadBitmap", "Ptr", 0, "Ptr", bmp, "Ptr"))
 	}
 	
 	
@@ -643,7 +641,7 @@ class ImageList extends Unknown
 	*/
 	AddSystemIcon(ico)
 	{
-		return this.ReplaceIcon(DllCall("LoadIconW", "uint", 0, "uint", ico))
+		return this.ReplaceIcon(DllCall("LoadIcon", "Ptr", 0, "Ptr", ico, "Ptr"))
 	}
 	
 	
@@ -659,7 +657,7 @@ class ImageList extends Unknown
 	*/
 	AddSystemCursor(cur)
 	{
-		return this.ReplaceIcon(DllCall("LoadCursorW", "uint", 0, "uint", cur))
+		return this.ReplaceIcon(DllCall("LoadCursor", "Ptr", 0, "Ptr", cur, "Ptr"))
 	}
 
 	/*
@@ -672,8 +670,7 @@ class ImageList extends Unknown
 	Unload()
 	{
 		local hM
-		hM := ImageList.hModule
-		ImageList.hModule := 0
-		return DllCall("FreeLibrary", "UPtr", hM)
+		hM := ImageList.hModule, ImageList.hModule := 0
+		return DllCall("FreeLibrary", "Ptr", hM, "UInt")
 	}
 }

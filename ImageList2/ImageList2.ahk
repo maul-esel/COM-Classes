@@ -48,7 +48,7 @@ class ImageList2 extends ImageList
 	*/
 	Resize(width, height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "ptr", this.ptr, "int", width, "int", height))
+		return this._Error(DllCall(NumGet(this.vt, 32*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", width, "Int", height, "Int"))
 	}
 
 	/*
@@ -66,7 +66,7 @@ class ImageList2 extends ImageList
 	*/
 	GetOriginalSize(index, flags, byRef width, byRef height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+33*A_PtrSize), "ptr", this.ptr, "int", index, "UInt", flags, "int*", width, "int*", height))
+		return this._Error(DllCall(NumGet(this.vt, 33*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt", flags, "Int*", width, "Int*", height, "Int"))
 	}
 
 	/*
@@ -83,7 +83,7 @@ class ImageList2 extends ImageList
 	*/
 	SetOriginalSize(index, width, height)
 	{
-		return this._Error(DllCall(NumGet(this.vt+34*A_PtrSize), "ptr", this.ptr, "int", index, "int", width, "int", height))
+		return this._Error(DllCall(NumGet(this.vt, 34*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Int", width, "Int", height, "Int"))
 	}
 
 	/*
@@ -117,7 +117,7 @@ class ImageList2 extends ImageList
 	*/
 	ForceImagePresent(index, flags)
 	{
-		return this._Error(DllCall(NumGet(this.vt+37*A_PtrSize), "ptr", this.ptr, "int", index, "uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 37*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -134,7 +134,7 @@ class ImageList2 extends ImageList
 	*/
 	DiscardImages(start, end, flags)
 	{
-		return this._Error(DllCall(NumGet(this.vt+38*A_PtrSize), "ptr", this.ptr, "int", start, "int", end, "uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 38*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", start, "Int", end, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -142,14 +142,14 @@ class ImageList2 extends ImageList
 	Preloads images, as specified.
 
 	Parameters:
-		IMAGELISTDRAWPARAMS params - either an instance of the IMAGELISTDRAWPARAMS class or a pointer to a valid IMAGELISTDRAWPARAMS struct.
+		IMAGELISTDRAWPARAMS params - either an instance of the IMAGELISTDRAWPARAMS class or a pointer to a valid IMAGELISTDRAWPARAMS struct, containing information about an image list draw operation.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
 	PreloadImages(params)
 	{
-		return this._Error(DllCall(NumGet(this.vt+39*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(params) ? params.ToStructPtr() : params))
+		return this._Error(DllCall(NumGet(this.vt, 39*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(params) ? params.ToStructPtr() : params, "Int"))
 	}
 	
 	/*
@@ -163,7 +163,7 @@ class ImageList2 extends ImageList
 	{
 		local struct
 		VarSetCapacity(struct, IMAGELISTSTATS.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+40*A_PtrSize), "ptr", this.ptr, "ptr", &struct))
+		this._Error(DllCall(NumGet(this.vt, 40*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", &struct, "Int"))
 		return IMAGELISTSTATS.FromStructPtr(&struct)
 	}
 	
@@ -183,7 +183,7 @@ class ImageList2 extends ImageList
 	*/
 	Initialize(width, height, flags, initial, max)
 	{
-		return this._Error(DllCall(NumGet(this.vt+41*A_PtrSize), "ptr", this.ptr, "int", width, "int", height, "uint", flags, "int", initial, "int", max))
+		return this._Error(DllCall(NumGet(this.vt, 41*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", width, "Int", height, "UInt", flags, "Int", initial, "Int", max, "Int"))
 	}
 	
 	/*
@@ -202,7 +202,7 @@ class ImageList2 extends ImageList
 	*/
 	Replace2(index, image, flags, mask := 0, punk := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+42*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", image, "ptr", mask, "ptr", punk, "uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 42*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", image, "Ptr", mask, "Ptr", punk, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -220,6 +220,6 @@ class ImageList2 extends ImageList
 	*/
 	ReplaceFromImageList(index, src, srcIndex, punk := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+43*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", IsObject(src) ? src.ptr : src, "Int", srcIndex, "ptr", punk, "uint", 0)) ; msdn: last param is not used
+		return this._Error(DllCall(NumGet(this.vt, 43*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", IsObject(src) ? src.ptr : src, "Int", srcIndex, "Ptr", punk, "UInt", 0, "Int")) ; msdn: last param is not used
 	}
 }

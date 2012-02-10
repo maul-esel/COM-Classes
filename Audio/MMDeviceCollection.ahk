@@ -7,14 +7,14 @@ class MMDeviceCollection extends Unknown
 	GetCount()
 	{
 		local count
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", count))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", count, "Int"))
 		return count
 	}
 	
 	Item(index)
 	{
 		local device
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", index, "ptr*", device))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", device))
 		return new MMDevice(device)	
 	}
 }

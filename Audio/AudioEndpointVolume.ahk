@@ -6,6 +6,6 @@ class AudioEndpointVolume extends Unknown
 	
 	SetMasterVolumeLevel(level, event := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "float", level, "uint", event))	
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Float", level, "Ptr", event, "Int"))
 	}
 }

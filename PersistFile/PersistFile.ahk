@@ -41,7 +41,7 @@ class PersistFile extends Persist
 	*/
 	IsDirty()
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -57,7 +57,7 @@ class PersistFile extends Persist
 	*/
 	Load(path, flags)
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", path, "uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", path, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -73,12 +73,12 @@ class PersistFile extends Persist
 	*/
 	Save(path, remember)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "str", path, "uint", remember))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", path, "UInt", remember, "Int"))
 	}
 
 	/*
 	Method: SaveCompleted
-	Notifies the object that it can write to its file. It does this by notifying the object that it can revert from NoScribble mode (in which it must not write to its file), to Normal mode (in which it can). The component enters NoScribble mode when it receives an IPersistFile::Save call.
+	Notifies the object that it can write to its file. It does this by notifying the object that it can revert from NoScribble mode (in which it must not write to its file), to Normal mode (in which it can). The component enters NoScribble mode when it receives a <Save> call.
 
 	Parameters:
 		STR path - The absolute path of the file where the object was saved previously.
@@ -88,7 +88,7 @@ class PersistFile extends Persist
 	*/
 	SaveCompleted(path)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "str", path))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", path, "Int"))
 	}
 
 	/*
@@ -101,7 +101,7 @@ class PersistFile extends Persist
 	GetCurFile()
 	{
 		local path
-		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "ptr*", path))
+		this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", path, "Int"))
 		return StrGet(path)
 	}
 }

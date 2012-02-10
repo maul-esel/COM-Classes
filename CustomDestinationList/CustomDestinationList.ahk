@@ -45,7 +45,7 @@ class CustomDestinationList extends Unknown
 	*/
 	SetAppID(id)
 	{
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", id))
+		return this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", id, "Int"))
 	}
 
 	/*
@@ -70,7 +70,7 @@ class CustomDestinationList extends Unknown
 		if !CCFramework.isInteger(removedType)
 			VarSetCapacity(mem, 16, 00), removedType := CCFramework.String2GUID(removedType, &mem)
 
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", slots, "ptr", removedType, "ptr*", removedItems))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", slots, "Ptr", removedType, "Ptr*", removedItems, "Int"))
 	}
 
 	/*
@@ -92,7 +92,7 @@ class CustomDestinationList extends Unknown
 	{
 		if IsObject(items)
 			items := items.ptr
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", name, "ptr", items))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Ptr", items, "Int"))
 	}
 
 	/*
@@ -107,7 +107,7 @@ class CustomDestinationList extends Unknown
 	*/
 	AppendKnownCategory(category)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "uint", category))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", category, "Int"))
 	}
 
 	/*
@@ -126,9 +126,7 @@ class CustomDestinationList extends Unknown
 	*/
 	AddUserTasks(tasks)
 	{
-		if IsObject(tasks)
-			tasks := tasks.ptr
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", tasks))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(tasks) ? tasks.ptr : tasks, "Int"))
 	}
 
 	/*
@@ -140,7 +138,7 @@ class CustomDestinationList extends Unknown
 	*/
 	CommitList()
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -160,7 +158,7 @@ class CustomDestinationList extends Unknown
 		if !CCFramework.isInteger(type)
 			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
 
-		this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", type, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", type, "Ptr*", out, "Int"))
 		return out
 	}
 
@@ -182,7 +180,7 @@ class CustomDestinationList extends Unknown
 	*/
 	DeleteList(id)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "str", id))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", id, "Int"))
 	}
 
 	/*
@@ -194,6 +192,6 @@ class CustomDestinationList extends Unknown
 	*/
 	AbortList()
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 }

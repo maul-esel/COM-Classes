@@ -37,9 +37,7 @@ class ObjectCollection extends ObjectArray
 	*/
 	AddObject(obj)
 	{
-		if IsObject(obj)
-			obj := obj.ptr
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "ptr", obj))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(obj) ? obj.ptr : obj, "Int"))
 	}
 
 	/*
@@ -54,9 +52,7 @@ class ObjectCollection extends ObjectArray
 	*/
 	AddFromArray(array)
 	{
-		if IsObject(array)
-			array := array.ptr
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", array))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(array) ? array .ptr : array, "Int"))
 	}
 
 	/*
@@ -71,7 +67,7 @@ class ObjectCollection extends ObjectArray
 	*/
 	RemoveObjectAt(index)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uint", index))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", index, "Int"))
 	}
 
 	/*
@@ -83,6 +79,6 @@ class ObjectCollection extends ObjectArray
 	*/
 	Clear()
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 }

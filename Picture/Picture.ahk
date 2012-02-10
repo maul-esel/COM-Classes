@@ -52,10 +52,8 @@ class Picture extends Unknown
 	FromPICTDESC(src)
 	{
 		local mem, iid, pPict
-		if IsObject(src)
-			src := src.ToStructPtr()
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(Picture.IID, &mem)
-		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "UPtr", src, "UPtr", iid, "UInt", false, "ptr*", pPict))
+		this._Error(DllCall("OleAut32.dll\OleCreatePictureIndirect", "Ptr", IsObject(src) ? src.ptr : src, "Ptr", iid, "UInt", false, "Ptr*", pPict, "Int"))
 		return new Picture(pPict)
 	}
 
@@ -186,7 +184,7 @@ class Picture extends Unknown
 	get_Handle()
 	{
 		local handle
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint*", handle))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", handle, "Int"))
 		return handle
 	}
 
@@ -202,13 +200,13 @@ class Picture extends Unknown
 	get_hPal()
 	{
 		local hPal
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint*", hPal))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", hPal, "Int"))
 		return hPal
 	}
 
 	/*
 	Method: get_Type
-	Retrieves the current type of the picture contained in the picture object.
+	Retrieves the current type of the picture contained in the picture object. This is one of the values defined in the PICTYPE enumeration class.
 
 	Returns:
 		SHORT type - the picture type
@@ -218,7 +216,7 @@ class Picture extends Unknown
 	get_Type()
 	{
 		local type
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "short*", type))
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Short*", type, "Int"))
 		return type
 	}
 
@@ -227,14 +225,14 @@ class Picture extends Unknown
 	Retrieves the current width of the picture in the picture object.
 
 	Returns:
-		UINT width - the image's width
+		INT width - the image's width
 
 	corresponding property: <width>
 	*/
 	get_Width()
 	{
 		local width
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int*", width))
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int*", width, "Int"))
 		return width
 	}
 
@@ -243,14 +241,14 @@ class Picture extends Unknown
 	Retrieves the current height of the picture in the picture object.
 
 	Returns:
-		UINT height - the image's height
+		INT height - the image's height
 
 	corresponding property: <height>
 	*/
 	get_Height()
 	{
 		local height
-		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "int*", height))
+		this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int*", height, "Int"))
 		return height
 	}
 
@@ -276,7 +274,7 @@ class Picture extends Unknown
 	*/
 	Render(dc, x, y, w, h, xSrc, ySrc, wSrc, hSrc, rect := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "UPtr", dc, "int", x, "int", y, "int", w, "int", h, "int", xSrc, "int", ySrc, "int", wSrc, "int", hSrc, "ptr", IsObject(rect) ? rect.ToStructPtr() : rect))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", dc, "Int", x, "Int", y, "Int", w, "Int", h, "Int", xSrc, "Int", ySrc, "Int", wSrc, "Int", hSrc, "Ptr", IsObject(rect) ? rect.ToStructPtr() : rect, "Int"))
 	}
 
 	/*
@@ -293,7 +291,7 @@ class Picture extends Unknown
 	*/
 	set_hPal(value)
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "uint", value))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", value, "Int"))
 	}
 
 	/*
@@ -308,7 +306,7 @@ class Picture extends Unknown
 	get_CurDC()
 	{
 		local hDC
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr*", hDC))
+		this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", hDC, "Int"))
 		return hDC
 	}
 
@@ -319,14 +317,14 @@ class Picture extends Unknown
 	Parameters:
 		HDC newHDC - A handle for the device context in which to select the picture.
 		[opt] byRef HDC outHDC - receives the previous HDC.
-		[opt] byRef HBITMAP outHBMP - receives the the GDI handle of the picture.
+		[opt] byRef PTR outHBMP - receives the the GDI handle of the picture.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
 	SelectPicture(newHDC, byRef outHDC := "", byRef outHBMP := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "ptr", newHDC, "ptr*", outHDC, "ptr*", outHBMP))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", newHDC, "Ptr*", outHDC, "UInt*", outHBMP, "Int"))
 	}
 
 	/*
@@ -341,7 +339,7 @@ class Picture extends Unknown
 	get_KeepOriginalFormat()
 	{
 		local keep
-		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "uint*", keep))
+		this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", keep, "Int"))
 		return keep
 	}
 
@@ -359,7 +357,7 @@ class Picture extends Unknown
 	*/
 	put_KeepOriginalFormat(value)
 	{
-		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "uint", value))
+		return this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", value, "Int"))
 	}
 
 	/*
@@ -371,7 +369,7 @@ class Picture extends Unknown
 	*/
 	PictureChanged()
 	{
-		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -388,7 +386,7 @@ class Picture extends Unknown
 	SaveAsFile(stream, fSaveMemCopy)
 	{
 		local cbSize
-		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "ptr", (IsObject(stream) ? stream.ptr : stream), "uint", fSaveMemCopy, "int*", cbSize))
+		this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", (IsObject(stream) ? stream.ptr : stream), "UInt", fSaveMemCopy, "Int*", cbSize, "Int"))
 		return cbSize
 	}
 
@@ -404,7 +402,7 @@ class Picture extends Unknown
 	get_Attributes()
 	{
 		local attr
-		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "uint*", attr))
+		this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", attr, "Int"))
 		return attr
 	}
 }

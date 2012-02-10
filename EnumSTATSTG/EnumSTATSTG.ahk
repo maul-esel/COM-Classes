@@ -49,7 +49,7 @@ class EnumSTATSTG extends Unknown
 		local mem_array, bool
 		static stat_size := STATSTG.GetRequiredSize()
 
-		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", count, "Ptr*", mem_array, "UInt*", retrievedCount))
+		bool := this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", count, "Ptr*", mem_array, "UInt*", retrievedCount, "Int"))
 		, array := []
 
 		Loop retrievedCount
@@ -72,7 +72,7 @@ class EnumSTATSTG extends Unknown
 	*/
 	Skip(count)
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "UInt", count))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", count, "Int"))
 	}
 
 	/*
@@ -84,7 +84,7 @@ class EnumSTATSTG extends Unknown
 	*/
 	Reset()
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -97,7 +97,7 @@ class EnumSTATSTG extends Unknown
 	Clone()
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "Int"))
 		return new EnumSTATSTG(out)
 	}
 }

@@ -54,7 +54,7 @@ class EnumShellItems
 	Next(count, byRef array, byRef retrievedCount := "")
 	{
 		VarSetCapacity(array, count * A_PtrSize, 0)
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", count, "ptr", &array, "uint*", retrievedCount))
+		return this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", count, "Ptr", &array, "UInt*", retrievedCount, "Int"))
 	}
 
 	/*
@@ -69,7 +69,7 @@ class EnumShellItems
 	*/
 	Skip(count)
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", count))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", count, "Int"))
 	}
 
 	/*
@@ -81,7 +81,7 @@ class EnumShellItems
 	*/
 	Reset()
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -94,7 +94,7 @@ class EnumShellItems
 	Clone()
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "Int"))
 		return new EnumShellItems(out)
 	}
 }

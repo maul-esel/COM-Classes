@@ -85,7 +85,7 @@ class TaskbarList extends Unknown
 	*/
 	DeleteTab(hWin)
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", hWin, "Int"))
 	}
 
 	/*

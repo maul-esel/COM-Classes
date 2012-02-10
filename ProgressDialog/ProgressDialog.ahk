@@ -37,8 +37,8 @@ class ProgressDialog extends Unknown
 	starts displaying the progress dialog.
 
 	Parameters:
-		[opt] UINT flags - a combination of flags modifying the dialog. You can use the fields of the PROGDLG class for convenience.
 		[opt] HWND hParent - the handle to a window to make the dialog box modal to. You must set the appropriate flag to make this work.
+		[opt] UINT flags - a combination of flags modifying the dialog. You can use the fields of the PROGDLG class for convenience.
 
 	Returns:
 		BOOL success - true on success, false otherwise
@@ -49,9 +49,9 @@ class ProgressDialog extends Unknown
 		MyProgress.StartProgressDialog()
 		(end code)
 	*/
-	StartProgressDialog(flags := 0, hParent := 0)
+	StartProgressDialog(hParent := 0, flags := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Ptr", 0, "UInt", flags, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hParent, "Ptr", 0, "UInt", flags, "Ptr", 0, "Int")) ; msdn: param #2 / #4 are reserved
 	}
 
 	/*
@@ -71,7 +71,7 @@ class ProgressDialog extends Unknown
 	*/
 	StopProgressDialog()
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -89,7 +89,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetTitle(title)
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "str", title))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", title, "Int"))
 	}
 
 	/*
@@ -105,7 +105,7 @@ class ProgressDialog extends Unknown
 	HasUserCanceled()
 	{
 		this._Error(0)
-		return DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr)
+		return DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt")
 	}
 
 	/*
@@ -123,7 +123,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetProgress(percent)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", percent, "UInt", 100, "Int"))
 	}
 
 	/*
@@ -143,7 +143,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetLine(line, text, compact := false)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "UInt", line, "str", text, "UInt", compact, "UInt", 0)) ; msdn: last param is reserved
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", line, "Str", text, "UInt", compact, "Ptr", 0, "Int")) ; msdn: last param is reserved
 	}
 
 	/*
@@ -161,7 +161,7 @@ class ProgressDialog extends Unknown
 	*/
 	SetCancelMsg(text)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "str", text, "UInt", 0)) ; msdn: last param is reserved
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", text, "Ptr", 0, "Int")) ; msdn: last param is reserved
 	}
 
 	/*
@@ -179,10 +179,12 @@ class ProgressDialog extends Unknown
 	*/
 	Timer(action)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", action, "UInt", 0)) ; msdn: last param is reserved
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", action, "Ptr", 0, "Int")) ; msdn: last param is reserved
 	}
 
 	/*
+	group: helper methods
+
 	Method: ResetTimer
 	resets the timer the dialog box calculates to display the estimated remaining time.
 

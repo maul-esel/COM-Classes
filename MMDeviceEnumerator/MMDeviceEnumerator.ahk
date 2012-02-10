@@ -47,7 +47,7 @@ class MMDeviceEnumerator extends Unknown
 	EnumAudioEndpoints(dataFlow, mask)
 	{
 		local devices
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", mask, "ptr*", devices))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", dataFlow, "UInt", mask, "Ptr*", devices, "Int"))
 		return new MMDeviceCollection(devices)
 	}
 
@@ -68,7 +68,7 @@ class MMDeviceEnumerator extends Unknown
 	GetDefaultAudioEndpoint(dataFlow, role)
 	{
 		local device
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "uint", dataFlow, "uint", role, "ptr*", device))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", dataFlow, "UInt", role, "Ptr*", device, "Int"))
 		return new MMDevice(device)
 	}
 
@@ -85,12 +85,13 @@ class MMDeviceEnumerator extends Unknown
 	GetDevice(id)
 	{
 		local device
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "str", id, "ptr*", device))
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", id, "Ptr*", device, "Int"))
 		return new MMDevice(device)
 	}
 
 	/*
 	Function: RegisterEndpointNotificationCallback
+	registers a client's notification callback interface.
 
 	Parameters:
 		MMNotificationClient client - either a MMNotificationClient instance or a pointer to it
@@ -100,11 +101,12 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	RegisterEndpointNotificationCallback(client)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(client) ? client.ptr : client, "Int"))
 	}
 
 	/*
 	Function: UnregisterEndpointNotificationCallback
+	deletes the registration of a notification interface that the client registered in a previous call to the <RegisterEndpointNotificationCallback> method.
 
 	Parameters:
 		MMNotificationClient client - either a MMNotificationClient instance or a pointer to it
@@ -114,6 +116,6 @@ class MMDeviceEnumerator extends Unknown
 	*/
 	UnregisterEndpointNotificationCallback(client)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(client) ? client.ptr : client))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(client) ? client.ptr : client, "Int"))
 	}
 }

@@ -42,7 +42,7 @@ class ObjectArray extends Unknown
 	GetCount()
 	{
 		local count
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "UInt*", count))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", count, "Int"))
 		return count
 	}
 
@@ -55,7 +55,7 @@ class ObjectArray extends Unknown
 		IID type - Reference to the desired interface ID. This can either be a IID string or a pointer.
 
 	Returns:
-		UPTR obj - the interface pointer
+		PTR obj - the interface pointer
 	*/
 	GetAt(index, type)
 	{
@@ -64,7 +64,7 @@ class ObjectArray extends Unknown
 		if !CCFramework.isInteger(type)
 			VarSetCapacity(mem, 16, 00), type := CCFramework.String2GUID(type, &mem)
 
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr", type, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr", type, "Ptr*", out, "Int"))
 		return out
 	}
 }

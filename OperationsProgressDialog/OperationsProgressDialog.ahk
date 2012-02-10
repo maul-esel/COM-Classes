@@ -37,15 +37,15 @@ class OperationsProgressDialog extends Unknown
 	Starts the progress dialog.
 
 	Parameters:
-		[opt] UINT flags - a combination fo flags modifying the dialog. You can use the fields of the PROGDLG class for convenience.
 		[opt] HWND hParent - the handle to the parent window
+		[opt] UINT flags - a combination fo flags modifying the dialog. You can use the fields of the PROGDLG class for convenience.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	StartProgressDialog(flags := 0, hParent := 0)
+	StartProgressDialog(hParent := 0, flags := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "UInt", hParent, "Uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hParent, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -57,7 +57,7 @@ class OperationsProgressDialog extends Unknown
 	*/	
 	StopProgressDialog()
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -72,7 +72,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	SetOperation(operation)
 	{
-		return this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "UInt", operation))
+		return this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", operation, "Int"))
 	}
 
 	/*
@@ -87,32 +87,26 @@ class OperationsProgressDialog extends Unknown
 	*/
 	SetMode(mode)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Uint", mode))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", mode, "Int"))
 	}
 
 	/*
 	Method: UpdateProgress
 
 	Parameters:
-		int pointsReached - Current points, used for showing progress in points. (progressbar)
-		int pointsTotal - Total points, used for showing progress in points.
-		int sizeReached - Current size in bytes, used for showing progress in bytes.
-		int sizeTotal - total size in bytes, used for showing progress in bytes.
-		int itemsReached - Current items, used for showing progress in items.
-		int itemsTotal - Specifies total items, used for showing progress in items.
+		UINT64 pointsReached - Current points, used for showing progress in points. (progressbar)
+		UINT64 pointsTotal - Total points, used for showing progress in points.
+		UINT64 sizeReached - Current size in bytes, used for showing progress in bytes.
+		UINT64 sizeTotal - total size in bytes, used for showing progress in bytes.
+		UINT64 itemsReached - Current items, used for showing progress in items.
+		UINT64 itemsTotal - Specifies total items, used for showing progress in items.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
 	UpdateProgress(pointsReached, pointsTotal, sizeReached, sizeTotal, itemsReached, itemsTotal)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize),	"Ptr",		this.ptr
-													,	"Uint64",	pointsReached
-													,	"Uint64",	pointsTotal
-													,	"UInt64",	sizeReached
-													,	"UInt64",	sizeTotal
-													,	"Uint64",	itemsReached
-													,	"Uint64",	itemsTotal))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64", pointsReached, "Int64", pointsTotal, "Int64", sizeReached, "Int64", sizeTotal, "Int64", itemsReached, "Int64", itemsTotal, "Int"))
 	}
 
 	/*
@@ -132,10 +126,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	UpdateLocations(source, target, item := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr
-								, "Ptr", IsObject(source) ? source.ptr : source
-								, "Ptr", IsObject(target) ? target.ptr : target
-								, "Ptr", IsObject(item) ? item.ptr : item))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(source) ? source.ptr : source, "Ptr", IsObject(target) ? target.ptr : target, "Ptr", IsObject(item) ? item.ptr : item, "Int"))
 	}
 
 	/*
@@ -147,7 +138,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	ResetTimer()
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -159,7 +150,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	PauseTimer()
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -171,7 +162,7 @@ class OperationsProgressDialog extends Unknown
 	*/
 	ResumeTimer()
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -179,15 +170,15 @@ class OperationsProgressDialog extends Unknown
 	Gets elapsed and remaining time for progress dialog.
 
 	Parameters:	
-		byref INT elapsed - the elapsed time in milliseconds
-		byref INT remaining - the remaining time in milliseconds
+		byRef INT64 elapsed - the elapsed time in milliseconds
+		byRef INT64 remaining - the remaining time in milliseconds
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	GetMilliseconds(ByRef elapsed, ByRef remaining)
+	GetMilliseconds(byRef elapsed, byRef remaining)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt64*", elapsed, "UInt64*", remaining))
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64*", elapsed, "Int64*", remaining, "Int"))
 	}
 
 	/*
@@ -203,7 +194,7 @@ class OperationsProgressDialog extends Unknown
 	GetOperationStatus()
 	{
 		local status
-		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt*", status))
+		this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", status, "Int"))
 		return status
 	}
 }
