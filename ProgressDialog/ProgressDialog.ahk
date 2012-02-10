@@ -113,17 +113,37 @@ class ProgressDialog extends Unknown
 	sets the progress amount.
 
 	Parameters:
-		INT percent - the new progress value, in percent
+		UINT current - the current progress value
+		UINT total - specifies what value "current" will have when the operation finished
 
 	Returns:
 		BOOL success - true on success, false otherwise
 
 	Example:
->	MyProgress.SetProgress(50)
+>		MyProgress.SetProgress(50, 100)
 	*/
-	SetProgress(percent)
+	SetProgress(current, total)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", percent, "UInt", 100))
+		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "UInt", current, "UInt", total))
+	}
+
+	/*
+	Method: SetProgress64
+	Updates the progress dialog box with the current state of the operation.
+
+	Parameters:
+		INT64 current - the current progress value
+		INT64 total - specifies what value "current" will have when the operation finished
+
+	Returns:
+		BOOL success - true on success, false otherwise
+
+	Remarks:
+		The only difference between this and <SetProgress> is that this method lets you specify values > 4 GB.
+	*/
+	SetProgress64(current, total)
+	{
+		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "Int64", current, "Int64", total))
 	}
 
 	/*
