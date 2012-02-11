@@ -28,7 +28,7 @@ and are stored in a github repository at [https://github.com/maul-esel/COM-Class
 ### AutoHotkey
 *AutoHotkey* is a scripting language originally developed by Chris Mallett.
 Custom AutoHotkey forks and versions include the original version (also called AutoHotkey *"basic"*, *"classic"* or *"vanilla"*), as well as *AutoHotkey\_L*, *AutoHotkey\_H* and *IronAHK*.
-In this document, the term *"AutoHotkey"* usually refers to the [supported forks](versions).
+In this document, the term *"AutoHotkey"* usually refers to the [supported forks](#versions).
 
 ### Interface classes
 Within this specification, the term *"interface classes"* refers to classes that *"wrap"* a COM interface.
@@ -125,16 +125,16 @@ All code should not allocate more memory than actually needed. To do so, it may 
 However, sometimes the memory must be still valid when the method allocating it is left.
 
 ### Avoid pollution of the global namespace
-Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](header_files)).
+Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](#header_files)).
 Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local.
 
 ### Array handling
 Whenever an array is expected, the handling code must be able to handle a raw memory pointer to the array or an AutoHotkey array.
-In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](structure_classes) or it can be mixed.
+In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](#structure_classes) or it can be mixed.
 
 #### VARIANT arrays
 The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can either be a raw memory pointer to the string or an array of arbitrary values for the `VARIANT`.
-Those must be converted to [wrapper objects]( "VARIANT handling").
+Those must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
 
 ***
 
