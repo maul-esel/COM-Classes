@@ -62,13 +62,13 @@ class RichEditOLE extends Unknown
 	Retrieves an IOleClientSite interface to be used when creating a new object. All objects inserted into a rich edit control must use client site interfaces returned by this function. A client site may be used with exactly one object.
 
 	Returns:
-		UPTR client - the IOleClientSite pointer
+		OleClientSite client - the IOleClientSite, either as class instance (if available) or as pointer
 	*/
 	GetClientSite()
 	{
 		local client
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", client))
-		return client
+		return IsObject(OleClientSite) ? new OleClientSite(client) : client
 	}
 
 	/*
