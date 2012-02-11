@@ -53,7 +53,7 @@ class RichEditOLE extends Unknown
 	{
 		static EM_GETOLEINTERFACE := 0x43C
 		local ptr
-		DllCall("SendMessage", "uptr", ctrl, "uint", EM_GETOLEINTERFACE, "uint", 0, "ptr*", ptr)
+		DllCall("SendMessage", "Ptr", ctrl, "UInt", EM_GETOLEINTERFACE, "Ptr", 0, "Ptr*", ptr, "Int")
 		return new RichEditOLE(ptr)
 	}
 
@@ -62,12 +62,12 @@ class RichEditOLE extends Unknown
 	Retrieves an IOleClientSite interface to be used when creating a new object. All objects inserted into a rich edit control must use client site interfaces returned by this function. A client site may be used with exactly one object.
 
 	Returns:
-		UPTR client - the IOleClientSite pointer
+		PTR client - the IOleClientSite pointer
 	*/
 	GetClientSite()
 	{
 		local client
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", client))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", client, "Int"))
 		return client
 	}
 
@@ -81,7 +81,7 @@ class RichEditOLE extends Unknown
 	GetObjectCount()
 	{
 		this._Error(0)
-		return DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr)
+		return DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int")
 	}
 
 	/*
@@ -94,7 +94,7 @@ class RichEditOLE extends Unknown
 	GetLinkCount()
 	{
 		this._Error(0)
-		return DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr)
+		return DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int")
 	}
 
 	/*
@@ -112,7 +112,7 @@ class RichEditOLE extends Unknown
 	{
 		local obj
 		VarSetCapacity(obj,	REOBJECT.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", &obj, "uint", flags))
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", &obj, "UInt", flags, "Int"))
 		return REOBJECT.FromStructPtr(&obj)
 	}
 
@@ -131,7 +131,7 @@ class RichEditOLE extends Unknown
 	*/
 	InsertObject(obj)
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(obj) ? obj.ToStructPtr() : obj))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(obj) ? obj.ToStructPtr() : obj, "Int"))
 	}
 
 	/*
@@ -151,7 +151,7 @@ class RichEditOLE extends Unknown
 		local mem
 		if !CCFramework.isInteger(clsid)
 			VarSetCapacity(mem, 16, 00), clsid := CCFramework.String2GUID(clsid, &mem)
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "int", index, "ptr", clsid, "str", type))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", clsid, "Str", type, "Int"))
 	}
 
 	/*
@@ -172,7 +172,7 @@ class RichEditOLE extends Unknown
 			VarSetCapacity(mem1, 16, 00), old := CCFramework.String2GUID(old, &mem1)
 		if !CCFramework.isInteger(new)
 			VarSetCapacity(mem2, 16, 00), new := CCFramework.String2GUID(new, &mem2)
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", old, "ptr", new))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", old, "Ptr", new, "Int"))
 	}
 
 	/*
@@ -188,7 +188,7 @@ class RichEditOLE extends Unknown
 	*/
 	SetHostNames(app, obj)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "str", app, "str", obj))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", app, "Str", obj, "Int"))
 	}
 
 	/*
@@ -204,7 +204,7 @@ class RichEditOLE extends Unknown
 	*/
 	SetLinkAvailable(index, value)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "int", index, "uint", value))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt", value, "Int"))
 	}
 
 	/*
@@ -220,7 +220,7 @@ class RichEditOLE extends Unknown
 	*/
 	SetDvaspect(index, aspect)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "int", index, "uint", aspect))
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "UInt", aspect, "Int"))
 	}
 
 	/*
@@ -235,7 +235,7 @@ class RichEditOLE extends Unknown
 	*/
 	HandsOffStorage(index)
 	{
-		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index))
+		return this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Int"))
 	}
 
 	/*
@@ -251,7 +251,7 @@ class RichEditOLE extends Unknown
 	*/
 	SaveCompleted(index, stg)
 	{
-		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "Int", index, "Ptr", IsObject(stg) ? stg.ptr : stg))
+		return this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", IsObject(stg) ? stg.ptr : stg, "Int"))
 	}
 
 	/*
@@ -266,7 +266,7 @@ class RichEditOLE extends Unknown
 	*/
 	InPlaceDeactivate()
 	{
-		return this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -281,7 +281,7 @@ class RichEditOLE extends Unknown
 	*/
 	ContextSensitiveHelp(enter)
 	{
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "UInt", enter))
+		return this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", enter, "Int"))
 	}
 
 	/*
@@ -298,7 +298,7 @@ class RichEditOLE extends Unknown
 	GetClipboardData(range, reco)
 	{
 		local obj
-		this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(range) ? range.ToStructPtr() : range, "UInt", reco, "Ptr*", obj))
+		this._Error(DllCall(NumGet(this.vt, 17*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(range) ? range.ToStructPtr() : range, "UInt", reco, "Ptr*", obj, "Int"))
 		return IsObject(DataObject) ? new DataObject(obj) : obj
 	}
 
@@ -309,13 +309,13 @@ class RichEditOLE extends Unknown
 	Parameters:
 		DataObject obj - IDataObject interface for the clipboard object to import, either as class instance or raw interface pointer.
 		UINT cf - Clipboard format to use. A value of zero will use the best available format. You may use the fields of the CF class for convenience.
-		[opt] UPTR hMetaPict - Handle to a metafile containing the icon view of an object. The handle is used only if the DVASPECT.ICON display aspect is required by a Paste Special operation.
+		[opt] PTR hMetaPict - Handle to a metafile containing the icon view of an object. The handle is used only if the DVASPECT.ICON display aspect is required by a Paste Special operation.
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
 	ImportDataObject(obj, cf, hMetaPict := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(obj) ? obj.ptr : obj, "UInt", cf, "Ptr", hMetaPict))
+		return this._Error(DllCall(NumGet(this.vt, 18*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(obj) ? obj.ptr : obj, "UInt", cf, "Ptr", hMetaPict, "Int"))
 	}
 }
