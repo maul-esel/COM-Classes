@@ -52,7 +52,7 @@ class ShellItem  extends Unknown
 		if IsObject(bc)
 			bc := bc.ptr
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
-		DllCall("Shell32\SHCreateItemFromParsingName", "str", path, "ptr", bc, "ptr", iid, "ptr*", out)
+		DllCall("Shell32\SHCreateItemFromParsingName", "Str", path, "Ptr", bc, "Ptr", iid, "Ptr*", out, "Int")
 		return new ShellItem(out)
 	}
 
@@ -78,7 +78,7 @@ class ShellItem  extends Unknown
 			VarSetCapacity(mem1, 16, 00), folder := CCFramework.String2GUID(folder, &mem1)
 
 		VarSetCapacity(mem2, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem2)
-		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "ptr", folder, "uint", 0, "ptr", user, "ptr", iid, "ptr*", out))
+		this._Error(DllCall("Shell32\SHGetKnownFolderItem", "Ptr", folder, "UInt", 0, "Ptr", user, "Ptr", iid, "Ptr*", out, "Int"))
 
 		return new ShellItem(out)
 	}
@@ -108,7 +108,7 @@ class ShellItem  extends Unknown
 		if IsObject(bc)
 			bc := bc.ptr
 		VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(this.IID, &mem)
-		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "ptr", parent, "str", path, "ptr", bc, "ptr", iid, "ptr*", out))
+		this._Error(DllCall("Shell32\SHCreateItemFromRelativeName", "Ptr", parent, "Str", path, "Ptr", bc, "Ptr", iid, "Ptr*", out, "Int"))
 		return new ShellItem(out)
 	}
 
@@ -124,7 +124,7 @@ class ShellItem  extends Unknown
 		[opt] IBindCtx bc - a raw interface pointer to an IBindCtx instance on a bind context object. Used to pass optional parameters to the handler. The contents of the bind context are handler-specific. For example, when binding to BHID_Stream, the STGM flags in the bind context indicate the mode of access desired (read or read/write).
 
 	Returns:
-		UPTR instance - a raw memory pointer to the created instance
+		PTR instance - a raw memory pointer to the created instance
 
 	Remarks:
 		The GUID for bc must be one of the following values defined in Shlguid.h:
@@ -157,7 +157,7 @@ class ShellItem  extends Unknown
 		if IsObject(bc)
 			bc := bc.ptr
 
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", bc, "ptr", mode, "ptr", interface, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", bc, "Ptr", mode, "Ptr", interface, "Ptr*", out, "Int"))
 		return out
 	}
 
@@ -171,7 +171,7 @@ class ShellItem  extends Unknown
 	GetParent()
 	{
 		local parent
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "ptr*", parent))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", parent, "Int"))
 		return new ShellItem(parent)
 	}
 
@@ -188,7 +188,7 @@ class ShellItem  extends Unknown
 	GetDisplayName(flag := 0)
 	{
 		local name
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", flag, "ptr*", name))
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", flag, "Ptr*", name, "Int"))
 		return StrGet(name, "UTF-16")
 	}
 
@@ -205,7 +205,7 @@ class ShellItem  extends Unknown
 	*/
 	GetAttributes(requested, byRef attr)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", requested, "UInt*", attr))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", requested, "UInt*", attr, "Int"))
 	}
 
 	/*
@@ -222,7 +222,7 @@ class ShellItem  extends Unknown
 	Compare(compareTo, hint := 0)
 	{
 		local result
-		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "Ptr", IsObject(compareTo) ? compareTo.ptr : compareTo, "UInt", hint, "Int*", result))
+		this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(compareTo) ? compareTo.ptr : compareTo, "UInt", hint, "Int*", result, "Int"))
 		return result
 	}
 }
