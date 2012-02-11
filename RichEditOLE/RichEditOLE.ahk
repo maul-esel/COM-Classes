@@ -51,8 +51,9 @@ class RichEditOLE extends Unknown
 	*/
 	FromHWND(ctrl)
 	{
+		static EM_GETOLEINTERFACE := 0x43C
 		local ptr
-		result := DllCall("SendMessage", "uptr", ctrl, "uint", 0x400 + 60, "uint", 0, "ptr*", ptr)
+		DllCall("SendMessage", "uptr", ctrl, "uint", EM_GETOLEINTERFACE, "uint", 0, "ptr*", ptr)
 		return new RichEditOLE(ptr)
 	}
 
