@@ -119,7 +119,7 @@ class ShellItem  extends Unknown
 	Binds to a handler for an item as specified by the handler ID value (BHID).
 
 	Parameters:
-		GUID mode - a GUID that specifies which handler will be created, either as GUID string or as pointer.. See Remarks.
+		GUID mode - a GUID that specifies which handler will be created, either as GUID string or as pointer. See Remarks.
 		IID interface - the IID of the interface to retrieve, either as GUID string or as pointer.
 		[opt] IBindCtx bc - a raw interface pointer to an IBindCtx instance on a bind context object. Used to pass optional parameters to the handler. The contents of the bind context are handler-specific. For example, when binding to BHID_Stream, the STGM flags in the bind context indicate the mode of access desired (read or read/write).
 
@@ -127,7 +127,7 @@ class ShellItem  extends Unknown
 		UPTR instance - a raw memory pointer to the created instance
 
 	Remarks:
-		The GUID for bc must be one of the following values defined in Shlguid.h:
+		The GUID for "mode" must be one of the following values defined in Shlguid.h:
 		BHID_SFObject - Restricts usage to BindToObject.
 		BHID_SFUIObject - Restricts usage to GetUIObjectOf.
 		BHID_SFViewObject - Restricts usage to CreateViewObject.
