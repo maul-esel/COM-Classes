@@ -277,9 +277,10 @@ class ImageList extends Unknown
 	*/
 	Merge(index1, index2, xoffset, yoffset, punk2)
 	{
-		local out
+		local out, mem
+		VarSetCapacity(mem, 16, 00)
 		if this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "int", index1, "ptr", punk2.QueryInterface(Unknown.IID), "int", index2
-					, "int", xoffset, "int", yoffset, "UPtr", CCFramework.String2GUID(this.IID), "ptr*", out))
+					, "int", xoffset, "int", yoffset, "UPtr", CCFramework.String2GUID(this.IID, &mem), "ptr*", out))
 			return new ImageList(out)
 	}
 
