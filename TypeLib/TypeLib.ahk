@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - CCFramework, TypeInfo, (TypeComp)
+	Other classes - CCFramework, TypeInfo, TypeComp
 	Helper classes - TYPEKIND, TLIBATTR, MEMBERID
 */
 class TypeLib extends Unknown

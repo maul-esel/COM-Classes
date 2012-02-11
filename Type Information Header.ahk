@@ -50,7 +50,6 @@ includes all classes related to the type information system
 #include CALLCONV.ahk
 #include EXCEPINFO.ahk
 #include DISPPARAMS.ahk
-;#include BINDPTR.ahk
 
 #include ..\
 #include Unknown\Unknown.ahk
@@ -58,4 +57,4 @@ includes all classes related to the type information system
 #include TypeInfo2\TypeInfo2.ahk
 #include TypeLib\TypeLib.ahk
 #include TypeLib2\TypeLib2.ahk
-;#include TypeComp\TypeComp.ahk
+#include TypeComp\TypeComp.ahk
