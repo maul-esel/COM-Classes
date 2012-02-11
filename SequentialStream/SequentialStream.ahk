@@ -39,7 +39,7 @@ class SequentialStream extends Unknown
 	reads a specified number of bytes from the stream object into memory, starting at the current seek pointer.
 
 	Parameters:
-		UPTR buffer - a pointer to the buffer the stream should be read to
+		PTR buffer - a pointer to the buffer the stream should be read to
 		UINT bytesToRead - the number of bytes to read
 		[opt] byRef UINT bytesRead - receives the number of bytes actually read
 
@@ -51,7 +51,7 @@ class SequentialStream extends Unknown
 	*/
 	Read(buffer, bytesToRead, byRef bytesRead := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", buffer, "UInt", bytesToRead, "UInt*", bytesRead))
+		return this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", buffer, "UInt", bytesToRead, "UInt*", bytesRead, "Int"))
 	}
 
 	/*
@@ -59,7 +59,7 @@ class SequentialStream extends Unknown
 	writes a specified number of bytes into the stream object starting at the current seek pointer.
 
 	Parameters:
-		UPTR buffer - a pointer to the buffer that contains the bytes to write
+		PTR buffer - a pointer to the buffer that contains the bytes to write
 		UINT bytesToWrite - the number of bytes to write
 		[opt] byRef UINT bytesWritten - receives the number of bytes actually written
 
@@ -68,6 +68,6 @@ class SequentialStream extends Unknown
 	*/
 	Write(buffer, bytesToWrite, byRef bytesWritten := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "ptr", buffer, "UInt", bytesToWrite, "UInt*", bytesWritten))
+		return this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", buffer, "UInt", bytesToWrite, "UInt*", bytesWritten, "Int"))
 	}
 }
