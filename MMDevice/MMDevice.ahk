@@ -51,8 +51,10 @@ class MMDevice extends Unknown
 	*/
 	Activate(iid, ctx, params := 0)
 	{
-		local obj
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", CCFramework.String2GUID(outputType.IID), "uint", clsctx, "uint", params, "ptr*", obj))
+		local obj, mem
+		if !CCFramework.isInteger(iid)
+			VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(iid, &mem)
+		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr", iid, "uint", clsctx, "uint", params, "ptr*", obj))
 		return obj
 	}
 
