@@ -507,7 +507,7 @@ class ImageList extends Unknown
 		INT index - the index of the image
 		INT xHotspot - contains the x-component of the hot spot within the new image. 
 		INT yHotspot - contains the x-component of the hot spot within the new image. 
-		ImageList il - the ImageList that contains the specified image. If omitted, the current instance is used.
+		ImageList il - the ImageList that contains the specified image.
 
 	Returns:
 		BOOL success - true on success, false otherwise
