@@ -10,7 +10,7 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/ILCF)
-	- *msdn* ()
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/bb761443)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
