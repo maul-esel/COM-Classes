@@ -22,6 +22,9 @@ Requirements:
 #include ..\ShellLinkA.ahk
 #include ..\..\Persist\Persist.ahk
 #include ..\..\PersistFile\PersistFile.ahk
+#include ..\..\Helper Classes\StructBase.ahk
+#include ..\..\Helper Classes\FILETIME.ahk
+#include ..\..\Helper Classes\WIN32_FIND_DATA.ahk
 
 link := new ShellLinkA() ; create a shell link
 
