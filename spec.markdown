@@ -126,7 +126,7 @@ However, sometimes the memory must be still valid when the method allocating it 
 
 ### Avoid pollution of the global namespace
 Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](#header_files)).
-Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local.
+Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local to avoid overwriting a super-global.
 
 ## Arrays
 Methods or structure classes sometimes need to handle arrays. This can either be arrays of structures or of pure values (integers, pointers, `BYTE`, ...).
@@ -151,6 +151,18 @@ Arrays of strings are generally handled the same. However, single object fields 
 The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can either be a raw memory pointer to the string or an array of arbitrary values for the `VARIANT`.
 Here as well, single object fields may not be considered pointers to `VARIANT` structures but integer values for the `VARIANT` structures.
 Those values must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
+
+## GUIDs
+Any method or structure class handling GUIDs (or IIDs or CLSIDs or KNOWNFOLDERIDs or any other type which is actually a GUID)
+must be able to handle either a string representing the GUID (such as `"{7C476BA2-02B1-48f4-8048-B24619DDC058}"`) or a raw pointer to the GUID in memory.
+The distinction between those can be made using the `is` operator to check if the given value is an integer (or in AutoHotkey v2, `CCFramework.isInteger()`).
+
+In case it is a pointer, it is either passed directly to a method or, for structure classes, copied into the structure. (Note: a GUID structure has 16 bytes.)
+
+The conversion from a string can be made using `CCFramework.String2GUID()`. To obey the memory guidelines, a class often needs to pass a valid pointer as second parameter:
+methods typically pass a pointer to non-persistent memory previously allocated, structure classes often pass the pointer to the memory instance of the structure + the offset of the GUID within.
+
+When a GUID pointer is given and the handling code must convert it to a string, it may simply use `CCFramework.GUID2String()`.
 
 ***
 
@@ -242,10 +254,6 @@ Such a method must obtain a COM interface pointer in a special way (might be a `
 ### Regular parameters
 A parameter's name may differ from the name it has in the "original" interface. It should be short and descriptive.
 The parameter order may as well differ from the interface, for example if default values can be supplied.
-
-Any parameter that is a GUID (or an IID or a CLSID) should accept a string representation,
-such as `{7C476BA2-02B1-48f4-8048-B24619DDC058}` as well as a raw memory pointer to a GUID structure.
-The class can differentiate between those using the `is` operator (or in AutoHotkey v2, `CCFramework.isInteger()`).
 
 Any other parameter that is a structure must accept both an instance of a helper class and a raw memory pointer. The distinction can be made using `IsObject()`.
 In case it's a class instance, `instance.ToStructPtr()` is passed to the COM method. If the method releases a structure's memory which had previously been allocated by the same instance,
