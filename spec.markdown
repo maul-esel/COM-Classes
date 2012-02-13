@@ -128,7 +128,7 @@ However, sometimes the memory must be still valid when the method allocating it 
 Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](#header_files)).
 Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local to avoid overwriting a super-global.
 
-## Arrays
+## Array handling
 Methods or structure classes sometimes need to handle arrays. This can either be arrays of structures or of pure values (integers, pointers, `BYTE`, ...).
 In such a case they must as well accept a pointer to an array in memory or an AutoHotkey object (AutoHotkey array). This distinction can easily be made using `IsObject()`.
 In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](#structure_classes) or it can be mixed.
@@ -299,9 +299,9 @@ Nested structures are represented by instances of the matching helper class by d
 If there is a *named* union in the structure, it is represented by an object wit the specific fields.
 *Unnamed* unions are simply ignored, the members are accessible via the "main" structure class.
 
-For handling of arrays, see above.
+For handling of arrays, see [above](array_handling).
 
-### Enumeration classes
+### Constant classes
 ...
 
 ***
