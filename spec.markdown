@@ -299,7 +299,7 @@ Nested structures are represented by instances of the matching helper class by d
 If there is a *named* union in the structure, it is represented by an object wit the specific fields.
 *Unnamed* unions are simply ignored, the members are accessible via the "main" structure class.
 
-For handling of arrays, see [above](array_handling).
+For handling of arrays, see [above](#array_handling).
 
 ### Constant classes
 ...
