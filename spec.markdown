@@ -34,20 +34,20 @@ In this document, the term *"AutoHotkey"* usually refers to the [supported forks
 Within this specification, the term *"interface classes"* refers to classes that *"wrap"* a COM interface.
 That means they have the same methods as the interface and redirect any call to a COM instance pointer.
 
-***
-
-## This document
-### code blocks
-Within this document, all highlighted code is for AutoHotkey.
-Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a variable.
-
 ### memory
 The term ***"persistent memory"*** describes any memory directly or indirectly allocated via `CCFramework.AllocateMemory()`.
 This allocated memory stays valid until it is explicitly released, usually (directly or indirectly) by `CCFramework.FreeMemory()`.
 
 ***"non-persistent memory"*** is everything allocated with `VarSetCapacity()`. This only stays valid as long as the corresponding variable is valid.
 So if it's a local variable in a method, the memory is no longer valid when the method is left.
-This may be intended (unneeded memory is automatically freed) or not (the memory is still needed).
+This may be intended (unneeded memory is automatically freed) or not (the memory may still be needed).
+
+***
+
+## This document
+### code blocks
+Within this document, all highlighted code is for AutoHotkey.
+Inside code-blocks which aren't actually used for code but for templates or similar, `;` delimits a comment and `%NAME%` is a variable.
 
 ***
 
