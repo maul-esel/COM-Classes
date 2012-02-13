@@ -128,13 +128,29 @@ However, sometimes the memory must be still valid when the method allocating it 
 Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](#header_files)).
 Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local.
 
-### Array handling
-Whenever an array is expected, the handling code must be able to handle a raw memory pointer to the array or an AutoHotkey array.
+## Arrays
+Methods or structure classes sometimes need to handle arrays. This can either be arrays of structures or of pure values (integers, pointers, `BYTE`, ...).
+In such a case they must as well accept a pointer to an array in memory or an AutoHotkey object (AutoHotkey array). This distinction can easily be made using `IsObject()`.
 In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](#structure_classes) or it can be mixed.
+
+So, if a pointer is given, it is just passed to a method. In a structure class, it depends on whether the array is **in** the structure or the structure just holds a pointer to the array.
+In the first case, the memory is just copied over, otherwise, the specific field is set to the pointer.
+
+If an AutoHotkey object is passed, memory is allocated for the array and the specific elements are copied to the memory array. The code must not use a `for`-Loop but a regular loop.
+This ensures that non-array mambers (with string keys) are not copied.
+
+However, copying a pointer or allocating memory for an object array require the handling code to know either the size or length of the array.
+Structures holding these arrays often have a field that describes one of those (or the size of the entire structure), and methods sometimes have a parameter.
+If so, this field or parameter is initialized with -1 (an optional parameter). If the user changes this value, the new value is assumed to be the number (or size) of elements
+to be actually copied. Otherwise, if it's -1, the result of the array's `maxIndex()` method is taken as element count.
+
+#### String arrays
+Arrays of strings are generally handled the same. However, single object fields may never be considered *string pointers*, they're always taken as strings.
 
 #### VARIANT arrays
 The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can either be a raw memory pointer to the string or an array of arbitrary values for the `VARIANT`.
-Those must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
+Here as well, single object fields may not be considered pointers to `VARIANT` structures but integer values for the `VARIANT` structures.
+Those values must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
 
 ***
 
