@@ -281,8 +281,9 @@ class Storage extends Unknown
 	*/
 	SetClass(clsid)
 	{
+		local mem
 		if !CCFramework.isInteger(clsid)
-			clsid := CCFramework.String2GUID(clsid)
+			VarSetCapacity(mem, 16, 00), clsid := CCFramework.String2GUID(clsid, &mem)
 		return this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "Ptr", this.ptr, "Ptr", clsid))
 	}
 
