@@ -10,14 +10,14 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TypeInfo)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221696%28v=VS.85%29)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221696)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - CCFramework, TypeLib, TypeComp
-	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, ARRAYDESC, DISPATCHF
+	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, ARRAYDESC, DISPATCHF, DISPPARAMS, EXCEPINFO
 */
 class TypeInfo extends Unknown
 {
