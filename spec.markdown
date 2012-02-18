@@ -177,7 +177,7 @@ Besides those, there are currently no limitations of what interfaces can be adde
 
 ***
 
-## Classes
+## Interface Classes
 ### The class name
 The name of a class must exactly match the interface name, except that a leading "I", if present, is ommitted.
 This "I" is part of a naming convention itself and indicates the name belongs to an interface.
@@ -246,7 +246,8 @@ These methods should be named `From%INFO%` where *%INFO%* is the type of the giv
 Such a method must obtain a COM interface pointer in a special way (might be a `DllCall()`) and then create a new instance, supplying that pointer.
 
 #### internal methods
-...
+If a class has some task it needs to do frequently, such as a difficult type conversion, it might add an internal method. However, this should be done very rarely.
+If an internal method exists, it must be [documented](#documentation) as such and put at the end of the class.
 
 ***
 
@@ -291,18 +292,25 @@ They're called "helper classes" and there are currently 2 types of them:
 
 ### Structure classes
 Structure classes are classes that represent memory structures. They inherit `StructBase` and implement the methods `FromStructPtr(ptr)`, `ToStructPtr()` and `GetRequiredSize()`.
-For a documentation of those, see the `StructBase` documentation.
+The `StructBase` documentation includes documentation of those.
 
 Besides that, structure classes have all fields that the represented structure has. They must be named exactly the same.
 Nested structures are represented by instances of the matching helper class by default. However, they must also accept pointers to the nested instances.
 
-If there is a *named* union in the structure, it is represented by an object wit the specific fields.
+If there is a *named* union in the structure, it is represented by an object with the specific fields.
 *Unnamed* unions are simply ignored, the members are accessible via the "main" structure class.
 
 For handling of arrays, see [above](#array_handling).
 
 ### Constant classes
-...
+Constant classes can either represent some kind of enumeration (holding integers, sometimes referred to as "enumeration classes") or more complex values, such as GUIDs or strings.
+The field names must exactly match those or the original constants, except that a common prefix must be ommitted.
+
+Constant classes can inherit another class, however, this is a very rare case. There's no common base class for them yet.
+In even more rare cases, constant classes may also contain methods.
+
+For complex values, performance is important to consider. For example, GUIDs must be declared as strings, not converted to pointers on load-time.
+If possible, there should never be classes holding object instances, as this might have a dramatic performance impact.
 
 ***
 
