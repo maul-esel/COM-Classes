@@ -172,12 +172,12 @@ class TypeInfo extends Unknown
 	Returns:
 		ARRAY ids - an AHK-array containing the IDs
 	*/
-	GetIDsOfNames(names, count := "")
+	GetIDsOfNames(names, count := -1)
 	{
 		local names_array, id_array, ids
 		if IsObject(names)
 		{
-			if (!count)
+			if (count == -1)
 				count := names.maxIndex()
 			VarSetCapacity(names_array, A_PtrSize * count, 00)
 			Loop count
