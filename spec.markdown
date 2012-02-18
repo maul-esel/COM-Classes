@@ -447,7 +447,8 @@ Interface classes must be put in `%CLASSNAME%/%CLASSNAME%.ahk`, e.g. `ImageList/
     ## Description ; this is optional
     ...
 
-Helper classes are put in `Helper Classes/%CLASSNAME%.ahk`, header files go in `%SUBJECT% header.ahk` (in the root folder of the repository).
+Structure classes are put in `Structure Classes/%CLASSNAME%.ahk`, constant classes must reside in `Constant Classes/%CLASSNAME%.ahk`,
+header files go in `%SUBJECT% header.ahk` (in the root folder of the repository).
 `SUBJECT` is the "subject" the included classes are about or what they have in common. Examples would be `UIAutomation header.ahk` or `Type Information header.ahk`.
 
 Examples go in `%CLASSNAME%/examples/example%N%.ahk`, where `N` is a increasing number, starting from 1.
