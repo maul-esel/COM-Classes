@@ -128,22 +128,24 @@ class Storage extends Unknown
 		local mem1, mem2
 		if IsObject(iidExclude)
 		{
-			iidExcludeCount := iidExcludeCount ? iidExcludeCount : iidExclude.maxIndex(), VarSetCapacity(mem1, iidExcludeCount * A_PtrSize, 00), iidExclude := &mem1
+			iidExcludeCount := iidExcludeCount ? iidExcludeCount : iidExclude.maxIndex(), VarSetCapacity(mem1, iidExcludeCount * 16, 00)
 			Loop iidExcludeCount
 			{
 				if CCFramework.isInteger(iidExclude[A_Index])
-					NumPut(iidExclude[A_Index], mem1, (A_Index - 1) * A_PtrSize, "Ptr")
+					CCFramework.CopyMemory(iidExclude[A_Index], &mem1 + (A_Index - 1) * 16, 16)
 				else
-					NumPut(CCFramework.String2GUID(iidExclude[A_Index]), mem1, (A_Index - 1) * A_PtrSize, "Ptr")
+					CCFramework.String2GUID(iidExclude[A_Index], &mem1 + (A_Index - 1) * 16)
 			}
+			iidExclude := &mem1
 		}
 		if IsObject(nameExclude)
 		{
-			VarSetCapacity(mem2, nameExclude.maxIndex() * A_PtrSize, 00), nameExclude := &mem2
+			VarSetCapacity(mem2, nameExclude.maxIndex() * A_PtrSize, 00)
 			Loop nameExclude.maxIndex()
 			{
 				NumPut(nameExclude.GetAdress(A_Index), mem2, (A_Index - 1) * A_PtrSize, "Ptr")
 			}
+			nameExclude := &mem2
 		}
 		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", iidExcludeCount, "Ptr", iidExclude, "Ptr", nameExclude, "Ptr", IsObject(dest) ? dest.ptr : dest))
 	}
