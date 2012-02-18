@@ -184,9 +184,10 @@ class TypeInfo extends Unknown
 			{
 				NumPut(names.GetAdress(A_Index), names_array, A_PtrSize * (A_Index - 1), "UPtr")
 			}
+			names := &names_array
 		}
 		VarSetCapacity(id_array, 4 * count, 00)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(names) ? &names_array : names, "UInt", count, "UPtr", &id_array))
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", names, "UInt", count, "UPtr", &id_array))
 		ids := []
 		Loop count
 		{
