@@ -128,6 +128,7 @@ class PICTDESC extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a PICTDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		PICTDESC instance - the new PICTDESC instance
@@ -135,10 +136,10 @@ class PICTDESC extends StructBase
 	Remarks:
 		To retrieve any values besides <cbSizeofstruct> and <picType>, the first must match the size the later one requires. <picType> must also not be PICTYPE.NONE or PICTYPE.UNINITIALIZED. If this is the case, all other fields are left to their defaults.
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new PICTDESC()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.cbSizeofstruct	:= NumGet(1*ptr,	00,	"UInt")
 		instance.picType		:= NumGet(1*ptr,	04,	"UInt")

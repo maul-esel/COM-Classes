@@ -89,14 +89,15 @@ class THUMBBUTTON extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a THUMBBUTTON struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		THUMBBUTTON instance - the new THUMBBUTTON instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new THUMBBUTTON()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.dwMask		:=	NumGet(1*ptr,	000+0*A_PtrSize,	"UInt")
 		instance.iId		:=	NumGet(1*ptr,	004+0*A_PtrSize,	"UInt")

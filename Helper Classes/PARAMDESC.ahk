@@ -78,14 +78,15 @@ class PARAMDESC extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a PARAMDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		PARAMDESC instance - the new PARAMDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new PARAMDESC(NumGet(1*ptr, 20, "UShort"), PARAMDESCEX.FromStructPtr(ptr))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

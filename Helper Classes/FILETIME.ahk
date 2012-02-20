@@ -72,14 +72,15 @@ class FILETIME extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a FILETIME struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		FILETIME instance - the new FILETIME instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new FILETIME(NumGet(1*ptr, 00, "UInt"), NumGet(1*ptr, 04, "UInt"))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

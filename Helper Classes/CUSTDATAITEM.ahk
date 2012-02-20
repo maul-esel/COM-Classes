@@ -88,14 +88,15 @@ class CUSTDATAITEM extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a TYPEDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		TYPEDESC instance - the new TYPEDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new CUSTDATAITEM(CCFramework.GUID2String(ptr), CCFramework.BuildVARIANTARG(ptr+16))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

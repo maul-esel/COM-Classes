@@ -109,14 +109,15 @@ class EXCEPINFO extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a EXCEPINFO struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		EXCEPINFO instance - the new EXCEPINFO instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new EXCEPINFO()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.wCode				:= NumGet(1*ptr,	00+0*A_PtrSize,	"Short")
 		instance.wReserved			:= NumGet(1*ptr,	02+0*A_PtrSize,	"Short")

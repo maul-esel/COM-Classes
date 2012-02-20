@@ -72,14 +72,15 @@ class SIZE extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a SIZE struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		SIZE instance - the new SIZE instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new SIZE(NumGet(1*ptr, 00, "Int"), NumGet(1*ptr, 04, "Int"))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

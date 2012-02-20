@@ -133,14 +133,15 @@ class STATSTG extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a STATSTG struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		STATSTG instance - the new STATSTG instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new STATSTG()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.pwcsName			:= StrGet(NumGet(1*ptr, 0,	"UPtr"),	"UTF-16")
 		instance.type				:= NumGet(1*ptr,	00 + 1*A_PtrSize,	"UInt")

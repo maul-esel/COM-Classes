@@ -113,14 +113,15 @@ class DISPPARAMS extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a DISPPARAMS struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		DISPPARAMS instance - the new DISPPARAMS instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new DISPPARAMS(), arg_array := [], named_array := [], arg_ptr, named_ptr
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.cArg := NumGet(1*ptr, 2 * A_PtrSize, "UInt")
 		instance.cNamedArgs := NumGet(1*ptr, 2 * A_PtrSize + 4, "UInt")

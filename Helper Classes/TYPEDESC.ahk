@@ -94,14 +94,15 @@ class TYPEDESC extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a TYPEDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		TYPEDESC instance - the new TYPEDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new TYPEDESC()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.vt := NumGet(1*ptr, A_PtrSize, "UInt")
 		if (CCFramework.HasEnumFlag(instance.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(instance.vt, VARENUM.ARRAY))
