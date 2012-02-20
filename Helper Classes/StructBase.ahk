@@ -157,11 +157,12 @@ class StructBase extends _CCF_Error_Handler_
 
 	Parameters:
 		UPTR ptr - a pointer to a struct in memory
+		[opt] BOOL own - set this to false if the instance must not release the given pointer
 
 	Returns:
 		OBJECT instance - the new instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		throw Exception("Abstract method was not overridden.", -1)
 	}
@@ -207,24 +208,35 @@ class StructBase extends _CCF_Error_Handler_
 
 	Parameters:
 		UPTR ptr - the pointer to set
+		[opt] BOOL own - the new value for the <OwnsOriginalPointer> field
 	*/
-	SetOriginalPointer(ptr)
+	SetOriginalPointer(ptr, own := true)
 	{
 		this._internal_orig_ptr_ := ptr
+		this.OwnsOriginalPointer := own
 	}
 
 	; the field holding the original pointer
 	_internal_orig_ptr_ := 0
 
 	/*
+	Field: OwnsOriginalPointer
+	true if the original pointer is allowed to be released by this instance, false if not
+	*/
+	OwnsOriginalPointer := true
+
+	/*
 	Method: ReleaseOriginalPointer
 	if the current instance was created by a call to <FromStructPtr()>, and the pointer passed to the method was previoulsy allocated using CCFramework.AllocateMemory(), this releases the pointer the instance was created from.
+
+	Parameters:
+		[opt] BOOL force - true if the pointer should be released even if <OwnsOriginalPointer> is set to false
 
 	Returns:
 		BOOL success - true on success, false otherwise
 	*/
-	ReleaseOriginalPointer()
+	ReleaseOriginalPointer(force := false)
 	{
-		return CCFramework.FreeMemory(this.GetOriginalPointer())
+		return (this.OwnsOriginalPointer || force) ? CCFramework.FreeMemory(this.GetOriginalPointer()) : 0
 	}
 }
