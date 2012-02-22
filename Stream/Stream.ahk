@@ -33,13 +33,13 @@ class Stream extends SequentialStream
 	static IID := "{0000000c-0000-0000-C000-000000000046}"
 	
 	/*
-	group: constructors
+	group: constructor methods
 
 	Method: FromHGlobal
 	As this class does not support direct creation, you can use this method to create an instance from a handle, e.g. a HICON.
 
 	Parameters:
-		UPTR handle - the handle to create a stream from
+		PTR handle - the handle to create a stream from
 		[opt] BOOL autoRelease - indicates whether the underlying handle provided should be freed automatically if the object is released.
 
 	Returns:
@@ -48,11 +48,13 @@ class Stream extends SequentialStream
 	FromHGlobal(handle, autoRelease := true)
 	{
 		local ptr
-		this._Error(DllCall("Ole32.dll\CreateStreamOnHGlobal", "UPtr", handle, "UInt", autoRelease, "ptr*", ptr))
+		this._Error(DllCall("Ole32.dll\CreateStreamOnHGlobal", "Ptr", handle, "UInt", autoRelease, "Ptr*", ptr, "Int"))
 		return new Stream(ptr)
 	}
 
 	/*
+	group: IStream methods
+
 	Method: Seek
 	changes the seek pointer to a new location. The new location is relative to either the beginning of the stream, the end of the stream, or the current seek pointer.
 
@@ -61,12 +63,12 @@ class Stream extends SequentialStream
 		UINT dwOrigin - The origin for the displacement specified in move. You can use the fields of the STREAM_SEEK class for convenience.
 
 	Returns:
-		UINT64 newPos - the location where this method writes the value of the new seek pointer from the beginning of the stream.
+		INT64 newPos - the location where this method writes the value of the new seek pointer from the beginning of the stream.
 	*/
 	Seek(move, dwOrigin)
 	{
 		local pos
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "int64", move, "uint", dwOrigin, "Uint64*", pos))
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64", move, "UInt", dwOrigin, "Int64*", pos, "Int"))
 		return pos
 	}
 
@@ -75,14 +77,14 @@ class Stream extends SequentialStream
 	changes the size of the stream object.
 
 	Parameters:
-		UINT64 newsize - Specifies the new size of the stream as a number of bytes.
+		INT64 newsize - Specifies the new size of the stream as a number of bytes.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
 	SetSize(newsize)
 	{
-		return this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "uint64", newsize))
+		return this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64", newsize, "Int"))
 	}
 
 	/*
@@ -91,16 +93,16 @@ class Stream extends SequentialStream
 
 	Parameters:
 		Stream destination - either a Stream instance or a pointer to the IStream instance to copy the bytes to.
-		UINT64 byteCount - The number of bytes to copy from the source stream.
-		[opt] byRef UINT64 bytesRead - receives the number of bytes actually read from the source stream
-		[opt] byRef UINT64 bytesWritten - receives the number of byteCount actually written to the destination
+		INT64 byteCount - The number of bytes to copy from the source stream.
+		[opt] byRef INT64 bytesRead - receives the number of bytes actually read from the source stream
+		[opt] byRef INT64 bytesWritten - receives the number of byteCount actually written to the destination
 
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
 	CopyTo(destination, byteCount, byRef bytesRead := "", byRef bytesWritten := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "uptr", (IsObject(destination) ? destination.ptr : destination), "uint64", byteCount, "uint64*", bytesRead, "uint64*", bytesWritten))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(destination) ? destination.ptr : destination, "Int64", byteCount, "Int64*", bytesRead, "Int64*", bytesWritten, "Int"))
 	}
 
 	/*
@@ -115,19 +117,19 @@ class Stream extends SequentialStream
 	*/
 	Commit(flags)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "uint", flags))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", flags, "Int"))
 	}
 
 	/*
 	Method: Revert
-	This method has no effect.
+	discards all changes that have been made to a transacted stream since the last IStream::Commit call.
 
 	Returns:
 		BOOL success - true on success, false otherwise.
 	*/
 	Revert()
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -135,8 +137,8 @@ class Stream extends SequentialStream
 	restricts access to a specified range of bytes in the stream.
 
 	Parameters:
-		UINT64 offset - specifies the byte offset for the beginning of the range.
-		UINT64 byteCount - specifies the length of the range, in bytes, to be restricted.
+		INT64 offset - specifies the byte offset for the beginning of the range.
+		INT64 byteCount - specifies the length of the range, in bytes, to be restricted.
 		UINT lockType - specifies the restrictions being requested on accessing the range. You may use the fields of the LOCKTYPE enumeration class for convenience.
 
 	Returns:
@@ -144,7 +146,7 @@ class Stream extends SequentialStream
 	*/
 	LockRegion(offset, byteCount, lockType)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "uint64", offset, "uint64", byteCount, "uint", lockType))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64", offset, "Int64", byteCount, "UInt", lockType, "Int"))
 	}
 
 	/*
@@ -152,8 +154,8 @@ class Stream extends SequentialStream
 	removes the access restriction on a range of bytes previously restricted with IStream::LockRegion.
 
 	Parameters:
-		UINT64 offset - specifies the byte offset for the beginning of the range.
-		UINT64 byteCount - specifies the length of the range, in bytes, to be restricted.
+		INT64 offset - specifies the byte offset for the beginning of the range.
+		INT64 byteCount - specifies the length of the range, in bytes, to be restricted.
 		UINT lockType - specifies the access restrictions previously placed on the range. You may use the fields of the LOCKTYPE enumeration class for convenience.
 
 	Returns:
@@ -161,7 +163,7 @@ class Stream extends SequentialStream
 	*/
 	UnlockRegion(offset, byteCount, lockType)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "ptr", this.ptr, "uint64", offset, "uint64", byteCount, "uint", lockType))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int64", offset, "Int64", byteCount, "UInt", lockType, "Int"))
 	}
 
 	/*
@@ -178,7 +180,7 @@ class Stream extends SequentialStream
 	{
 		local struct
 		VarSetCapacity(struct, STATSTG.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", &struct, "uint", flag))
+		this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", &struct, "UInt", flag, "Int"))
 		return STATSTG.FromStructPtr(&struct)
 	}
 
@@ -192,7 +194,7 @@ class Stream extends SequentialStream
 	Clone()
 	{
 		local ptr
-		this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "ptr*", ptr))
+		this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", ptr, "Int"))
 		return new Stream(ptr)
 	}
 }
