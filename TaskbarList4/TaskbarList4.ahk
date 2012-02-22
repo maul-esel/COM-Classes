@@ -55,6 +55,6 @@ class TaskbarList4 extends TaskbarList3
 	*/
 	SetTabProperties(hTab, properties)
 	{
-		return this._Error(DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", properties))
+		return this._Error(DllCall(NumGet(this.vt, 21*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hTab, "UInt", properties, "Int"))
 	}
 }

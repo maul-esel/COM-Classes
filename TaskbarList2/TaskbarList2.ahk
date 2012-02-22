@@ -52,6 +52,6 @@ class TaskbarList2 extends TaskbarList
 	*/
 	MarkFullScreen(hWin, ApplyRemove)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Uint", hWin, "UInt", ApplyRemove))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "UInt", ApplyRemove, "Int"))
 	}
 }

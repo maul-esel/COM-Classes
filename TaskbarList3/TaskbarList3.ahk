@@ -53,7 +53,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetProgressValue(hWin, value)
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "int64", value, "int64", 100))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "Int64", value, "Int64", 100, "Int"))
 	}
 
 	/*
@@ -81,7 +81,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetProgressState(hWin, state)
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", state))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "UInt", state, "Int"))
 	}
 
 	/*
@@ -104,7 +104,7 @@ class TaskbarList3 extends TaskbarList2
 	*/	
 	RegisterTab(hTab, hWin)
 	{
-		return this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin))
+		return this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hTab, "Ptr", hWin, "Int"))
 	}
 
 	/*
@@ -126,7 +126,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	UnRegisterTab(hTab)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "UInt", hTab))
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hTab, "Int"))
 	}
 
 	/*
@@ -149,7 +149,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetTabOrder(hTab, hBefore := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hBefore))
+		return this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hTab, "Ptr", hBefore, "Int"))
 	}
 
 	/*
@@ -172,7 +172,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetTabActive(hTab, hWin)
 	{
-		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "UInt", hTab, "UInt", hWin, "UInt", 0))
+		return this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hTab, "Ptr", hWin, "UInt", 0, "Int")) ; msdn: param #3 is reserved
 	}
 
 	/*
@@ -196,7 +196,7 @@ class TaskbarList3 extends TaskbarList2
 		local bool, free_mem := false
 		if IsObject(array)
 			count := count ? count : array.maxIndex(), array := this.ParseArray(array), free_mem := true
-		bool := this._Error(DllCall(NumGet(this.vt + 15 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", count, "UPtr", array))
+		bool := this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "UInt", count, "Ptr", array, "Int"))
 		if free_mem
 			CCFramework.FreeMemory(array)
 		return bool
@@ -219,7 +219,7 @@ class TaskbarList3 extends TaskbarList2
 		local bool, free_mem := false
 		if IsObject(array)
 			count := count ? count : array.maxIndex(), array := this.ParseArray(array), free_mem := true
-		bool := this._Error(DllCall(NumGet(this.vt + 16 * A_PtrSize), "ptr", this.ptr, "uptr", hWin, "UInt", count, "UPtr", array))
+		bool := this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "UInt", count, "Ptr", array, "Int"))
 		if free_mem
 			CCFramework.FreeMemory(array)
 		return bool
@@ -238,7 +238,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	ThumbBarSetImageList(hWin, il)
 	{
-		return this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", il))
+		return this._Error(DllCall(NumGet(this.vt, 17*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "Ptr", il, "Int"))
 	}
 
 	/*
@@ -265,7 +265,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetOverlayIcon(hWin, Icon, altText := "")
 	{
-		return this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "Ptr", this.ptr, "uint", hWin, "uint", Icon, "str", altText))
+		return this._Error(DllCall(NumGet(this.vt, 18*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "Ptr", Icon, "Str", altText, "Int"))
 	}
 
 	/*
@@ -288,7 +288,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetThumbnailTooltip(hWin, Tooltip)
 	{
-		return this._Error(DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "str", Tooltip))
+		return this._Error(DllCall(NumGet(this.vt, 19*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "Str", Tooltip, "Int"))
 	}
 
 	/*
@@ -312,7 +312,7 @@ class TaskbarList3 extends TaskbarList2
 	*/
 	SetThumbnailClip(hWin, clip)
 	{
-		return this._Error(DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "UInt", hWin, "UPtr", IsObject(clip) ? clip.ToStructPtr() : clip))
+		return this._Error(DllCall(NumGet(this.vt, 20*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", hWin, "Ptr", IsObject(clip) ? clip.ToStructPtr() : clip, "Int"))
 	}
 
 	/*
