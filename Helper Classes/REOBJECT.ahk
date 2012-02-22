@@ -136,14 +136,15 @@ class REOBJECT extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a REOBJECT struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		REOBJECT instance - the new REOBJECT instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new REOBJECT()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.cbStruct	:= NumGet(1*ptr,	00+0*A_PtrSize,	"UInt")
 		instance.cp			:= NumGet(1*ptr,	04+0*A_PtrSize,	"UInt")

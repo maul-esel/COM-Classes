@@ -79,14 +79,15 @@ class PARAMDESCEX extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a PARAMDESCEX struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		PARAMDESCEX instance - the new PARAMDESCEX instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new PARAMDESCEX(CCFramework.BuildVARIANTARG(ptr))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

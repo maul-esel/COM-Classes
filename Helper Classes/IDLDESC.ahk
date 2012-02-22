@@ -74,14 +74,15 @@ class IDLDESC extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a IDLDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		IDLDESC instance - the new IDLDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new IDLDESC(NumGet(1*ptr,	00,	"UInt"), NumGet(1*ptr,	04,	"UShort"))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

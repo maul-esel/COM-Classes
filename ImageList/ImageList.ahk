@@ -277,9 +277,10 @@ class ImageList extends Unknown
 	*/
 	Merge(index1, index2, xoffset, yoffset, punk2)
 	{
-		local out
-		this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index1, "Ptr", punk2.QueryInterface(Unknown.IID), "Int", index2, "Int", xoffset, "Int", yoffset, "Ptr", CCFramework.String2GUID(this.IID), "Ptr*", out, "Int"))
-		return new ImageList(out)
+		local out, mem
+		VarSetCapacity(mem, 16, 00)
+		if this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index1, "Ptr", punk2.QueryInterface(Unknown.IID), "Int", index2, "Int", xoffset, "Int", yoffset, "Ptr", CCFramework.String2GUID(this.IID, &mem), "Ptr*", out, "Int"))
+			return new ImageList(out)
 	}
 
 	/*
@@ -506,7 +507,7 @@ class ImageList extends Unknown
 		INT index - the index of the image
 		INT xHotspot - contains the x-component of the hot spot within the new image. 
 		INT yHotspot - contains the x-component of the hot spot within the new image. 
-		ImageList il - the ImageList that contains the specified image. If omitted, the current instance is used.
+		ImageList il - the ImageList that contains the specified image.
 
 	Returns:
 		BOOL success - true on success, false otherwise

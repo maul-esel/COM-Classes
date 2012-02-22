@@ -74,14 +74,15 @@ class PARAMDATA extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a PARAMDATA struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		PARAMDATA instance - the new PARAMDATA instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new PARAMDATA(StrGet(NumGet(1*ptr, 00, "UPtr")), NumGet(1*ptr, A_PtrSize,	"UShort"))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

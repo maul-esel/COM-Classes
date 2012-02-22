@@ -72,14 +72,15 @@ class SAFEARRAYBOUND extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a SAFEARRAYBOUND struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		SAFEARRAYBOUND instance - the new SAFEARRAYBOUND instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new SAFEARRAYBOUND(NumGet(1*ptr, 00, "UInt"), NumGet(1*ptr, 04, "UInt"))
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

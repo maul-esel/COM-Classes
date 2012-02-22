@@ -98,14 +98,15 @@ class TLIBATTR extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a TLIBATTR struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		TLIBATTR instance - the new TLIBATTR instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new TLIBATTR()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.guid			:= CCFramework.GUID2String(ptr)
 		instance.lcid			:= NumGet(1*ptr,	16,	"UInt")

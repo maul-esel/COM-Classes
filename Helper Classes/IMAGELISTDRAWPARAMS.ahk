@@ -192,14 +192,15 @@ class IMAGELISTDRAWPARAMS extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a IMAGELISTDRAWPARAMS struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		IMAGELISTDRAWPARAMS instance - the new IMAGELISTDRAWPARAMS instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new IMAGELISTDRAWPARAMS()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.cbSize		:= NumGet(1*ptr,	00 + 0*A_PtrSize,	"UInt")
 		instance.ptr		:= NumGet(1*ptr,	04 + 0*A_PtrSize,	"UPtr")

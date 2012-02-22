@@ -37,7 +37,7 @@ class CF
 
 	Supported since Windows...
 	*/
-	static DIBV5 := CF.GetWindowsVersion() >= 0x0500 ? 17 : ""
+	static DIBV5 := 17
 
 	/*
 	Field: DIF
@@ -93,7 +93,7 @@ class CF
 
 	Supported since Windows...
 	*/
-	static HDROP := CF.GetWindowsVersion() >= 0x0400 ? 15 : ""
+	static HDROP := 15
 
 	/*
 	Field: LOCALE
@@ -104,7 +104,7 @@ class CF
 
 	Supported since Windows...
 	*/
-	static LOCALE := CF.GetWindowsVersion() >= 0x0400 ? 16 : ""
+	static LOCALE := 16
 
 	/*
 	Field: METAFILEPICT
@@ -189,7 +189,7 @@ class CF
 	/*
 	Field: MAX
 	*/
-	static MAX := (v := CF.GetWindowsVersion()) < 0x0400 ? 15 : (v < 0x0500 ? 17 : 18)
+	static MAX := 18
 
 	/*
 	Field: HTML

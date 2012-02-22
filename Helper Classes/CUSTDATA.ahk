@@ -97,18 +97,19 @@ class CUSTDATA extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a CUSTDATA struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		CUSTDATA instance - the new CUSTDATA instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance, array := [], size := CUSTDATAITEM.GetRequiredSize(), count := NumGet(1*ptr, 00, "UInt"), arr_ptr := NumGet(1*ptr, 04, "Ptr")
 		Loop count
 			array.Insert(CUSTDATAITEM.FromStructPtr(arr_ptr + (A_Index - 1) * size))
 
 		instance := new CUSTDATA(array, count)
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
 

@@ -92,16 +92,17 @@ class ARRAYDESC extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a ARRAYDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		ARRAYDESC instance - the new ARRAYDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		static td_size := TYPEDESC.GetRequiredSize(), sab_size := SAFEARRAYBOUND.GetRequiredSize()
 
 		local instance := new ARRAYDESC()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.tdescElem := TYPEDESC.FromStructPtr(ptr)
 		instance.cDims := NumGet(1*ptr, td_size, "UShort")

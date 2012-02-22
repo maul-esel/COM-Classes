@@ -105,14 +105,15 @@ class SYSTEMTIME extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a SYSTEMTIME struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		SYSTEMTIME instance - the new SYSTEMTIME instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new SYSTEMTIME()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.wYear			:= NumGet(1*ptr,	00, "short")
 		instance.wMonth			:= NumGet(1*ptr,	02,	"short")

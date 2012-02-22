@@ -80,16 +80,17 @@ class ELEMDESC extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a ELEMDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		ELEMDESC instance - the new ELEMDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		static td_size := TYPEDESC.GetRequiredSize()
 
 		local instance := new ELEMDESC()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.tdesc := TYPEDESC.FromStructPtr(ptr)
 		, instance.idldesc := IDLDESC.FromStructPtr(ptr + td_size)

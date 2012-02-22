@@ -181,14 +181,15 @@ class TYPEATTR extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a TYPEATTR struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		TYPEATTR instance - the new TYPEATTR instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new TYPEATTR()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.guid				:= CCFramework.GUID2String(ptr)
 		instance.lcid				:= NumGet(1*ptr,	16+0*A_PtrSize,	"UInt")

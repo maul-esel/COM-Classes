@@ -122,14 +122,15 @@ class WIN32_FIND_DATA extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a WIN32_FIND_DATA struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		WIN32_FIND_DATA instance - the new WIN32_FIND_DATA instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new WIN32_FIND_DATA()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.dwFileAttributes	:= NumGet(1*ptr,	00,	"UInt")
 		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04)

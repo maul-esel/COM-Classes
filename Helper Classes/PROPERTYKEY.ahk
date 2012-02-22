@@ -69,14 +69,15 @@ class PROPERTYKEY extends StructBase
 
 	Parameters:
 		UPTR ptr - a pointer to a PROPERTYKEY struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		PROPERTYKEY instance - the new PROPERTYKEY instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		local instance := new PROPERTYKEY()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.fmtid	:= CCFramework.GUID2String(ptr)
 		instance.pid	:= NumGet(1*ptr,	16,	"UInt")

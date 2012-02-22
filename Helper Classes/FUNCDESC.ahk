@@ -134,16 +134,17 @@ class FUNCDESC extends StructBase
 
 	Parameters:
 		PTR ptr - a pointer to a FUNCDESC struct in memory
+		[opt] BOOL own - false if the instance must no release the pointer (defaults to true)
 
 	Returns:
 		FUNCDESC instance - the new FUNCDESC instance
 	*/
-	FromStructPtr(ptr)
+	FromStructPtr(ptr, own := true)
 	{
 		static ed_size := ELEMDESC.GetRequiredSize()
 
 		local instance := new FUNCDESC()
-		instance.SetOriginalPointer(ptr)
+		instance.SetOriginalPointer(ptr, own)
 
 		instance.memid := NumGet(1*ptr, 00, "UInt")
 		, instance.lprgscode := NumGet(NumGet(1*ptr, 04, "Ptr"), 00, "UInt")
