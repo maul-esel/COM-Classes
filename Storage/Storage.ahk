@@ -52,7 +52,7 @@ class Storage extends Unknown
 	CreateStream(name, access)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "Ptr", this.ptr, "Str", name, "UInt", access, "UInt", 0, "UInt", 0, "Ptr*", out)) ; msdn: param #3/4 are reserved
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", access, "UInt", 0, "UInt", 0, "Ptr*", out, "Int")) ; msdn: param #3/4 are reserved
 		return IsObject(Stream) ? new Stream(out) : out
 	}
 
@@ -70,7 +70,7 @@ class Storage extends Unknown
 	OpenStream(name, access)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "Ptr", this.ptr, "Str", name, "UInt", 0, "UInt", access, "UInt", 0, "Ptr*", out)) ; msdn: param #2/4 are reserved
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Ptr", 0, "UInt", access, "UInt", 0, "Ptr*", out, "Int")) ; msdn: param #2/4 are reserved
 		return IsObject(Stream) ? new Stream(out) : out
 	}
 
@@ -88,7 +88,7 @@ class Storage extends Unknown
 	CreateStorage(name, access)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "Ptr", this.ptr, "Str", name, "UInt", access, "UInt", 0, "UInt", 0, "Ptr*", out)) ; msdn: param #3/4 are reserved
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", access, "UInt", 0, "UInt", 0, "Ptr*", out, "Int")) ; msdn: param #3/4 are reserved
 		return new Storage(out)
 	}
 
@@ -106,7 +106,7 @@ class Storage extends Unknown
 	OpenStorage(name, access)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "Ptr", this.ptr, "Str", name, "Ptr", 0, "UInt", access, "Ptr", 0, "UInt", 0, "Ptr*", out)) ; msdn: param #2/4 must be NULL, #5 is reserved
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Ptr", 0, "UInt", access, "Ptr", 0, "UInt", 0, "Ptr*", out, "Int")) ; msdn: param #2/4 must be NULL, #5 is reserved
 		return new Storage(out)
 	}
 
@@ -147,7 +147,7 @@ class Storage extends Unknown
 			}
 			nameExclude := &mem2
 		}
-		return this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "Ptr", this.ptr, "UInt", iidExcludeCount, "Ptr", iidExclude, "Ptr", nameExclude, "Ptr", IsObject(dest) ? dest.ptr : dest))
+		return this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", iidExcludeCount, "Ptr", iidExclude, "Ptr", nameExclude, "Ptr", IsObject(dest) ? dest.ptr : dest, "Int"))
 	}
 
 	/*
@@ -165,7 +165,7 @@ class Storage extends Unknown
 	*/
 	MoveElementTo(name, dest, newName, operation)
 	{
-		return this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "Ptr", this.ptr, "Str", name, "Ptr", IsObject(dest) ? dest.ptr : dest, "Str", newName, "UInt", operation))
+		return this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Ptr", IsObject(dest) ? dest.ptr : dest, "Str", newName, "UInt", operation, "Int"))
 	}
 
 	/*
@@ -188,7 +188,7 @@ class Storage extends Unknown
 	*/
 	Commit(flags)
 	{
-		return this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "Ptr", this.ptr, "UInt", flags))
+		return this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", flags, "Int"))
 	}
 
 	/*
@@ -200,7 +200,7 @@ class Storage extends Unknown
 	*/
 	Revert()
 	{
-		return this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "Ptr", this.ptr))
+		return this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int"))
 	}
 
 	/*
@@ -216,7 +216,7 @@ class Storage extends Unknown
 	EnumElements()
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "UInt", 0, "Ptr", 0, "UInt", 0, "Ptr*", out)) ; msdn: param #1-#3 are reserved
+		this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", 0, "Ptr", 0, "UInt", 0, "Ptr*", out, "Int")) ; msdn: param #1-#3 are reserved
 		return IsObject(EnumSTATSTG) ? new EnumSTATSTG(out) : out
 	}
 
@@ -232,7 +232,7 @@ class Storage extends Unknown
 	*/
 	DestroyElement(name)
 	{
-		return this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "Ptr", this.ptr, "Str", name))
+		return this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Int"))
 	}
 
 	/*
@@ -248,7 +248,7 @@ class Storage extends Unknown
 	*/
 	RenameElement(oldName, newName)
 	{
-		return this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "Ptr", this.ptr, "Str", oldName, "Str", newName))
+		return this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", oldName, "Str", newName, "Int"))
 	}
 
 	/*
@@ -266,7 +266,7 @@ class Storage extends Unknown
 	*/
 	SetElementTimes(name := "", creationTime := 0, accessTime := 0, modTime := 0)
 	{
-		return this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "Ptr", this.ptr, "Ptr", name ? &name : 0, "Ptr", IsObject(creationTime) ? creationTime.ToStructPtr() : creationTime, "Ptr", IsObject(accessTime) ? accessTime.ToStructPtr() : accessTime, "Ptr", IsObject(modTime) ? modTime.ToStructPtr() : modTime))
+		return this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "Ptr", IsObject(creationTime) ? creationTime.ToStructPtr() : creationTime, "Ptr", IsObject(accessTime) ? accessTime.ToStructPtr() : accessTime, "Ptr", IsObject(modTime) ? modTime.ToStructPtr() : modTime, "Int"))
 	}
 
 	/*
@@ -284,7 +284,7 @@ class Storage extends Unknown
 		local mem
 		if !CCFramework.isInteger(clsid)
 			VarSetCapacity(mem, 16, 00), clsid := CCFramework.String2GUID(clsid, &mem)
-		return this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "Ptr", this.ptr, "Ptr", clsid))
+		return this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", clsid, "Int"))
 	}
 
 	/*
@@ -300,7 +300,7 @@ class Storage extends Unknown
 	*/
 	SetStateBits(state, mask)
 	{
-		return this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "Ptr", this.ptr, "UInt", state, "UInt", mask))
+		return this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", state, "UInt", mask, "Int"))
 	}
 
 	/*
@@ -316,7 +316,7 @@ class Storage extends Unknown
 	Stat(flags := 0)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "Ptr", this.ptr, "Ptr*", out, "UInt", flags))
+		this._Error(DllCall(NumGet(this.vt, 17*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "UInt", flags, "Int"))
 		return IsObject(STATSTG) ? new STATSTG(out) : out
 	}
 }
