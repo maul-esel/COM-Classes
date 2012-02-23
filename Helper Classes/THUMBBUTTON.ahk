@@ -76,9 +76,10 @@ class THUMBBUTTON extends StructBase
 		NumPut(this.dwMask,		1*ptr,	000+0*A_PtrSize,	"UInt")
 		NumPut(this.iId,		1*ptr,	004+0*A_PtrSize,	"UInt")
 		NumPut(this.iBitmap,	1*ptr,	008+0*A_PtrSize,	"UInt")
-		NumPut(this.hIcon,		1*ptr,	012+0*A_PtrSize,	"UPtr")
-		StrPut(this.szTip,		1*ptr + 012+1*A_PtrSize,	260,	"UTF-16")
-		NumPut(this.dwFlags,	1*ptr,	532+1*A_PtrSize,	"UInt")
+		padding := A_PtrSize == 8 ? 4 : 0 ; padding: 4 bytes on 64bit, 0 on 32bit
+		NumPut(this.hIcon,		1*ptr,	012+0*A_PtrSize + padding,	"Ptr")
+		StrPut(this.szTip,		1*ptr + 012+1*A_PtrSize + padding,	260,	"UTF-16")
+		NumPut(this.dwFlags,	1*ptr,	532+1*A_PtrSize + padding,	"UInt")
 
 		return ptr
 	}
@@ -102,9 +103,10 @@ class THUMBBUTTON extends StructBase
 		instance.dwMask		:=	NumGet(1*ptr,	000+0*A_PtrSize,	"UInt")
 		instance.iId		:=	NumGet(1*ptr,	004+0*A_PtrSize,	"UInt")
 		instance.iBitmap	:=	NumGet(1*ptr,	008+0*A_PtrSize,	"UInt")
-		instance.hIcon		:=	NumGet(1*ptr,	012+0*A_PtrSize,	"UPtr")
-		instance.szTip		:=	StrGet(1*ptr  + 012+1*A_PtrSize,	260,	"UTF-16")
-		instance.dwFlags	:=	NumGet(1*ptr,	272+1*A_PtrSize,	"UInt")
+		padding := A_PtrSize == 8 ? 4 : 0 ; padding: 4 bytes on 64bit, 0 on 32bit
+		instance.hIcon		:=	NumGet(1*ptr,	012+0*A_PtrSize + padding,	"UPtr")
+		instance.szTip		:=	StrGet(1*ptr  + 012+1*A_PtrSize + padding,	260,	"UTF-16")
+		instance.dwFlags	:=	NumGet(1*ptr,	272+1*A_PtrSize + padding,	"UInt")
 
 		return instance
 	}
@@ -125,6 +127,6 @@ class THUMBBUTTON extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
-		return A_PtrSize + 536
+		return A_PtrSize == 8 ? 552 : 540 ;A_PtrSize + 536
 	}
 }
