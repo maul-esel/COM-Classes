@@ -26,6 +26,7 @@ Example:
 	#include Stream\Stream.ahk
 	#include Constant Classes\IDI.ahk
 	#include Constant Classes\PICTYPE.ahk
+	#include Structure Classes\StructBase.ahk
 	#include Structure Classes\PICTDESC.ahk
 	#include Constant Classes\STREAM_SEEK.ahk
 	#include SaveHImage2File.ahk
