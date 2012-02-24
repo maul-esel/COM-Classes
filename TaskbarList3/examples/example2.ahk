@@ -11,21 +11,21 @@ License:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 7, Windows Server 2008 R2 or higher
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, TaskbarList, TaskbarList2, TaskbarList3, StructBase, THUMBBUTTON, IDI, THUMBBUTTONMASK, THUMBBUTTONFLAGS
 */
 
 #SingleInstance force
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #include ..\..\TaskbarList\TaskbarList.ahk
 #include ..\..\TaskbarList2\TaskbarList2.ahk
 #include ..\TaskbarList3.ahk
-#Include ..\..\Helper Classes\StructBase.ahk
-#include ..\..\Helper Classes\IDI.ahk
-#include ..\..\Helper Classes\THUMBBUTTON.ahk
-#include ..\..\Helper Classes\THUMBBUTTONMASK.ahk
-#include ..\..\Helper Classes\THUMBBUTTONFLAGS.ahk
+#Include ..\..\Structure Classes\StructBase.ahk
+#include ..\..\Constant Classes\IDI.ahk
+#include ..\..\Structure Classes\THUMBBUTTON.ahk
+#include ..\..\Constant Classes\THUMBBUTTONMASK.ahk
+#include ..\..\Constant Classes\THUMBBUTTONFLAGS.ahk
 
 OnExit GuiClose
 OnMessage(0x111, "WM_COMMAND") ; monitor clicks on buttons

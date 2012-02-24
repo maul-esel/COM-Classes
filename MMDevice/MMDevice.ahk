@@ -16,7 +16,8 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - (CLSCTX, PROPVARIANT), DEVICE_STATE, STGM
+	Constant classes - CLSCTX, DEVICE_STATE, STGM
+	Structure classes - (PROPVARIANT)
 	Other classes - CCFramework, PropertyStore
 */
 class MMDevice extends Unknown

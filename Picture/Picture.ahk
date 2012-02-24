@@ -14,9 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - Windows 2000 Professional / Windows 2000 Server
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper Classes - PICTYPE, RECT, PICTUREATTRIBUTES, PICTDESC
+	Constant Classes - PICTYPE
+	Structure classes - RECT, PICTUREATTRIBUTES, PICTDESC
 	Other classes - Stream, CCFramework
 */
 class Picture extends Unknown

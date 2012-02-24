@@ -14,10 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
+	Constant classes - DESCKIND, INVOKEKIND
+	Structure classes - FUNCDESC, VARDESC
 	Other classes - CCFramework, TypeInfo
-	Helper classes - DESCKIND, FUNCDESC, VARDESC, INVOKEKIND
 */
 class TypeComp extends Unknown
 {
@@ -54,7 +54,7 @@ class TypeComp extends Unknown
 		if (!hash)
 			hash := DllCall("OleAut32\LHashValOfName", "UInt", 0, "Str", name)
 		bool := this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", hash, "Short", flags, "Ptr*", info, "UInt*", kind, "Ptr*", outValue, "Int"))
-		if (info && IsObject(TypeInfo)
+		if (info && IsObject(TypeInfo))
 			info := new TypeInfo(info)
 		if (kind == 1 && IsObject(FUNCDESC))
 			outValue := FUNCDESC.FromStructPtr(outValue)
@@ -84,7 +84,7 @@ class TypeComp extends Unknown
 		if (!hash)
 			hash := DllCall("OleAut32\LHashValOfName", "UInt", 0, "Str", name)
 		bool := this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", hash, "Ptr*", info, "Ptr*", comp, "Int"))
-		if (info && IsObject(TypeInfo)
+		if (info && IsObject(TypeInfo))
 			info := new TypeInfo(info)
 		if (comp)
 			comp := new TypeComp(comp)
