@@ -10,14 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TypeLib2)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221256%28v=vs.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221256)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown, TypeLib
 	Other classes - CCFramework
-	Helper classes - CUSTDATA
+	Structure classes - CUSTDATA
 */
 class TypeLib2 extends TypeLib
 {

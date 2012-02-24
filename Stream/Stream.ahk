@@ -16,7 +16,8 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown, SequentialStream
-	Helper classes - STGC, LOCKTYPE, STATFLAG, STREAM_SEEK, STATSTG
+	Constant classes - STGC, LOCKTYPE, STATFLAG, STREAM_SEEK
+	Structure classes - STATSTG
 */
 class Stream extends SequentialStream
 {

@@ -10,14 +10,14 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TypeLib)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221549%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221549)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - CCFramework, TypeInfo, TypeComp
-	Helper classes - TYPEKIND, TLIBATTR, MEMBERID
+	Constant classes - TYPEKIND, MEMBERID
+	Structure classes - TLIBATTR
 */
 class TypeLib extends Unknown
 {
@@ -159,7 +159,7 @@ class TypeLib extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr*", out))
-		return TLIBATTR.FromStructPtr(out)
+		return TLIBATTR.FromStructPtr(out, false)
 	}
 
 	/*

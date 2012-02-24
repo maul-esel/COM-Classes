@@ -18,16 +18,16 @@ Remarks:
 
 Example:
 	(start code)
-	#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+	#include _CCF_Error_Handler_.ahk
 	#include CCFramework.ahk
 	#include Unknown\Unknown.ahk
 	#include Picture\Picture.ahk
 	#include SequentialStream\SequentialStream.ahk
 	#include Stream\Stream.ahk
-	#include Helper Classes\IDI.ahk
-	#include Helper Classes\PICTYPE.ahk
-	#include Helper Classes\PICTDESC.ahk
-	#include Helper Classes\STREAM_SEEK.ahk
+	#include Constant Classes\IDI.ahk
+	#include Constant Classes\PICTYPE.ahk
+	#include Structure Classes\PICTDESC.ahk
+	#include Constant Classes\STREAM_SEEK.ahk
 	#include SaveHImage2File.ahk
 
 	hIcon := DllCall("LoadIcon", "uptr", 0, "uint", IDI.HAND, "ptr") ; load a system icon

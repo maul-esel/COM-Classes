@@ -15,9 +15,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - Windows 2000 Professional / Windows 2000 Server or newer
+	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - STGM, STGC, STGMOVE, FILETIME, STATSTG, STATFLAG
+	Constant classes - STGM, STGC, STGMOVE, STATFLAG
+	Structure classes - FILETIME, STATSTG
 	Other classes - SequentialStream, Stream, EnumSTATSTG, CCFramework
 */
 class Storage extends Unknown

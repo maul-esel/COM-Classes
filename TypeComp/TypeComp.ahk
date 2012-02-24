@@ -14,10 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
+	Constant classes - DESCKIND, INVOKEKIND
+	Structure classes - FUNCDESC, VARDESC
 	Other classes - CCFramework, TypeInfo
-	Helper classes - DESCKIND, FUNCDESC, VARDESC, INVOKEKIND
 */
 class TypeComp extends Unknown
 {
@@ -47,6 +47,9 @@ class TypeComp extends Unknown
 
 	Returns:
 		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If a VARDESC or FUNCDESC is returned via "outValue", the caller is responsible for deleting it with the returned type description ("info") by calling ITypeInfo::ReleaseFuncDesc or ITypeInfo::ReleaseVarDesc on it.
 	*/
 	Bind(name, hash := 0, flags := 0, byRef info := "", byRef kind := 0, byRef outValue := 0)
 	{
@@ -54,12 +57,12 @@ class TypeComp extends Unknown
 		if (!hash)
 			hash := DllCall("OleAut32\LHashValOfName", "UInt", 0, "Str", name)
 		bool := this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", hash, "Short", flags, "Ptr*", info, "UInt*", kind, "Ptr*", outValue, "Int"))
-		if (info && IsObject(TypeInfo)
+		if (info && IsObject(TypeInfo))
 			info := new TypeInfo(info)
 		if (kind == 1 && IsObject(FUNCDESC))
-			outValue := FUNCDESC.FromStructPtr(outValue)
+			outValue := FUNCDESC.FromStructPtr(outValue, false)
 		if ((kind == 2 || kind == 4) && IsObject(VARDESC))
-			outValue := VARDESC.FromStructPtr(outValue)
+			outValue := VARDESC.FromStructPtr(outValue, false)
 		if (kind == 3)
 			outValue := new TypeComp(outValue)
 		return bool
@@ -84,7 +87,7 @@ class TypeComp extends Unknown
 		if (!hash)
 			hash := DllCall("OleAut32\LHashValOfName", "UInt", 0, "Str", name)
 		bool := this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Str", name, "UInt", hash, "Ptr*", info, "Ptr*", comp, "Int"))
-		if (info && IsObject(TypeInfo)
+		if (info && IsObject(TypeInfo))
 			info := new TypeInfo(info)
 		if (comp)
 			comp := new TypeComp(comp)

@@ -12,10 +12,10 @@ License:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Windows XP or Windows Server 2003 or higher.
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, ProgressDialog
 */
 #SingleInstance
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #Include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\ProgressDialog.ahk

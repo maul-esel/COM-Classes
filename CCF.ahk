@@ -14,7 +14,7 @@ Remarks:
 class: _CCF_Error_Handler_
 the base class that includes error handling
 */
-#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include _CCF_Error_Handler_.ahk
 
 /*
 class: CCFramework
@@ -239,4 +239,4 @@ group: helper structs
 class: StructBase
 a base class for all struct classes
 */
-#include Helper Classes\StructBase.ahk
+#include Structure Classes\StructBase.ahk

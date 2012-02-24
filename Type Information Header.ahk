@@ -2,30 +2,11 @@
 Header: Type Information
 includes all classes related to the type information system
 */
-#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include _CCF_Error_Handler_.ahk
 #include CCFramework.ahk
 
-#include Helper Classes
+#include Structure Classes\
 #include StructBase.ahk
-
-#include DISPID.ahk
-#include MEMBERID.ahk
-
-#include IDLFLAG.ahk
-#include VARFLAG.ahk
-#include PARAMFLAG.ahk
-#include FUNCFLAG.ahk
-#include TYPEFLAG.ahk
-#include LIBFLAGS.ahk
-#include IMPLTYPEFLAG.ahk
-
-#include VARKIND.ahk
-#include FUNCKIND.ahk
-#include TYPEKIND.ahk
-#include SYSKIND.ahk
-#include REGKIND.ahk
-#include DESCKIND.ahk
-#include INVOKEKIND.ahk
 
 #include IDLDESC.ahk
 #include VARDESC.ahk
@@ -45,11 +26,32 @@ includes all classes related to the type information system
 #include TYPEATTR.ahk
 #include TLIBATTR.ahk
 
+#include EXCEPINFO.ahk
+#include DISPPARAMS.ahk
+
+#Include ..\Constant Classes\
+#include DISPID.ahk
+#include MEMBERID.ahk
+
+#include IDLFLAG.ahk
+#include VARFLAG.ahk
+#include PARAMFLAG.ahk
+#include FUNCFLAG.ahk
+#include TYPEFLAG.ahk
+#include LIBFLAGS.ahk
+#include IMPLTYPEFLAG.ahk
+
+#include VARKIND.ahk
+#include FUNCKIND.ahk
+#include TYPEKIND.ahk
+#include SYSKIND.ahk
+#include REGKIND.ahk
+#include DESCKIND.ahk
+#include INVOKEKIND.ahk
+
 #include DISPATCHF.ahk
 #include VARENUM.ahk
 #include CALLCONV.ahk
-#include EXCEPINFO.ahk
-#include DISPPARAMS.ahk
 
 #include ..\
 #include Unknown\Unknown.ahk

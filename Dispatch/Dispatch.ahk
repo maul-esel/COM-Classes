@@ -14,10 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
 	Other classes - CCFramework, TypeInfo
-	Helper classes - DISPID, MEMBERID, DISPATCHF, DISPPARAMS, EXCEPINFO
+	Constant classes - DISPID, MEMBERID, DISPATCHF
+	Structure classes - DISPPARAMS, EXCEPINFO
 */
 class Dispatch extends Unknown
 {

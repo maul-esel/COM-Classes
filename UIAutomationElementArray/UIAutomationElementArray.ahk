@@ -10,7 +10,7 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/UIAutomationElementArray)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ee671426%28v=vs.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ee671426)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
