@@ -11,10 +11,10 @@ License:
 Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, TaskbarList
 */
 #SingleInstance
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\TaskbarList.ahk
