@@ -10,13 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PARAMDESC)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221089%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221089)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - PARAMDESCEX, PARAMFLAG
+	Constant classes - PARAMFLAG
+	Structure classes - PARAMDESCEX
 	Other classes - CCFramework
 */
 class PARAMDESC extends StructBase

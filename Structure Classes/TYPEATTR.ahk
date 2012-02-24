@@ -10,13 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TYPEATTR)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221003%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221003)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - DISPID, MEMBERID, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
+	Constant classes - DISPID, MEMBERID, TYPEKIND
+	Structure classes - IDLDESC, TYPEDESC, ARRAYDESC
 */
 class TYPEATTR extends StructBase
 {

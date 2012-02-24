@@ -10,11 +10,10 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/LIBFLAGS)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221149%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221149)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 */
 class LIBFLAGS
 {

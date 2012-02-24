@@ -10,11 +10,10 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/DISPPARAMS)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221416%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221416)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
 	Other classes - CCFramework
 */

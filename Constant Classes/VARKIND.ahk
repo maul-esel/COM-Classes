@@ -10,11 +10,10 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/VARKIND)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221381%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221381)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 */
 class VARKIND
 {

@@ -14,10 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
+	Constant classes - DESCKIND, INVOKEKIND
+	Structure classes - FUNCDESC, VARDESC
 	Other classes - CCFramework, TypeInfo
-	Helper classes - DESCKIND, FUNCDESC, VARDESC, INVOKEKIND
 */
 class TypeComp extends Unknown
 {

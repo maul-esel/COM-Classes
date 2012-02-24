@@ -10,14 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/DISPATCHF)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221359%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221359)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 
 Remarks:
-	This class is named DISPATCHF instead of DISPATCH (as the C++ constants) to avoid a possible conflict with the IDispatch interface (which would, when wrapped, handled by a class called "Dispatch").
+	This class is named DISPATCHF instead of DISPATCH (as the C++ constants) to avoid a conflict with the Dispatch interface class.
 */
 class DISPATCHF
 {

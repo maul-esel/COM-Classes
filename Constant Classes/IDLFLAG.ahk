@@ -10,11 +10,10 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/IDLFLAG)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/aa909796.aspx, originally intended for Windows Mobile)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/aa909796, originally intended for Windows Mobile)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 */
 class IDLFLAG
 {

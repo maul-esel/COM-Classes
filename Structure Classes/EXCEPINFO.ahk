@@ -10,7 +10,7 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/EXCEPINFO)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221133%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221133)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha

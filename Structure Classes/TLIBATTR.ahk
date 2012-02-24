@@ -10,13 +10,12 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TLIBATTR)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221376%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221376)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - SYSKIND, LIBFLAGS
+	Constant classes - SYSKIND, LIBFLAGS
 	Other classes - CCFramework
 */
 class TLIBATTR extends StructBase

@@ -16,7 +16,8 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - REO, DVASPECT, SIZE
+	Constant classes - REO, DVASPECT
+	Structure classes - SIZE
 	Other classes - CCFramework
 */
 class REOBJECT extends StructBase

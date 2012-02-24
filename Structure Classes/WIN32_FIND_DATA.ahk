@@ -16,7 +16,8 @@ Requirements:
 	AutoHotkey - AHK v2 alpha
 	OS - Windows XP / Windows Server 2003 or higher
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - FILETIME, FILE_ATTRIBUTE
+	Constant classes - FILE_ATTRIBUTE
+	Structure classes - FILETIME
 */
 class WIN32_FIND_DATA extends StructBase
 {

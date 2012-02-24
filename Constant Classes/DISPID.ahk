@@ -10,11 +10,10 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/DISPID)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221242%28v=vs.85%29)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221242)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 */
 class DISPID
 {

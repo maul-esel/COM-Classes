@@ -14,9 +14,8 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - IDLFLAG
+	Constant classes - IDLFLAG
 */
 class IDLDESC extends StructBase
 {

@@ -10,13 +10,12 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/PARAMDATA)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221100%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221100)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - VARENUM
+	Constant classes - VARENUM
 */
 class PARAMDATA extends StructBase
 {

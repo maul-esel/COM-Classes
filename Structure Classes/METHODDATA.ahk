@@ -10,13 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/METHODDATA)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221359%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221359)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - VARENUM, DISPID, MEMBERID, CALLCONV, DISPATCHF, PARAMDATA
+	Constant classes - VARENUM, DISPID, MEMBERID, CALLCONV, DISPATCHF
+	Structure classes - PARAMDATA
 */
 class METHODDATA extends StructBase
 {

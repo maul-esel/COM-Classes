@@ -14,9 +14,9 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - MEMBERID, ELEMDESC, FUNCKIND, INVOKEKIND, CALLCONV, FUNCFLAGS
+	Constant classes - DISPID, MEMBERID, FUNCKIND, INVOKEKIND, CALLCONV, FUNCFLAGS
+	Structure classes - ELEMDESC
 */
 class FUNCDESC extends StructBase
 {

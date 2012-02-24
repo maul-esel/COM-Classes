@@ -10,13 +10,13 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/TYPEDESC)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221162%28v=VS.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221162)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - VARENUM, (ARRAYDESC)
+	Constant classes - VARENUM
+	Structure classes - ARRAYDESC
 	Other classes - CCFramework
 */
 class TYPEDESC extends StructBase

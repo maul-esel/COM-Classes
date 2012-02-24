@@ -14,9 +14,9 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - MEMBERID, ELEMDESC, VARKIND, VARFLAGS
+	Constant classes - MEMBERID, VARKIND, VARFLAGS
+	Structure classes - ELEMDESC
 	Other classes - CCFramework
 */
 class VARDESC extends StructBase

@@ -14,9 +14,8 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, StructBase
-	Helper classes - TYPEDESC, PARAMDESC, [IDLDESC]
+	Helper classes - TYPEDESC, PARAMDESC, IDLDESC
 	Other classes - CCFramework
 */
 class ELEMDESC extends StructBase
