@@ -2,14 +2,16 @@
 Header: TaskbarList
 includes all classes related to TaskbarList management
 */
-#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include _CCF_Error_Handler_.ahk
 #include CCFramework.ahk
 
-#include Helper Classes
+#include Structure Classes\
 #include StructBase.ahk
-#include TBPFlag.ahk
 #include RECT.ahk
 #include THUMBBUTTON.ahk
+
+#Include ..\Constant Classes\
+#include TBPFlag.ahk
 
 #include ..\
 #include Unknown\Unknown.ahk
