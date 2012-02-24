@@ -135,7 +135,7 @@ class ARRAYDESC extends StructBase
 		local count := IsObject(data) && data.HasKey("cDims")
 			? data.cDims ; if cDims was passed: use this value
 			: (this != ARRAYDESC) ; if not called as static method but on instance:
-				? (this.cDims == -1 ; if user did not change original value:
+				? (this.cDims == -1) ; if user did not change original value:
 					? IsObject(this.rgbounds) ; if we have an AHK-array of dimension bounds:
 						? this.rgbounds.maxIndex() ; use its length
 						: 1 ; if it is not an AHK-array but a pointer, use 1

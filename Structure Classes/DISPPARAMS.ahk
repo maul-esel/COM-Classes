@@ -128,7 +128,7 @@ class DISPPARAMS extends StructBase
 
 		arg_ptr := NumGet(1*ptr, 00, "Ptr")
 		Loop instance.cArgs
-			arg_array.Insert(CCFramework.BuildVARIANTARG(arg_ptr + (A_Index - 1) * 16)
+			arg_array.Insert(CCFramework.BuildVARIANTARG(arg_ptr + (A_Index - 1) * 16))
 
 		named_ptr := NumGet(1*ptr, A_PtrSize, "Ptr")
 		Loop instance.cNamedArgs
