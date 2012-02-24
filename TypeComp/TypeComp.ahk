@@ -47,6 +47,9 @@ class TypeComp extends Unknown
 
 	Returns:
 		BOOL success - true on success, false otherwise
+
+	Remarks:
+		If a VARDESC or FUNCDESC is returned via "outValue", the caller is responsible for deleting it with the returned type description ("info") by calling ITypeInfo::ReleaseFuncDesc or ITypeInfo::ReleaseVarDesc on it.
 	*/
 	Bind(name, hash := 0, flags := 0, byRef info := "", byRef kind := 0, byRef outValue := 0)
 	{
@@ -57,9 +60,9 @@ class TypeComp extends Unknown
 		if (info && IsObject(TypeInfo))
 			info := new TypeInfo(info)
 		if (kind == 1 && IsObject(FUNCDESC))
-			outValue := FUNCDESC.FromStructPtr(outValue)
+			outValue := FUNCDESC.FromStructPtr(outValue, false)
 		if ((kind == 2 || kind == 4) && IsObject(VARDESC))
-			outValue := VARDESC.FromStructPtr(outValue)
+			outValue := VARDESC.FromStructPtr(outValue, false)
 		if (kind == 3)
 			outValue := new TypeComp(outValue)
 		return bool

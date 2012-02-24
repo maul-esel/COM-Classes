@@ -159,7 +159,7 @@ class TypeLib extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "ptr*", out))
-		return TLIBATTR.FromStructPtr(out)
+		return TLIBATTR.FromStructPtr(out, false)
 	}
 
 	/*

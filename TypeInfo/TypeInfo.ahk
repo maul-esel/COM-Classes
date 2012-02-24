@@ -39,12 +39,15 @@ class TypeInfo extends Unknown
 
 	Returns:
 		TYPEATTR info - an instance of the TYPEATTR class containing the information
+
+	Remarks:
+		Free the returned structure by passing it to <ReleaseTypeAttr>.
 	*/
 	GetTypeAttr()
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", out))
-		return TYPEATTR.FromStructPtr(out)
+		return TYPEATTR.FromStructPtr(out, false)
 	}
 
 	/*
@@ -78,7 +81,7 @@ class TypeInfo extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
-		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out) : out
+		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out, false) : out
 	}
 
 	/*
@@ -98,7 +101,7 @@ class TypeInfo extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
-		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out) : out
+		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out, false) : out
 	}
 
 	/*
