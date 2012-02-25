@@ -29,6 +29,12 @@ the base class for all other CCF interface classes
 #include Unknown\Unknown.ahk
 
 /*
+class: StructBase
+a base class for all structure classes
+*/
+#include Structure Classes\StructBase.ahk
+
+/*
 class: Dispatch
 implements the IDispatch interface and provides its dynamic-call functionality
 */
@@ -39,6 +45,12 @@ class: CustomDestinationList
 a class for managing custom jump lists in Windows7
 */
 #include CustomDestinationList\CustomDestinationList.ahk
+
+/*
+class: RichEditOLE
+class for managing a RichEdit control
+*/
+#include RichEditOLE\RichEditOLE.ahk
 
 /*
 group: Images
@@ -96,12 +108,6 @@ class: ObjectCollection
 provides more methods for IUnknown-derived instance arrays
 */
 #include ObjectCollection\ObjectCollection.ahk
-
-/*
-class: EnumShellItems
-enumerates a collection of IShellItems
-*/
-#include EnumShellItems\EnumShellItems.ahk
 
 /*
 group: progress dialogs
@@ -176,15 +182,6 @@ enumerates storage or stream descriptions
 #include EnumSTATSTG\EnumSTATSTG.ahk
 
 /*
-group: RichEdit management
-*/
-/*
-class: RichEditOLE
-class for managing a RichEdit control
-*/
-#include RichEditOLE\RichEditOLE.ahk
-
-/*
 group: shell
 */
 /*
@@ -192,6 +189,12 @@ class: ShellItem
 represents an "Shell item", such as a file
 */
 #include ShellItem\ShellItem.ahk
+
+/*
+class: EnumShellItems
+enumerates a collection of IShellItems
+*/
+#include EnumShellItems\EnumShellItems.ahk
 
 /*
 class: ShellLinkW
@@ -306,12 +309,3 @@ class: UIAutomationElementArray
 represents an array of UIAutomation elements
 */
 #include UIAutomationElementArray\UIAutomationElementArray.ahk
-
-/*
-group: helper structs
-*/
-/*
-class: StructBase
-a base class for all struct classes
-*/
-#include Structure Classes\StructBase.ahk
