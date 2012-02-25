@@ -29,6 +29,12 @@ the base class for all other CCF interface classes
 #include Unknown\Unknown.ahk
 
 /*
+class: Dispatch
+implements the IDispatch interface and provides its dynamic-call functionality
+*/
+#include Dispatch\Dispatch.ahk
+
+/*
 class: CustomDestinationList
 a class for managing custom jump lists in Windows7
 */
@@ -63,6 +69,18 @@ class: MMDeviceEnumerator
 a class for enumerating devices
 */
 #include MMDeviceEnumerator\MMDeviceEnumerator.ahk
+
+/*
+class: MMDeviceCollection
+represents a collection of devices
+*/
+#include MMDeviceCollection\MMDeviceCollection.ahk
+
+/*
+class: MMDevice
+represents an audio device
+*/
+#include MMDevice\MMDevice.ahk
 
 /*
 group: collections
@@ -146,6 +164,18 @@ a class for managing a stream
 #include Stream\Stream.ahk
 
 /*
+class: Storage
+represents a storage, aka "filesystem in a file"
+*/
+#include Storage\Storage.ahk
+
+/*
+class: EnumSTATSTG
+enumerates storage or stream descriptions
+*/
+#include EnumSTATSTG\EnumSTATSTG.ahk
+
+/*
 group: RichEdit management
 */
 /*
@@ -212,6 +242,45 @@ provides even more methods for the taskbar
 #include TaskbarList4\TaskbarList4.ahk
 
 /*
+group: type information
+*/
+/*
+class: ProvideClassInfo
+provides type information interfaces for a class
+*/
+#include ProvideClassInfo\ProvideClassInfo.ahk
+
+/*
+class: TypeComp
+provides type functionality for compilers
+*/
+#include TypeComp\TypeComp.ahk
+
+/*
+class: TypeInfo
+provides detailed information on a type
+*/
+#include TypeInfo\TypeInfo.ahk
+
+/*
+class: TypeInfo2
+provides even more information on a type
+*/
+#include TypeInfo2\TypeInfo2.ahk
+
+/*
+class: TypeLib
+provides functionality for loading type information from a library
+*/
+#include TypeLib\TypeLib.ahk
+
+/*
+class: TypeLib2
+provides even more functionality for type libraries
+*/
+#include TypeLib2\TypeLib2.ahk
+
+/*
 group: UIAutomation
 */
 /*
@@ -231,6 +300,12 @@ class: UIAutomationBoolCondition
 represents a condition that can either be true or false
 */
 #Include UIAutomationBoolCondition\UIAutomationBoolCondition.ahk
+
+/*
+class: UIAutomationElementArray
+represents an array of UIAutomation elements
+*/
+#include UIAutomationElementArray\UIAutomationElementArray.ahk
 
 /*
 group: helper structs
