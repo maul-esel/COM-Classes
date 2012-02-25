@@ -105,7 +105,7 @@ class CUSTDATA extends StructBase
 	{
 		local instance, array := [], size := CUSTDATAITEM.GetRequiredSize(), count := NumGet(1*ptr, 00, "UInt"), arr_ptr := NumGet(1*ptr, 04, "Ptr")
 		Loop count
-			array.Insert(CUSTDATAITEM.FromStructPtr(arr_ptr + (A_Index - 1) * size))
+			array.Insert(CUSTDATAITEM.FromStructPtr(arr_ptr + (A_Index - 1) * size, false))
 
 		instance := new CUSTDATA(array, count)
 		instance.SetOriginalPointer(ptr, own)

@@ -207,8 +207,8 @@ class TYPEATTR extends StructBase
 		instance.wTypeFlags			:= NumGet(1*ptr,	50+1*A_PtrSize,	"UShort")
 		instance.wMajorVerNum		:= NumGet(1*ptr,	52+1*A_PtrSize,	"UShort")
 		instance.wMinorVerNum		:= NumGet(1*ptr,	54+1*A_PtrSize,	"UShort")
-		instance.tdescAlias			:= TYPEDESC.FromStructPtr(ptr+56+A_PtrSize)
-		instance.idldescType		:= IDLDESC.FromStructPtr(ptr+56+A_PtrSize+instance.tdescAlias.GetRequiredSize())
+		instance.tdescAlias			:= TYPEDESC.FromStructPtr(ptr+56+A_PtrSize, false)
+		instance.idldescType		:= IDLDESC.FromStructPtr(ptr+56+A_PtrSize+instance.tdescAlias.GetRequiredSize(), false)
 
 		return instance
 	}

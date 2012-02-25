@@ -85,7 +85,7 @@ class PARAMDESC extends StructBase
 	*/
 	FromStructPtr(ptr, own := true)
 	{
-		local instance := new PARAMDESC(NumGet(1*ptr, 20, "UShort"), PARAMDESCEX.FromStructPtr(ptr))
+		local instance := new PARAMDESC(NumGet(1*ptr, 20, "UShort"), PARAMDESCEX.FromStructPtr(ptr, false))
 		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}

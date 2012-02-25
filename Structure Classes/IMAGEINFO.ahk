@@ -108,7 +108,7 @@ class IMAGEINFO extends StructBase
 	{
 		local instance := new IMAGEINFO(NumGet(1*ptr,	00+0*A_PtrSize, "UPtr")
 						,	NumGet(1*ptr,		00+1*A_PtrSize, "UPtr")
-						,	RECT.FromStructPtr(ptr + 08 + 2*A_PtrSize))
+						,	RECT.FromStructPtr(ptr + 08 + 2*A_PtrSize, false))
 		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}

@@ -155,7 +155,7 @@ class FUNCDESC extends StructBase
 		, instance.cParams := NumGet(1*ptr, 16 + 2 * A_PtrSize, "Short")
 		, instance.cParamsOpt := NumGet(1*ptr, 18 + 2 * A_PtrSize, "Short")
 		, instance.oVft := NumGet(1*ptr, 20 + 2 * A_PtrSize, "Short")
-		, instance.elemdescFunc := ELEMDESC.FromStructPtr(ptr + 24 + 2 * A_PtrSize)
+		, instance.elemdescFunc := ELEMDESC.FromStructPtr(ptr + 24 + 2 * A_PtrSize, false)
 		, instance.wFuncFlags := NumGet(1*ptr, 24 + 2 * A_PtrSize + ed_size, "Short")
 
 		return instance

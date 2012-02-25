@@ -134,9 +134,9 @@ class WIN32_FIND_DATA extends StructBase
 		instance.SetOriginalPointer(ptr, own)
 
 		instance.dwFileAttributes	:= NumGet(1*ptr,	00,	"UInt")
-		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04)
-		instance.ftLastAccessTime	:= FILETIME.FromStructPtr(ptr + 12)
-		instance.ftLastWriteTime	:= FILETIME.FromStructPtr(ptr + 20)
+		instance.ftCreationTime		:= FILETIME.FromStructPtr(ptr + 04, false)
+		instance.ftLastAccessTime	:= FILETIME.FromStructPtr(ptr + 12, false)
+		instance.ftLastWriteTime	:= FILETIME.FromStructPtr(ptr + 20, false)
 		instance.nFileSizeHigh		:= NumGet(1*ptr,	28,	"UInt")
 		instance.nFileSizeLow		:= NumGet(1*ptr,	32,	"UInt")
 		instance.dwReserved0		:= NumGet(1*ptr,	36,	"UInt")
