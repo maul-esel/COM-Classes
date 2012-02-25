@@ -126,7 +126,7 @@ class VARDESC extends StructBase
 			instance.oInst := NumGet(1*ptr, 04 + A_PtrSize, "UInt")
 		else if (instance.varkind == 2)
 			instance.lpvarValue := CCFramework.BuildVARIANT(NumGet(1*ptr, 04 + A_PtrSize, "Ptr"))
-		instance.elemdescVar := ELEMDESC.FromStructPtr(ptr + 04 + 2 * A_PtrSize)
+		instance.elemdescVar := ELEMDESC.FromStructPtr(ptr + 04 + 2 * A_PtrSize, false)
 		, instance.wVarFlags := NumGet(1*ptr, 04 + 2 * A_PtrSize + ed_size, "UShort")
 
 		return instance

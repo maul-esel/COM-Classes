@@ -103,12 +103,12 @@ class ARRAYDESC extends StructBase
 		local instance := new ARRAYDESC()
 		instance.SetOriginalPointer(ptr, own)
 
-		instance.tdescElem := TYPEDESC.FromStructPtr(ptr)
+		instance.tdescElem := TYPEDESC.FromStructPtr(ptr, false)
 		instance.cDims := NumGet(1*ptr, td_size, "UShort")
 
 		instance.rgbounds := []
 		Loop instance.cDims
-			instance.rgbounds.Insert(SAFEARRAYBOUND.FromStructPtr(ptr + td_size + 2 + (A_Index - 1) * sab_size))
+			instance.rgbounds.Insert(SAFEARRAYBOUND.FromStructPtr(ptr + td_size + 2 + (A_Index - 1) * sab_size, false))
 
 		return instance
 	}

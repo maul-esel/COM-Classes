@@ -153,7 +153,7 @@ class REOBJECT extends StructBase
 		instance.poleobj	:= NumGet(1*ptr,	24+0*A_PtrSize,	"UPtr")
 		instance.pstg		:= NumGet(1*ptr,	24+1*A_PtrSize,	"UPtr")
 		instance.polesite	:= NumGet(1*ptr,	24+2*A_PtrSize,	"UPtr")
-		instance.sizel 		:= SIZE.FromStructPtr(ptr + 24+3*A_PtrSize)
+		instance.sizel 		:= SIZE.FromStructPtr(ptr + 24+3*A_PtrSize, false)
 		instance.dvaspect	:= NumGet(1*ptr,	32+3*A_PtrSize,	"UInt")
 		instance.dwFlags	:= NumGet(1*ptr,	36+3*A_PtrSize,	"UInt")
 		instance.dwUser		:= NumGet(1*ptr,	40+3*A_PtrSize,	"UInt")

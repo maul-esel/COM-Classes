@@ -91,9 +91,9 @@ class ELEMDESC extends StructBase
 		local instance := new ELEMDESC()
 		instance.SetOriginalPointer(ptr, own)
 
-		instance.tdesc := TYPEDESC.FromStructPtr(ptr)
-		, instance.idldesc := IDLDESC.FromStructPtr(ptr + td_size)
-		, instance.paramdesc := PARAMDESC.FromStructPtr(ptr + td_size)
+		instance.tdesc := TYPEDESC.FromStructPtr(ptr, false)
+		, instance.idldesc := IDLDESC.FromStructPtr(ptr + td_size, false)
+		, instance.paramdesc := PARAMDESC.FromStructPtr(ptr + td_size, false)
 
 		return instance
 	}
