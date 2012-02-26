@@ -36,10 +36,10 @@ class POINT extends StructBase
 	creates a new instance of the POINT class
 
 	Parameters:
-		x - the initial value for the <x> field
-		y - the initial value for the <y> field
+		[opt] INT x - the initial value for the <x> field
+		[opt] INT y - the initial value for the <y> field
 	*/
-	__New(x, y)
+	__New(x := 0, y := 0)
 	{
 		this.x := x, this.y := y
 	}
