@@ -44,7 +44,7 @@ a class for managing custom jump lists in Windows7
 class: KDC
 a constant class containing system-defined jump list categories
 */
-#include KDC.ahk
+#include Constant Classes\KDC.ahk
 
 /*
 class: FILE_ATTRIBUTE
@@ -89,6 +89,36 @@ a constant class specifying the type of a variable
 #include Constant Classes\VARENUM.ahk
 
 /*
+class: FILETIME
+a structure class representing the number of 100-nanosecond-intervals since 1601
+*/
+#Include Structure Classes\FILETIME.ahk
+
+/*
+class: POINT
+a structure class holding the x- and y-coordinate for a point
+*/
+#Include Structure Classes\POINT.ahk
+
+/*
+class: RECT
+a structure class describing a rectangle
+*/
+#Include Structure Classes\RECT.ahk
+
+/*
+class: SIZE
+a structure class specifying the size of a rectangle
+*/
+#Include Structure Classes\SIZE.ahk
+
+/*
+class: SYSTEMTIME
+a structure class specifying date and time
+*/
+#Include Structure Classes\SYSTEMTIME.ahk
+
+/*
 group: RichEdit management
 */
 /*
@@ -110,6 +140,24 @@ a constant class containing flags that control a REOBJECT structure
 #include Constant Classes\REO.ahk
 
 /*
+class: CHARRANGE
+a structure class describing a range of characters in the RichEdit control
+*/
+#Include Structure Classes\CHARRANGE.ahk
+
+/*
+class: REOBJECT
+a structure class describing an object in a RichEdit control
+*/
+#Include Structure Classes\REOBJECT.ahk
+
+/*
+class: SAFEARRAYBOUND
+a structure class describing a COM SafeArray
+*/
+#Include Structure Classes\SAFEARRAYBOUND.ahk
+
+/*
 group: Images
 */
 /*
@@ -129,6 +177,30 @@ class: Picture
 a class for managing a picture
 */
 #include Picture\Picture.ahk
+
+/*
+class: IMAGEINFO
+a structure class containing information about an image in an image list
+*/
+#Include Structure Classes\IMAGEINFO.ahk
+
+/*
+class: IMAGELISTDRAWPARAMS
+a structure class containing information about an image list draw operation
+*/
+#Include Structure Classes\IMAGELISTDRAWPARAMS.ahk
+
+/*
+class: IMAGELISTSTATS
+a structure class containing information about an image list statistics
+*/
+#Include Structure Classes\IMAGELISTSTATS.ahk
+
+/*
+class: PICTDESC
+a structure class describing a picture object
+*/
+#Include Structure Classes\PICTDESC.ahk
 
 /*
 class: IDC
@@ -350,6 +422,12 @@ a constant class containing property state flags
 #include Constant Classes\PSC.ahk
 
 /*
+class: PROPERTYKEY
+a structure class identifying a property
+*/
+#Include Structure Classes\PROPERTYKEY.ahk
+
+/*
 group: streams
 */
 /*
@@ -419,6 +497,12 @@ a constant class used to calculate the new seek-pointer location in a stream
 #include Constant Classes\STREAM_SEEK.ahk
 
 /*
+class: STATSTG
+a structure class holdign statistics about a Stream or Storage
+*/
+#Include Structure Classes\STATSTG.ahk
+
+/*
 group: shell
 */
 /*
@@ -479,6 +563,12 @@ a constant class containing flags on how to find a ShellLink's target
 #include Constant Classes\SLR.ahk
 
 /*
+class: WIN32_FIND_DATA
+a structure class containing information about a file found by an API
+*/
+#Include Structure Classes\WIN32_FIND_DATA.ahk
+
+/*
 group: Taskbar
 */
 /*
@@ -528,6 +618,12 @@ class: THUMBBUTTONMASK
 a constant class containing flags htat indicate the valid parts of a THUMNNUTTON structure
 */
 #include Constant Classes\THUMBBUTTONMASK.ahk
+
+/*
+class: THUMBBUTTON
+a structure class describing a taskbar thumbnail toolbar button
+*/
+#Include Structure Classes\THUMBBUTTON.ahk
 
 /*
 group: type information
@@ -650,7 +746,7 @@ a constant class containing type library flags
 class: PARAMFLAGS
 a constant class containing parameter flags
 */
-#include Constant Classes\PARAMFLAGS.ahk
+#include Constant Classes\PARAMFLAG.ahk
 
 /*
 class: REGKIND
@@ -687,6 +783,108 @@ class: VARKIND
 a constant class specifying a variable's kind
 */
 #include Constant Classes\VARKIND.ahk
+
+/*
+class: ARRAYDESC
+a structure class describing an array
+*/
+#include Structure Classes\ARRAYDESC.ahk
+
+/*
+class: CUSTDATA
+a structure class representing custom data
+*/
+#Include Structure Classes\CUSTDATA.ahk
+
+/*
+class: CUSTDATAITEM
+a structure class representing a custom data item
+*/
+#Include Structure Classes\CUSTDATAITEM.ahk
+
+/*
+class: DISPPARAMS
+a structure class containing arguments passed to a method or property
+*/
+#Include Structure Classes\DISPPARAMS.ahk
+
+/*
+class: ELEMDESC
+a structure class containing data for a variable, function or function parameter
+*/
+#Include Structure Classes\ELEMDESC.ahk
+
+/*
+class: EXCEPINFO
+a structure class containing data about an exception
+*/
+#Include Structure Classes\EXCEPINFO.ahk
+
+/*
+class: FUNCDESC
+a structure class describing a function
+*/
+#Include Structure Classes\FUNCDESC.ahk
+
+/*
+class: IDLDESC
+a structure class used for transferring s structure element, parameter or return value
+*/
+#Include Structure Classes\IDLDESC.ahk
+
+/*
+class: INTERFACEDATA
+a structure class that describes an interface
+*/
+#Include Structure Classes\INTERFACEDATA.ahk
+
+/*
+class: METHODDATA
+a structure class describing a method
+*/
+#Include Structure Classes\METHODDATA.ahk
+
+/*
+class: PARAMDATA
+a structure class describing a parameter
+*/
+#Include Structure Classes\PARAMDATA.ahk
+
+/*
+class: PARAMDESC
+a structure class used for transferring a parameter
+*/
+#Include Structure Classes\PARAMDESC.ahk
+
+/*
+class: PARAMDESCEX
+a structure class containing information about a parameter default value
+*/
+#Include Structure Classes\PARAMDESCEX.ahk
+
+/*
+class: TLIBATTR
+a structure class containing information about a type library
+*/
+#Include Structure Classes\TLIBATTR.ahk
+
+/*
+class: TYPEATTR
+a structure class containing information about a type
+*/
+#Include Structure Classes\TYPEATTR.ahk
+
+/*
+class: TYPEDESC
+a structure class describing a type
+*/
+#Include Structure Classes\TYPEDESC.ahk
+
+/*
+class: VARDESC
+a structure class describing a variable
+*/
+#Include Structure Classes\VARDESC.ahk
 
 /*
 group: UIAutomation
