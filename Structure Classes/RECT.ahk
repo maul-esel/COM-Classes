@@ -48,10 +48,10 @@ class RECT extends StructBase
 	creates a new instance of the RECT class
 
 	Parameters:
-		[opt] left - the initial value for the <left> field
-		[opt] top - the initial value for the <top> field
-		[opt] right - the initial value for the <right> field
-		[opt] bottom - the initial value for the <bottom> field
+		[opt] INT left - the initial value for the <left> field
+		[opt] INT top - the initial value for the <top> field
+		[opt] INT right - the initial value for the <right> field
+		[opt] INT bottom - the initial value for the <bottom> field
 	*/
 	__New(left := 0, top := 0, right := 0, bottom := 0)
 	{
