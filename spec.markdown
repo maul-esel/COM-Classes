@@ -128,7 +128,7 @@ However, sometimes the memory must be still valid when the method allocating it 
 Methods must not create global variables if not absolutely needed. The only global (or super-global) variables allowed are the classes (and possibly [type definitions](#header_files)).
 Since AutoHotkey also has "super-global" variables, this includes that any local variable must explicitly be declared as local to avoid overwriting a super-global.
 
-## Array handling
+### Array handling
 Methods or structure classes sometimes need to handle arrays. This can either be arrays of structures or of pure values (integers, pointers, `BYTE`, ...).
 In such a case they must as well accept a pointer to an array in memory or an AutoHotkey object (AutoHotkey array). This distinction can easily be made using `IsObject()`.
 In case it's an AutoHotkey array, the array can hold pointers to structure instances or instances of the specific [structure class](#structure_classes) or it can be mixed.
@@ -152,7 +152,7 @@ The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can 
 Here as well, single object fields may not be considered pointers to `VARIANT` structures but integer values for the `VARIANT` structures.
 Those values must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
 
-## GUIDs
+### GUIDs
 Any method or structure class handling GUIDs (or IIDs or CLSIDs or KNOWNFOLDERIDs or any other type which is actually a GUID)
 must be able to handle either a string representing the GUID (such as `"{7C476BA2-02B1-48f4-8048-B24619DDC058}"`) or a raw pointer to the GUID in memory.
 The distinction between those can be made using the `is` operator to check if the given value is an integer (or in AutoHotkey v2, `CCFramework.isInteger()`).
