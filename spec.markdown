@@ -183,7 +183,7 @@ The wrapper object is an AutoHotkey object with 3 fields:
 field	| description
 --------|-------------------------------------------------------------------------
 `ref`	| contains a pointer to the VARIANT structure in memory
-`vt`	| contains the variable tpye, as defined e.g. in the VARENUM helper class
+`vt`	| contains the variable type, as defined e.g. in the VARENUM helper class
 `value`	| contains the value: an integer, string or COM wrapper object
 
 A COM method that accepts a `VARIANT` should receive the `ref` field with a type of `"Ptr"`.
