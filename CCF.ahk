@@ -539,6 +539,12 @@ Remarks:
 global ShellLink := ShellLinkW
 
 /*
+class: KNOWNFOLDERID
+a constant class representing GUIDs (constants) that identify standard folders registered with the system as Known Folders.
+*/
+#include Constant Classes\KNOWNFOLDERID.ahk
+
+/*
 class: SICHINT
 a constant class containing ShellItem compare flags
 */
