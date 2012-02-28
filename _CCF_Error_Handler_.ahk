@@ -15,7 +15,7 @@ class _CCF_Error_Handler_
 	{
 		local param_list, i, p
 
-		if !IsFunc("Obj" . method)
+		if (!IsFunc("Obj" . method) && method != "_NewEnum")
 		{
 			param_list := ""
 			For i, p in params
