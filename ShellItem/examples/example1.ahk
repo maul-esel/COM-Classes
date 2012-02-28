@@ -22,17 +22,18 @@ Requirements:
 #Include ..\..\Constant Classes\SFGAO.ahk
 #Include ..\..\Constant Classes\KNOWNFOLDERID.ahk
 
+
 ; #############################################
 ; Explicit filepath
-shItem := ShellItem.FromAbsolutePath(A_ScriptDir "\data\test.txt")
+shItem := ShellItem.FromAbsolutePath(A_AhkPath)
 
 ; display a few names
 MsgBox % "NORMALDISPLAY: <" shItem.GetDisplayName() ">`nFILESYSPATH: <" shItem.GetDisplayName(SIGDN.FILESYSPATH) ">`nDESKTOPABSOLUTEEDITING: <" shItem.GetDisplayName(SIGDN.DESKTOPABSOLUTEEDITING) ">`nPARENTRELATIVEFORADDRESSBAR: <" shItem.GetDisplayName(SIGDN.PARENTRELATIVEFORADDRESSBAR) ">"
 
 ; checking some attributes
 ret := shItem.GetAttributes((SFGAO.HASPROPSHEET | SFGAO.ENCRYPTED | SFGAO.FOLDER | SFGAO.BROWSABLE), bits)
-; to display wheter the flag is set or not, we need some bitwise operations
-MsgBox % "HASPROPSHEET: <" ((bits & SFGAO.HASPROPSHEET) > 0) ">`nENCRYPTED: <" ((bits & SFGAO.ENCRYPTED) > 0) ">`nFOLDER: <" ((bits & SFGAO.FOLDER) > 0) ">`nBROWSABLE: <" ((bits & SFGAO.BROWSABLE) > 0) ">"  
+; to display wheter the flag is set or not, we use Utility function - or some bitwise operations
+MsgBox % "HASPROPSHEET: <" CCFramework.HasEnumFlag(bits, SFGAO.HASPROPSHEET) ">`nENCRYPTED: <" CCFramework.HasEnumFlag(bits,SFGAO.ENCRYPTED) ">`nFOLDER: <" ((bits & SFGAO.FOLDER) > 0) ">`nBROWSABLE: <" ((bits & SFGAO.BROWSABLE) > 0) ">" 
 
 ; ############################################
 ; Known Folder
@@ -40,7 +41,7 @@ shItem := ShellItem.FromKnownFolder(KNOWNFOLDERID.PublicDocuments)
 MsgBox % "NORMALDISPLAY: <" shItem.GetDisplayName() ">`nFILESYSPATH: <" shItem.GetDisplayName(SIGDN.FILESYSPATH) ">`nDESKTOPABSOLUTEEDITING: <" shItem.GetDisplayName(SIGDN.DESKTOPABSOLUTEEDITING) ">`nPARENTRELATIVEFORADDRESSBAR: <" shItem.GetDisplayName(SIGDN.PARENTRELATIVEFORADDRESSBAR) ">"
 
 ret := shItem.GetAttributes((SFGAO.HASPROPSHEET | SFGAO.ENCRYPTED | SFGAO.FOLDER | SFGAO.BROWSABLE), bits)
-MsgBox % "HASPROPSHEET: <" ((bits & SFGAO.HASPROPSHEET) > 0) ">`nENCRYPTED: <" ((bits & SFGAO.ENCRYPTED) > 0) ">`nFOLDER: <" ((bits & SFGAO.FOLDER) > 0) ">`nBROWSABLE: <" ((bits & SFGAO.BROWSABLE) > 0) ">" 
+MsgBox % "HASPROPSHEET: <" CCFramework.HasEnumFlag(bits, SFGAO.HASPROPSHEET) ">`nENCRYPTED: <" CCFramework.HasEnumFlag(bits,SFGAO.ENCRYPTED) ">`nFOLDER: <" CCFramework.HasEnumFlag(bits,SFGAO.FOLDER) ">`nBROWSABLE: <" CCFramework.HasEnumFlag(bits,SFGAO.BROWSABLE) ">"  
 
 ; #############################################
 ; Comparing Known Folder Item vs. Explicit filepath item
