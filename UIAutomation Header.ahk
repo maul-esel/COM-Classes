@@ -1,5 +1,5 @@
 ﻿/*
-Header: UIAtomation
+Header: UIAutomation
 includes all classes realted to the UI Automation system (only a few interfaces are wrapped)
 */
 #include _CCF_Error_Handler_.ahk
@@ -9,3 +9,5 @@ includes all classes realted to the UI Automation system (only a few interfaces 
 #include UIAutomationCondition\UIAutomationCondition.ahk
 #include UIAutomationNotCondition\UIAutomationNotCondition.ahk
 #include UIAutomationBoolCondition\UIAutomationBoolCondition.ahk
+
+#include UIAutomation\UIAutomation.ahk
