@@ -152,6 +152,10 @@ The above does not fully apply to `VARIANT` (or `VARIANTARG`) arrays: those can 
 Here as well, single object fields may not be considered pointers to `VARIANT` structures but integer values for the `VARIANT` structures.
 Those values must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
 
+#### COM SAFEARRAYs
+When a COM SAFEARRAY is expected (which can be created in AutoHotkey using `ComObjArray()`), the code should accept a raw pointer to the array structure as well as an AutoHotkey ComObjArray() - object.
+To get the value from the array object (which can be recognized using `IsObject()`), `ComObjValue()` must be called on it.
+
 ### GUIDs
 Any method or structure class handling GUIDs (or IIDs or CLSIDs or KNOWNFOLDERIDs or any other type which is actually a GUID)
 must be able to handle either a string representing the GUID (such as `"{7C476BA2-02B1-48f4-8048-B24619DDC058}"`) or a raw pointer to the GUID in memory.
@@ -198,6 +202,14 @@ The `VARIANTARG` structure is essentially the same as the `VARIANT` structure.
 The handling methods `CCFramework.CreateVARIANTARG(value)` and `CCFramework.BuildVARIANTARG(ptr)` are simply aliases for the `VARIANT` handling methods.
 For better readability (and maintainability) classes should still differentiate between those.
 Besides this, all guidelines defined above apply to `VARIANTARG` structures, too.
+
+### Working with other interfaces
+When a method or structure class field expects a pointer to another interface, it should be able to handle both a raw interface pointer or a wrapper instance.
+The code should generally be written so that it can handle a wrapper object even if the interface is not yet wrapped.
+
+It's easy to distinguish between a pointer and a class instance using `IsObject()`. The COM pointer to a class instance can be accessed using the `ptr` field.
+However, if the expected interface inherits `IDispatch` and is therefore unlikely to be wrapped, the code must instead be able to handle a COM object defined by AutoHotkey.
+In this case, the pointer is accessed using `ComObjUnwrap()` (whereas the difference can still be detected using `IsObject()`).
 
 ***
 
