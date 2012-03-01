@@ -50,7 +50,7 @@ class Unknown extends _CCF_Error_Handler_
 	static ThrowOnCreation := false
 
 	/*
-	group: metafunctions
+	group: meta-functions
 
 	Method: __New
 	constructor for all inherited classes
@@ -98,6 +98,18 @@ class Unknown extends _CCF_Error_Handler_
 	__Delete()
 	{
 		return ObjRelease(this.ptr)
+	}
+
+	/*
+	group: builtin method overrides
+
+	Method: _Clone
+	an override for the internal method _Clone() to make it also increase the underlying COM instance's reference count
+	*/
+	_Clone()
+	{
+		this.AddRef() ; no matter if called on "this" or the new clone - same COM pointer
+		return ObjClone(this)
 	}
 
 	/*
