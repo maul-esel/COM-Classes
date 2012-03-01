@@ -12,10 +12,10 @@ License:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows XP or Windows Server 2003 or higher.
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, ProgressDialog
 */
 #SingleInstance force
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #Include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\ProgressDialog.ahk
@@ -32,7 +32,7 @@ if (!progress.StartProgressDialog()) ; show the dialog
 
 Loop 100
 {
-	progress.SetProgress(A_Index) ; update progress
+	progress.SetProgress(A_Index, 100) ; update progress
 	sleep 500
 	if (progress.HasUserCanceled()) ; if user canceled:
 	{

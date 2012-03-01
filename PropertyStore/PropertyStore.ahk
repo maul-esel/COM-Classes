@@ -16,7 +16,7 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - PROPERTYKEY
+	Structure classes - PROPERTYKEY
 */
 class PropertyStore extends Unknown
 {

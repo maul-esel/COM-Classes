@@ -10,14 +10,14 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/AHK_Lv1.1/TypeInfo)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221696%28v=VS.85%29)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/ms221696)
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - (unknown)
 	Base classes - _CCF_Error_Handler_, Unknown
-	Other classes - CCFramework, TypeLib, (TypeComp)
-	Helper classes - DISPID, MEMBERID, TYPEATTR, TYPEKIND, IDLDESC, TYPEDESC, (ARRAYDESC)
+	Other classes - CCFramework, TypeLib, TypeComp
+	Constant classes - DISPID, MEMBERID, TYPEKIND, DISPATCHF
+	Structure classes - TYPEATTR, IDLDESC, TYPEDESC, ARRAYDESC, DISPPARAMS, EXCEPINFO
 */
 class TypeInfo extends Unknown
 {
@@ -39,12 +39,15 @@ class TypeInfo extends Unknown
 
 	Returns:
 		TYPEATTR info - an instance of the TYPEATTR class containing the information
+
+	Remarks:
+		Free the returned structure by passing it to <ReleaseTypeAttr>.
 	*/
 	GetTypeAttr()
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", out))
-		return TYPEATTR.FromStructPtr(out)
+		return TYPEATTR.FromStructPtr(out, false)
 	}
 
 	/*
@@ -78,7 +81,7 @@ class TypeInfo extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
-		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out) : out
+		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out, false) : out
 	}
 
 	/*
@@ -98,7 +101,7 @@ class TypeInfo extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
-		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out) : out
+		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out, false) : out
 	}
 
 	/*
@@ -107,7 +110,7 @@ class TypeInfo extends Unknown
 
 	Parameters:
 		INT memid - The ID of the member whose name (or names) is to be returned. For special values, you might use the MEMBERID (or DISPID) enum class for convenience.
-		byRef OBJECT array - receives an AHK-array containing the names
+		byRef STR[] array - receives an AHK-array containing the names
 		[opt] byRef UINT count - receives the number of names retrieved
 		[opt] UINT name_count - optional: the size of the array. Defaults to 100, which should be sufficient in most cases.
 
@@ -166,27 +169,28 @@ class TypeInfo extends Unknown
 	Maps between member names and member IDs, and parameter names and parameter IDs.
 
 	Parameters:
-		ARRAY names - either an AHK-array or a pointer or a memory array containing the names
+		STR[] names - either an AHK-array or a pointer or a memory array containing the names
 		[opt] UINT count - the count of the names in the array. If an AHK-array is passed, you can leave this empty.
 
 	Returns:
-		ARRAY ids - an AHK-array containing the IDs
+		MEMBERID[] ids - an AHK-array containing the IDs
 	*/
-	GetIDsOfNames(names, count = "")
+	GetIDsOfNames(names, count = -1)
 	{
 		local names_array, id_array, ids
 		if IsObject(names)
 		{
-			if (!count)
+			if (count == -1)
 				count := names.maxIndex()
 			VarSetCapacity(names_array, A_PtrSize * count, 00)
 			Loop count
 			{
 				NumPut(names.GetAdress(A_Index), names_array, A_PtrSize * (A_Index - 1), "UPtr")
 			}
+			names := &names_array
 		}
 		VarSetCapacity(id_array, 4 * count, 00)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(names) ? &names_array : names, "UInt", count, "UPtr", &id_array))
+		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", names, "UInt", count, "UPtr", &id_array))
 		ids := []
 		Loop count
 		{
@@ -200,14 +204,24 @@ class TypeInfo extends Unknown
 	Invokes a method, or accesses a property of an object, that implements the interface described by the type description.
 
 	Parameters:
-		UPTR instance - a pointer to an instance (or a class instance) of the interface described by this type description.
-		UINT memid - the member id identifying the mamber to be called.
-		UINT flags - Flags describing the context of the invoke call. You may use the fields of the DISPATCH enum class for convenience.
+		PTR instance - a pointer to an instance (or a class instance) of the interface described by this type description.
+		UINT memid - the member id identifying the member to be called.
+		USHORT flags - Flags describing the context of the invoke call. You may use the fields of the DISPATCHF enum class for convenience.
+		byRef DISPPARAMS params - An array of arguments, an array of DISPIDs for named arguments, and counts of the number of elements in each array.
+		[opt] byRef VARIANT result - if the method returns anything, this receives a VARIANT wrapper object (or a pointer if CCFramework is not available)
+		[opt] byRef EXCEPINFO exception - receives information about an exception if it occured
+		[opt] byRef err_index - if there is an argument with an invalid type, this receives the index of this argument
 
+	Returns:
+		BOOL success - true on success, false otherwise.
 	*/
 	Invoke(instance, memid, flags, byRef params, byRef result = "", byRef exception = "", byRef err_index = 0)
 	{
-
+		local bool := this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index))
+		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
+		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
+		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception) : exception
+		return bool
 	}
 
 	/*

@@ -14,9 +14,10 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - Windows Vista / Windows Server 2008 or newer
+	OS - Windows Vista / Windows Server 2008 or higher
 	Base classes - _CCF_Error_Handler_, Unknown, ImageList
-	Helper classes - ILGOS, ILDI, ILFIP, IMAGELISTDRAWPARAMS, IMAGELISTSTATS, ILC, ILR
+	Constant classes - ILGOS, ILDI, ILFIP, ILC, ILR
+	Structure classes - IMAGELISTDRAWPARAMS, IMAGELISTSTATS
 */
 class ImageList2 extends ImageList
 {

@@ -2,7 +2,7 @@
 	THIS EXAMPLE IS INCOMPLETE!!!
 */
 #SingleInstance force
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\RichEditOLE.ahk

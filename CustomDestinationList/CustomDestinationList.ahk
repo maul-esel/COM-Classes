@@ -16,8 +16,8 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 7 / Windows Server 2008 R2 or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - KDC
-	Other classes - CCFramework, ObjectArray, ShellLink, ShellItem (not strictly required, but could be of use)
+	Constant classes - KDC
+	Other classes - CCFramework, ObjectArray, ShellLink, ShellItem
 */
 class CustomDestinationList extends Unknown
 {

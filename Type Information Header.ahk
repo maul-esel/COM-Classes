@@ -2,12 +2,34 @@
 Header: Type Information
 includes all classes related to the type information system
 */
-#include _CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include _CCF_Error_Handler_.ahk
 #include CCFramework.ahk
 
-#include Helper Classes
+#include Structure Classes\
 #include StructBase.ahk
 
+#include IDLDESC.ahk
+#include VARDESC.ahk
+#include PARAMDESCEX.ahk
+#include PARAMDESC.ahk
+#include FUNCDESC.ahk
+#include ARRAYDESC.ahk
+#include ELEMDESC.ahk
+#include TYPEDESC.ahk
+
+#include CUSTDATAITEM.ahk
+#include CUSTDATA.ahk
+#include PARAMDATA.ahk
+#include METHODDATA.ahk
+#include INTERFACEDATA.ahk
+
+#include TYPEATTR.ahk
+#include TLIBATTR.ahk
+
+#include EXCEPINFO.ahk
+#include DISPPARAMS.ahk
+
+#Include ..\Constant Classes\
 #include DISPID.ahk
 #include MEMBERID.ahk
 
@@ -27,35 +49,14 @@ includes all classes related to the type information system
 #include DESCKIND.ahk
 #include INVOKEKIND.ahk
 
-#include IDLDESC.ahk
-;#include VARDESC.ahk
-;#include PARAMDESCEX.ahk
-;#include PARAMDESC.ahk
-;#include FUNCDESC.ahk
-;#include ARRAYDESC.ahk
-;#include ELEMDESC.ahk
-#include TYPEDESC.ahk
-
-;#include CUSTDATAITEM.ahk
-;#include CUSTDATA.ahk
-#include PARAMDATA.ahk
-#include METHODDATA.ahk
-#include INTERFACEDATA.ahk
-
-#include TYPEATTR.ahk
-#include TLIBATTR.ahk
-
 #include DISPATCHF.ahk
 #include VARENUM.ahk
 #include CALLCONV.ahk
-#include EXCEPINFO.ahk
-;#include DISPPARAMS.ahk
-;#include BINDPTR.ahk
 
 #include ..\
 #include Unknown\Unknown.ahk
 #include TypeInfo\TypeInfo.ahk
-;#include TypeInfo2\TypeInfo2.ahk
+#include TypeInfo2\TypeInfo2.ahk
 #include TypeLib\TypeLib.ahk
-;#include TypeLib2\TypeLib2.ahk
-;#include TypeComp\TypeComp.ahk
+#include TypeLib2\TypeLib2.ahk
+#include TypeComp\TypeComp.ahk

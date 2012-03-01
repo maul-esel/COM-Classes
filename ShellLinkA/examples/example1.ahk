@@ -13,10 +13,10 @@ License:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows 2000 Server or higher
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, ShellLinkA, Persist, PersistFile
 */
 #SingleInstance off
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #include ..\..\Unknown\Unknown.ahk
 #include ..\ShellLinkA.ahk

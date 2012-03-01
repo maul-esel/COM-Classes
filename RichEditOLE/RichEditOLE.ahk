@@ -16,7 +16,8 @@ Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional / Windows 2000 Server or higher
 	Base classes - _CCF_Error_Handler_, Unknown
-	Helper classes - REO, REOBJECT, DVASPECT, CHARRANGE, CF
+	Constant classes - REO, DVASPECT, CF
+	Structure classes - REOBJECT, CHARRANGE
 	Other classes - CCFramework
 
 Remarks:
@@ -51,8 +52,9 @@ class RichEditOLE extends Unknown
 	*/
 	FromHWND(ctrl)
 	{
+		static EM_GETOLEINTERFACE := 0x43C
 		local ptr
-		result := DllCall("SendMessage", "uptr", ctrl, "uint", 0x400 + 60, "uint", 0, "ptr*", ptr)
+		DllCall("SendMessage", "uptr", ctrl, "uint", EM_GETOLEINTERFACE, "uint", 0, "ptr*", ptr)
 		return new RichEditOLE(ptr)
 	}
 
@@ -61,13 +63,13 @@ class RichEditOLE extends Unknown
 	Retrieves an IOleClientSite interface to be used when creating a new object. All objects inserted into a rich edit control must use client site interfaces returned by this function. A client site may be used with exactly one object.
 
 	Returns:
-		UPTR client - the IOleClientSite pointer
+		OleClientSite client - the IOleClientSite, either as class instance (if available) or as pointer
 	*/
 	GetClientSite()
 	{
 		local client
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", client))
-		return client
+		return IsObject(OleClientSite) ? new OleClientSite(client) : client
 	}
 
 	/*

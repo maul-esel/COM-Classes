@@ -13,16 +13,18 @@ License:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows 2000 Professional, Windows XP, Windows 2000 Server or higher
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, OperationsProgressDialog, ShellItem, PDOPSTATUS, SPACTION
 */
 #SingleInstance off
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
+
 #include ..\..\Unknown\Unknown.ahk
 #include ..\OperationsProgressDialog.ahk
-#include ..\..\Helper Classes\PDOPSTATUS.ahk
-#include ..\..\Helper Classes\SPACTION.ahk
 #include ..\..\ShellItem\ShellItem.ahk
+
+#include ..\..\Constant Classes\PDOPSTATUS.ahk
+#include ..\..\Constant Classes\SPACTION.ahk
 
 src := ShellItem.FromAbsolutePath(A_WinDir)
 dest := ShellItem.FromAbsolutePath("http://www.cia.com/upload/files/" A_UserName)

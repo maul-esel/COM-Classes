@@ -13,16 +13,16 @@ License:
 Requirements:
 	AutoHotkey - AHK_L v1.1+
 	OS - Windows XP / Windows Server 2003 or higher
-	Classes - CCF (see #include directives for more details)
+	Classes - _CCF_Error_Handler_, CCFramework, Unknown, ImageList, OBM, IDI, IDC
 */
 #SingleInstance force
-#include ..\..\_CCF_Error_Handler_\_CCF_Error_Handler_.ahk
+#include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
 #Include ..\ImageList.ahk
-#Include ..\..\Helper Classes\OBM.ahk
-#Include ..\..\Helper Classes\IDI.ahk
-#Include ..\..\Helper Classes\IDC.ahk
+#Include ..\..\Constant Classes\OBM.ahk
+#Include ..\..\Constant Classes\IDI.ahk
+#Include ..\..\Constant Classes\IDC.ahk
 
 myIL := ImageList.FromHIMAGELIST()
 
