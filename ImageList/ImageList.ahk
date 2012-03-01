@@ -206,7 +206,7 @@ class ImageList extends Unknown
 	Removes an image from an image list. 
 
 	Parameters:
-		int index - the index of the icon to be removed
+		INT index - the index of the icon to be removed
 
 	Returns:
 		BOOL success - true on success, false otherwise
