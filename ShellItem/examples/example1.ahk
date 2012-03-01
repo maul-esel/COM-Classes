@@ -17,7 +17,7 @@ Requirements:
 #include ..\..\_CCF_Error_Handler_.ahk
 #include ..\..\CCFramework.ahk
 #Include ..\..\Unknown\Unknown.ahk
-#Include ..\..\ShellItem\ShellItem.ahk
+#Include ..\ShellItem.ahk
 #Include ..\..\Constant Classes\SIGDN.ahk
 #Include ..\..\Constant Classes\SFGAO.ahk
 #Include ..\..\Constant Classes\KNOWNFOLDERID.ahk
