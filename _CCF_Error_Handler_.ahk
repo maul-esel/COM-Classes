@@ -14,8 +14,9 @@ class _CCF_Error_Handler_
 	__Call(method, params*)
 	{
 		local param_list, i, p
+		local func := Func("Obj" . LTrim(method, "_"))
 
-		if (!IsFunc("Obj" . method) && method != "_NewEnum")
+		if (!IsObject(func) || !func.IsBuiltIn)
 		{
 			param_list := ""
 			For i, p in params
