@@ -14,7 +14,6 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
-	OS - (unknown)
 */
 class KNOWNFOLDERID
 {
