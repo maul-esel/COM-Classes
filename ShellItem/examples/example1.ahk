@@ -37,7 +37,7 @@ MsgBox % "HASPROPSHEET: <" CCFramework.HasEnumFlag(bits, SFGAO.HASPROPSHEET) ">`
 
 ; ############################################
 ; Known Folder
-shItem := ShellItem.FromKnownFolder(KNOWNFOLDERID.PublicDocuments)
+shItem := ShellItem.FromKNOWNFOLDERID(KNOWNFOLDERID.PublicDocuments)
 MsgBox % "NORMALDISPLAY: <" shItem.GetDisplayName() ">`nFILESYSPATH: <" shItem.GetDisplayName(SIGDN.FILESYSPATH) ">`nDESKTOPABSOLUTEEDITING: <" shItem.GetDisplayName(SIGDN.DESKTOPABSOLUTEEDITING) ">`nPARENTRELATIVEFORADDRESSBAR: <" shItem.GetDisplayName(SIGDN.PARENTRELATIVEFORADDRESSBAR) ">"
 
 ret := shItem.GetAttributes((SFGAO.HASPROPSHEET | SFGAO.ENCRYPTED | SFGAO.FOLDER | SFGAO.BROWSABLE), bits)
