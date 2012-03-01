@@ -10,7 +10,7 @@ License:
 
 Documentation:
 	- *class documentation* (http://maul-esel.github.com/COM-Classes/master/KNOWNFOLDERID)
-	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378457%28v=vs.85%29.aspx)
+	- *msdn* (http://msdn.microsoft.com/en-us/library/windows/desktop/dd378457)
 
 Requirements:
 	AutoHotkey - AHK v2 alpha
