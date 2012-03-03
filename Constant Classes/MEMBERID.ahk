@@ -14,7 +14,6 @@ Documentation:
 
 Requirements:
 	AutoHotkey - AHK_L v1.1+
-	OS - (unknown)
 	Base classes - DISPID
 */
 class MEMBERID extends DISPID

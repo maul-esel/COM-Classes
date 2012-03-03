@@ -28,7 +28,7 @@ class TYPEDESC extends StructBase
 	Remarks:
 		As <lptdesc>, <lpadesc> and <hreftype> are in an union, only one of them can be present at the same time.
 	*/
-	lptdesc := new TYPEDESC()
+	lptdesc := 0
 
 	/*
 	Field: lpadesc
@@ -37,7 +37,7 @@ class TYPEDESC extends StructBase
 	Remarks:
 		As <lptdesc>, <lpadesc> and <hreftype> are in an union, only one of them can be present at the same time.
 	*/
-	lpadesc := new ARRAYDESC()
+	lpadesc := 0
 
 	/*
 	Field: hreftype

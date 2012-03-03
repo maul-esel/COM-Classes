@@ -34,8 +34,6 @@ class CF
 	/*
 	Field: DIBV5
 	A memory object containing a BITMAPV5HEADER structure followed by the bitmap color space information and the bitmap bits.
-
-	Supported since Windows...
 	*/
 	static DIBV5 := 17
 
@@ -90,8 +88,6 @@ class CF
 	/*
 	Field: HDROP
 	A handle to type HDROP that identifies a list of files. An application can retrieve information about the files by passing the handle to the DragQueryFile function.
-
-	Supported since Windows...
 	*/
 	static HDROP := 15
 
@@ -101,8 +97,6 @@ class CF
 	An application that pastes text from the clipboard can retrieve this format to determine which character set was used to generate the text.
 	Note that the clipboard does not support plain text in multiple character sets. To achieve this, use a formatted text data type such as RTF instead.
 	The system uses the code page associated with <LOCALE> to implicitly convert from <TEXT> to <UNICODETEXT>. Therefore, the correct code page table is used for the conversion.
-
-	Supported since Windows...
 	*/
 	static LOCALE := 16
 
