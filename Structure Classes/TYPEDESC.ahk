@@ -79,7 +79,7 @@ class TYPEDESC extends StructBase
 		{
 			NumPut(this.lpadesc.ToStructPtr(),	1*ptr,	00,	"UPtr")
 		}
-		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.USER_DEFINED))
+		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.USERDEFINED))
 		{
 			NumPut(this.hreftype,	1*ptr,	00,	"UInt")
 		}
@@ -113,7 +113,7 @@ class TYPEDESC extends StructBase
 		{
 			instance.lpadesc := ARRAYDESC.FromStructPtr(NumGet(1*ptr, 00, "UPtr"))
 		}
-		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.USER_DEFINED))
+		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.USERDEFINED))
 		{
 			instance.hreftype := NumGet(1*ptr, 00, "UInt")
 		}
