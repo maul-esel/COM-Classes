@@ -28,13 +28,27 @@ class FUNCDESC extends StructBase
 
 	/*
 	Field: lprgscode
-	_[*TBD*]_
+	An array of possible return values.
+
+	Remarks:
+		You can set this field either to an AHK-array or a raw memory pointer to the array in memory.
+		In case you set it to a pointer, set the <cScodes> field to the lenght (in items) of the array.
+		Otherwise, you may leave <cScodes> unchanged (to use the entire array) or change it to use only a few values out of the array.
+
+		When retrieved from an instance created <FromStructPtr>, this is always an AHK array.
 	*/
 	lprgscode := 0
 
 	/*
 	Field: lprgelemdescParam
-	_[*TBD*]_
+	An array of ELEMDESC structures describing the parameters.
+
+	Remarks:
+		You can set this field either to an AHK-array or a raw memory pointer to the array in memory.
+		In case you set it to a pointer, set the <cParams> field to the lenght (in items) of the array.
+		Otherwise, you may leave <cParams> unchanged (to use the entire array) or change it to use only a few values out of the array.
+
+		When retrieved from an instance created <FromStructPtr>, this is always an AHK array.
 	*/
 	lprgelemdescParam := 0
 
@@ -59,6 +73,9 @@ class FUNCDESC extends StructBase
 	/*
 	Field: cParams
 	The total number of parameters.
+
+	Remarks:
+		This defines the size of the <lprgelemdescParam> array. If you set that member to an AHK array and you want to use all of its indexes, just leave this field unchanged.
 	*/
 	cParams := -1
 
@@ -77,8 +94,11 @@ class FUNCDESC extends StructBase
 	/*
 	Field: cScodes
 	The number of possible return values.
+
+	Remarks:
+		This defines the size of the <lprgscode> array. If you set that member to an AHK array and you want to use all of its indexes, just leave this field unchanged.
 	*/
-	cScodes := 0
+	cScodes := -1
 
 	/*
 	Field: elemdescFunc
@@ -105,7 +125,7 @@ class FUNCDESC extends StructBase
 	ToStructPtr(ptr = 0)
 	{
 		static ed_size := ELEMDESC.GetRequiredSize()
-		local mem, val
+		local mem1, mem2, val, error_count, param_count
 
 		if (!ptr)
 		{
@@ -113,15 +133,34 @@ class FUNCDESC extends StructBase
 		}
 
 		NumPut(this.memid, 1*ptr, 00, "UInt")
-		, mem := this.Allocate(4), val := this.lprgscode, CCFramework.CopyMemory(&val, mem, 4), NumPut(mem, 1*ptr, 04, "Ptr")
-		, NumPut(IsObject(this.lprgelemdescParam) ? this.lprgelemdescParam.ToStructPtr() : this.lprgelemdescParam, 1*ptr, 04 + 1*A_PtrSize, "Ptr")
+
+		if (IsObject(this.lprgscode))
+		{
+			error_count := this.cScodes == -1 ? this.lprgscode.maxIndex() : this.cScodes, mem1 := this.Allocate(4 * error_count)
+			Loop %error_count%
+				NumPut(this.lprgscode[A_Index], 1*mem1, (A_Index - 1) * 4, "UInt")
+		}
+		else
+			mem1 := this.lprgscode
+		NumPut(mem1, 1*ptr, 04, "Ptr")
+
+		if (IsObject(this.lprgelemdescParam))
+		{
+			param_count := this.cParams == -1 ? this.lprgelemdescParam.maxIndex() : this.cParams, mem2 := this.Allocate(ed_size * param_count)
+			Loop %param_count%
+				this.lprgelemdescParam[A_Index].ToStructPtr(mem2 + (A_Index - 1) * ed_size)
+		}
+		else
+			mem2 := this.lprgelemdescParam
+		NumPut(mem2, 1*ptr, 04 + 1*A_PtrSize, "Ptr")
+
 		, NumPut(this.funckind, 1*ptr, 04 + 2 * A_PtrSize, "UInt")
 		, NumPut(this.invkind, 1*ptr, 08 + 2 * A_PtrSize, "UInt")
 		, NumPut(this.callconv, 1*ptr, 12 + 2 * A_PtrSize, "UInt")
-		, NumPut(this.cParams, 1*ptr, 16 + 2 * A_PtrSize, "Short")
+		, NumPut(param_count, 1*ptr, 16 + 2 * A_PtrSize, "Short")
 		, NumPut(this.cParamsOpt, 1*ptr, 18 + 2 * A_PtrSize, "Short")
 		, NumPut(this.oVft, 1*ptr, 20 + 2 * A_PtrSize, "Short")
-		, NumPut(this.cScodes, 1*ptr, 22 + 2 * A_PtrSize, "Short")
+		, NumPut(error_count, 1*ptr, 22 + 2 * A_PtrSize, "Short")
 		, IsObject(this.elemdescFunc) ? this.elemdescFunc.ToStructPtr(ptr + 24 + 2 * A_PtrSize) : CCFramework.CopyMemory(this.elemdescFunc, ptr + 24 + 2 * A_PtrSize, ed_size)
 		, NumPut(this.wFuncFlags, 1*ptr, 24 + 2 * A_PtrSize + ed_size, "Short")
 
@@ -142,21 +181,29 @@ class FUNCDESC extends StructBase
 	FromStructPtr(ptr, own = true)
 	{
 		static ed_size := ELEMDESC.GetRequiredSize()
+		local arr_ptr
 
 		local instance := new FUNCDESC()
 		instance.SetOriginalPointer(ptr, own)
 
 		instance.memid := NumGet(1*ptr, 00, "UInt")
-		, instance.lprgscode := NumGet(NumGet(1*ptr, 04, "Ptr"), 00, "UInt")
-		, instance.lprgdescParam := ELEMDESC.FromStructPtr(NumGet(1*ptr, 04 + A_PtrSize, "Ptr"))
 		, instance.funckind := NumGet(1*ptr, 04 + 2 * A_PtrSize, "UInt")
 		, instance.invkind := NumGet(1*ptr, 08 + 2 * A_PtrSize, "UInt")
 		, instance.callconv := NumGet(1*ptr, 12 + 2 * A_PtrSize, "UInt")
 		, instance.cParams := NumGet(1*ptr, 16 + 2 * A_PtrSize, "Short")
 		, instance.cParamsOpt := NumGet(1*ptr, 18 + 2 * A_PtrSize, "Short")
 		, instance.oVft := NumGet(1*ptr, 20 + 2 * A_PtrSize, "Short")
+		, instance.cScodes := NumGet(1*ptr, 22 + 2 * A_PtrSize, "Short")
 		, instance.elemdescFunc := ELEMDESC.FromStructPtr(ptr + 24 + 2 * A_PtrSize, false)
 		, instance.wFuncFlags := NumGet(1*ptr, 24 + 2 * A_PtrSize + ed_size, "Short")
+
+		instance.lprgscode := [], arr_ptr := NumGet(1*ptr, 04, "Ptr")
+		Loop % instance.cScodes
+			instance.lprgscode.Insert(NumGet(1*arr_ptr, (A_Index - 1) * 4, "UInt"))
+
+		instance.lprgdescParam := [], arr_ptr := NumGet(1*ptr, 04 + A_PtrSize, "Ptr")
+		Loop % instance.cParams
+			instance.lprgelemdescParam.Insert(ELEMDESC.FromStructPtr(arr_ptr + (A_Index - 1) * ed_size, false))
 
 		return instance
 	}
