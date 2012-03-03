@@ -136,7 +136,7 @@ class FUNCDESC extends StructBase
 
 		if (IsObject(this.lprgscode))
 		{
-			error_count := this.cScodes == -1 ? this.lprgscode.maxIndex() ? this.cScodes, mem1 := this.Allocate(4 * error_count)
+			error_count := this.cScodes == -1 ? this.lprgscode.maxIndex() : this.cScodes, mem1 := this.Allocate(4 * error_count)
 			Loop error_count
 				NumPut(this.lprgscode[A_Index], 1*mem1, (A_Index - 1) * 4, "UInt")
 		}
@@ -146,7 +146,7 @@ class FUNCDESC extends StructBase
 
 		if (IsObject(this.lprgelemdescParam))
 		{
-			param_count := this.cParams == -1 ? this.lprgelemdescParam.maxIndex() ? this.cParams, mem2 := this.Allocate(ed_size * param_count)
+			param_count := this.cParams == -1 ? this.lprgelemdescParam.maxIndex() : this.cParams, mem2 := this.Allocate(ed_size * param_count)
 			Loop param_count
 				this.lprgelemdescParam[A_Index].ToStructPtr(mem2 + (A_Index - 1) * ed_size)
 		}
@@ -199,7 +199,7 @@ class FUNCDESC extends StructBase
 
 		instance.lprgscode := [], arr_ptr := NumGet(1*ptr, 04, "Ptr")
 		Loop instance.cScodes
-			instance.lprgscode.Insert(NumGet(1*arr_ptr, (A_Index - 1) * 4, "UInt")
+			instance.lprgscode.Insert(NumGet(1*arr_ptr, (A_Index - 1) * 4, "UInt"))
 
 		instance.lprgdescParam := [], arr_ptr := NumGet(1*ptr, 04 + A_PtrSize, "Ptr")
 		Loop instance.cParams
