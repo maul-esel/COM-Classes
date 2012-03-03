@@ -71,15 +71,15 @@ class TYPEDESC extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		if (CCFramework.HasEnumFlag(this.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(this.vt, VARENUM.ARRAY))
+		if (this.vt == VARENUM.PTR || this.vt == VARENUM.ARRAY)
 		{
 			NumPut(this.lptdesc.ToStructPtr(),	1*ptr,	00,	"UPtr")
 		}
-		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.CARRAY))
+		else if (this.vt == VARENUM.CARRAY)
 		{
 			NumPut(this.lpadesc.ToStructPtr(),	1*ptr,	00,	"UPtr")
 		}
-		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.USERDEFINED))
+		else if (this.vt == VARENUM.USERDEFINED)
 		{
 			NumPut(this.hreftype,	1*ptr,	00,	"UInt")
 		}
@@ -105,15 +105,15 @@ class TYPEDESC extends StructBase
 		instance.SetOriginalPointer(ptr, own)
 
 		instance.vt := NumGet(1*ptr, A_PtrSize, "UInt")
-		if (CCFramework.HasEnumFlag(instance.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(instance.vt, VARENUM.ARRAY))
+		if (instance.vt == VARENUM.PTR || instance.vt == VARENUM.ARRAY)
 		{
 			instance.lptdesc := TYPEDESC.FromStructPtr(NumGet(1*ptr, 00, "UPtr"))
 		}
-		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.CARRAY))
+		else if (instance.vt == VARENUM.CARRAY)
 		{
 			instance.lpadesc := ARRAYDESC.FromStructPtr(NumGet(1*ptr, 00, "UPtr"))
 		}
-		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.USERDEFINED))
+		else if (instance.vt == VARENUM.USERDEFINED)
 		{
 			instance.hreftype := NumGet(1*ptr, 00, "UInt")
 		}
