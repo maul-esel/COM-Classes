@@ -123,7 +123,7 @@ class TypeInfo extends Unknown
 		VarSetCapacity(arr, name_count * A_PtrSize, 0)
 		bool := this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "Int", memid, "ptr", &arr, "UInt", name_count, "UInt*", count))
 		array := []
-		Loop count
+		Loop %count%
 		{
 			array.Insert(StrGet(NumGet(&arr + (A_Index - 1) * A_PtrSize, 00, "UPtr"), "UTF-16"))
 		}
@@ -183,7 +183,7 @@ class TypeInfo extends Unknown
 			if (count == -1)
 				count := names.maxIndex()
 			VarSetCapacity(names_array, A_PtrSize * count, 00)
-			Loop count
+			Loop %count%
 			{
 				NumPut(names.GetAdress(A_Index), names_array, A_PtrSize * (A_Index - 1), "UPtr")
 			}
@@ -192,7 +192,7 @@ class TypeInfo extends Unknown
 		VarSetCapacity(id_array, 4 * count, 00)
 		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", names, "UInt", count, "UPtr", &id_array))
 		ids := []
-		Loop count
+		Loop %count%
 		{
 			ids.Insert(NumGet(id_array, (A_Index - 1) * 4, "UInt"))
 		}
