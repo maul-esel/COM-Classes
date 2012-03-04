@@ -58,6 +58,7 @@ class ELEMDESC extends StructBase
 	ToStructPtr(ptr := 0)
 	{
 		static td_size := TYPEDESC.GetRequiredSize(), idl_size := IDLDESC.GetRequiredSize(), param_size := PARAMDESC.GetRequiredSize()
+		local offset
 
 		if (!ptr)
 		{
@@ -65,10 +66,12 @@ class ELEMDESC extends StructBase
 		}
 
 		IsObject(this.tdesc) ? this.tdesc.ToStructPtr(ptr) : CCFramework.CopyMemory(this.tdesc, ptr, td_size)
+		; <A_PtrSize - 4 bytes padding>
+		offset := td_size + A_PtrSize - 4
 		if (!this.idldesc)
-			IsObject(this.paramdesc) ? this.paramdesc.ToStructPtr(ptr + td_size) : CCFramework.CopyMemory(this.paramdesc, ptr + td_size, param_size)
+			IsObject(this.paramdesc) ? this.paramdesc.ToStructPtr(ptr + offset) : CCFramework.CopyMemory(this.paramdesc, ptr + offset, param_size)
 		else
-			IsObject(this.idldesc) ? this.idldesc.ToStructPtr(ptr + td_size) : CCFramework.CopyMemory(this.idldesc, ptr + td_size, idl_size)
+			IsObject(this.idldesc) ? this.idldesc.ToStructPtr(ptr + offset) : CCFramework.CopyMemory(this.idldesc, ptr + offset, idl_size)
 
 		return ptr
 	}
@@ -87,13 +90,16 @@ class ELEMDESC extends StructBase
 	FromStructPtr(ptr, own := true)
 	{
 		static td_size := TYPEDESC.GetRequiredSize()
+		local offset
 
 		local instance := new ELEMDESC()
 		instance.SetOriginalPointer(ptr, own)
 
 		instance.tdesc := TYPEDESC.FromStructPtr(ptr, false)
-		, instance.idldesc := IDLDESC.FromStructPtr(ptr + td_size, false)
-		, instance.paramdesc := PARAMDESC.FromStructPtr(ptr + td_size, false)
+		; <A_PtrSize - 4 bytes padding>
+		, offset := td_size + A_PtrSize - 4
+		, instance.idldesc := IDLDESC.FromStructPtr(ptr + offset, false)
+		, instance.paramdesc := PARAMDESC.FromStructPtr(ptr + offset, false)
 
 		return instance
 	}
@@ -114,6 +120,7 @@ class ELEMDESC extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
-		return TYPEDESC.GetRequiredSize() + PARAMDESC.GetRequiredSize()
+		static td_size := TYPEDESC.GetRequiredSize(), pd_size := PARAMDESC.GetRequiredSize(), padding := A_PtrSize - 4
+		return td_size + padding + pd_size
 	}
 }

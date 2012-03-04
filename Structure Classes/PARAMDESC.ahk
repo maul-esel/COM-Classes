@@ -67,7 +67,7 @@ class PARAMDESC extends StructBase
 		}
 
 		NumPut(this.pparamdescex.ToStructPtr(), 1*ptr, 00, "Ptr")
-		NumPut(this.wParamFlags, 1*ptr, 20, "UShort")
+		NumPut(this.wParamFlags, 1*ptr, A_PtrSize, "UShort")
 
 		return ptr
 	}
@@ -85,7 +85,7 @@ class PARAMDESC extends StructBase
 	*/
 	FromStructPtr(ptr, own := true)
 	{
-		local instance := new PARAMDESC(NumGet(1*ptr, 20, "UShort"), PARAMDESCEX.FromStructPtr(NumGet(1*ptr, 00, "Ptr"), false))
+		local instance := new PARAMDESC(NumGet(1*ptr, A_PtrSize, "UShort"), PARAMDESCEX.FromStructPtr(NumGet(1*ptr, 00, "Ptr"), false))
 		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
