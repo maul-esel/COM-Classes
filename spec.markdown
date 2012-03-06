@@ -467,7 +467,12 @@ The directory for an interface class must also hold a `README.md` in the followi
 ***
 
 ## Documentation
-...
+CCF classes should be well-documented. The documentation is processed with NaturalDocs, so it should use that format.
+The existing classes should suffice as templates.
+
+The documentation should also explicitly include the requirements for the OS, other classes, other software and more.
+The required CCF classes must be separated by their type, i.e. "Base classes", "Constant classes", "Structure classes"
+and "Other classes" (which holds interface classes and general use classes such as CCFramework).
 
 ***
 
