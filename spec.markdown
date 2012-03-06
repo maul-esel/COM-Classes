@@ -153,8 +153,10 @@ Here as well, single object fields may not be considered pointers to `VARIANT` s
 Those values must be converted to [wrapper objects](#_and__parameters_and_fields "VARIANT handling").
 
 #### COM SAFEARRAYs
-When a COM SAFEARRAY is expected (which can be created in AutoHotkey using `ComObjArray()`), the code should accept a raw pointer to the array structure as well as an AutoHotkey ComObjArray() - object.
+When a COM SAFEARRAY is expected, the code should accept a raw pointer to the array structure as well as an AutoHotkey SAFEARRAY object created with `ComObjArray()`.
 To get the value from the array object (which can be recognized using `IsObject()`), `ComObjValue()` must be called on it.
+
+The handling of SAFEARRAYs as output values or structure fields is not yet defined. In case an interface needs that, a way must be found and this specification must be updated.
 
 ### GUIDs
 Any method or structure class handling GUIDs (or IIDs or CLSIDs or KNOWNFOLDERIDs or any other type which is actually a GUID)
