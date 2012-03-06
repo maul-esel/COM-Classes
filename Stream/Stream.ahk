@@ -177,10 +177,10 @@ class Stream extends SequentialStream
 	*/
 	Stat(flag := 0)
 	{
-		local struct
-		VarSetCapacity(struct, STATSTG.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", &struct, "uint", flag))
-		return STATSTG.FromStructPtr(&struct)
+		static stat_size := STATSTG.GetRequiredSize()
+		local struct := CCFramework.AllocateMemory(stat_size)
+		this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr", struct, "uint", flag))
+		return STATSTG.FromStructPtr(struct)
 	}
 
 	/*
