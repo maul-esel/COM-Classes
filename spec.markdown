@@ -156,7 +156,16 @@ Those values must be converted to [wrapper objects](#_and__parameters_and_fields
 When a COM SAFEARRAY is expected, the code should accept a raw pointer to the array structure as well as an AutoHotkey SAFEARRAY object created with `ComObjArray()`.
 To get the value from the array object (which can be recognized using `IsObject()`), `ComObjValue()` must be called on it.
 
-The handling of SAFEARRAYs as output values or structure fields is not yet defined. In case an interface needs that, a way must be found and this specification must be updated.
+To handle SAFEARRAYs as output values or structure fields, the element type of the array must be determined at first. Then `ComObj()` can be used to create an array.
+The below example shows how to handle such. Note that the `ptr` variable holds a pointer to the array here. The variable `arr` receives the object.
+
+{% highlight ahk linenos %}
+VT_ARRAY := 0x2000
+DllCall("OleAut32\SafeArrayGetVartype", "Ptr", ptr, "UShort*", vt, "Int")
+arr := ComObj(vt|VT_ARRAY, ptr)
+{% endhighlight %}
+
+It must be noted that this method still has some limitations defined by AutoHotkey. For instance, SAFEARRAYs with more than 8 dimensions are not supported.
 
 ### GUIDs
 Any method or structure class handling GUIDs (or IIDs or CLSIDs or KNOWNFOLDERIDs or any other type which is actually a GUID)
