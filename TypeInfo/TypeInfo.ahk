@@ -220,7 +220,7 @@ class TypeInfo extends Unknown
 		local bool := this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index))
 		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
 		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
-		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception) : exception
+		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception, false) : exception
 		return bool
 	}
 
@@ -239,12 +239,12 @@ class TypeInfo extends Unknown
 		BOOL success - true on success, false otherwise
 
 	Remarks:
-		If MEMBERID.NIL is passed as id, the documentation for the library itself is returned.
+		If MEMBERID.NIL is passed as id, the documentation for the type information itself is returned.
 	*/
 	GetDocumentation(id, byRef name := "", byRef doc := "", byRef context := "", byRef helpfile := "")
 	{
 		local bool, pName, pDoc, pHelpfile
-		bool := this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
+		bool := this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "Int", id, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
 		name := StrGet(pName), doc := StrGet(pDoc), helpfile := StrGet(pHelpfile)
 		return bool
 	}

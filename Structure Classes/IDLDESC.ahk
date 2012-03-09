@@ -61,8 +61,8 @@ class IDLDESC extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		NumPut(this.dwReserved,		1*ptr,	00,	"UInt")
-		NumPut(this.wIDLFlags,		1*ptr,	04,	"UShort")
+		NumPut(this.dwReserved,		1*ptr,	00,	"Ptr")
+		NumPut(this.wIDLFlags,		1*ptr,	A_PtrSize,	"UShort")
 
 		return ptr
 	}
@@ -80,7 +80,7 @@ class IDLDESC extends StructBase
 	*/
 	FromStructPtr(ptr, own := true)
 	{
-		local instance := new IDLDESC(NumGet(1*ptr,	00,	"UInt"), NumGet(1*ptr,	04,	"UShort"))
+		local instance := new IDLDESC(NumGet(1*ptr,	A_PtrSize,	"Ptr"), NumGet(1*ptr,	04,	"UShort"))
 		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
@@ -90,7 +90,7 @@ class IDLDESC extends StructBase
 	calculates the size a memory instance of this class requires.
 
 	Parameters:
-		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+		[opt] OBJECT data - an optional data object that may contain data for the calculation.
 
 	Returns:
 		UINT bytes - the number of bytes required
@@ -101,6 +101,6 @@ class IDLDESC extends StructBase
 	*/
 	GetRequiredSize(data := "")
 	{
-		return 6
+		return A_PtrSize + 2
 	}
 }

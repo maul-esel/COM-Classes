@@ -55,7 +55,7 @@ class EnumSTATSTG extends Unknown
 		Loop retrievedCount
 		{
 			offset := mem_array + (A_Index - 1) * stat_size
-			, array.Insert(IsObject(STATSTG) ? STATSTG.FromStructPtr(offset) : offset)
+			, array.Insert(IsObject(STATSTG) ? STATSTG.FromStructPtr(offset, false) : offset)
 		}
 		return bool
 	}

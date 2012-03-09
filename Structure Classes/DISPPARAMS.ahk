@@ -141,7 +141,7 @@ class DISPPARAMS extends StructBase
 	calculates the size a memory instance of this class requires.
 
 	Parameters:
-		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+		[opt] OBJECT data - an optional data object that may contain data for the calculation.
 
 	Returns:
 		UINT bytes - the number of bytes required

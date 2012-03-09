@@ -162,10 +162,10 @@ class ImageList2 extends ImageList
 	*/
 	GetStatistics()
 	{
-		local struct
-		VarSetCapacity(struct, IMAGELISTSTATS.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt, 40*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", &struct, "Int"))
-		return IMAGELISTSTATS.FromStructPtr(&struct)
+		static stat_size := IMAGELISTSTATS.GetRequiredSize()
+		local struct := CCFramework.AllocateMemory(stat_size)
+		this._Error(DllCall(NumGet(this.vt, 40*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", struct, "Int"))
+		return IMAGELISTSTATS.FromStructPtr(struct)
 	}
 	
 	/*

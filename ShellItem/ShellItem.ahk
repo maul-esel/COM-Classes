@@ -61,7 +61,7 @@ class ShellItem  extends Unknown
 	Creates a Shell item object for a known folder.
 
 	Parameters:
-		GUID folder - the GUID of the known folder, as string or pointer
+		GUID folder - the GUID of the known folder, as string or pointer. You may use the fields of the KNOWNFOLDERID class for convenience.
 		[opt] HTOKEN user - An access token used to represent a particular user. This parameter is usually ommited, in which case the function tries to access the current user's instance of the folder. However, you may need to assign a value to hToken for those folders that can have multiple users but are treated as belonging to a single user. The most commonly used folder of this type is Documents.
 
 	Returns:
@@ -70,7 +70,7 @@ class ShellItem  extends Unknown
 	Remarks:
 		To call this function on public known folders, the caller must have Administrator privileges.
 	*/
-	FromKnownFolder(folder, user := 0)
+	FromKNOWNFOLDERID(folder, user := 0)
 	{
 		local iid, mem1, mem2, out
 

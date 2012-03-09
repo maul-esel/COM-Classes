@@ -58,9 +58,10 @@ class PropertyStoreCache extends PropertyStore
 	*/
 	GetValueAndState(key, byRef value, byRef state)
 	{
-		local bool
-		bool := this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(key) ? key.ToStructPtr() : key, "Ptr* ", value, "UInt*", state, "Int"))
-		, value := IsObject(PROPVARIANT) ? PROPVARIANT.FromStructPtr(value) : value
+		local bool, val
+		val := CCFramework.AllocateMemory(16) ; PROPVARIANT.GetRequiredSize()
+		bool := this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(key) ? key.ToStructPtr() : key, "Ptr*", val, "UInt*", state, "Int"))
+		;value := PROPVARIANT.FromStructPtr(val)
 		return bool
 	}
 

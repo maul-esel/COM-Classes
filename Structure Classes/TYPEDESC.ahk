@@ -28,7 +28,7 @@ class TYPEDESC extends StructBase
 	Remarks:
 		As <lptdesc>, <lpadesc> and <hreftype> are in an union, only one of them can be present at the same time.
 	*/
-	lptdesc := new TYPEDESC()
+	lptdesc := 0
 
 	/*
 	Field: lpadesc
@@ -37,7 +37,7 @@ class TYPEDESC extends StructBase
 	Remarks:
 		As <lptdesc>, <lpadesc> and <hreftype> are in an union, only one of them can be present at the same time.
 	*/
-	lpadesc := new ARRAYDESC()
+	lpadesc := 0
 
 	/*
 	Field: hreftype
@@ -71,15 +71,15 @@ class TYPEDESC extends StructBase
 			ptr := this.Allocate(this.GetRequiredSize())
 		}
 
-		if (CCFramework.HasEnumFlag(this.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(this.vt, VARENUM.ARRAY))
+		if (this.vt == VARENUM.PTR || this.vt == VARENUM.ARRAY)
 		{
 			NumPut(this.lptdesc.ToStructPtr(),	1*ptr,	00,	"UPtr")
 		}
-		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.CARRAY))
+		else if (this.vt == VARENUM.CARRAY)
 		{
 			NumPut(this.lpadesc.ToStructPtr(),	1*ptr,	00,	"UPtr")
 		}
-		else if (CCFramework.HasEnumFlag(this.vt, VARENUM.USER_DEFINED))
+		else if (this.vt == VARENUM.USERDEFINED)
 		{
 			NumPut(this.hreftype,	1*ptr,	00,	"UInt")
 		}
@@ -105,15 +105,15 @@ class TYPEDESC extends StructBase
 		instance.SetOriginalPointer(ptr, own)
 
 		instance.vt := NumGet(1*ptr, A_PtrSize, "UInt")
-		if (CCFramework.HasEnumFlag(instance.vt, VARENUM.PTR) || CCFramework.HasEnumFlag(instance.vt, VARENUM.ARRAY))
+		if (instance.vt == VARENUM.PTR || instance.vt == VARENUM.ARRAY)
 		{
 			instance.lptdesc := TYPEDESC.FromStructPtr(NumGet(1*ptr, 00, "UPtr"))
 		}
-		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.CARRAY))
+		else if (instance.vt == VARENUM.CARRAY)
 		{
 			instance.lpadesc := ARRAYDESC.FromStructPtr(NumGet(1*ptr, 00, "UPtr"))
 		}
-		else if (CCFramework.HasEnumFlag(instance.vt, VARENUM.USER_DEFINED))
+		else if (instance.vt == VARENUM.USERDEFINED)
 		{
 			instance.hreftype := NumGet(1*ptr, 00, "UInt")
 		}
@@ -126,7 +126,7 @@ class TYPEDESC extends StructBase
 	calculates the size a memory instance of this class requires.
 
 	Parameters:
-		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+		[opt] OBJECT data - an optional data object that may contain data for the calculation.
 
 	Returns:
 		UINT bytes - the number of bytes required

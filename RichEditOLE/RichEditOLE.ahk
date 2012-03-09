@@ -111,10 +111,10 @@ class RichEditOLE extends Unknown
 	*/
 	GetObject(index, flags)
 	{
-		local obj
-		VarSetCapacity(obj,	REOBJECT.GetRequiredSize(), 0)
-		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", &obj, "UInt", flags, "Int"))
-		return REOBJECT.FromStructPtr(&obj)
+		static reo_size := REOBJECT.GetRequiredSize()
+		local obj := CCFramework.AllocateMemory(reo_size)
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", index, "Ptr", obj, "UInt", flags, "Int"))
+		return REOBJECT.FromStructPtr(obj)
 	}
 
 	/*

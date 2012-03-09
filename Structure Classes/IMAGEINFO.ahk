@@ -58,11 +58,11 @@ class IMAGEINFO extends StructBase
 	creates a new instance of the class
 
 	Parameters:
-		HBITMAP hbmImage - the initial value of the <hbmImage> field
-		HBITMAP hbmMask - the initial value of the <hbmMask> field
-		RECT rcImage - the initial (RECT) value of the <rcImage> field
+		[opt] HBITMAP hbmImage - the initial value of the <hbmImage> field
+		[opt] HBITMAP hbmMask - the initial value of the <hbmMask> field
+		[opt] RECT rcImage - the initial value of the <rcImage> field
 	*/
-	__New(hbmImage, hbmMask, rcImage)
+	__New(hbmImage := 0, hbmMask := 0, rcImage  := 0)
 	{
 		this.hbmImage := hbmImage, this.hbmMask := hbmMask, this.rcImage := rcImage
 	}
@@ -118,7 +118,7 @@ class IMAGEINFO extends StructBase
 	calculates the size a memory instance of this class requires.
 
 	Parameters:
-		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+		[opt] OBJECT data - an optional data object that may contain data for the calculation.
 
 	Returns:
 		UINT bytes - the number of bytes required

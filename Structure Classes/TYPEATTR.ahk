@@ -44,7 +44,7 @@ class TYPEATTR extends StructBase
 
 	/*
 	Field: memidConstructor
-	ID of constructor,MEMBERID_NIL if none
+	ID of constructor, MEMBERID_NIL if none
 	*/
 	memidConstructor := 0
 
@@ -124,13 +124,13 @@ class TYPEATTR extends StructBase
 	Field: tdescAlias
 	If typekind is TYPEKIND.ALIAS, specifies the type for which this type is an alias.
 	*/
-	tdescAlias := new TYPEDESC()
+	tdescAlias := 0
 
 	/*
 	Field: idldescType
 	IDL attributes of the described type
 	*/
-	idldescType := new IDLDESC()
+	idldescType := 0
 
 	/*
 	Method: ToStructPtr
@@ -218,7 +218,7 @@ class TYPEATTR extends StructBase
 	calculates the size a memory instance of this class requires.
 
 	Parameters:
-		[opt] OBJECT data - an optional data object that may cotain data for the calculation.
+		[opt] OBJECT data - an optional data object that may contain data for the calculation.
 
 	Returns:
 		UINT bytes - the number of bytes required
