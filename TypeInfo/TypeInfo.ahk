@@ -46,7 +46,7 @@ class TypeInfo extends Unknown
 	GetTypeAttr()
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 03*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "Int"))
 		return TYPEATTR.FromStructPtr(out, false)
 	}
 
@@ -60,7 +60,7 @@ class TypeInfo extends Unknown
 	GetTypeComp()
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+04*A_PtrSize), "ptr", this.ptr, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 04*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "Int"))
 		return IsObject(TypeComp) ? new TypeComp(out) : out
 	}
 
@@ -80,7 +80,7 @@ class TypeInfo extends Unknown
 	GetFuncDesc(index)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+05*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 05*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", out, "Int"))
 		return IsObject(FUNCDESC) ? FUNCDESC.FromStructPtr(out, false) : out
 	}
 
@@ -100,7 +100,7 @@ class TypeInfo extends Unknown
 	GetVarDesc(index)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+06*A_PtrSize), "ptr", this.ptr, "UInt", index, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", out, "Int"))
 		return IsObject(VARDESC) ? VARDESC.FromStructPtr(out, false) : out
 	}
 
@@ -121,11 +121,11 @@ class TypeInfo extends Unknown
 	{
 		local arr, bool
 		VarSetCapacity(arr, name_count * A_PtrSize, 0)
-		bool := this._Error(DllCall(NumGet(this.vt+07*A_PtrSize), "ptr", this.ptr, "Int", memid, "ptr", &arr, "UInt", name_count, "UInt*", count))
+		bool := this._Error(DllCall(NumGet(this.vt, 07*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", memid, "Ptr", &arr, "UInt", name_count, "UInt*", count, "Int"))
 		array := []
 		Loop count
 		{
-			array.Insert(StrGet(NumGet(&arr + (A_Index - 1) * A_PtrSize, 00, "UPtr"), "UTF-16"))
+			array.Insert(StrGet(NumGet(&arr + (A_Index - 1) * A_PtrSize, 00, "Ptr"), "UTF-16"))
 		}
 		return bool
 	}
@@ -143,7 +143,7 @@ class TypeInfo extends Unknown
 	GetRefTypeOfImplType(index)
 	{
 		local handle
-		this._Error(DllCall(NumGet(this.vt+08*A_PtrSize), "ptr", this.ptr, "UInt", index, "UInt*", handle))
+		this._Error(DllCall(NumGet(this.vt, 08*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "UInt*", handle, "Int"))
 		return handle
 	}
 
@@ -160,7 +160,7 @@ class TypeInfo extends Unknown
 	GetImplTypeFlags(index)
 	{
 		local flags
-		this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "UInt", index, "UInt*", flags))
+		this._Error(DllCall(NumGet(this.vt, 09*A_PtrSize, "Ptr"), "ptr", this.ptr, "UInt", index, "UInt*", flags, "Int"))
 		return flags
 	}
 
@@ -190,7 +190,7 @@ class TypeInfo extends Unknown
 			names := &names_array
 		}
 		VarSetCapacity(id_array, 4 * count, 00)
-		this._Error(DllCall(NumGet(this.vt+10*A_PtrSize), "ptr", this.ptr, "ptr", names, "UInt", count, "UPtr", &id_array))
+		this._Error(DllCall(NumGet(this.vt, 10*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", names, "UInt", count, "Ptr", &id_array, "Int"))
 		ids := []
 		Loop count
 		{
@@ -217,7 +217,7 @@ class TypeInfo extends Unknown
 	*/
 	Invoke(instance, memid, flags, byRef params, byRef result := "", byRef exception := "", byRef err_index := 0)
 	{
-		local bool := this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index))
+		local bool := this._Error(DllCall(NumGet(this.vt, 11*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index, "Int"))
 		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
 		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
 		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception, false) : exception
@@ -244,7 +244,7 @@ class TypeInfo extends Unknown
 	GetDocumentation(id, byRef name := "", byRef doc := "", byRef context := "", byRef helpfile := "")
 	{
 		local bool, pName, pDoc, pHelpfile
-		bool := this._Error(DllCall(NumGet(this.vt+12*A_PtrSize), "ptr", this.ptr, "Int", id, "ptr*", pName, "ptr*", pDoc, "UInt*", context, "ptr*", pHelpfile))
+		bool := this._Error(DllCall(NumGet(this.vt, 12*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Int", id, "Ptr*", pName, "Ptr*", pDoc, "UInt*", context, "Ptr*", pHelpfile, "Int"))
 		name := StrGet(pName), doc := StrGet(pDoc), helpfile := StrGet(pHelpfile)
 		return bool
 	}
@@ -269,7 +269,7 @@ class TypeInfo extends Unknown
 	GetDllEntry(id, invkind, byRef dll := "", byRef name := "", byRef ordinal := 0)
 	{
 		local bool, pDll, pName
-		bool := this._Error(DllCall(NumGet(this.vt+13*A_PtrSize), "ptr", this.ptr, "Uint", id, "UInt", invkind, "ptr*", pDll, "ptr*", pName, "Short*", ordinal))
+		bool := this._Error(DllCall(NumGet(this.vt, 13*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "UInt", invkind, "Ptr*", pDll, "Ptr*", pName, "Short*", ordinal, "Int"))
 		dll := StrGet(pDll), name := StrGet(pName)
 		return bool
 	}
@@ -287,7 +287,7 @@ class TypeInfo extends Unknown
 	GetRefTypeInfo(handle)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+14*A_PtrSize), "ptr", this.ptr, "UInt", handle, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 14*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", handle, "Ptr*", out, "Int"))
 		return new TypeInfo(out)
 	}
 
@@ -305,7 +305,7 @@ class TypeInfo extends Unknown
 	AddressOfMember(id, kind := 0)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+15*A_PtrSize), "ptr", this.ptr, "UInt", id, "UInt", kind, "UPtr*", out))
+		this._Error(DllCall(NumGet(this.vt, 15*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "UInt", kind, "Ptr*", out, "Int"))
 		return out
 	}
 
@@ -330,7 +330,7 @@ class TypeInfo extends Unknown
 		if !CCFramework.isInteger(iid)
 			VarSetCapacity(mem, 16, 00), iid := CCFramework.String2GUID(iid, &mem)
 
-		this._Error(DllCall(NumGet(this.vt+16*A_PtrSize), "ptr", this.ptr, "ptr", IsObject(outer) ? outer.ptr : outer, "ptr", iid, "ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 16*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(outer) ? outer.ptr : outer, "Ptr", iid, "Ptr*", out, "Int"))
 		return out
 	}
 
@@ -350,7 +350,7 @@ class TypeInfo extends Unknown
 	GetMops(id)
 	{
 		local out
-		this._Error(DllCall(NumGet(this.vt+17*A_PtrSize), "ptr", this.ptr, "UInt", id, "Ptr*", out))
+		this._Error(DllCall(NumGet(this.vt, 17*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "Ptr*", out, "Int"))
 		return StrGet(out)
 	}
 
@@ -359,7 +359,7 @@ class TypeInfo extends Unknown
 	Retrieves the containing type library and the index of the type description within that type library.
 
 	Parameters:
-		[opt] byRef TypeInfo lib - receives a TypeLib instance containing the type description
+		[opt] byRef TypeLib lib - receives a TypeLib instance containing the type description
 		[opt] byRef UINT index - receives the index of the type description within the containing type library.
 
 	Returns:
@@ -368,7 +368,7 @@ class TypeInfo extends Unknown
 	GetContainingTypeLib(byRef lib := "", byRef index := 0)
 	{
 		local bool, out
-		bool := this._Error(DllCall(NumGet(this.vt+18*A_PtrSize), "ptr", this.ptr, "Ptr*", out, "UInt*", index))
+		bool := this._Error(DllCall(NumGet(this.vt, 18*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", out, "UInt*", index, "Int"))
 		lib := IsObject(TypeLib) ? new TypeLib(out) : out
 		return bool
 	}
@@ -382,7 +382,8 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseTypeAttr(attr)
 	{
-		DllCall(NumGet(this.vt+19*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
+		this._Error(0)
+		DllCall(NumGet(this.vt, 19*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 
 	/*
@@ -394,7 +395,8 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseFuncDesc(attr)
 	{
-		DllCall(NumGet(this.vt+20*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
+		this._Error(0)
+		DllCall(NumGet(this.vt, 20*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 
 	/*
@@ -406,6 +408,7 @@ class TypeInfo extends Unknown
 	*/
 	ReleaseVarDesc(attr)
 	{
-		DllCall(NumGet(this.vt+21*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
+		this._Error(0)
+		DllCall(NumGet(this.vt, 21*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", IsObject(attr) ? attr.GetOriginalPointer() : attr)
 	}
 }
