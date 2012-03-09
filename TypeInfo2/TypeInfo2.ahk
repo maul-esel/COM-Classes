@@ -58,7 +58,7 @@ class TypeInfo2 extends TypeInfo
 	GetTypeKind()
 	{
 		local kind
-		this._Error(DllCall(NumGet(this.vt+22*A_PtrSize), "Ptr", this.ptr, "UInt*", kind))
+		this._Error(DllCall(NumGet(this.vt, 22*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", kind, "Int"))
 		return kind
 	}
 
@@ -72,7 +72,7 @@ class TypeInfo2 extends TypeInfo
 	GetTypeFlags()
 	{
 		local flags
-		this._Error(DllCall(NumGet(this.vt+23*A_PtrSize), "Ptr", this.ptr, "UInt*", flags))
+		this._Error(DllCall(NumGet(this.vt, 23*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt*", flags, "Int"))
 		return flags
 	}
 
@@ -90,7 +90,7 @@ class TypeInfo2 extends TypeInfo
 	GetFuncIndexOfMemId(id, invkind)
 	{
 		local index
-		this._Error(DllCall(NumGet(this.vt+24*A_PtrSize), "Ptr", this.ptr, "UInt", id, "UInt", invkind, "UInt*", index))
+		this._Error(DllCall(NumGet(this.vt, 24*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "UInt", invkind, "UInt*", index, "Int"))
 		return index
 	}
 
@@ -107,7 +107,7 @@ class TypeInfo2 extends TypeInfo
 	GetVarIndexOfMemId(id)
 	{
 		local index
-		this._Error(DllCall(NumGet(this.vt+25*A_PtrSize), "Ptr", this.ptr, "UInt", id, "UInt*", index))
+		this._Error(DllCall(NumGet(this.vt, 25*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "UInt*", index, "Int"))
 		return index
 	}
 
@@ -126,7 +126,7 @@ class TypeInfo2 extends TypeInfo
 		local mem, variant
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
-		this._Error(DllCall(NumGet(this.vt+26*A_PtrSize), "Ptr", this.ptr, "Ptr", guid, "Ptr*", variant))
+		this._Error(DllCall(NumGet(this.vt, 26*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr", guid, "Ptr*", variant, "Int"))
 		return CCFramework.BuildVARIANT(variant)
 	}
 
@@ -146,7 +146,7 @@ class TypeInfo2 extends TypeInfo
 		local mem, variant
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
-		this._Error(DllCall(NumGet(this.vt+27*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant))
+		this._Error(DllCall(NumGet(this.vt, 27*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant, "Int"))
 		return CCFramework.BuildVARIANT(variant)
 	}
 
@@ -167,7 +167,7 @@ class TypeInfo2 extends TypeInfo
 		local mem, variant
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
-		this._Error(DllCall(NumGet(this.vt+28*A_PtrSize), "Ptr", this.ptr, "UInt", indexFunc, "UInt", indexParam, "Ptr", guid, "Ptr*", variant))
+		this._Error(DllCall(NumGet(this.vt, 28*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", indexFunc, "UInt", indexParam, "Ptr", guid, "Ptr*", variant, "Int"))
 		return CCFramework.BuildVARIANT(variant)
 	}
 
@@ -187,7 +187,7 @@ class TypeInfo2 extends TypeInfo
 		local mem, variant
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
-		this._Error(DllCall(NumGet(this.vt+29*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant))
+		this._Error(DllCall(NumGet(this.vt, 29*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant, "Int"))
 		return CCFramework.BuildVARIANT(variant)
 	}
 
@@ -207,7 +207,7 @@ class TypeInfo2 extends TypeInfo
 		local mem, variant
 		if !CCFramework.isInteger(guid)
 			VarSetCapacity(mem, 16, 00), guid := CCFramework.String2GUID(guid, &mem)
-		this._Error(DllCall(NumGet(this.vt+30*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant))
+		this._Error(DllCall(NumGet(this.vt, 30*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr", guid, "Ptr*", variant, "Int"))
 		return CCFramework.BuildVARIANT(variant)
 	}
 
@@ -231,7 +231,7 @@ class TypeInfo2 extends TypeInfo
 	GetDocumentation2(id, lcid := 0, byRef help := "", byRef context := 0, ByRef dll := "")
 	{
 		local bool, pHelp, pDll
-		bool := this._Error(DllCall(NumGet(this.vt+31*A_PtrSize), "Ptr", this.ptr, "UInt", id, "UInt", lcid, "Ptr*", pHelp, "UInt*", context, "Ptr*", pDll))
+		bool := this._Error(DllCall(NumGet(this.vt, 31*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", id, "UInt", lcid, "Ptr*", pHelp, "UInt*", context, "Ptr*", pDll, "Int"))
 		help := StrGet(pHelp), dll := StrGet(pDll)
 		return bool
 	}
@@ -249,7 +249,7 @@ class TypeInfo2 extends TypeInfo
 	GetAllCustData()
 	{
 		local data
-		this._Error(DllCall(NumGet(this.vt+32*A_PtrSize), "Ptr", this.ptr, "Ptr*", data))
+		this._Error(DllCall(NumGet(this.vt, 32*A_PtrSize, "Ptr"), "Ptr", this.ptr, "Ptr*", data, "Int"))
 		return IsObject(CUSTDATA) ? new CUSTDATA(data) : data
 	}
 
@@ -269,7 +269,7 @@ class TypeInfo2 extends TypeInfo
 	GetAllFuncCustData(index)
 	{
 		local data
-		this._Error(DllCall(NumGet(this.vt+33*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr*", data))
+		this._Error(DllCall(NumGet(this.vt, 33*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", data, "Int"))
 		return IsObject(CUSTDATA) ? new CUSTDATA(data) : data
 	}
 
@@ -290,7 +290,7 @@ class TypeInfo2 extends TypeInfo
 	GetAllParamCustData(indexFunc, indexParam)
 	{
 		local data
-		this._Error(DllCall(NumGet(this.vt+34*A_PtrSize), "Ptr", this.ptr, "UInt", indexFunc, "UInt", indexParam, "Ptr*", data))
+		this._Error(DllCall(NumGet(this.vt, 34*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", indexFunc, "UInt", indexParam, "Ptr*", data, "Int"))
 		return IsObject(CUSTDATA) ? new CUSTDATA(data) : data
 	}
 
@@ -310,7 +310,7 @@ class TypeInfo2 extends TypeInfo
 	GetAllVarCustData(index)
 	{
 		local data
-		this._Error(DllCall(NumGet(this.vt+35*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr*", data))
+		this._Error(DllCall(NumGet(this.vt, 35*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", data, "Int"))
 		return IsObject(CUSTDATA) ? new CUSTDATA(data) : data
 	}
 
@@ -330,7 +330,7 @@ class TypeInfo2 extends TypeInfo
 	GetAllImplTypeCustData(index)
 	{
 		local data
-		this._Error(DllCall(NumGet(this.vt+36*A_PtrSize), "Ptr", this.ptr, "UInt", index, "Ptr*", data))
+		this._Error(DllCall(NumGet(this.vt, 36*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", index, "Ptr*", data, "Int"))
 		return IsObject(CUSTDATA) ? new CUSTDATA(data) : data
 	}
 }
