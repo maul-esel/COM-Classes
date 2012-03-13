@@ -128,7 +128,7 @@ class Dispatch extends Unknown
 		local bool := this._Error(DllCall(NumGet(this.vt, 06*A_PtrSize, "Ptr"), "Ptr", this.ptr, "UInt", memid, "Ptr", 0, "UInt", lcid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index, "Int"))
 		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
 		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
-		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception) : exception
+		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception, false) : exception
 		return bool
 	}
 }

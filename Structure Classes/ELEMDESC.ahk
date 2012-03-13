@@ -24,7 +24,7 @@ class ELEMDESC extends StructBase
 	Field: tdesc
 	a TYPEDESC structure (as pointer or class instance) that describes the type of the element
 	*/
-	tdesc := new TYPEDESC()
+	tdesc := 0
 
 	/*
 	Field: idldesc
@@ -43,7 +43,7 @@ class ELEMDESC extends StructBase
 	Remarks:
 		See the remarks on <idldesc>.
 	*/
-	paramdesc := new PARAMDESC()
+	paramdesc := 0
 
 	/*
 	Method: ToStructPtr
@@ -114,6 +114,7 @@ class ELEMDESC extends StructBase
 	*/
 	GetRequiredSize(data = "")
 	{
-		return TYPEDESC.GetRequiredSize() + PARAMDESC.GetRequiredSize()
+		static td_size := TYPEDESC.GetRequiredSize(), pd_size := PARAMDESC.GetRequiredSize()
+		return td_size + pd_size
 	}
 }

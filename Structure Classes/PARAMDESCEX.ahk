@@ -66,8 +66,9 @@ class PARAMDESCEX extends StructBase
 		}
 
 		NumPut(this.cBytes, 1*ptr, 00, "UInt")
+		; <4 bytes padding>
 		; copy VARIANT to memory and free its memory again:
-		CCFramework.CopyMemory(variant := CCFramework.CreateVARIANTARG(this.varDefaultValue).ref, ptr + 4, 16), CCFramework.FreeMemory(variant)
+		CCFramework.CopyMemory(variant := CCFramework.CreateVARIANTARG(this.varDefaultValue).ref, ptr + 8, 16), CCFramework.FreeMemory(variant)
 
 		return ptr
 	}
@@ -85,7 +86,7 @@ class PARAMDESCEX extends StructBase
 	*/
 	FromStructPtr(ptr, own = true)
 	{
-		local instance := new PARAMDESCEX(CCFramework.BuildVARIANTARG(ptr))
+		local instance := new PARAMDESCEX(CCFramework.BuildVARIANTARG(ptr + 8))
 		instance.SetOriginalPointer(ptr, own)
 		return instance
 	}
@@ -106,6 +107,6 @@ class PARAMDESCEX extends StructBase
 	*/
 	GetRequiredSize(data = "")
 	{
-		return 20
+		return 24
 	}
 }

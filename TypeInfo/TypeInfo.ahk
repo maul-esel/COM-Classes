@@ -47,7 +47,7 @@ class TypeInfo extends Unknown
 	{
 		local out
 		this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "ptr*", out))
-		return TYPEATTR.FromStructPtr(out, false)
+		return IsObject(TYPEATTR) ? TYPEATTR.FromStructPtr(out, false) : out
 	}
 
 	/*
@@ -220,7 +220,7 @@ class TypeInfo extends Unknown
 		local bool := this._Error(DllCall(NumGet(this.vt+11*A_PtrSize), "Ptr", this.ptr, "Ptr", IsObject(instance) ? instance.ptr : instance, "UInt", memid, "UShort", flags, "Ptr", params := IsObject(params) ? params.ToStructPtr() : params, "Ptr*", result, "Ptr*", exception, "UInt*", err_index))
 		params := IsObject(DISPPARAMS) ? DISPPARAMS.FromStructPtr(params) : params
 		, result := IsObject(CCFramework) ? CCFramework.BuildVARIANT(result) : result
-		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception) : exception
+		, exception := IsObject(EXCEPINFO) ? EXCEPINFO.FromStructPtr(exception, false) : exception
 		return bool
 	}
 

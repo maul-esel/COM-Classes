@@ -201,7 +201,7 @@ class FUNCDESC extends StructBase
 		Loop % instance.cScodes
 			instance.lprgscode.Insert(NumGet(1*arr_ptr, (A_Index - 1) * 4, "UInt"))
 
-		instance.lprgdescParam := [], arr_ptr := NumGet(1*ptr, 04 + A_PtrSize, "Ptr")
+		instance.lprgelemdescParam := [], arr_ptr := NumGet(1*ptr, 04 + A_PtrSize, "Ptr")
 		Loop % instance.cParams
 			instance.lprgelemdescParam.Insert(ELEMDESC.FromStructPtr(arr_ptr + (A_Index - 1) * ed_size, false))
 

@@ -48,13 +48,13 @@ class ShellLinkA extends Unknown
 	GetPath(byRef path, flags, byRef data = 0)
 	{
 		local struct, bool
-		static MAX_PATH := 260
+		static MAX_PATH := 260, data_size := WIN32_FIND_DATA.GetRequiredSize()
 
-		VarSetCapacity(struct, WIN32_FIND_DATA.GetRequiredSize(), 0), VarSetCapacity(path, MAX_PATH * A_IsUnicode ? 2 : 1, 0)
+		struct := CCFramework.AllocateMemory(data_size), VarSetCapacity(path, MAX_PATH * A_IsUnicode ? 2 : 1, 0)
 
-		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", &struct, "uint", flags))
+		bool := this._Error(DllCall(NumGet(this.vt+03*A_PtrSize), "ptr", this.ptr, "str", path, "int", MAX_PATH, "ptr", struct, "uint", flags))
 
-		data := WIN32_FIND_DATA.FromStructPtr(&struct)
+		data := WIN32_FIND_DATA.FromStructPtr(struct)
 		return bool
 	}
 

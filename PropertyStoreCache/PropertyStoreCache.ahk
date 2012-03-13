@@ -63,9 +63,9 @@ class PropertyStoreCache extends PropertyStore
 		local bool, val
 		if IsObject(key)
 			key := key.ToStructPtr()
-		VarSetCapacity(val, 16, 0)
-		bool := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr", &val, "uint*", state))
-		;value := PROPVARIANT.FromStructPtr(&val)
+		val := CCFramework.AllocateMemory(16) ; PROPVARIANT.GetRequiredSize()
+		bool := this._Error(DllCall(NumGet(this.vt+09*A_PtrSize), "ptr", this.ptr, "ptr", key, "ptr", val, "uint*", state))
+		;value := PROPVARIANT.FromStructPtr(val)
 		return bool
 	}
 
