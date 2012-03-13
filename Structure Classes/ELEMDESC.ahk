@@ -66,9 +66,9 @@ class ELEMDESC extends StructBase
 
 		IsObject(this.tdesc) ? this.tdesc.ToStructPtr(ptr) : CCFramework.CopyMemory(this.tdesc, ptr, td_size)
 		if (!this.idldesc)
-			IsObject(this.paramdesc) ? this.paramdesc.ToStructPtr(ptr + offset) : CCFramework.CopyMemory(this.paramdesc, ptr + td_size, param_size)
+			IsObject(this.paramdesc) ? this.paramdesc.ToStructPtr(ptr + td_size) : CCFramework.CopyMemory(this.paramdesc, ptr + td_size, param_size)
 		else
-			IsObject(this.idldesc) ? this.idldesc.ToStructPtr(ptr + offset) : CCFramework.CopyMemory(this.idldesc, ptr + td_size, idl_size)
+			IsObject(this.idldesc) ? this.idldesc.ToStructPtr(ptr + td_size) : CCFramework.CopyMemory(this.idldesc, ptr + td_size, idl_size)
 
 		return ptr
 	}
